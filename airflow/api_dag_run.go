@@ -60,9 +60,9 @@ func (r DAGRunApiApiClearDagRunRequest) ClearDagRun(clearDagRun ClearDagRun) DAG
 	return r
 }
 
-func (r DAGRunApiApiClearDagRunRequest) Execute() (*AnyOfDAGRunTaskInstanceCollection, *http.Response, error) {
-	return r.ApiService.ClearDagRunExecute(r)
-}
+// func (r DAGRunApiApiClearDagRunRequest) Execute() (*AnyOfDAGRunTaskInstanceCollection, *http.Response, error) {
+// 	return r.ApiService.ClearDagRunExecute(r)
+// }
 
 /*
 ClearDagRun Clear a DAG run
@@ -88,124 +88,124 @@ func (a *DAGRunApiService) ClearDagRun(ctx context.Context, dagId string, dagRun
 
 // Execute executes the request
 //  @return AnyOfDAGRunTaskInstanceCollection
-func (a *DAGRunApiService) ClearDagRunExecute(r DAGRunApiApiClearDagRunRequest) (*AnyOfDAGRunTaskInstanceCollection, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *AnyOfDAGRunTaskInstanceCollection
-	)
+// func (a *DAGRunApiService) ClearDagRunExecute(r DAGRunApiApiClearDagRunRequest) (*AnyOfDAGRunTaskInstanceCollection, *http.Response, error) {
+// 	var (
+// 		localVarHTTPMethod   = http.MethodPost
+// 		localVarPostBody     interface{}
+// 		formFiles            []formFile
+// 		localVarReturnValue  *AnyOfDAGRunTaskInstanceCollection
+// 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DAGRunApiService.ClearDagRun")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
+// 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DAGRunApiService.ClearDagRun")
+// 	if err != nil {
+// 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+// 	}
 
-	localVarPath := localBasePath + "/dags/{dag_id}/dagRuns/{dag_run_id}/clear"
-	localVarPath = strings.Replace(localVarPath, "{"+"dag_id"+"}", url.PathEscape(parameterToString(r.dagId, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"dag_run_id"+"}", url.PathEscape(parameterToString(r.dagRunId, "")), -1)
+// 	localVarPath := localBasePath + "/dags/{dag_id}/dagRuns/{dag_run_id}/clear"
+// 	localVarPath = strings.Replace(localVarPath, "{"+"dag_id"+"}", url.PathEscape(parameterToString(r.dagId, "")), -1)
+// 	localVarPath = strings.Replace(localVarPath, "{"+"dag_run_id"+"}", url.PathEscape(parameterToString(r.dagRunId, "")), -1)
 
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.clearDagRun == nil {
-		return localVarReturnValue, nil, reportError("clearDagRun is required and must be specified")
-	}
+// 	localVarHeaderParams := make(map[string]string)
+// 	localVarQueryParams := url.Values{}
+// 	localVarFormParams := url.Values{}
+// 	if r.clearDagRun == nil {
+// 		return localVarReturnValue, nil, reportError("clearDagRun is required and must be specified")
+// 	}
 
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
+// 	// to determine the Content-Type header
+// 	localVarHTTPContentTypes := []string{"application/json"}
 
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
+// 	// set Content-Type header
+// 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+// 	if localVarHTTPContentType != "" {
+// 		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+// 	}
 
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
+// 	// to determine the Accept header
+// 	localVarHTTPHeaderAccepts := []string{"application/json"}
 
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	// body params
-	localVarPostBody = r.clearDagRun
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
+// 	// set Accept header
+// 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+// 	if localVarHTTPHeaderAccept != "" {
+// 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+// 	}
+// 	// body params
+// 	localVarPostBody = r.clearDagRun
+// 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+// 	if err != nil {
+// 		return localVarReturnValue, nil, err
+// 	}
 
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
+// 	localVarHTTPResponse, err := a.client.callAPI(req)
+// 	if err != nil || localVarHTTPResponse == nil {
+// 		return localVarReturnValue, localVarHTTPResponse, err
+// 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
+// 	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+// 	localVarHTTPResponse.Body.Close()
+// 	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+// 	if err != nil {
+// 		return localVarReturnValue, localVarHTTPResponse, err
+// 	}
 
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
+// 	if localVarHTTPResponse.StatusCode >= 300 {
+// 		newErr := &GenericOpenAPIError{
+// 			body:  localVarBody,
+// 			error: localVarHTTPResponse.Status,
+// 		}
+// 		if localVarHTTPResponse.StatusCode == 400 {
+// 			var v Error
+// 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+// 			if err != nil {
+// 				newErr.error = err.Error()
+// 				return localVarReturnValue, localVarHTTPResponse, newErr
+// 			}
+// 			newErr.model = v
+// 			return localVarReturnValue, localVarHTTPResponse, newErr
+// 		}
+// 		if localVarHTTPResponse.StatusCode == 401 {
+// 			var v Error
+// 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+// 			if err != nil {
+// 				newErr.error = err.Error()
+// 				return localVarReturnValue, localVarHTTPResponse, newErr
+// 			}
+// 			newErr.model = v
+// 			return localVarReturnValue, localVarHTTPResponse, newErr
+// 		}
+// 		if localVarHTTPResponse.StatusCode == 403 {
+// 			var v Error
+// 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+// 			if err != nil {
+// 				newErr.error = err.Error()
+// 				return localVarReturnValue, localVarHTTPResponse, newErr
+// 			}
+// 			newErr.model = v
+// 			return localVarReturnValue, localVarHTTPResponse, newErr
+// 		}
+// 		if localVarHTTPResponse.StatusCode == 404 {
+// 			var v Error
+// 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+// 			if err != nil {
+// 				newErr.error = err.Error()
+// 				return localVarReturnValue, localVarHTTPResponse, newErr
+// 			}
+// 			newErr.model = v
+// 		}
+// 		return localVarReturnValue, localVarHTTPResponse, newErr
+// 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
+// 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+// 	if err != nil {
+// 		newErr := &GenericOpenAPIError{
+// 			body:  localVarBody,
+// 			error: err.Error(),
+// 		}
+// 		return localVarReturnValue, localVarHTTPResponse, newErr
+// 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
+// 	return localVarReturnValue, localVarHTTPResponse, nil
+// }
 
 type DAGRunApiApiDeleteDagRunRequest struct {
 	ctx context.Context
