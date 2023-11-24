@@ -1,4 +1,4 @@
-module github.com/apache/airflow-client-go
+module github.com/drfaust92/airflow-client-go
 
 go 1.13
 
