@@ -26,7 +26,7 @@ import (
 	"net/url"
 	"testing"
 
-	"github.com/apache/airflow-client-go/airflow"
+	"github.com/drfaust92/airflow-client-go/airflow"
 	"github.com/stretchr/testify/assert"
 )
 
