@@ -2,7 +2,10 @@ module github.com/drfaust92/airflow-client-go
 
 go 1.23
 
+replace github.com/drfaust92/airflow-client-go/airflow => ./airflow
+
 require (
+	github.com/drfaust92/airflow-client-go/airflow v0.5.0
 	github.com/stretchr/testify v1.6.1
 )
 
