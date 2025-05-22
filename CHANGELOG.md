@@ -17,6 +17,12 @@
  under the License.
  -->
 
+# v2.10.0
+
+Apache Airflow API version: 2.10.x
+
+Apache Airflow Auth Fab API Version: 1.5.x
+
 # v2.5.0
 
 Apache Airflow API version: 2.5.x
