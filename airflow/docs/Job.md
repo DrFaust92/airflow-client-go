@@ -1,37 +1,18 @@
-<!--
- Licensed to the Apache Software Foundation (ASF) under one
- or more contributor license agreements.  See the NOTICE file
- distributed with this work for additional information
- regarding copyright ownership.  The ASF licenses this file
- to you under the Apache License, Version 2.0 (the
- "License"); you may not use this file except in compliance
- with the License.  You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing,
- software distributed under the License is distributed on an
- "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- KIND, either express or implied.  See the License for the
- specific language governing permissions and limitations
- under the License.
- -->
-
 # Job
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | Pointer to **int32** |  | [optional] 
 **DagId** | Pointer to **NullableString** |  | [optional] 
-**State** | Pointer to **NullableString** |  | [optional] 
-**JobType** | Pointer to **NullableString** |  | [optional] 
-**StartDate** | Pointer to **NullableString** |  | [optional] 
 **EndDate** | Pointer to **NullableString** |  | [optional] 
-**LatestHeartbeat** | Pointer to **NullableString** |  | [optional] 
 **ExecutorClass** | Pointer to **NullableString** |  | [optional] 
 **Hostname** | Pointer to **NullableString** |  | [optional] 
+**Id** | Pointer to **int32** |  | [optional] 
+**JobType** | Pointer to **NullableString** |  | [optional] 
+**LatestHeartbeat** | Pointer to **NullableString** |  | [optional] 
+**StartDate** | Pointer to **NullableString** |  | [optional] 
+**State** | Pointer to **NullableString** |  | [optional] 
 **Unixname** | Pointer to **NullableString** |  | [optional] 
 
 ## Methods
@@ -52,31 +33,6 @@ will change when the set of required properties is changed
 NewJobWithDefaults instantiates a new Job object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetId
-
-`func (o *Job) GetId() int32`
-
-GetId returns the Id field if non-nil, zero value otherwise.
-
-### GetIdOk
-
-`func (o *Job) GetIdOk() (*int32, bool)`
-
-GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetId
-
-`func (o *Job) SetId(v int32)`
-
-SetId sets Id field to given value.
-
-### HasId
-
-`func (o *Job) HasId() bool`
-
-HasId returns a boolean if a field has been set.
 
 ### GetDagId
 
@@ -113,111 +69,6 @@ HasDagId returns a boolean if a field has been set.
 `func (o *Job) UnsetDagId()`
 
 UnsetDagId ensures that no value is present for DagId, not even an explicit nil
-### GetState
-
-`func (o *Job) GetState() string`
-
-GetState returns the State field if non-nil, zero value otherwise.
-
-### GetStateOk
-
-`func (o *Job) GetStateOk() (*string, bool)`
-
-GetStateOk returns a tuple with the State field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetState
-
-`func (o *Job) SetState(v string)`
-
-SetState sets State field to given value.
-
-### HasState
-
-`func (o *Job) HasState() bool`
-
-HasState returns a boolean if a field has been set.
-
-### SetStateNil
-
-`func (o *Job) SetStateNil(b bool)`
-
- SetStateNil sets the value for State to be an explicit nil
-
-### UnsetState
-`func (o *Job) UnsetState()`
-
-UnsetState ensures that no value is present for State, not even an explicit nil
-### GetJobType
-
-`func (o *Job) GetJobType() string`
-
-GetJobType returns the JobType field if non-nil, zero value otherwise.
-
-### GetJobTypeOk
-
-`func (o *Job) GetJobTypeOk() (*string, bool)`
-
-GetJobTypeOk returns a tuple with the JobType field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetJobType
-
-`func (o *Job) SetJobType(v string)`
-
-SetJobType sets JobType field to given value.
-
-### HasJobType
-
-`func (o *Job) HasJobType() bool`
-
-HasJobType returns a boolean if a field has been set.
-
-### SetJobTypeNil
-
-`func (o *Job) SetJobTypeNil(b bool)`
-
- SetJobTypeNil sets the value for JobType to be an explicit nil
-
-### UnsetJobType
-`func (o *Job) UnsetJobType()`
-
-UnsetJobType ensures that no value is present for JobType, not even an explicit nil
-### GetStartDate
-
-`func (o *Job) GetStartDate() string`
-
-GetStartDate returns the StartDate field if non-nil, zero value otherwise.
-
-### GetStartDateOk
-
-`func (o *Job) GetStartDateOk() (*string, bool)`
-
-GetStartDateOk returns a tuple with the StartDate field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetStartDate
-
-`func (o *Job) SetStartDate(v string)`
-
-SetStartDate sets StartDate field to given value.
-
-### HasStartDate
-
-`func (o *Job) HasStartDate() bool`
-
-HasStartDate returns a boolean if a field has been set.
-
-### SetStartDateNil
-
-`func (o *Job) SetStartDateNil(b bool)`
-
- SetStartDateNil sets the value for StartDate to be an explicit nil
-
-### UnsetStartDate
-`func (o *Job) UnsetStartDate()`
-
-UnsetStartDate ensures that no value is present for StartDate, not even an explicit nil
 ### GetEndDate
 
 `func (o *Job) GetEndDate() string`
@@ -253,41 +104,6 @@ HasEndDate returns a boolean if a field has been set.
 `func (o *Job) UnsetEndDate()`
 
 UnsetEndDate ensures that no value is present for EndDate, not even an explicit nil
-### GetLatestHeartbeat
-
-`func (o *Job) GetLatestHeartbeat() string`
-
-GetLatestHeartbeat returns the LatestHeartbeat field if non-nil, zero value otherwise.
-
-### GetLatestHeartbeatOk
-
-`func (o *Job) GetLatestHeartbeatOk() (*string, bool)`
-
-GetLatestHeartbeatOk returns a tuple with the LatestHeartbeat field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetLatestHeartbeat
-
-`func (o *Job) SetLatestHeartbeat(v string)`
-
-SetLatestHeartbeat sets LatestHeartbeat field to given value.
-
-### HasLatestHeartbeat
-
-`func (o *Job) HasLatestHeartbeat() bool`
-
-HasLatestHeartbeat returns a boolean if a field has been set.
-
-### SetLatestHeartbeatNil
-
-`func (o *Job) SetLatestHeartbeatNil(b bool)`
-
- SetLatestHeartbeatNil sets the value for LatestHeartbeat to be an explicit nil
-
-### UnsetLatestHeartbeat
-`func (o *Job) UnsetLatestHeartbeat()`
-
-UnsetLatestHeartbeat ensures that no value is present for LatestHeartbeat, not even an explicit nil
 ### GetExecutorClass
 
 `func (o *Job) GetExecutorClass() string`
@@ -358,6 +174,171 @@ HasHostname returns a boolean if a field has been set.
 `func (o *Job) UnsetHostname()`
 
 UnsetHostname ensures that no value is present for Hostname, not even an explicit nil
+### GetId
+
+`func (o *Job) GetId() int32`
+
+GetId returns the Id field if non-nil, zero value otherwise.
+
+### GetIdOk
+
+`func (o *Job) GetIdOk() (*int32, bool)`
+
+GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetId
+
+`func (o *Job) SetId(v int32)`
+
+SetId sets Id field to given value.
+
+### HasId
+
+`func (o *Job) HasId() bool`
+
+HasId returns a boolean if a field has been set.
+
+### GetJobType
+
+`func (o *Job) GetJobType() string`
+
+GetJobType returns the JobType field if non-nil, zero value otherwise.
+
+### GetJobTypeOk
+
+`func (o *Job) GetJobTypeOk() (*string, bool)`
+
+GetJobTypeOk returns a tuple with the JobType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetJobType
+
+`func (o *Job) SetJobType(v string)`
+
+SetJobType sets JobType field to given value.
+
+### HasJobType
+
+`func (o *Job) HasJobType() bool`
+
+HasJobType returns a boolean if a field has been set.
+
+### SetJobTypeNil
+
+`func (o *Job) SetJobTypeNil(b bool)`
+
+ SetJobTypeNil sets the value for JobType to be an explicit nil
+
+### UnsetJobType
+`func (o *Job) UnsetJobType()`
+
+UnsetJobType ensures that no value is present for JobType, not even an explicit nil
+### GetLatestHeartbeat
+
+`func (o *Job) GetLatestHeartbeat() string`
+
+GetLatestHeartbeat returns the LatestHeartbeat field if non-nil, zero value otherwise.
+
+### GetLatestHeartbeatOk
+
+`func (o *Job) GetLatestHeartbeatOk() (*string, bool)`
+
+GetLatestHeartbeatOk returns a tuple with the LatestHeartbeat field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLatestHeartbeat
+
+`func (o *Job) SetLatestHeartbeat(v string)`
+
+SetLatestHeartbeat sets LatestHeartbeat field to given value.
+
+### HasLatestHeartbeat
+
+`func (o *Job) HasLatestHeartbeat() bool`
+
+HasLatestHeartbeat returns a boolean if a field has been set.
+
+### SetLatestHeartbeatNil
+
+`func (o *Job) SetLatestHeartbeatNil(b bool)`
+
+ SetLatestHeartbeatNil sets the value for LatestHeartbeat to be an explicit nil
+
+### UnsetLatestHeartbeat
+`func (o *Job) UnsetLatestHeartbeat()`
+
+UnsetLatestHeartbeat ensures that no value is present for LatestHeartbeat, not even an explicit nil
+### GetStartDate
+
+`func (o *Job) GetStartDate() string`
+
+GetStartDate returns the StartDate field if non-nil, zero value otherwise.
+
+### GetStartDateOk
+
+`func (o *Job) GetStartDateOk() (*string, bool)`
+
+GetStartDateOk returns a tuple with the StartDate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStartDate
+
+`func (o *Job) SetStartDate(v string)`
+
+SetStartDate sets StartDate field to given value.
+
+### HasStartDate
+
+`func (o *Job) HasStartDate() bool`
+
+HasStartDate returns a boolean if a field has been set.
+
+### SetStartDateNil
+
+`func (o *Job) SetStartDateNil(b bool)`
+
+ SetStartDateNil sets the value for StartDate to be an explicit nil
+
+### UnsetStartDate
+`func (o *Job) UnsetStartDate()`
+
+UnsetStartDate ensures that no value is present for StartDate, not even an explicit nil
+### GetState
+
+`func (o *Job) GetState() string`
+
+GetState returns the State field if non-nil, zero value otherwise.
+
+### GetStateOk
+
+`func (o *Job) GetStateOk() (*string, bool)`
+
+GetStateOk returns a tuple with the State field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetState
+
+`func (o *Job) SetState(v string)`
+
+SetState sets State field to given value.
+
+### HasState
+
+`func (o *Job) HasState() bool`
+
+HasState returns a boolean if a field has been set.
+
+### SetStateNil
+
+`func (o *Job) SetStateNil(b bool)`
+
+ SetStateNil sets the value for State to be an explicit nil
+
+### UnsetState
+`func (o *Job) UnsetState()`
+
+UnsetState ensures that no value is present for State, not even an explicit nil
 ### GetUnixname
 
 `func (o *Job) GetUnixname() string`

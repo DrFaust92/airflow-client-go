@@ -1,33 +1,15 @@
-<!--
- Licensed to the Apache Software Foundation (ASF) under one
- or more contributor license agreements.  See the NOTICE file
- distributed with this work for additional information
- regarding copyright ownership.  The ASF licenses this file
- to you under the Apache License, Version 2.0 (the
- "License"); you may not use this file except in compliance
- with the License.  You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing,
- software distributed under the License is distributed on an
- "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- KIND, either express or implied.  See the License for the
- specific language governing permissions and limitations
- under the License.
- -->
-
 # XComCollectionItem
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Key** | Pointer to **string** |  | [optional] 
-**Timestamp** | Pointer to **string** |  | [optional] 
-**ExecutionDate** | Pointer to **string** |  | [optional] 
-**TaskId** | Pointer to **string** |  | [optional] 
 **DagId** | Pointer to **string** |  | [optional] 
+**ExecutionDate** | Pointer to **string** |  | [optional] 
+**Key** | Pointer to **string** |  | [optional] 
+**MapIndex** | Pointer to **int32** |  | [optional] 
+**TaskId** | Pointer to **string** |  | [optional] 
+**Timestamp** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
@@ -48,55 +30,30 @@ NewXComCollectionItemWithDefaults instantiates a new XComCollectionItem object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetKey
+### GetDagId
 
-`func (o *XComCollectionItem) GetKey() string`
+`func (o *XComCollectionItem) GetDagId() string`
 
-GetKey returns the Key field if non-nil, zero value otherwise.
+GetDagId returns the DagId field if non-nil, zero value otherwise.
 
-### GetKeyOk
+### GetDagIdOk
 
-`func (o *XComCollectionItem) GetKeyOk() (*string, bool)`
+`func (o *XComCollectionItem) GetDagIdOk() (*string, bool)`
 
-GetKeyOk returns a tuple with the Key field if it's non-nil, zero value otherwise
+GetDagIdOk returns a tuple with the DagId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetKey
+### SetDagId
 
-`func (o *XComCollectionItem) SetKey(v string)`
+`func (o *XComCollectionItem) SetDagId(v string)`
 
-SetKey sets Key field to given value.
+SetDagId sets DagId field to given value.
 
-### HasKey
+### HasDagId
 
-`func (o *XComCollectionItem) HasKey() bool`
+`func (o *XComCollectionItem) HasDagId() bool`
 
-HasKey returns a boolean if a field has been set.
-
-### GetTimestamp
-
-`func (o *XComCollectionItem) GetTimestamp() string`
-
-GetTimestamp returns the Timestamp field if non-nil, zero value otherwise.
-
-### GetTimestampOk
-
-`func (o *XComCollectionItem) GetTimestampOk() (*string, bool)`
-
-GetTimestampOk returns a tuple with the Timestamp field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetTimestamp
-
-`func (o *XComCollectionItem) SetTimestamp(v string)`
-
-SetTimestamp sets Timestamp field to given value.
-
-### HasTimestamp
-
-`func (o *XComCollectionItem) HasTimestamp() bool`
-
-HasTimestamp returns a boolean if a field has been set.
+HasDagId returns a boolean if a field has been set.
 
 ### GetExecutionDate
 
@@ -123,6 +80,56 @@ SetExecutionDate sets ExecutionDate field to given value.
 
 HasExecutionDate returns a boolean if a field has been set.
 
+### GetKey
+
+`func (o *XComCollectionItem) GetKey() string`
+
+GetKey returns the Key field if non-nil, zero value otherwise.
+
+### GetKeyOk
+
+`func (o *XComCollectionItem) GetKeyOk() (*string, bool)`
+
+GetKeyOk returns a tuple with the Key field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetKey
+
+`func (o *XComCollectionItem) SetKey(v string)`
+
+SetKey sets Key field to given value.
+
+### HasKey
+
+`func (o *XComCollectionItem) HasKey() bool`
+
+HasKey returns a boolean if a field has been set.
+
+### GetMapIndex
+
+`func (o *XComCollectionItem) GetMapIndex() int32`
+
+GetMapIndex returns the MapIndex field if non-nil, zero value otherwise.
+
+### GetMapIndexOk
+
+`func (o *XComCollectionItem) GetMapIndexOk() (*int32, bool)`
+
+GetMapIndexOk returns a tuple with the MapIndex field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMapIndex
+
+`func (o *XComCollectionItem) SetMapIndex(v int32)`
+
+SetMapIndex sets MapIndex field to given value.
+
+### HasMapIndex
+
+`func (o *XComCollectionItem) HasMapIndex() bool`
+
+HasMapIndex returns a boolean if a field has been set.
+
 ### GetTaskId
 
 `func (o *XComCollectionItem) GetTaskId() string`
@@ -148,30 +155,30 @@ SetTaskId sets TaskId field to given value.
 
 HasTaskId returns a boolean if a field has been set.
 
-### GetDagId
+### GetTimestamp
 
-`func (o *XComCollectionItem) GetDagId() string`
+`func (o *XComCollectionItem) GetTimestamp() string`
 
-GetDagId returns the DagId field if non-nil, zero value otherwise.
+GetTimestamp returns the Timestamp field if non-nil, zero value otherwise.
 
-### GetDagIdOk
+### GetTimestampOk
 
-`func (o *XComCollectionItem) GetDagIdOk() (*string, bool)`
+`func (o *XComCollectionItem) GetTimestampOk() (*string, bool)`
 
-GetDagIdOk returns a tuple with the DagId field if it's non-nil, zero value otherwise
+GetTimestampOk returns a tuple with the Timestamp field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetDagId
+### SetTimestamp
 
-`func (o *XComCollectionItem) SetDagId(v string)`
+`func (o *XComCollectionItem) SetTimestamp(v string)`
 
-SetDagId sets DagId field to given value.
+SetTimestamp sets Timestamp field to given value.
 
-### HasDagId
+### HasTimestamp
 
-`func (o *XComCollectionItem) HasDagId() bool`
+`func (o *XComCollectionItem) HasTimestamp() bool`
 
-HasDagId returns a boolean if a field has been set.
+HasTimestamp returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

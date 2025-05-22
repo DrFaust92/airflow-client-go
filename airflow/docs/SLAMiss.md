@@ -1,35 +1,16 @@
-<!--
- Licensed to the Apache Software Foundation (ASF) under one
- or more contributor license agreements.  See the NOTICE file
- distributed with this work for additional information
- regarding copyright ownership.  The ASF licenses this file
- to you under the Apache License, Version 2.0 (the
- "License"); you may not use this file except in compliance
- with the License.  You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing,
- software distributed under the License is distributed on an
- "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- KIND, either express or implied.  See the License for the
- specific language governing permissions and limitations
- under the License.
- -->
-
 # SLAMiss
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**TaskId** | Pointer to **string** | The task ID. | [optional] [readonly] 
 **DagId** | Pointer to **string** | The DAG ID. | [optional] 
-**ExecutionDate** | Pointer to **string** |  | [optional] 
-**EmailSent** | Pointer to **bool** |  | [optional] 
-**Timestamp** | Pointer to **string** |  | [optional] 
 **Description** | Pointer to **NullableString** |  | [optional] 
+**EmailSent** | Pointer to **bool** |  | [optional] 
+**ExecutionDate** | Pointer to **string** |  | [optional] 
 **NotificationSent** | Pointer to **bool** |  | [optional] 
+**TaskId** | Pointer to **string** | The task ID. | [optional] [readonly] 
+**Timestamp** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
@@ -49,31 +30,6 @@ will change when the set of required properties is changed
 NewSLAMissWithDefaults instantiates a new SLAMiss object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetTaskId
-
-`func (o *SLAMiss) GetTaskId() string`
-
-GetTaskId returns the TaskId field if non-nil, zero value otherwise.
-
-### GetTaskIdOk
-
-`func (o *SLAMiss) GetTaskIdOk() (*string, bool)`
-
-GetTaskIdOk returns a tuple with the TaskId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetTaskId
-
-`func (o *SLAMiss) SetTaskId(v string)`
-
-SetTaskId sets TaskId field to given value.
-
-### HasTaskId
-
-`func (o *SLAMiss) HasTaskId() bool`
-
-HasTaskId returns a boolean if a field has been set.
 
 ### GetDagId
 
@@ -99,81 +55,6 @@ SetDagId sets DagId field to given value.
 `func (o *SLAMiss) HasDagId() bool`
 
 HasDagId returns a boolean if a field has been set.
-
-### GetExecutionDate
-
-`func (o *SLAMiss) GetExecutionDate() string`
-
-GetExecutionDate returns the ExecutionDate field if non-nil, zero value otherwise.
-
-### GetExecutionDateOk
-
-`func (o *SLAMiss) GetExecutionDateOk() (*string, bool)`
-
-GetExecutionDateOk returns a tuple with the ExecutionDate field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetExecutionDate
-
-`func (o *SLAMiss) SetExecutionDate(v string)`
-
-SetExecutionDate sets ExecutionDate field to given value.
-
-### HasExecutionDate
-
-`func (o *SLAMiss) HasExecutionDate() bool`
-
-HasExecutionDate returns a boolean if a field has been set.
-
-### GetEmailSent
-
-`func (o *SLAMiss) GetEmailSent() bool`
-
-GetEmailSent returns the EmailSent field if non-nil, zero value otherwise.
-
-### GetEmailSentOk
-
-`func (o *SLAMiss) GetEmailSentOk() (*bool, bool)`
-
-GetEmailSentOk returns a tuple with the EmailSent field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetEmailSent
-
-`func (o *SLAMiss) SetEmailSent(v bool)`
-
-SetEmailSent sets EmailSent field to given value.
-
-### HasEmailSent
-
-`func (o *SLAMiss) HasEmailSent() bool`
-
-HasEmailSent returns a boolean if a field has been set.
-
-### GetTimestamp
-
-`func (o *SLAMiss) GetTimestamp() string`
-
-GetTimestamp returns the Timestamp field if non-nil, zero value otherwise.
-
-### GetTimestampOk
-
-`func (o *SLAMiss) GetTimestampOk() (*string, bool)`
-
-GetTimestampOk returns a tuple with the Timestamp field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetTimestamp
-
-`func (o *SLAMiss) SetTimestamp(v string)`
-
-SetTimestamp sets Timestamp field to given value.
-
-### HasTimestamp
-
-`func (o *SLAMiss) HasTimestamp() bool`
-
-HasTimestamp returns a boolean if a field has been set.
 
 ### GetDescription
 
@@ -210,6 +91,56 @@ HasDescription returns a boolean if a field has been set.
 `func (o *SLAMiss) UnsetDescription()`
 
 UnsetDescription ensures that no value is present for Description, not even an explicit nil
+### GetEmailSent
+
+`func (o *SLAMiss) GetEmailSent() bool`
+
+GetEmailSent returns the EmailSent field if non-nil, zero value otherwise.
+
+### GetEmailSentOk
+
+`func (o *SLAMiss) GetEmailSentOk() (*bool, bool)`
+
+GetEmailSentOk returns a tuple with the EmailSent field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEmailSent
+
+`func (o *SLAMiss) SetEmailSent(v bool)`
+
+SetEmailSent sets EmailSent field to given value.
+
+### HasEmailSent
+
+`func (o *SLAMiss) HasEmailSent() bool`
+
+HasEmailSent returns a boolean if a field has been set.
+
+### GetExecutionDate
+
+`func (o *SLAMiss) GetExecutionDate() string`
+
+GetExecutionDate returns the ExecutionDate field if non-nil, zero value otherwise.
+
+### GetExecutionDateOk
+
+`func (o *SLAMiss) GetExecutionDateOk() (*string, bool)`
+
+GetExecutionDateOk returns a tuple with the ExecutionDate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExecutionDate
+
+`func (o *SLAMiss) SetExecutionDate(v string)`
+
+SetExecutionDate sets ExecutionDate field to given value.
+
+### HasExecutionDate
+
+`func (o *SLAMiss) HasExecutionDate() bool`
+
+HasExecutionDate returns a boolean if a field has been set.
+
 ### GetNotificationSent
 
 `func (o *SLAMiss) GetNotificationSent() bool`
@@ -234,6 +165,56 @@ SetNotificationSent sets NotificationSent field to given value.
 `func (o *SLAMiss) HasNotificationSent() bool`
 
 HasNotificationSent returns a boolean if a field has been set.
+
+### GetTaskId
+
+`func (o *SLAMiss) GetTaskId() string`
+
+GetTaskId returns the TaskId field if non-nil, zero value otherwise.
+
+### GetTaskIdOk
+
+`func (o *SLAMiss) GetTaskIdOk() (*string, bool)`
+
+GetTaskIdOk returns a tuple with the TaskId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTaskId
+
+`func (o *SLAMiss) SetTaskId(v string)`
+
+SetTaskId sets TaskId field to given value.
+
+### HasTaskId
+
+`func (o *SLAMiss) HasTaskId() bool`
+
+HasTaskId returns a boolean if a field has been set.
+
+### GetTimestamp
+
+`func (o *SLAMiss) GetTimestamp() string`
+
+GetTimestamp returns the Timestamp field if non-nil, zero value otherwise.
+
+### GetTimestampOk
+
+`func (o *SLAMiss) GetTimestampOk() (*string, bool)`
+
+GetTimestampOk returns a tuple with the Timestamp field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTimestamp
+
+`func (o *SLAMiss) SetTimestamp(v string)`
+
+SetTimestamp sets Timestamp field to given value.
+
+### HasTimestamp
+
+`func (o *SLAMiss) HasTimestamp() bool`
+
+HasTimestamp returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

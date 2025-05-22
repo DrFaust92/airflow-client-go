@@ -1,33 +1,14 @@
-<!--
- Licensed to the Apache Software Foundation (ASF) under one
- or more contributor license agreements.  See the NOTICE file
- distributed with this work for additional information
- regarding copyright ownership.  The ASF licenses this file
- to you under the Apache License, Version 2.0 (the
- "License"); you may not use this file except in compliance
- with the License.  You may obtain a copy of the License at
+# \PoolAPI
 
-   http://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing,
- software distributed under the License is distributed on an
- "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- KIND, either express or implied.  See the License for the
- specific language governing permissions and limitations
- under the License.
- -->
-
-# \PoolApi
-
-All URIs are relative to *http://localhost/api/v1*
+All URIs are relative to */api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**DeletePool**](PoolApi.md#DeletePool) | **Delete** /pools/{pool_name} | Delete a pool
-[**GetPool**](PoolApi.md#GetPool) | **Get** /pools/{pool_name} | Get a pool
-[**GetPools**](PoolApi.md#GetPools) | **Get** /pools | List pools
-[**PatchPool**](PoolApi.md#PatchPool) | **Patch** /pools/{pool_name} | Update a pool
-[**PostPool**](PoolApi.md#PostPool) | **Post** /pools | Create a pool
+[**DeletePool**](PoolAPI.md#DeletePool) | **Delete** /pools/{pool_name} | Delete a pool
+[**GetPool**](PoolAPI.md#GetPool) | **Get** /pools/{pool_name} | Get a pool
+[**GetPools**](PoolAPI.md#GetPools) | **Get** /pools | List pools
+[**PatchPool**](PoolAPI.md#PatchPool) | **Patch** /pools/{pool_name} | Update a pool
+[**PostPool**](PoolAPI.md#PostPool) | **Post** /pools | Create a pool
 
 
 
@@ -43,22 +24,22 @@ Delete a pool
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./airflow"
 )
 
 func main() {
-    poolName := "poolName_example" // string | The pool name.
+	poolName := "poolName_example" // string | The pool name.
 
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PoolApi.DeletePool(context.Background(), poolName).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PoolApi.DeletePool``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.PoolAPI.DeletePool(context.Background(), poolName).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PoolAPI.DeletePool``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -85,7 +66,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+No authorization required
 
 ### HTTP request headers
 
@@ -109,24 +90,24 @@ Get a pool
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./airflow"
 )
 
 func main() {
-    poolName := "poolName_example" // string | The pool name.
+	poolName := "poolName_example" // string | The pool name.
 
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PoolApi.GetPool(context.Background(), poolName).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PoolApi.GetPool``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetPool`: Pool
-    fmt.Fprintf(os.Stdout, "Response from `PoolApi.GetPool`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.PoolAPI.GetPool(context.Background(), poolName).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PoolAPI.GetPool``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetPool`: Pool
+	fmt.Fprintf(os.Stdout, "Response from `PoolAPI.GetPool`: %v\n", resp)
 }
 ```
 
@@ -153,7 +134,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+No authorization required
 
 ### HTTP request headers
 
@@ -177,26 +158,26 @@ List pools
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./airflow"
 )
 
 func main() {
-    limit := int32(56) // int32 | The numbers of items to return. (optional) (default to 100)
-    offset := int32(56) // int32 | The number of items to skip before starting to collect the result set. (optional)
-    orderBy := "orderBy_example" // string | The name of the field to order the results by. Prefix a field name with `-` to reverse the sort order.  *New in version 2.1.0*  (optional)
+	limit := int32(56) // int32 | The numbers of items to return. (optional) (default to 100)
+	offset := int32(56) // int32 | The number of items to skip before starting to collect the result set. (optional)
+	orderBy := "orderBy_example" // string | The name of the field to order the results by. Prefix a field name with `-` to reverse the sort order.  *New in version 2.1.0*  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PoolApi.GetPools(context.Background()).Limit(limit).Offset(offset).OrderBy(orderBy).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PoolApi.GetPools``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetPools`: PoolCollection
-    fmt.Fprintf(os.Stdout, "Response from `PoolApi.GetPools`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.PoolAPI.GetPools(context.Background()).Limit(limit).Offset(offset).OrderBy(orderBy).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PoolAPI.GetPools``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetPools`: PoolCollection
+	fmt.Fprintf(os.Stdout, "Response from `PoolAPI.GetPools`: %v\n", resp)
 }
 ```
 
@@ -221,7 +202,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+No authorization required
 
 ### HTTP request headers
 
@@ -245,26 +226,26 @@ Update a pool
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./airflow"
 )
 
 func main() {
-    poolName := "poolName_example" // string | The pool name.
-    pool := *openapiclient.NewPool() // Pool | 
-    updateMask := []string{"Inner_example"} // []string | The fields to update on the resource. If absent or empty, all modifiable fields are updated. A comma-separated list of fully qualified names of fields.  (optional)
+	poolName := "poolName_example" // string | The pool name.
+	pool := *openapiclient.NewPool() // Pool | 
+	updateMask := []string{"Inner_example"} // []string | The fields to update on the resource. If absent or empty, all modifiable fields are updated. A comma-separated list of fully qualified names of fields.  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PoolApi.PatchPool(context.Background(), poolName).Pool(pool).UpdateMask(updateMask).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PoolApi.PatchPool``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `PatchPool`: Pool
-    fmt.Fprintf(os.Stdout, "Response from `PoolApi.PatchPool`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.PoolAPI.PatchPool(context.Background(), poolName).Pool(pool).UpdateMask(updateMask).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PoolAPI.PatchPool``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `PatchPool`: Pool
+	fmt.Fprintf(os.Stdout, "Response from `PoolAPI.PatchPool`: %v\n", resp)
 }
 ```
 
@@ -293,7 +274,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+No authorization required
 
 ### HTTP request headers
 
@@ -317,24 +298,24 @@ Create a pool
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./airflow"
 )
 
 func main() {
-    pool := *openapiclient.NewPool() // Pool | 
+	pool := *openapiclient.NewPool() // Pool | 
 
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PoolApi.PostPool(context.Background()).Pool(pool).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PoolApi.PostPool``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `PostPool`: Pool
-    fmt.Fprintf(os.Stdout, "Response from `PoolApi.PostPool`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.PoolAPI.PostPool(context.Background()).Pool(pool).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PoolAPI.PostPool``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `PostPool`: Pool
+	fmt.Fprintf(os.Stdout, "Response from `PoolAPI.PostPool`: %v\n", resp)
 }
 ```
 
@@ -357,7 +338,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+No authorization required
 
 ### HTTP request headers
 

@@ -1,35 +1,16 @@
-<!--
- Licensed to the Apache Software Foundation (ASF) under one
- or more contributor license agreements.  See the NOTICE file
- distributed with this work for additional information
- regarding copyright ownership.  The ASF licenses this file
- to you under the Apache License, Version 2.0 (the
- "License"); you may not use this file except in compliance
- with the License.  You may obtain a copy of the License at
+# \ProviderAPI
 
-   http://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing,
- software distributed under the License is distributed on an
- "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- KIND, either express or implied.  See the License for the
- specific language governing permissions and limitations
- under the License.
- -->
-
-# \ProviderApi
-
-All URIs are relative to *http://localhost/api/v1*
+All URIs are relative to */api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetProviders**](ProviderApi.md#GetProviders) | **Get** /providers | List providers
+[**GetProviders**](ProviderAPI.md#GetProviders) | **Get** /providers | List providers
 
 
 
 ## GetProviders
 
-> ProviderCollection GetProviders(ctx).Execute()
+> GetProviders200Response GetProviders(ctx).Execute()
 
 List providers
 
@@ -41,23 +22,23 @@ List providers
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./airflow"
 )
 
 func main() {
 
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ProviderApi.GetProviders(context.Background()).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ProviderApi.GetProviders``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetProviders`: ProviderCollection
-    fmt.Fprintf(os.Stdout, "Response from `ProviderApi.GetProviders`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ProviderAPI.GetProviders(context.Background()).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ProviderAPI.GetProviders``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetProviders`: GetProviders200Response
+	fmt.Fprintf(os.Stdout, "Response from `ProviderAPI.GetProviders`: %v\n", resp)
 }
 ```
 
@@ -72,11 +53,11 @@ Other parameters are passed through a pointer to a apiGetProvidersRequest struct
 
 ### Return type
 
-[**ProviderCollection**](ProviderCollection.md)
+[**GetProviders200Response**](GetProviders200Response.md)
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+No authorization required
 
 ### HTTP request headers
 

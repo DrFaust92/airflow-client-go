@@ -1,22 +1,3 @@
-<!--
- Licensed to the Apache Software Foundation (ASF) under one
- or more contributor license agreements.  See the NOTICE file
- distributed with this work for additional information
- regarding copyright ownership.  The ASF licenses this file
- to you under the Apache License, Version 2.0 (the
- "License"); you may not use this file except in compliance
- with the License.  You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing,
- software distributed under the License is distributed on an
- "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- KIND, either express or implied.  See the License for the
- specific language governing permissions and limitations
- under the License.
- -->
-
 # ScheduleInterval
 
 ## Properties
@@ -25,27 +6,27 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type** | **string** |  | 
 **Days** | **int32** |  | 
-**Seconds** | **int32** |  | 
 **Microseconds** | **int32** |  | 
-**Years** | **int32** |  | 
-**Months** | **int32** |  | 
-**Leapdays** | **int32** |  | 
-**Hours** | **int32** |  | 
-**Minutes** | **int32** |  | 
-**Year** | **int32** |  | 
-**Month** | **int32** |  | 
+**Seconds** | **int32** |  | 
 **Day** | **int32** |  | 
 **Hour** | **int32** |  | 
-**Minute** | **int32** |  | 
-**Second** | **int32** |  | 
+**Hours** | **int32** |  | 
+**Leapdays** | **int32** |  | 
 **Microsecond** | **int32** |  | 
+**Minute** | **int32** |  | 
+**Minutes** | **int32** |  | 
+**Month** | **int32** |  | 
+**Months** | **int32** |  | 
+**Second** | **int32** |  | 
+**Year** | **int32** |  | 
+**Years** | **int32** |  | 
 **Value** | **string** |  | 
 
 ## Methods
 
 ### NewScheduleInterval
 
-`func NewScheduleInterval(type_ string, days int32, seconds int32, microseconds int32, years int32, months int32, leapdays int32, hours int32, minutes int32, year int32, month int32, day int32, hour int32, minute int32, second int32, microsecond int32, value string, ) *ScheduleInterval`
+`func NewScheduleInterval(type_ string, days int32, microseconds int32, seconds int32, day int32, hour int32, hours int32, leapdays int32, microsecond int32, minute int32, minutes int32, month int32, months int32, second int32, year int32, years int32, value string, ) *ScheduleInterval`
 
 NewScheduleInterval instantiates a new ScheduleInterval object
 This constructor will assign default values to properties that have it defined,
@@ -100,26 +81,6 @@ and a boolean to check if the value has been set.
 SetDays sets Days field to given value.
 
 
-### GetSeconds
-
-`func (o *ScheduleInterval) GetSeconds() int32`
-
-GetSeconds returns the Seconds field if non-nil, zero value otherwise.
-
-### GetSecondsOk
-
-`func (o *ScheduleInterval) GetSecondsOk() (*int32, bool)`
-
-GetSecondsOk returns a tuple with the Seconds field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSeconds
-
-`func (o *ScheduleInterval) SetSeconds(v int32)`
-
-SetSeconds sets Seconds field to given value.
-
-
 ### GetMicroseconds
 
 `func (o *ScheduleInterval) GetMicroseconds() int32`
@@ -140,144 +101,24 @@ and a boolean to check if the value has been set.
 SetMicroseconds sets Microseconds field to given value.
 
 
-### GetYears
+### GetSeconds
 
-`func (o *ScheduleInterval) GetYears() int32`
+`func (o *ScheduleInterval) GetSeconds() int32`
 
-GetYears returns the Years field if non-nil, zero value otherwise.
+GetSeconds returns the Seconds field if non-nil, zero value otherwise.
 
-### GetYearsOk
+### GetSecondsOk
 
-`func (o *ScheduleInterval) GetYearsOk() (*int32, bool)`
+`func (o *ScheduleInterval) GetSecondsOk() (*int32, bool)`
 
-GetYearsOk returns a tuple with the Years field if it's non-nil, zero value otherwise
+GetSecondsOk returns a tuple with the Seconds field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetYears
+### SetSeconds
 
-`func (o *ScheduleInterval) SetYears(v int32)`
+`func (o *ScheduleInterval) SetSeconds(v int32)`
 
-SetYears sets Years field to given value.
-
-
-### GetMonths
-
-`func (o *ScheduleInterval) GetMonths() int32`
-
-GetMonths returns the Months field if non-nil, zero value otherwise.
-
-### GetMonthsOk
-
-`func (o *ScheduleInterval) GetMonthsOk() (*int32, bool)`
-
-GetMonthsOk returns a tuple with the Months field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMonths
-
-`func (o *ScheduleInterval) SetMonths(v int32)`
-
-SetMonths sets Months field to given value.
-
-
-### GetLeapdays
-
-`func (o *ScheduleInterval) GetLeapdays() int32`
-
-GetLeapdays returns the Leapdays field if non-nil, zero value otherwise.
-
-### GetLeapdaysOk
-
-`func (o *ScheduleInterval) GetLeapdaysOk() (*int32, bool)`
-
-GetLeapdaysOk returns a tuple with the Leapdays field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetLeapdays
-
-`func (o *ScheduleInterval) SetLeapdays(v int32)`
-
-SetLeapdays sets Leapdays field to given value.
-
-
-### GetHours
-
-`func (o *ScheduleInterval) GetHours() int32`
-
-GetHours returns the Hours field if non-nil, zero value otherwise.
-
-### GetHoursOk
-
-`func (o *ScheduleInterval) GetHoursOk() (*int32, bool)`
-
-GetHoursOk returns a tuple with the Hours field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetHours
-
-`func (o *ScheduleInterval) SetHours(v int32)`
-
-SetHours sets Hours field to given value.
-
-
-### GetMinutes
-
-`func (o *ScheduleInterval) GetMinutes() int32`
-
-GetMinutes returns the Minutes field if non-nil, zero value otherwise.
-
-### GetMinutesOk
-
-`func (o *ScheduleInterval) GetMinutesOk() (*int32, bool)`
-
-GetMinutesOk returns a tuple with the Minutes field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMinutes
-
-`func (o *ScheduleInterval) SetMinutes(v int32)`
-
-SetMinutes sets Minutes field to given value.
-
-
-### GetYear
-
-`func (o *ScheduleInterval) GetYear() int32`
-
-GetYear returns the Year field if non-nil, zero value otherwise.
-
-### GetYearOk
-
-`func (o *ScheduleInterval) GetYearOk() (*int32, bool)`
-
-GetYearOk returns a tuple with the Year field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetYear
-
-`func (o *ScheduleInterval) SetYear(v int32)`
-
-SetYear sets Year field to given value.
-
-
-### GetMonth
-
-`func (o *ScheduleInterval) GetMonth() int32`
-
-GetMonth returns the Month field if non-nil, zero value otherwise.
-
-### GetMonthOk
-
-`func (o *ScheduleInterval) GetMonthOk() (*int32, bool)`
-
-GetMonthOk returns a tuple with the Month field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMonth
-
-`func (o *ScheduleInterval) SetMonth(v int32)`
-
-SetMonth sets Month field to given value.
+SetSeconds sets Seconds field to given value.
 
 
 ### GetDay
@@ -320,6 +161,66 @@ and a boolean to check if the value has been set.
 SetHour sets Hour field to given value.
 
 
+### GetHours
+
+`func (o *ScheduleInterval) GetHours() int32`
+
+GetHours returns the Hours field if non-nil, zero value otherwise.
+
+### GetHoursOk
+
+`func (o *ScheduleInterval) GetHoursOk() (*int32, bool)`
+
+GetHoursOk returns a tuple with the Hours field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHours
+
+`func (o *ScheduleInterval) SetHours(v int32)`
+
+SetHours sets Hours field to given value.
+
+
+### GetLeapdays
+
+`func (o *ScheduleInterval) GetLeapdays() int32`
+
+GetLeapdays returns the Leapdays field if non-nil, zero value otherwise.
+
+### GetLeapdaysOk
+
+`func (o *ScheduleInterval) GetLeapdaysOk() (*int32, bool)`
+
+GetLeapdaysOk returns a tuple with the Leapdays field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLeapdays
+
+`func (o *ScheduleInterval) SetLeapdays(v int32)`
+
+SetLeapdays sets Leapdays field to given value.
+
+
+### GetMicrosecond
+
+`func (o *ScheduleInterval) GetMicrosecond() int32`
+
+GetMicrosecond returns the Microsecond field if non-nil, zero value otherwise.
+
+### GetMicrosecondOk
+
+`func (o *ScheduleInterval) GetMicrosecondOk() (*int32, bool)`
+
+GetMicrosecondOk returns a tuple with the Microsecond field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMicrosecond
+
+`func (o *ScheduleInterval) SetMicrosecond(v int32)`
+
+SetMicrosecond sets Microsecond field to given value.
+
+
 ### GetMinute
 
 `func (o *ScheduleInterval) GetMinute() int32`
@@ -338,6 +239,66 @@ and a boolean to check if the value has been set.
 `func (o *ScheduleInterval) SetMinute(v int32)`
 
 SetMinute sets Minute field to given value.
+
+
+### GetMinutes
+
+`func (o *ScheduleInterval) GetMinutes() int32`
+
+GetMinutes returns the Minutes field if non-nil, zero value otherwise.
+
+### GetMinutesOk
+
+`func (o *ScheduleInterval) GetMinutesOk() (*int32, bool)`
+
+GetMinutesOk returns a tuple with the Minutes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMinutes
+
+`func (o *ScheduleInterval) SetMinutes(v int32)`
+
+SetMinutes sets Minutes field to given value.
+
+
+### GetMonth
+
+`func (o *ScheduleInterval) GetMonth() int32`
+
+GetMonth returns the Month field if non-nil, zero value otherwise.
+
+### GetMonthOk
+
+`func (o *ScheduleInterval) GetMonthOk() (*int32, bool)`
+
+GetMonthOk returns a tuple with the Month field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMonth
+
+`func (o *ScheduleInterval) SetMonth(v int32)`
+
+SetMonth sets Month field to given value.
+
+
+### GetMonths
+
+`func (o *ScheduleInterval) GetMonths() int32`
+
+GetMonths returns the Months field if non-nil, zero value otherwise.
+
+### GetMonthsOk
+
+`func (o *ScheduleInterval) GetMonthsOk() (*int32, bool)`
+
+GetMonthsOk returns a tuple with the Months field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMonths
+
+`func (o *ScheduleInterval) SetMonths(v int32)`
+
+SetMonths sets Months field to given value.
 
 
 ### GetSecond
@@ -360,24 +321,44 @@ and a boolean to check if the value has been set.
 SetSecond sets Second field to given value.
 
 
-### GetMicrosecond
+### GetYear
 
-`func (o *ScheduleInterval) GetMicrosecond() int32`
+`func (o *ScheduleInterval) GetYear() int32`
 
-GetMicrosecond returns the Microsecond field if non-nil, zero value otherwise.
+GetYear returns the Year field if non-nil, zero value otherwise.
 
-### GetMicrosecondOk
+### GetYearOk
 
-`func (o *ScheduleInterval) GetMicrosecondOk() (*int32, bool)`
+`func (o *ScheduleInterval) GetYearOk() (*int32, bool)`
 
-GetMicrosecondOk returns a tuple with the Microsecond field if it's non-nil, zero value otherwise
+GetYearOk returns a tuple with the Year field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetMicrosecond
+### SetYear
 
-`func (o *ScheduleInterval) SetMicrosecond(v int32)`
+`func (o *ScheduleInterval) SetYear(v int32)`
 
-SetMicrosecond sets Microsecond field to given value.
+SetYear sets Year field to given value.
+
+
+### GetYears
+
+`func (o *ScheduleInterval) GetYears() int32`
+
+GetYears returns the Years field if non-nil, zero value otherwise.
+
+### GetYearsOk
+
+`func (o *ScheduleInterval) GetYearsOk() (*int32, bool)`
+
+GetYearsOk returns a tuple with the Years field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetYears
+
+`func (o *ScheduleInterval) SetYears(v int32)`
+
+SetYears sets Years field to given value.
 
 
 ### GetValue

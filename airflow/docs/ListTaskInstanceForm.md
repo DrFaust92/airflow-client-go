@@ -1,22 +1,3 @@
-<!--
- Licensed to the Apache Software Foundation (ASF) under one
- or more contributor license agreements.  See the NOTICE file
- distributed with this work for additional information
- regarding copyright ownership.  The ASF licenses this file
- to you under the Apache License, Version 2.0 (the
- "License"); you may not use this file except in compliance
- with the License.  You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing,
- software distributed under the License is distributed on an
- "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- KIND, either express or implied.  See the License for the
- specific language governing permissions and limitations
- under the License.
- -->
-
 # ListTaskInstanceForm
 
 ## Properties
@@ -24,17 +5,22 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **DagIds** | Pointer to **[]string** | Return objects with specific DAG IDs. The value can be repeated to retrieve multiple matching values (OR condition). | [optional] 
-**ExecutionDateGte** | Pointer to **time.Time** | Returns objects greater or equal to the specified date.  This can be combined with execution_date_lte parameter to receive only the selected period.  | [optional] 
-**ExecutionDateLte** | Pointer to **time.Time** | Returns objects less than or equal to the specified date.  This can be combined with execution_date_gte parameter to receive only the selected period.  | [optional] 
-**StartDateGte** | Pointer to **time.Time** | Returns objects greater or equal the specified date.  This can be combined with start_date_lte parameter to receive only the selected period.  | [optional] 
-**StartDateLte** | Pointer to **time.Time** | Returns objects less or equal the specified date.  This can be combined with start_date_gte parameter to receive only the selected period.  | [optional] 
-**EndDateGte** | Pointer to **time.Time** | Returns objects greater or equal the specified date.  This can be combined with start_date_lte parameter to receive only the selected period.  | [optional] 
-**EndDateLte** | Pointer to **time.Time** | Returns objects less than or equal to the specified date.  This can be combined with start_date_gte parameter to receive only the selected period.  | [optional] 
+**DagRunIds** | Pointer to **[]string** | Return objects with specific DAG Run IDs. The value can be repeated to retrieve multiple matching values (OR condition). *New in version 2.7.1* | [optional] 
 **DurationGte** | Pointer to **float32** | Returns objects greater than or equal to the specified values.  This can be combined with duration_lte parameter to receive only the selected period.  | [optional] 
 **DurationLte** | Pointer to **float32** | Returns objects less than or equal to the specified values.  This can be combined with duration_gte parameter to receive only the selected range.  | [optional] 
-**State** | Pointer to [**[]TaskState**](TaskState.md) | The value can be repeated to retrieve multiple matching values (OR condition). | [optional] 
+**EndDateGte** | Pointer to **time.Time** | Returns objects greater or equal the specified date.  This can be combined with start_date_lte parameter to receive only the selected period.  | [optional] 
+**EndDateLte** | Pointer to **time.Time** | Returns objects less than or equal to the specified date.  This can be combined with start_date_gte parameter to receive only the selected period.  | [optional] 
+**ExecutionDateGte** | Pointer to **time.Time** | Returns objects greater or equal to the specified date.  This can be combined with execution_date_lte parameter to receive only the selected period.  | [optional] 
+**ExecutionDateLte** | Pointer to **time.Time** | Returns objects less than or equal to the specified date.  This can be combined with execution_date_gte parameter to receive only the selected period.  | [optional] 
+**Executor** | Pointer to **[]string** | The value can be repeated to retrieve multiple matching values (OR condition). | [optional] 
+**PageLimit** | Pointer to **int32** | The numbers of items to return. | [optional] [default to 100]
+**PageOffset** | Pointer to **int32** | The number of items to skip before starting to collect the result set. | [optional] 
 **Pool** | Pointer to **[]string** | The value can be repeated to retrieve multiple matching values (OR condition). | [optional] 
 **Queue** | Pointer to **[]string** | The value can be repeated to retrieve multiple matching values (OR condition). | [optional] 
+**StartDateGte** | Pointer to **time.Time** | Returns objects greater or equal the specified date.  This can be combined with start_date_lte parameter to receive only the selected period.  | [optional] 
+**StartDateLte** | Pointer to **time.Time** | Returns objects less or equal the specified date.  This can be combined with start_date_gte parameter to receive only the selected period.  | [optional] 
+**State** | Pointer to [**[]TaskState**](TaskState.md) | The value can be repeated to retrieve multiple matching values (OR condition). | [optional] 
+**TaskIds** | Pointer to **[]string** | Return objects with specific task IDs. The value can be repeated to retrieve multiple matching values (OR condition). *New in version 2.7.1* | [optional] 
 
 ## Methods
 
@@ -80,155 +66,30 @@ SetDagIds sets DagIds field to given value.
 
 HasDagIds returns a boolean if a field has been set.
 
-### GetExecutionDateGte
+### GetDagRunIds
 
-`func (o *ListTaskInstanceForm) GetExecutionDateGte() time.Time`
+`func (o *ListTaskInstanceForm) GetDagRunIds() []string`
 
-GetExecutionDateGte returns the ExecutionDateGte field if non-nil, zero value otherwise.
+GetDagRunIds returns the DagRunIds field if non-nil, zero value otherwise.
 
-### GetExecutionDateGteOk
+### GetDagRunIdsOk
 
-`func (o *ListTaskInstanceForm) GetExecutionDateGteOk() (*time.Time, bool)`
+`func (o *ListTaskInstanceForm) GetDagRunIdsOk() (*[]string, bool)`
 
-GetExecutionDateGteOk returns a tuple with the ExecutionDateGte field if it's non-nil, zero value otherwise
+GetDagRunIdsOk returns a tuple with the DagRunIds field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetExecutionDateGte
+### SetDagRunIds
 
-`func (o *ListTaskInstanceForm) SetExecutionDateGte(v time.Time)`
+`func (o *ListTaskInstanceForm) SetDagRunIds(v []string)`
 
-SetExecutionDateGte sets ExecutionDateGte field to given value.
+SetDagRunIds sets DagRunIds field to given value.
 
-### HasExecutionDateGte
+### HasDagRunIds
 
-`func (o *ListTaskInstanceForm) HasExecutionDateGte() bool`
+`func (o *ListTaskInstanceForm) HasDagRunIds() bool`
 
-HasExecutionDateGte returns a boolean if a field has been set.
-
-### GetExecutionDateLte
-
-`func (o *ListTaskInstanceForm) GetExecutionDateLte() time.Time`
-
-GetExecutionDateLte returns the ExecutionDateLte field if non-nil, zero value otherwise.
-
-### GetExecutionDateLteOk
-
-`func (o *ListTaskInstanceForm) GetExecutionDateLteOk() (*time.Time, bool)`
-
-GetExecutionDateLteOk returns a tuple with the ExecutionDateLte field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetExecutionDateLte
-
-`func (o *ListTaskInstanceForm) SetExecutionDateLte(v time.Time)`
-
-SetExecutionDateLte sets ExecutionDateLte field to given value.
-
-### HasExecutionDateLte
-
-`func (o *ListTaskInstanceForm) HasExecutionDateLte() bool`
-
-HasExecutionDateLte returns a boolean if a field has been set.
-
-### GetStartDateGte
-
-`func (o *ListTaskInstanceForm) GetStartDateGte() time.Time`
-
-GetStartDateGte returns the StartDateGte field if non-nil, zero value otherwise.
-
-### GetStartDateGteOk
-
-`func (o *ListTaskInstanceForm) GetStartDateGteOk() (*time.Time, bool)`
-
-GetStartDateGteOk returns a tuple with the StartDateGte field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetStartDateGte
-
-`func (o *ListTaskInstanceForm) SetStartDateGte(v time.Time)`
-
-SetStartDateGte sets StartDateGte field to given value.
-
-### HasStartDateGte
-
-`func (o *ListTaskInstanceForm) HasStartDateGte() bool`
-
-HasStartDateGte returns a boolean if a field has been set.
-
-### GetStartDateLte
-
-`func (o *ListTaskInstanceForm) GetStartDateLte() time.Time`
-
-GetStartDateLte returns the StartDateLte field if non-nil, zero value otherwise.
-
-### GetStartDateLteOk
-
-`func (o *ListTaskInstanceForm) GetStartDateLteOk() (*time.Time, bool)`
-
-GetStartDateLteOk returns a tuple with the StartDateLte field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetStartDateLte
-
-`func (o *ListTaskInstanceForm) SetStartDateLte(v time.Time)`
-
-SetStartDateLte sets StartDateLte field to given value.
-
-### HasStartDateLte
-
-`func (o *ListTaskInstanceForm) HasStartDateLte() bool`
-
-HasStartDateLte returns a boolean if a field has been set.
-
-### GetEndDateGte
-
-`func (o *ListTaskInstanceForm) GetEndDateGte() time.Time`
-
-GetEndDateGte returns the EndDateGte field if non-nil, zero value otherwise.
-
-### GetEndDateGteOk
-
-`func (o *ListTaskInstanceForm) GetEndDateGteOk() (*time.Time, bool)`
-
-GetEndDateGteOk returns a tuple with the EndDateGte field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetEndDateGte
-
-`func (o *ListTaskInstanceForm) SetEndDateGte(v time.Time)`
-
-SetEndDateGte sets EndDateGte field to given value.
-
-### HasEndDateGte
-
-`func (o *ListTaskInstanceForm) HasEndDateGte() bool`
-
-HasEndDateGte returns a boolean if a field has been set.
-
-### GetEndDateLte
-
-`func (o *ListTaskInstanceForm) GetEndDateLte() time.Time`
-
-GetEndDateLte returns the EndDateLte field if non-nil, zero value otherwise.
-
-### GetEndDateLteOk
-
-`func (o *ListTaskInstanceForm) GetEndDateLteOk() (*time.Time, bool)`
-
-GetEndDateLteOk returns a tuple with the EndDateLte field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetEndDateLte
-
-`func (o *ListTaskInstanceForm) SetEndDateLte(v time.Time)`
-
-SetEndDateLte sets EndDateLte field to given value.
-
-### HasEndDateLte
-
-`func (o *ListTaskInstanceForm) HasEndDateLte() bool`
-
-HasEndDateLte returns a boolean if a field has been set.
+HasDagRunIds returns a boolean if a field has been set.
 
 ### GetDurationGte
 
@@ -280,30 +141,180 @@ SetDurationLte sets DurationLte field to given value.
 
 HasDurationLte returns a boolean if a field has been set.
 
-### GetState
+### GetEndDateGte
 
-`func (o *ListTaskInstanceForm) GetState() []TaskState`
+`func (o *ListTaskInstanceForm) GetEndDateGte() time.Time`
 
-GetState returns the State field if non-nil, zero value otherwise.
+GetEndDateGte returns the EndDateGte field if non-nil, zero value otherwise.
 
-### GetStateOk
+### GetEndDateGteOk
 
-`func (o *ListTaskInstanceForm) GetStateOk() (*[]TaskState, bool)`
+`func (o *ListTaskInstanceForm) GetEndDateGteOk() (*time.Time, bool)`
 
-GetStateOk returns a tuple with the State field if it's non-nil, zero value otherwise
+GetEndDateGteOk returns a tuple with the EndDateGte field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetState
+### SetEndDateGte
 
-`func (o *ListTaskInstanceForm) SetState(v []TaskState)`
+`func (o *ListTaskInstanceForm) SetEndDateGte(v time.Time)`
 
-SetState sets State field to given value.
+SetEndDateGte sets EndDateGte field to given value.
 
-### HasState
+### HasEndDateGte
 
-`func (o *ListTaskInstanceForm) HasState() bool`
+`func (o *ListTaskInstanceForm) HasEndDateGte() bool`
 
-HasState returns a boolean if a field has been set.
+HasEndDateGte returns a boolean if a field has been set.
+
+### GetEndDateLte
+
+`func (o *ListTaskInstanceForm) GetEndDateLte() time.Time`
+
+GetEndDateLte returns the EndDateLte field if non-nil, zero value otherwise.
+
+### GetEndDateLteOk
+
+`func (o *ListTaskInstanceForm) GetEndDateLteOk() (*time.Time, bool)`
+
+GetEndDateLteOk returns a tuple with the EndDateLte field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEndDateLte
+
+`func (o *ListTaskInstanceForm) SetEndDateLte(v time.Time)`
+
+SetEndDateLte sets EndDateLte field to given value.
+
+### HasEndDateLte
+
+`func (o *ListTaskInstanceForm) HasEndDateLte() bool`
+
+HasEndDateLte returns a boolean if a field has been set.
+
+### GetExecutionDateGte
+
+`func (o *ListTaskInstanceForm) GetExecutionDateGte() time.Time`
+
+GetExecutionDateGte returns the ExecutionDateGte field if non-nil, zero value otherwise.
+
+### GetExecutionDateGteOk
+
+`func (o *ListTaskInstanceForm) GetExecutionDateGteOk() (*time.Time, bool)`
+
+GetExecutionDateGteOk returns a tuple with the ExecutionDateGte field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExecutionDateGte
+
+`func (o *ListTaskInstanceForm) SetExecutionDateGte(v time.Time)`
+
+SetExecutionDateGte sets ExecutionDateGte field to given value.
+
+### HasExecutionDateGte
+
+`func (o *ListTaskInstanceForm) HasExecutionDateGte() bool`
+
+HasExecutionDateGte returns a boolean if a field has been set.
+
+### GetExecutionDateLte
+
+`func (o *ListTaskInstanceForm) GetExecutionDateLte() time.Time`
+
+GetExecutionDateLte returns the ExecutionDateLte field if non-nil, zero value otherwise.
+
+### GetExecutionDateLteOk
+
+`func (o *ListTaskInstanceForm) GetExecutionDateLteOk() (*time.Time, bool)`
+
+GetExecutionDateLteOk returns a tuple with the ExecutionDateLte field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExecutionDateLte
+
+`func (o *ListTaskInstanceForm) SetExecutionDateLte(v time.Time)`
+
+SetExecutionDateLte sets ExecutionDateLte field to given value.
+
+### HasExecutionDateLte
+
+`func (o *ListTaskInstanceForm) HasExecutionDateLte() bool`
+
+HasExecutionDateLte returns a boolean if a field has been set.
+
+### GetExecutor
+
+`func (o *ListTaskInstanceForm) GetExecutor() []string`
+
+GetExecutor returns the Executor field if non-nil, zero value otherwise.
+
+### GetExecutorOk
+
+`func (o *ListTaskInstanceForm) GetExecutorOk() (*[]string, bool)`
+
+GetExecutorOk returns a tuple with the Executor field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExecutor
+
+`func (o *ListTaskInstanceForm) SetExecutor(v []string)`
+
+SetExecutor sets Executor field to given value.
+
+### HasExecutor
+
+`func (o *ListTaskInstanceForm) HasExecutor() bool`
+
+HasExecutor returns a boolean if a field has been set.
+
+### GetPageLimit
+
+`func (o *ListTaskInstanceForm) GetPageLimit() int32`
+
+GetPageLimit returns the PageLimit field if non-nil, zero value otherwise.
+
+### GetPageLimitOk
+
+`func (o *ListTaskInstanceForm) GetPageLimitOk() (*int32, bool)`
+
+GetPageLimitOk returns a tuple with the PageLimit field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPageLimit
+
+`func (o *ListTaskInstanceForm) SetPageLimit(v int32)`
+
+SetPageLimit sets PageLimit field to given value.
+
+### HasPageLimit
+
+`func (o *ListTaskInstanceForm) HasPageLimit() bool`
+
+HasPageLimit returns a boolean if a field has been set.
+
+### GetPageOffset
+
+`func (o *ListTaskInstanceForm) GetPageOffset() int32`
+
+GetPageOffset returns the PageOffset field if non-nil, zero value otherwise.
+
+### GetPageOffsetOk
+
+`func (o *ListTaskInstanceForm) GetPageOffsetOk() (*int32, bool)`
+
+GetPageOffsetOk returns a tuple with the PageOffset field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPageOffset
+
+`func (o *ListTaskInstanceForm) SetPageOffset(v int32)`
+
+SetPageOffset sets PageOffset field to given value.
+
+### HasPageOffset
+
+`func (o *ListTaskInstanceForm) HasPageOffset() bool`
+
+HasPageOffset returns a boolean if a field has been set.
 
 ### GetPool
 
@@ -354,6 +365,106 @@ SetQueue sets Queue field to given value.
 `func (o *ListTaskInstanceForm) HasQueue() bool`
 
 HasQueue returns a boolean if a field has been set.
+
+### GetStartDateGte
+
+`func (o *ListTaskInstanceForm) GetStartDateGte() time.Time`
+
+GetStartDateGte returns the StartDateGte field if non-nil, zero value otherwise.
+
+### GetStartDateGteOk
+
+`func (o *ListTaskInstanceForm) GetStartDateGteOk() (*time.Time, bool)`
+
+GetStartDateGteOk returns a tuple with the StartDateGte field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStartDateGte
+
+`func (o *ListTaskInstanceForm) SetStartDateGte(v time.Time)`
+
+SetStartDateGte sets StartDateGte field to given value.
+
+### HasStartDateGte
+
+`func (o *ListTaskInstanceForm) HasStartDateGte() bool`
+
+HasStartDateGte returns a boolean if a field has been set.
+
+### GetStartDateLte
+
+`func (o *ListTaskInstanceForm) GetStartDateLte() time.Time`
+
+GetStartDateLte returns the StartDateLte field if non-nil, zero value otherwise.
+
+### GetStartDateLteOk
+
+`func (o *ListTaskInstanceForm) GetStartDateLteOk() (*time.Time, bool)`
+
+GetStartDateLteOk returns a tuple with the StartDateLte field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStartDateLte
+
+`func (o *ListTaskInstanceForm) SetStartDateLte(v time.Time)`
+
+SetStartDateLte sets StartDateLte field to given value.
+
+### HasStartDateLte
+
+`func (o *ListTaskInstanceForm) HasStartDateLte() bool`
+
+HasStartDateLte returns a boolean if a field has been set.
+
+### GetState
+
+`func (o *ListTaskInstanceForm) GetState() []TaskState`
+
+GetState returns the State field if non-nil, zero value otherwise.
+
+### GetStateOk
+
+`func (o *ListTaskInstanceForm) GetStateOk() (*[]TaskState, bool)`
+
+GetStateOk returns a tuple with the State field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetState
+
+`func (o *ListTaskInstanceForm) SetState(v []TaskState)`
+
+SetState sets State field to given value.
+
+### HasState
+
+`func (o *ListTaskInstanceForm) HasState() bool`
+
+HasState returns a boolean if a field has been set.
+
+### GetTaskIds
+
+`func (o *ListTaskInstanceForm) GetTaskIds() []string`
+
+GetTaskIds returns the TaskIds field if non-nil, zero value otherwise.
+
+### GetTaskIdsOk
+
+`func (o *ListTaskInstanceForm) GetTaskIdsOk() (*[]string, bool)`
+
+GetTaskIdsOk returns a tuple with the TaskIds field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTaskIds
+
+`func (o *ListTaskInstanceForm) SetTaskIds(v []string)`
+
+SetTaskIds sets TaskIds field to given value.
+
+### HasTaskIds
+
+`func (o *ListTaskInstanceForm) HasTaskIds() bool`
+
+HasTaskIds returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -1,30 +1,11 @@
-<!--
- Licensed to the Apache Software Foundation (ASF) under one
- or more contributor license agreements.  See the NOTICE file
- distributed with this work for additional information
- regarding copyright ownership.  The ASF licenses this file
- to you under the Apache License, Version 2.0 (the
- "License"); you may not use this file except in compliance
- with the License.  You may obtain a copy of the License at
+# \MonitoringAPI
 
-   http://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing,
- software distributed under the License is distributed on an
- "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- KIND, either express or implied.  See the License for the
- specific language governing permissions and limitations
- under the License.
- -->
-
-# \MonitoringApi
-
-All URIs are relative to *http://localhost/api/v1*
+All URIs are relative to */api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetHealth**](MonitoringApi.md#GetHealth) | **Get** /health | Get instance status
-[**GetVersion**](MonitoringApi.md#GetVersion) | **Get** /version | Get version information
+[**GetHealth**](MonitoringAPI.md#GetHealth) | **Get** /health | Get instance status
+[**GetVersion**](MonitoringAPI.md#GetVersion) | **Get** /version | Get version information
 
 
 
@@ -42,23 +23,23 @@ Get instance status
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./airflow"
 )
 
 func main() {
 
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.MonitoringApi.GetHealth(context.Background()).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `MonitoringApi.GetHealth``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetHealth`: HealthInfo
-    fmt.Fprintf(os.Stdout, "Response from `MonitoringApi.GetHealth`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.MonitoringAPI.GetHealth(context.Background()).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `MonitoringAPI.GetHealth``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetHealth`: HealthInfo
+	fmt.Fprintf(os.Stdout, "Response from `MonitoringAPI.GetHealth`: %v\n", resp)
 }
 ```
 
@@ -77,7 +58,7 @@ Other parameters are passed through a pointer to a apiGetHealthRequest struct vi
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+No authorization required
 
 ### HTTP request headers
 
@@ -101,23 +82,23 @@ Get version information
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./airflow"
 )
 
 func main() {
 
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.MonitoringApi.GetVersion(context.Background()).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `MonitoringApi.GetVersion``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetVersion`: VersionInfo
-    fmt.Fprintf(os.Stdout, "Response from `MonitoringApi.GetVersion`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.MonitoringAPI.GetVersion(context.Background()).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `MonitoringAPI.GetVersion``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetVersion`: VersionInfo
+	fmt.Fprintf(os.Stdout, "Response from `MonitoringAPI.GetVersion`: %v\n", resp)
 }
 ```
 
@@ -136,7 +117,7 @@ Other parameters are passed through a pointer to a apiGetVersionRequest struct v
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+No authorization required
 
 ### HTTP request headers
 

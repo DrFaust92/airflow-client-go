@@ -1,34 +1,15 @@
-<!--
- Licensed to the Apache Software Foundation (ASF) under one
- or more contributor license agreements.  See the NOTICE file
- distributed with this work for additional information
- regarding copyright ownership.  The ASF licenses this file
- to you under the Apache License, Version 2.0 (the
- "License"); you may not use this file except in compliance
- with the License.  You may obtain a copy of the License at
+# \ConnectionAPI
 
-   http://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing,
- software distributed under the License is distributed on an
- "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- KIND, either express or implied.  See the License for the
- specific language governing permissions and limitations
- under the License.
- -->
-
-# \ConnectionApi
-
-All URIs are relative to *http://localhost/api/v1*
+All URIs are relative to */api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**DeleteConnection**](ConnectionApi.md#DeleteConnection) | **Delete** /connections/{connection_id} | Delete a connection
-[**GetConnection**](ConnectionApi.md#GetConnection) | **Get** /connections/{connection_id} | Get a connection
-[**GetConnections**](ConnectionApi.md#GetConnections) | **Get** /connections | List connections
-[**PatchConnection**](ConnectionApi.md#PatchConnection) | **Patch** /connections/{connection_id} | Update a connection
-[**PostConnection**](ConnectionApi.md#PostConnection) | **Post** /connections | Create a connection
-[**TestConnection**](ConnectionApi.md#TestConnection) | **Post** /connections/test | Test a connection
+[**DeleteConnection**](ConnectionAPI.md#DeleteConnection) | **Delete** /connections/{connection_id} | Delete a connection
+[**GetConnection**](ConnectionAPI.md#GetConnection) | **Get** /connections/{connection_id} | Get a connection
+[**GetConnections**](ConnectionAPI.md#GetConnections) | **Get** /connections | List connections
+[**PatchConnection**](ConnectionAPI.md#PatchConnection) | **Patch** /connections/{connection_id} | Update a connection
+[**PostConnection**](ConnectionAPI.md#PostConnection) | **Post** /connections | Create a connection
+[**TestConnection**](ConnectionAPI.md#TestConnection) | **Post** /connections/test | Test a connection
 
 
 
@@ -44,22 +25,22 @@ Delete a connection
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./airflow"
 )
 
 func main() {
-    connectionId := "connectionId_example" // string | The connection ID.
+	connectionId := "connectionId_example" // string | The connection ID.
 
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ConnectionApi.DeleteConnection(context.Background(), connectionId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ConnectionApi.DeleteConnection``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.ConnectionAPI.DeleteConnection(context.Background(), connectionId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ConnectionAPI.DeleteConnection``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -86,7 +67,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+No authorization required
 
 ### HTTP request headers
 
@@ -110,24 +91,24 @@ Get a connection
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./airflow"
 )
 
 func main() {
-    connectionId := "connectionId_example" // string | The connection ID.
+	connectionId := "connectionId_example" // string | The connection ID.
 
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ConnectionApi.GetConnection(context.Background(), connectionId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ConnectionApi.GetConnection``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetConnection`: Connection
-    fmt.Fprintf(os.Stdout, "Response from `ConnectionApi.GetConnection`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ConnectionAPI.GetConnection(context.Background(), connectionId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ConnectionAPI.GetConnection``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetConnection`: Connection
+	fmt.Fprintf(os.Stdout, "Response from `ConnectionAPI.GetConnection`: %v\n", resp)
 }
 ```
 
@@ -154,7 +135,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+No authorization required
 
 ### HTTP request headers
 
@@ -178,26 +159,26 @@ List connections
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./airflow"
 )
 
 func main() {
-    limit := int32(56) // int32 | The numbers of items to return. (optional) (default to 100)
-    offset := int32(56) // int32 | The number of items to skip before starting to collect the result set. (optional)
-    orderBy := "orderBy_example" // string | The name of the field to order the results by. Prefix a field name with `-` to reverse the sort order.  *New in version 2.1.0*  (optional)
+	limit := int32(56) // int32 | The numbers of items to return. (optional) (default to 100)
+	offset := int32(56) // int32 | The number of items to skip before starting to collect the result set. (optional)
+	orderBy := "orderBy_example" // string | The name of the field to order the results by. Prefix a field name with `-` to reverse the sort order.  *New in version 2.1.0*  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ConnectionApi.GetConnections(context.Background()).Limit(limit).Offset(offset).OrderBy(orderBy).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ConnectionApi.GetConnections``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetConnections`: ConnectionCollection
-    fmt.Fprintf(os.Stdout, "Response from `ConnectionApi.GetConnections`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ConnectionAPI.GetConnections(context.Background()).Limit(limit).Offset(offset).OrderBy(orderBy).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ConnectionAPI.GetConnections``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetConnections`: ConnectionCollection
+	fmt.Fprintf(os.Stdout, "Response from `ConnectionAPI.GetConnections`: %v\n", resp)
 }
 ```
 
@@ -222,7 +203,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+No authorization required
 
 ### HTTP request headers
 
@@ -246,26 +227,26 @@ Update a connection
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./airflow"
 )
 
 func main() {
-    connectionId := "connectionId_example" // string | The connection ID.
-    connection := *openapiclient.NewConnection() // Connection | 
-    updateMask := []string{"Inner_example"} // []string | The fields to update on the resource. If absent or empty, all modifiable fields are updated. A comma-separated list of fully qualified names of fields.  (optional)
+	connectionId := "connectionId_example" // string | The connection ID.
+	connection := *openapiclient.NewConnection() // Connection | 
+	updateMask := []string{"Inner_example"} // []string | The fields to update on the resource. If absent or empty, all modifiable fields are updated. A comma-separated list of fully qualified names of fields.  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ConnectionApi.PatchConnection(context.Background(), connectionId).Connection(connection).UpdateMask(updateMask).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ConnectionApi.PatchConnection``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `PatchConnection`: Connection
-    fmt.Fprintf(os.Stdout, "Response from `ConnectionApi.PatchConnection`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ConnectionAPI.PatchConnection(context.Background(), connectionId).Connection(connection).UpdateMask(updateMask).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ConnectionAPI.PatchConnection``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `PatchConnection`: Connection
+	fmt.Fprintf(os.Stdout, "Response from `ConnectionAPI.PatchConnection`: %v\n", resp)
 }
 ```
 
@@ -294,7 +275,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+No authorization required
 
 ### HTTP request headers
 
@@ -318,24 +299,24 @@ Create a connection
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./airflow"
 )
 
 func main() {
-    connection := *openapiclient.NewConnection() // Connection | 
+	connection := *openapiclient.NewConnection() // Connection | 
 
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ConnectionApi.PostConnection(context.Background()).Connection(connection).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ConnectionApi.PostConnection``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `PostConnection`: Connection
-    fmt.Fprintf(os.Stdout, "Response from `ConnectionApi.PostConnection`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ConnectionAPI.PostConnection(context.Background()).Connection(connection).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ConnectionAPI.PostConnection``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `PostConnection`: Connection
+	fmt.Fprintf(os.Stdout, "Response from `ConnectionAPI.PostConnection`: %v\n", resp)
 }
 ```
 
@@ -358,7 +339,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+No authorization required
 
 ### HTTP request headers
 
@@ -384,24 +365,24 @@ Test a connection
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./airflow"
 )
 
 func main() {
-    connection := *openapiclient.NewConnection() // Connection | 
+	connection := *openapiclient.NewConnection() // Connection | 
 
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ConnectionApi.TestConnection(context.Background()).Connection(connection).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ConnectionApi.TestConnection``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `TestConnection`: ConnectionTest
-    fmt.Fprintf(os.Stdout, "Response from `ConnectionApi.TestConnection`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ConnectionAPI.TestConnection(context.Background()).Connection(connection).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ConnectionAPI.TestConnection``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `TestConnection`: ConnectionTest
+	fmt.Fprintf(os.Stdout, "Response from `ConnectionAPI.TestConnection`: %v\n", resp)
 }
 ```
 
@@ -424,7 +405,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+No authorization required
 
 ### HTTP request headers
 

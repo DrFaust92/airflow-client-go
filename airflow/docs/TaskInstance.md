@@ -1,54 +1,38 @@
-<!--
- Licensed to the Apache Software Foundation (ASF) under one
- or more contributor license agreements.  See the NOTICE file
- distributed with this work for additional information
- regarding copyright ownership.  The ASF licenses this file
- to you under the Apache License, Version 2.0 (the
- "License"); you may not use this file except in compliance
- with the License.  You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing,
- software distributed under the License is distributed on an
- "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- KIND, either express or implied.  See the License for the
- specific language governing permissions and limitations
- under the License.
- -->
-
 # TaskInstance
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**TaskId** | Pointer to **string** |  | [optional] 
 **DagId** | Pointer to **string** |  | [optional] 
 **DagRunId** | Pointer to **string** | The DagRun ID for this task instance  *New in version 2.3.0*  | [optional] 
-**ExecutionDate** | Pointer to **string** |  | [optional] 
-**StartDate** | Pointer to **NullableString** |  | [optional] 
-**EndDate** | Pointer to **NullableString** |  | [optional] 
 **Duration** | Pointer to **NullableFloat32** |  | [optional] 
-**State** | Pointer to [**TaskState**](TaskState.md) |  | [optional] 
-**TryNumber** | Pointer to **int32** |  | [optional] 
+**EndDate** | Pointer to **NullableString** |  | [optional] 
+**ExecutionDate** | Pointer to **string** |  | [optional] 
+**Executor** | Pointer to **NullableString** | Executor the task is configured to run on or None (which indicates the default executor)  *New in version 2.10.0*  | [optional] 
+**ExecutorConfig** | Pointer to **string** |  | [optional] 
+**Hostname** | Pointer to **string** |  | [optional] 
 **MapIndex** | Pointer to **int32** |  | [optional] 
 **MaxTries** | Pointer to **int32** |  | [optional] 
-**Hostname** | Pointer to **string** |  | [optional] 
-**Unixname** | Pointer to **string** |  | [optional] 
+**Note** | Pointer to **NullableString** | Contains manually entered notes by the user about the TaskInstance.  *New in version 2.5.0*  | [optional] 
+**Operator** | Pointer to **NullableString** | *Changed in version 2.1.1*&amp;#58; Field becomes nullable.  | [optional] 
+**Pid** | Pointer to **NullableInt32** |  | [optional] 
 **Pool** | Pointer to **string** |  | [optional] 
 **PoolSlots** | Pointer to **int32** |  | [optional] 
-**Queue** | Pointer to **NullableString** |  | [optional] 
 **PriorityWeight** | Pointer to **NullableInt32** |  | [optional] 
-**Operator** | Pointer to **NullableString** | *Changed in version 2.1.1*&amp;#58; Field becomes nullable.  | [optional] 
-**QueuedWhen** | Pointer to **NullableString** |  | [optional] 
-**Pid** | Pointer to **NullableInt32** |  | [optional] 
-**ExecutorConfig** | Pointer to **string** |  | [optional] 
-**SlaMiss** | Pointer to [**NullableSLAMiss**](SLAMiss.md) |  | [optional] 
+**Queue** | Pointer to **NullableString** |  | [optional] 
+**QueuedWhen** | Pointer to **NullableString** | The datetime that the task enter the state QUEUE, also known as queue_at  | [optional] 
 **RenderedFields** | Pointer to **map[string]interface{}** | JSON object describing rendered fields.  *New in version 2.3.0*  | [optional] 
-**Trigger** | Pointer to [**Trigger**](Trigger.md) |  | [optional] 
-**TriggererJob** | Pointer to [**Job**](Job.md) |  | [optional] 
-**Note** | Pointer to **NullableString** | Contains manually entered notes by the user about the TaskInstance.  *New in version 2.5.0*  | [optional] 
+**RenderedMapIndex** | Pointer to **NullableString** | Rendered name of an expanded task instance, if the task is mapped.  *New in version 2.9.0*  | [optional] 
+**SlaMiss** | Pointer to [**NullableSLAMiss**](SLAMiss.md) |  | [optional] 
+**StartDate** | Pointer to **NullableString** |  | [optional] 
+**State** | Pointer to [**NullableTaskState**](TaskState.md) |  | [optional] 
+**TaskDisplayName** | Pointer to **string** | Human centric display text for the task.  *New in version 2.9.0*  | [optional] 
+**TaskId** | Pointer to **string** |  | [optional] 
+**Trigger** | Pointer to [**NullableTrigger**](Trigger.md) |  | [optional] 
+**TriggererJob** | Pointer to [**NullableJob**](Job.md) |  | [optional] 
+**TryNumber** | Pointer to **int32** |  | [optional] 
+**Unixname** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
@@ -68,31 +52,6 @@ will change when the set of required properties is changed
 NewTaskInstanceWithDefaults instantiates a new TaskInstance object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetTaskId
-
-`func (o *TaskInstance) GetTaskId() string`
-
-GetTaskId returns the TaskId field if non-nil, zero value otherwise.
-
-### GetTaskIdOk
-
-`func (o *TaskInstance) GetTaskIdOk() (*string, bool)`
-
-GetTaskIdOk returns a tuple with the TaskId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetTaskId
-
-`func (o *TaskInstance) SetTaskId(v string)`
-
-SetTaskId sets TaskId field to given value.
-
-### HasTaskId
-
-`func (o *TaskInstance) HasTaskId() bool`
-
-HasTaskId returns a boolean if a field has been set.
 
 ### GetDagId
 
@@ -144,101 +103,6 @@ SetDagRunId sets DagRunId field to given value.
 
 HasDagRunId returns a boolean if a field has been set.
 
-### GetExecutionDate
-
-`func (o *TaskInstance) GetExecutionDate() string`
-
-GetExecutionDate returns the ExecutionDate field if non-nil, zero value otherwise.
-
-### GetExecutionDateOk
-
-`func (o *TaskInstance) GetExecutionDateOk() (*string, bool)`
-
-GetExecutionDateOk returns a tuple with the ExecutionDate field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetExecutionDate
-
-`func (o *TaskInstance) SetExecutionDate(v string)`
-
-SetExecutionDate sets ExecutionDate field to given value.
-
-### HasExecutionDate
-
-`func (o *TaskInstance) HasExecutionDate() bool`
-
-HasExecutionDate returns a boolean if a field has been set.
-
-### GetStartDate
-
-`func (o *TaskInstance) GetStartDate() string`
-
-GetStartDate returns the StartDate field if non-nil, zero value otherwise.
-
-### GetStartDateOk
-
-`func (o *TaskInstance) GetStartDateOk() (*string, bool)`
-
-GetStartDateOk returns a tuple with the StartDate field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetStartDate
-
-`func (o *TaskInstance) SetStartDate(v string)`
-
-SetStartDate sets StartDate field to given value.
-
-### HasStartDate
-
-`func (o *TaskInstance) HasStartDate() bool`
-
-HasStartDate returns a boolean if a field has been set.
-
-### SetStartDateNil
-
-`func (o *TaskInstance) SetStartDateNil(b bool)`
-
- SetStartDateNil sets the value for StartDate to be an explicit nil
-
-### UnsetStartDate
-`func (o *TaskInstance) UnsetStartDate()`
-
-UnsetStartDate ensures that no value is present for StartDate, not even an explicit nil
-### GetEndDate
-
-`func (o *TaskInstance) GetEndDate() string`
-
-GetEndDate returns the EndDate field if non-nil, zero value otherwise.
-
-### GetEndDateOk
-
-`func (o *TaskInstance) GetEndDateOk() (*string, bool)`
-
-GetEndDateOk returns a tuple with the EndDate field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetEndDate
-
-`func (o *TaskInstance) SetEndDate(v string)`
-
-SetEndDate sets EndDate field to given value.
-
-### HasEndDate
-
-`func (o *TaskInstance) HasEndDate() bool`
-
-HasEndDate returns a boolean if a field has been set.
-
-### SetEndDateNil
-
-`func (o *TaskInstance) SetEndDateNil(b bool)`
-
- SetEndDateNil sets the value for EndDate to be an explicit nil
-
-### UnsetEndDate
-`func (o *TaskInstance) UnsetEndDate()`
-
-UnsetEndDate ensures that no value is present for EndDate, not even an explicit nil
 ### GetDuration
 
 `func (o *TaskInstance) GetDuration() float32`
@@ -274,55 +138,150 @@ HasDuration returns a boolean if a field has been set.
 `func (o *TaskInstance) UnsetDuration()`
 
 UnsetDuration ensures that no value is present for Duration, not even an explicit nil
-### GetState
+### GetEndDate
 
-`func (o *TaskInstance) GetState() TaskState`
+`func (o *TaskInstance) GetEndDate() string`
 
-GetState returns the State field if non-nil, zero value otherwise.
+GetEndDate returns the EndDate field if non-nil, zero value otherwise.
 
-### GetStateOk
+### GetEndDateOk
 
-`func (o *TaskInstance) GetStateOk() (*TaskState, bool)`
+`func (o *TaskInstance) GetEndDateOk() (*string, bool)`
 
-GetStateOk returns a tuple with the State field if it's non-nil, zero value otherwise
+GetEndDateOk returns a tuple with the EndDate field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetState
+### SetEndDate
 
-`func (o *TaskInstance) SetState(v TaskState)`
+`func (o *TaskInstance) SetEndDate(v string)`
 
-SetState sets State field to given value.
+SetEndDate sets EndDate field to given value.
 
-### HasState
+### HasEndDate
 
-`func (o *TaskInstance) HasState() bool`
+`func (o *TaskInstance) HasEndDate() bool`
 
-HasState returns a boolean if a field has been set.
+HasEndDate returns a boolean if a field has been set.
 
-### GetTryNumber
+### SetEndDateNil
 
-`func (o *TaskInstance) GetTryNumber() int32`
+`func (o *TaskInstance) SetEndDateNil(b bool)`
 
-GetTryNumber returns the TryNumber field if non-nil, zero value otherwise.
+ SetEndDateNil sets the value for EndDate to be an explicit nil
 
-### GetTryNumberOk
+### UnsetEndDate
+`func (o *TaskInstance) UnsetEndDate()`
 
-`func (o *TaskInstance) GetTryNumberOk() (*int32, bool)`
+UnsetEndDate ensures that no value is present for EndDate, not even an explicit nil
+### GetExecutionDate
 
-GetTryNumberOk returns a tuple with the TryNumber field if it's non-nil, zero value otherwise
+`func (o *TaskInstance) GetExecutionDate() string`
+
+GetExecutionDate returns the ExecutionDate field if non-nil, zero value otherwise.
+
+### GetExecutionDateOk
+
+`func (o *TaskInstance) GetExecutionDateOk() (*string, bool)`
+
+GetExecutionDateOk returns a tuple with the ExecutionDate field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetTryNumber
+### SetExecutionDate
 
-`func (o *TaskInstance) SetTryNumber(v int32)`
+`func (o *TaskInstance) SetExecutionDate(v string)`
 
-SetTryNumber sets TryNumber field to given value.
+SetExecutionDate sets ExecutionDate field to given value.
 
-### HasTryNumber
+### HasExecutionDate
 
-`func (o *TaskInstance) HasTryNumber() bool`
+`func (o *TaskInstance) HasExecutionDate() bool`
 
-HasTryNumber returns a boolean if a field has been set.
+HasExecutionDate returns a boolean if a field has been set.
+
+### GetExecutor
+
+`func (o *TaskInstance) GetExecutor() string`
+
+GetExecutor returns the Executor field if non-nil, zero value otherwise.
+
+### GetExecutorOk
+
+`func (o *TaskInstance) GetExecutorOk() (*string, bool)`
+
+GetExecutorOk returns a tuple with the Executor field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExecutor
+
+`func (o *TaskInstance) SetExecutor(v string)`
+
+SetExecutor sets Executor field to given value.
+
+### HasExecutor
+
+`func (o *TaskInstance) HasExecutor() bool`
+
+HasExecutor returns a boolean if a field has been set.
+
+### SetExecutorNil
+
+`func (o *TaskInstance) SetExecutorNil(b bool)`
+
+ SetExecutorNil sets the value for Executor to be an explicit nil
+
+### UnsetExecutor
+`func (o *TaskInstance) UnsetExecutor()`
+
+UnsetExecutor ensures that no value is present for Executor, not even an explicit nil
+### GetExecutorConfig
+
+`func (o *TaskInstance) GetExecutorConfig() string`
+
+GetExecutorConfig returns the ExecutorConfig field if non-nil, zero value otherwise.
+
+### GetExecutorConfigOk
+
+`func (o *TaskInstance) GetExecutorConfigOk() (*string, bool)`
+
+GetExecutorConfigOk returns a tuple with the ExecutorConfig field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExecutorConfig
+
+`func (o *TaskInstance) SetExecutorConfig(v string)`
+
+SetExecutorConfig sets ExecutorConfig field to given value.
+
+### HasExecutorConfig
+
+`func (o *TaskInstance) HasExecutorConfig() bool`
+
+HasExecutorConfig returns a boolean if a field has been set.
+
+### GetHostname
+
+`func (o *TaskInstance) GetHostname() string`
+
+GetHostname returns the Hostname field if non-nil, zero value otherwise.
+
+### GetHostnameOk
+
+`func (o *TaskInstance) GetHostnameOk() (*string, bool)`
+
+GetHostnameOk returns a tuple with the Hostname field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHostname
+
+`func (o *TaskInstance) SetHostname(v string)`
+
+SetHostname sets Hostname field to given value.
+
+### HasHostname
+
+`func (o *TaskInstance) HasHostname() bool`
+
+HasHostname returns a boolean if a field has been set.
 
 ### GetMapIndex
 
@@ -374,56 +333,111 @@ SetMaxTries sets MaxTries field to given value.
 
 HasMaxTries returns a boolean if a field has been set.
 
-### GetHostname
+### GetNote
 
-`func (o *TaskInstance) GetHostname() string`
+`func (o *TaskInstance) GetNote() string`
 
-GetHostname returns the Hostname field if non-nil, zero value otherwise.
+GetNote returns the Note field if non-nil, zero value otherwise.
 
-### GetHostnameOk
+### GetNoteOk
 
-`func (o *TaskInstance) GetHostnameOk() (*string, bool)`
+`func (o *TaskInstance) GetNoteOk() (*string, bool)`
 
-GetHostnameOk returns a tuple with the Hostname field if it's non-nil, zero value otherwise
+GetNoteOk returns a tuple with the Note field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetHostname
+### SetNote
 
-`func (o *TaskInstance) SetHostname(v string)`
+`func (o *TaskInstance) SetNote(v string)`
 
-SetHostname sets Hostname field to given value.
+SetNote sets Note field to given value.
 
-### HasHostname
+### HasNote
 
-`func (o *TaskInstance) HasHostname() bool`
+`func (o *TaskInstance) HasNote() bool`
 
-HasHostname returns a boolean if a field has been set.
+HasNote returns a boolean if a field has been set.
 
-### GetUnixname
+### SetNoteNil
 
-`func (o *TaskInstance) GetUnixname() string`
+`func (o *TaskInstance) SetNoteNil(b bool)`
 
-GetUnixname returns the Unixname field if non-nil, zero value otherwise.
+ SetNoteNil sets the value for Note to be an explicit nil
 
-### GetUnixnameOk
+### UnsetNote
+`func (o *TaskInstance) UnsetNote()`
 
-`func (o *TaskInstance) GetUnixnameOk() (*string, bool)`
+UnsetNote ensures that no value is present for Note, not even an explicit nil
+### GetOperator
 
-GetUnixnameOk returns a tuple with the Unixname field if it's non-nil, zero value otherwise
+`func (o *TaskInstance) GetOperator() string`
+
+GetOperator returns the Operator field if non-nil, zero value otherwise.
+
+### GetOperatorOk
+
+`func (o *TaskInstance) GetOperatorOk() (*string, bool)`
+
+GetOperatorOk returns a tuple with the Operator field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetUnixname
+### SetOperator
 
-`func (o *TaskInstance) SetUnixname(v string)`
+`func (o *TaskInstance) SetOperator(v string)`
 
-SetUnixname sets Unixname field to given value.
+SetOperator sets Operator field to given value.
 
-### HasUnixname
+### HasOperator
 
-`func (o *TaskInstance) HasUnixname() bool`
+`func (o *TaskInstance) HasOperator() bool`
 
-HasUnixname returns a boolean if a field has been set.
+HasOperator returns a boolean if a field has been set.
 
+### SetOperatorNil
+
+`func (o *TaskInstance) SetOperatorNil(b bool)`
+
+ SetOperatorNil sets the value for Operator to be an explicit nil
+
+### UnsetOperator
+`func (o *TaskInstance) UnsetOperator()`
+
+UnsetOperator ensures that no value is present for Operator, not even an explicit nil
+### GetPid
+
+`func (o *TaskInstance) GetPid() int32`
+
+GetPid returns the Pid field if non-nil, zero value otherwise.
+
+### GetPidOk
+
+`func (o *TaskInstance) GetPidOk() (*int32, bool)`
+
+GetPidOk returns a tuple with the Pid field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPid
+
+`func (o *TaskInstance) SetPid(v int32)`
+
+SetPid sets Pid field to given value.
+
+### HasPid
+
+`func (o *TaskInstance) HasPid() bool`
+
+HasPid returns a boolean if a field has been set.
+
+### SetPidNil
+
+`func (o *TaskInstance) SetPidNil(b bool)`
+
+ SetPidNil sets the value for Pid to be an explicit nil
+
+### UnsetPid
+`func (o *TaskInstance) UnsetPid()`
+
+UnsetPid ensures that no value is present for Pid, not even an explicit nil
 ### GetPool
 
 `func (o *TaskInstance) GetPool() string`
@@ -474,41 +488,6 @@ SetPoolSlots sets PoolSlots field to given value.
 
 HasPoolSlots returns a boolean if a field has been set.
 
-### GetQueue
-
-`func (o *TaskInstance) GetQueue() string`
-
-GetQueue returns the Queue field if non-nil, zero value otherwise.
-
-### GetQueueOk
-
-`func (o *TaskInstance) GetQueueOk() (*string, bool)`
-
-GetQueueOk returns a tuple with the Queue field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetQueue
-
-`func (o *TaskInstance) SetQueue(v string)`
-
-SetQueue sets Queue field to given value.
-
-### HasQueue
-
-`func (o *TaskInstance) HasQueue() bool`
-
-HasQueue returns a boolean if a field has been set.
-
-### SetQueueNil
-
-`func (o *TaskInstance) SetQueueNil(b bool)`
-
- SetQueueNil sets the value for Queue to be an explicit nil
-
-### UnsetQueue
-`func (o *TaskInstance) UnsetQueue()`
-
-UnsetQueue ensures that no value is present for Queue, not even an explicit nil
 ### GetPriorityWeight
 
 `func (o *TaskInstance) GetPriorityWeight() int32`
@@ -544,41 +523,41 @@ HasPriorityWeight returns a boolean if a field has been set.
 `func (o *TaskInstance) UnsetPriorityWeight()`
 
 UnsetPriorityWeight ensures that no value is present for PriorityWeight, not even an explicit nil
-### GetOperator
+### GetQueue
 
-`func (o *TaskInstance) GetOperator() string`
+`func (o *TaskInstance) GetQueue() string`
 
-GetOperator returns the Operator field if non-nil, zero value otherwise.
+GetQueue returns the Queue field if non-nil, zero value otherwise.
 
-### GetOperatorOk
+### GetQueueOk
 
-`func (o *TaskInstance) GetOperatorOk() (*string, bool)`
+`func (o *TaskInstance) GetQueueOk() (*string, bool)`
 
-GetOperatorOk returns a tuple with the Operator field if it's non-nil, zero value otherwise
+GetQueueOk returns a tuple with the Queue field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetOperator
+### SetQueue
 
-`func (o *TaskInstance) SetOperator(v string)`
+`func (o *TaskInstance) SetQueue(v string)`
 
-SetOperator sets Operator field to given value.
+SetQueue sets Queue field to given value.
 
-### HasOperator
+### HasQueue
 
-`func (o *TaskInstance) HasOperator() bool`
+`func (o *TaskInstance) HasQueue() bool`
 
-HasOperator returns a boolean if a field has been set.
+HasQueue returns a boolean if a field has been set.
 
-### SetOperatorNil
+### SetQueueNil
 
-`func (o *TaskInstance) SetOperatorNil(b bool)`
+`func (o *TaskInstance) SetQueueNil(b bool)`
 
- SetOperatorNil sets the value for Operator to be an explicit nil
+ SetQueueNil sets the value for Queue to be an explicit nil
 
-### UnsetOperator
-`func (o *TaskInstance) UnsetOperator()`
+### UnsetQueue
+`func (o *TaskInstance) UnsetQueue()`
 
-UnsetOperator ensures that no value is present for Operator, not even an explicit nil
+UnsetQueue ensures that no value is present for Queue, not even an explicit nil
 ### GetQueuedWhen
 
 `func (o *TaskInstance) GetQueuedWhen() string`
@@ -614,66 +593,66 @@ HasQueuedWhen returns a boolean if a field has been set.
 `func (o *TaskInstance) UnsetQueuedWhen()`
 
 UnsetQueuedWhen ensures that no value is present for QueuedWhen, not even an explicit nil
-### GetPid
+### GetRenderedFields
 
-`func (o *TaskInstance) GetPid() int32`
+`func (o *TaskInstance) GetRenderedFields() map[string]interface{}`
 
-GetPid returns the Pid field if non-nil, zero value otherwise.
+GetRenderedFields returns the RenderedFields field if non-nil, zero value otherwise.
 
-### GetPidOk
+### GetRenderedFieldsOk
 
-`func (o *TaskInstance) GetPidOk() (*int32, bool)`
+`func (o *TaskInstance) GetRenderedFieldsOk() (*map[string]interface{}, bool)`
 
-GetPidOk returns a tuple with the Pid field if it's non-nil, zero value otherwise
+GetRenderedFieldsOk returns a tuple with the RenderedFields field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetPid
+### SetRenderedFields
 
-`func (o *TaskInstance) SetPid(v int32)`
+`func (o *TaskInstance) SetRenderedFields(v map[string]interface{})`
 
-SetPid sets Pid field to given value.
+SetRenderedFields sets RenderedFields field to given value.
 
-### HasPid
+### HasRenderedFields
 
-`func (o *TaskInstance) HasPid() bool`
+`func (o *TaskInstance) HasRenderedFields() bool`
 
-HasPid returns a boolean if a field has been set.
+HasRenderedFields returns a boolean if a field has been set.
 
-### SetPidNil
+### GetRenderedMapIndex
 
-`func (o *TaskInstance) SetPidNil(b bool)`
+`func (o *TaskInstance) GetRenderedMapIndex() string`
 
- SetPidNil sets the value for Pid to be an explicit nil
+GetRenderedMapIndex returns the RenderedMapIndex field if non-nil, zero value otherwise.
 
-### UnsetPid
-`func (o *TaskInstance) UnsetPid()`
+### GetRenderedMapIndexOk
 
-UnsetPid ensures that no value is present for Pid, not even an explicit nil
-### GetExecutorConfig
+`func (o *TaskInstance) GetRenderedMapIndexOk() (*string, bool)`
 
-`func (o *TaskInstance) GetExecutorConfig() string`
-
-GetExecutorConfig returns the ExecutorConfig field if non-nil, zero value otherwise.
-
-### GetExecutorConfigOk
-
-`func (o *TaskInstance) GetExecutorConfigOk() (*string, bool)`
-
-GetExecutorConfigOk returns a tuple with the ExecutorConfig field if it's non-nil, zero value otherwise
+GetRenderedMapIndexOk returns a tuple with the RenderedMapIndex field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetExecutorConfig
+### SetRenderedMapIndex
 
-`func (o *TaskInstance) SetExecutorConfig(v string)`
+`func (o *TaskInstance) SetRenderedMapIndex(v string)`
 
-SetExecutorConfig sets ExecutorConfig field to given value.
+SetRenderedMapIndex sets RenderedMapIndex field to given value.
 
-### HasExecutorConfig
+### HasRenderedMapIndex
 
-`func (o *TaskInstance) HasExecutorConfig() bool`
+`func (o *TaskInstance) HasRenderedMapIndex() bool`
 
-HasExecutorConfig returns a boolean if a field has been set.
+HasRenderedMapIndex returns a boolean if a field has been set.
 
+### SetRenderedMapIndexNil
+
+`func (o *TaskInstance) SetRenderedMapIndexNil(b bool)`
+
+ SetRenderedMapIndexNil sets the value for RenderedMapIndex to be an explicit nil
+
+### UnsetRenderedMapIndex
+`func (o *TaskInstance) UnsetRenderedMapIndex()`
+
+UnsetRenderedMapIndex ensures that no value is present for RenderedMapIndex, not even an explicit nil
 ### GetSlaMiss
 
 `func (o *TaskInstance) GetSlaMiss() SLAMiss`
@@ -709,30 +688,125 @@ HasSlaMiss returns a boolean if a field has been set.
 `func (o *TaskInstance) UnsetSlaMiss()`
 
 UnsetSlaMiss ensures that no value is present for SlaMiss, not even an explicit nil
-### GetRenderedFields
+### GetStartDate
 
-`func (o *TaskInstance) GetRenderedFields() map[string]interface{}`
+`func (o *TaskInstance) GetStartDate() string`
 
-GetRenderedFields returns the RenderedFields field if non-nil, zero value otherwise.
+GetStartDate returns the StartDate field if non-nil, zero value otherwise.
 
-### GetRenderedFieldsOk
+### GetStartDateOk
 
-`func (o *TaskInstance) GetRenderedFieldsOk() (*map[string]interface{}, bool)`
+`func (o *TaskInstance) GetStartDateOk() (*string, bool)`
 
-GetRenderedFieldsOk returns a tuple with the RenderedFields field if it's non-nil, zero value otherwise
+GetStartDateOk returns a tuple with the StartDate field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetRenderedFields
+### SetStartDate
 
-`func (o *TaskInstance) SetRenderedFields(v map[string]interface{})`
+`func (o *TaskInstance) SetStartDate(v string)`
 
-SetRenderedFields sets RenderedFields field to given value.
+SetStartDate sets StartDate field to given value.
 
-### HasRenderedFields
+### HasStartDate
 
-`func (o *TaskInstance) HasRenderedFields() bool`
+`func (o *TaskInstance) HasStartDate() bool`
 
-HasRenderedFields returns a boolean if a field has been set.
+HasStartDate returns a boolean if a field has been set.
+
+### SetStartDateNil
+
+`func (o *TaskInstance) SetStartDateNil(b bool)`
+
+ SetStartDateNil sets the value for StartDate to be an explicit nil
+
+### UnsetStartDate
+`func (o *TaskInstance) UnsetStartDate()`
+
+UnsetStartDate ensures that no value is present for StartDate, not even an explicit nil
+### GetState
+
+`func (o *TaskInstance) GetState() TaskState`
+
+GetState returns the State field if non-nil, zero value otherwise.
+
+### GetStateOk
+
+`func (o *TaskInstance) GetStateOk() (*TaskState, bool)`
+
+GetStateOk returns a tuple with the State field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetState
+
+`func (o *TaskInstance) SetState(v TaskState)`
+
+SetState sets State field to given value.
+
+### HasState
+
+`func (o *TaskInstance) HasState() bool`
+
+HasState returns a boolean if a field has been set.
+
+### SetStateNil
+
+`func (o *TaskInstance) SetStateNil(b bool)`
+
+ SetStateNil sets the value for State to be an explicit nil
+
+### UnsetState
+`func (o *TaskInstance) UnsetState()`
+
+UnsetState ensures that no value is present for State, not even an explicit nil
+### GetTaskDisplayName
+
+`func (o *TaskInstance) GetTaskDisplayName() string`
+
+GetTaskDisplayName returns the TaskDisplayName field if non-nil, zero value otherwise.
+
+### GetTaskDisplayNameOk
+
+`func (o *TaskInstance) GetTaskDisplayNameOk() (*string, bool)`
+
+GetTaskDisplayNameOk returns a tuple with the TaskDisplayName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTaskDisplayName
+
+`func (o *TaskInstance) SetTaskDisplayName(v string)`
+
+SetTaskDisplayName sets TaskDisplayName field to given value.
+
+### HasTaskDisplayName
+
+`func (o *TaskInstance) HasTaskDisplayName() bool`
+
+HasTaskDisplayName returns a boolean if a field has been set.
+
+### GetTaskId
+
+`func (o *TaskInstance) GetTaskId() string`
+
+GetTaskId returns the TaskId field if non-nil, zero value otherwise.
+
+### GetTaskIdOk
+
+`func (o *TaskInstance) GetTaskIdOk() (*string, bool)`
+
+GetTaskIdOk returns a tuple with the TaskId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTaskId
+
+`func (o *TaskInstance) SetTaskId(v string)`
+
+SetTaskId sets TaskId field to given value.
+
+### HasTaskId
+
+`func (o *TaskInstance) HasTaskId() bool`
+
+HasTaskId returns a boolean if a field has been set.
 
 ### GetTrigger
 
@@ -759,6 +833,16 @@ SetTrigger sets Trigger field to given value.
 
 HasTrigger returns a boolean if a field has been set.
 
+### SetTriggerNil
+
+`func (o *TaskInstance) SetTriggerNil(b bool)`
+
+ SetTriggerNil sets the value for Trigger to be an explicit nil
+
+### UnsetTrigger
+`func (o *TaskInstance) UnsetTrigger()`
+
+UnsetTrigger ensures that no value is present for Trigger, not even an explicit nil
 ### GetTriggererJob
 
 `func (o *TaskInstance) GetTriggererJob() Job`
@@ -784,41 +868,66 @@ SetTriggererJob sets TriggererJob field to given value.
 
 HasTriggererJob returns a boolean if a field has been set.
 
-### GetNote
+### SetTriggererJobNil
 
-`func (o *TaskInstance) GetNote() string`
+`func (o *TaskInstance) SetTriggererJobNil(b bool)`
 
-GetNote returns the Note field if non-nil, zero value otherwise.
+ SetTriggererJobNil sets the value for TriggererJob to be an explicit nil
 
-### GetNoteOk
+### UnsetTriggererJob
+`func (o *TaskInstance) UnsetTriggererJob()`
 
-`func (o *TaskInstance) GetNoteOk() (*string, bool)`
+UnsetTriggererJob ensures that no value is present for TriggererJob, not even an explicit nil
+### GetTryNumber
 
-GetNoteOk returns a tuple with the Note field if it's non-nil, zero value otherwise
+`func (o *TaskInstance) GetTryNumber() int32`
+
+GetTryNumber returns the TryNumber field if non-nil, zero value otherwise.
+
+### GetTryNumberOk
+
+`func (o *TaskInstance) GetTryNumberOk() (*int32, bool)`
+
+GetTryNumberOk returns a tuple with the TryNumber field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetNote
+### SetTryNumber
 
-`func (o *TaskInstance) SetNote(v string)`
+`func (o *TaskInstance) SetTryNumber(v int32)`
 
-SetNote sets Note field to given value.
+SetTryNumber sets TryNumber field to given value.
 
-### HasNote
+### HasTryNumber
 
-`func (o *TaskInstance) HasNote() bool`
+`func (o *TaskInstance) HasTryNumber() bool`
 
-HasNote returns a boolean if a field has been set.
+HasTryNumber returns a boolean if a field has been set.
 
-### SetNoteNil
+### GetUnixname
 
-`func (o *TaskInstance) SetNoteNil(b bool)`
+`func (o *TaskInstance) GetUnixname() string`
 
- SetNoteNil sets the value for Note to be an explicit nil
+GetUnixname returns the Unixname field if non-nil, zero value otherwise.
 
-### UnsetNote
-`func (o *TaskInstance) UnsetNote()`
+### GetUnixnameOk
 
-UnsetNote ensures that no value is present for Note, not even an explicit nil
+`func (o *TaskInstance) GetUnixnameOk() (*string, bool)`
+
+GetUnixnameOk returns a tuple with the Unixname field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUnixname
+
+`func (o *TaskInstance) SetUnixname(v string)`
+
+SetUnixname sets Unixname field to given value.
+
+### HasUnixname
+
+`func (o *TaskInstance) HasUnixname() bool`
+
+HasUnixname returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

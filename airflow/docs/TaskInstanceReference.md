@@ -1,32 +1,13 @@
-<!--
- Licensed to the Apache Software Foundation (ASF) under one
- or more contributor license agreements.  See the NOTICE file
- distributed with this work for additional information
- regarding copyright ownership.  The ASF licenses this file
- to you under the Apache License, Version 2.0 (the
- "License"); you may not use this file except in compliance
- with the License.  You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing,
- software distributed under the License is distributed on an
- "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- KIND, either express or implied.  See the License for the
- specific language governing permissions and limitations
- under the License.
- -->
-
 # TaskInstanceReference
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**TaskId** | Pointer to **string** | The task ID. | [optional] [readonly] 
 **DagId** | Pointer to **string** | The DAG ID. | [optional] [readonly] 
-**ExecutionDate** | Pointer to **string** |  | [optional] [readonly] 
 **DagRunId** | Pointer to **string** | The DAG run ID. | [optional] [readonly] 
+**ExecutionDate** | Pointer to **string** |  | [optional] [readonly] 
+**TaskId** | Pointer to **string** | The task ID. | [optional] [readonly] 
 
 ## Methods
 
@@ -46,31 +27,6 @@ will change when the set of required properties is changed
 NewTaskInstanceReferenceWithDefaults instantiates a new TaskInstanceReference object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetTaskId
-
-`func (o *TaskInstanceReference) GetTaskId() string`
-
-GetTaskId returns the TaskId field if non-nil, zero value otherwise.
-
-### GetTaskIdOk
-
-`func (o *TaskInstanceReference) GetTaskIdOk() (*string, bool)`
-
-GetTaskIdOk returns a tuple with the TaskId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetTaskId
-
-`func (o *TaskInstanceReference) SetTaskId(v string)`
-
-SetTaskId sets TaskId field to given value.
-
-### HasTaskId
-
-`func (o *TaskInstanceReference) HasTaskId() bool`
-
-HasTaskId returns a boolean if a field has been set.
 
 ### GetDagId
 
@@ -97,6 +53,31 @@ SetDagId sets DagId field to given value.
 
 HasDagId returns a boolean if a field has been set.
 
+### GetDagRunId
+
+`func (o *TaskInstanceReference) GetDagRunId() string`
+
+GetDagRunId returns the DagRunId field if non-nil, zero value otherwise.
+
+### GetDagRunIdOk
+
+`func (o *TaskInstanceReference) GetDagRunIdOk() (*string, bool)`
+
+GetDagRunIdOk returns a tuple with the DagRunId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDagRunId
+
+`func (o *TaskInstanceReference) SetDagRunId(v string)`
+
+SetDagRunId sets DagRunId field to given value.
+
+### HasDagRunId
+
+`func (o *TaskInstanceReference) HasDagRunId() bool`
+
+HasDagRunId returns a boolean if a field has been set.
+
 ### GetExecutionDate
 
 `func (o *TaskInstanceReference) GetExecutionDate() string`
@@ -122,30 +103,30 @@ SetExecutionDate sets ExecutionDate field to given value.
 
 HasExecutionDate returns a boolean if a field has been set.
 
-### GetDagRunId
+### GetTaskId
 
-`func (o *TaskInstanceReference) GetDagRunId() string`
+`func (o *TaskInstanceReference) GetTaskId() string`
 
-GetDagRunId returns the DagRunId field if non-nil, zero value otherwise.
+GetTaskId returns the TaskId field if non-nil, zero value otherwise.
 
-### GetDagRunIdOk
+### GetTaskIdOk
 
-`func (o *TaskInstanceReference) GetDagRunIdOk() (*string, bool)`
+`func (o *TaskInstanceReference) GetTaskIdOk() (*string, bool)`
 
-GetDagRunIdOk returns a tuple with the DagRunId field if it's non-nil, zero value otherwise
+GetTaskIdOk returns a tuple with the TaskId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetDagRunId
+### SetTaskId
 
-`func (o *TaskInstanceReference) SetDagRunId(v string)`
+`func (o *TaskInstanceReference) SetTaskId(v string)`
 
-SetDagRunId sets DagRunId field to given value.
+SetTaskId sets TaskId field to given value.
 
-### HasDagRunId
+### HasTaskId
 
-`func (o *TaskInstanceReference) HasDagRunId() bool`
+`func (o *TaskInstanceReference) HasTaskId() bool`
 
-HasDagRunId returns a boolean if a field has been set.
+HasTaskId returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

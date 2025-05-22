@@ -1,0 +1,82 @@
+# QueuedEventCollection
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**TotalEntries** | Pointer to **int32** | Count of total objects in the current result set before pagination parameters (limit, offset) are applied.  | [optional] 
+**Datasets** | Pointer to [**[]QueuedEvent**](QueuedEvent.md) |  | [optional] 
+
+## Methods
+
+### NewQueuedEventCollection
+
+`func NewQueuedEventCollection() *QueuedEventCollection`
+
+NewQueuedEventCollection instantiates a new QueuedEventCollection object
+This constructor will assign default values to properties that have it defined,
+and makes sure properties required by API are set, but the set of arguments
+will change when the set of required properties is changed
+
+### NewQueuedEventCollectionWithDefaults
+
+`func NewQueuedEventCollectionWithDefaults() *QueuedEventCollection`
+
+NewQueuedEventCollectionWithDefaults instantiates a new QueuedEventCollection object
+This constructor will only assign default values to properties that have it defined,
+but it doesn't guarantee that properties required by API are set
+
+### GetTotalEntries
+
+`func (o *QueuedEventCollection) GetTotalEntries() int32`
+
+GetTotalEntries returns the TotalEntries field if non-nil, zero value otherwise.
+
+### GetTotalEntriesOk
+
+`func (o *QueuedEventCollection) GetTotalEntriesOk() (*int32, bool)`
+
+GetTotalEntriesOk returns a tuple with the TotalEntries field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTotalEntries
+
+`func (o *QueuedEventCollection) SetTotalEntries(v int32)`
+
+SetTotalEntries sets TotalEntries field to given value.
+
+### HasTotalEntries
+
+`func (o *QueuedEventCollection) HasTotalEntries() bool`
+
+HasTotalEntries returns a boolean if a field has been set.
+
+### GetDatasets
+
+`func (o *QueuedEventCollection) GetDatasets() []QueuedEvent`
+
+GetDatasets returns the Datasets field if non-nil, zero value otherwise.
+
+### GetDatasetsOk
+
+`func (o *QueuedEventCollection) GetDatasetsOk() (*[]QueuedEvent, bool)`
+
+GetDatasetsOk returns a tuple with the Datasets field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDatasets
+
+`func (o *QueuedEventCollection) SetDatasets(v []QueuedEvent)`
+
+SetDatasets sets Datasets field to given value.
+
+### HasDatasets
+
+`func (o *QueuedEventCollection) HasDatasets() bool`
+
+HasDatasets returns a boolean if a field has been set.
+
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

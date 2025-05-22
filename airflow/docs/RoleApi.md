@@ -1,33 +1,14 @@
-<!--
- Licensed to the Apache Software Foundation (ASF) under one
- or more contributor license agreements.  See the NOTICE file
- distributed with this work for additional information
- regarding copyright ownership.  The ASF licenses this file
- to you under the Apache License, Version 2.0 (the
- "License"); you may not use this file except in compliance
- with the License.  You may obtain a copy of the License at
+# \RoleAPI
 
-   http://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing,
- software distributed under the License is distributed on an
- "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- KIND, either express or implied.  See the License for the
- specific language governing permissions and limitations
- under the License.
- -->
-
-# \RoleApi
-
-All URIs are relative to *http://localhost/api/v1*
+All URIs are relative to */api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**DeleteRole**](RoleApi.md#DeleteRole) | **Delete** /roles/{role_name} | Delete a role
-[**GetRole**](RoleApi.md#GetRole) | **Get** /roles/{role_name} | Get a role
-[**GetRoles**](RoleApi.md#GetRoles) | **Get** /roles | List roles
-[**PatchRole**](RoleApi.md#PatchRole) | **Patch** /roles/{role_name} | Update a role
-[**PostRole**](RoleApi.md#PostRole) | **Post** /roles | Create a role
+[**DeleteRole**](RoleAPI.md#DeleteRole) | **Delete** /roles/{role_name} | Delete a role
+[**GetRole**](RoleAPI.md#GetRole) | **Get** /roles/{role_name} | Get a role
+[**GetRoles**](RoleAPI.md#GetRoles) | **Get** /roles | List roles
+[**PatchRole**](RoleAPI.md#PatchRole) | **Patch** /roles/{role_name} | Update a role
+[**PostRole**](RoleAPI.md#PostRole) | **Post** /roles | Create a role
 
 
 
@@ -45,22 +26,22 @@ Delete a role
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./airflow"
 )
 
 func main() {
-    roleName := "roleName_example" // string | The role name
+	roleName := "roleName_example" // string | The role name
 
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.RoleApi.DeleteRole(context.Background(), roleName).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `RoleApi.DeleteRole``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.RoleAPI.DeleteRole(context.Background(), roleName).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `RoleAPI.DeleteRole``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -87,7 +68,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+No authorization required
 
 ### HTTP request headers
 
@@ -113,24 +94,24 @@ Get a role
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./airflow"
 )
 
 func main() {
-    roleName := "roleName_example" // string | The role name
+	roleName := "roleName_example" // string | The role name
 
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.RoleApi.GetRole(context.Background(), roleName).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `RoleApi.GetRole``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetRole`: Role
-    fmt.Fprintf(os.Stdout, "Response from `RoleApi.GetRole`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.RoleAPI.GetRole(context.Background(), roleName).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `RoleAPI.GetRole``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetRole`: Role
+	fmt.Fprintf(os.Stdout, "Response from `RoleAPI.GetRole`: %v\n", resp)
 }
 ```
 
@@ -157,7 +138,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+No authorization required
 
 ### HTTP request headers
 
@@ -183,26 +164,26 @@ List roles
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./airflow"
 )
 
 func main() {
-    limit := int32(56) // int32 | The numbers of items to return. (optional) (default to 100)
-    offset := int32(56) // int32 | The number of items to skip before starting to collect the result set. (optional)
-    orderBy := "orderBy_example" // string | The name of the field to order the results by. Prefix a field name with `-` to reverse the sort order.  *New in version 2.1.0*  (optional)
+	limit := int32(56) // int32 | The numbers of items to return. (optional) (default to 100)
+	offset := int32(56) // int32 | The number of items to skip before starting to collect the result set. (optional)
+	orderBy := "orderBy_example" // string | The name of the field to order the results by. Prefix a field name with `-` to reverse the sort order.  *New in version 2.1.0*  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.RoleApi.GetRoles(context.Background()).Limit(limit).Offset(offset).OrderBy(orderBy).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `RoleApi.GetRoles``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetRoles`: RoleCollection
-    fmt.Fprintf(os.Stdout, "Response from `RoleApi.GetRoles`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.RoleAPI.GetRoles(context.Background()).Limit(limit).Offset(offset).OrderBy(orderBy).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `RoleAPI.GetRoles``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetRoles`: RoleCollection
+	fmt.Fprintf(os.Stdout, "Response from `RoleAPI.GetRoles`: %v\n", resp)
 }
 ```
 
@@ -227,7 +208,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+No authorization required
 
 ### HTTP request headers
 
@@ -253,26 +234,26 @@ Update a role
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./airflow"
 )
 
 func main() {
-    roleName := "roleName_example" // string | The role name
-    role := *openapiclient.NewRole() // Role | 
-    updateMask := []string{"Inner_example"} // []string | The fields to update on the resource. If absent or empty, all modifiable fields are updated. A comma-separated list of fully qualified names of fields.  (optional)
+	roleName := "roleName_example" // string | The role name
+	role := *openapiclient.NewRole() // Role | 
+	updateMask := []string{"Inner_example"} // []string | The fields to update on the resource. If absent or empty, all modifiable fields are updated. A comma-separated list of fully qualified names of fields.  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.RoleApi.PatchRole(context.Background(), roleName).Role(role).UpdateMask(updateMask).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `RoleApi.PatchRole``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `PatchRole`: Role
-    fmt.Fprintf(os.Stdout, "Response from `RoleApi.PatchRole`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.RoleAPI.PatchRole(context.Background(), roleName).Role(role).UpdateMask(updateMask).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `RoleAPI.PatchRole``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `PatchRole`: Role
+	fmt.Fprintf(os.Stdout, "Response from `RoleAPI.PatchRole`: %v\n", resp)
 }
 ```
 
@@ -301,7 +282,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+No authorization required
 
 ### HTTP request headers
 
@@ -327,24 +308,24 @@ Create a role
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./airflow"
 )
 
 func main() {
-    role := *openapiclient.NewRole() // Role | 
+	role := *openapiclient.NewRole() // Role | 
 
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.RoleApi.PostRole(context.Background()).Role(role).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `RoleApi.PostRole``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `PostRole`: Role
-    fmt.Fprintf(os.Stdout, "Response from `RoleApi.PostRole`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.RoleAPI.PostRole(context.Background()).Role(role).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `RoleAPI.PostRole``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `PostRole`: Role
+	fmt.Fprintf(os.Stdout, "Response from `RoleAPI.PostRole`: %v\n", resp)
 }
 ```
 
@@ -367,7 +348,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+No authorization required
 
 ### HTTP request headers
 

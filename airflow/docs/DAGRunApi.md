@@ -1,43 +1,24 @@
-<!--
- Licensed to the Apache Software Foundation (ASF) under one
- or more contributor license agreements.  See the NOTICE file
- distributed with this work for additional information
- regarding copyright ownership.  The ASF licenses this file
- to you under the Apache License, Version 2.0 (the
- "License"); you may not use this file except in compliance
- with the License.  You may obtain a copy of the License at
+# \DAGRunAPI
 
-   http://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing,
- software distributed under the License is distributed on an
- "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- KIND, either express or implied.  See the License for the
- specific language governing permissions and limitations
- under the License.
- -->
-
-# \DAGRunApi
-
-All URIs are relative to *http://localhost/api/v1*
+All URIs are relative to */api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**ClearDagRun**](DAGRunApi.md#ClearDagRun) | **Post** /dags/{dag_id}/dagRuns/{dag_run_id}/clear | Clear a DAG run
-[**DeleteDagRun**](DAGRunApi.md#DeleteDagRun) | **Delete** /dags/{dag_id}/dagRuns/{dag_run_id} | Delete a DAG run
-[**GetDagRun**](DAGRunApi.md#GetDagRun) | **Get** /dags/{dag_id}/dagRuns/{dag_run_id} | Get a DAG run
-[**GetDagRuns**](DAGRunApi.md#GetDagRuns) | **Get** /dags/{dag_id}/dagRuns | List DAG runs
-[**GetDagRunsBatch**](DAGRunApi.md#GetDagRunsBatch) | **Post** /dags/~/dagRuns/list | List DAG runs (batch)
-[**GetUpstreamDatasetEvents**](DAGRunApi.md#GetUpstreamDatasetEvents) | **Get** /dags/{dag_id}/dagRuns/{dag_run_id}/upstreamDatasetEvents | Get dataset events for a DAG run
-[**PostDagRun**](DAGRunApi.md#PostDagRun) | **Post** /dags/{dag_id}/dagRuns | Trigger a new DAG run
-[**SetDagRunNote**](DAGRunApi.md#SetDagRunNote) | **Patch** /dags/{dag_id}/dagRuns/{dag_run_id}/setNote | Update the DagRun note.
-[**UpdateDagRunState**](DAGRunApi.md#UpdateDagRunState) | **Patch** /dags/{dag_id}/dagRuns/{dag_run_id} | Modify a DAG run
+[**ClearDagRun**](DAGRunAPI.md#ClearDagRun) | **Post** /dags/{dag_id}/dagRuns/{dag_run_id}/clear | Clear a DAG run
+[**DeleteDagRun**](DAGRunAPI.md#DeleteDagRun) | **Delete** /dags/{dag_id}/dagRuns/{dag_run_id} | Delete a DAG run
+[**GetDagRun**](DAGRunAPI.md#GetDagRun) | **Get** /dags/{dag_id}/dagRuns/{dag_run_id} | Get a DAG run
+[**GetDagRuns**](DAGRunAPI.md#GetDagRuns) | **Get** /dags/{dag_id}/dagRuns | List DAG runs
+[**GetDagRunsBatch**](DAGRunAPI.md#GetDagRunsBatch) | **Post** /dags/~/dagRuns/list | List DAG runs (batch)
+[**GetUpstreamDatasetEvents**](DAGRunAPI.md#GetUpstreamDatasetEvents) | **Get** /dags/{dag_id}/dagRuns/{dag_run_id}/upstreamDatasetEvents | Get dataset events for a DAG run
+[**PostDagRun**](DAGRunAPI.md#PostDagRun) | **Post** /dags/{dag_id}/dagRuns | Trigger a new DAG run.
+[**SetDagRunNote**](DAGRunAPI.md#SetDagRunNote) | **Patch** /dags/{dag_id}/dagRuns/{dag_run_id}/setNote | Update the DagRun note.
+[**UpdateDagRunState**](DAGRunAPI.md#UpdateDagRunState) | **Patch** /dags/{dag_id}/dagRuns/{dag_run_id} | Modify a DAG run
 
 
 
 ## ClearDagRun
 
-> DAGRun ClearDagRun(ctx, dagId, dagRunId).ClearDagRun(clearDagRun).Execute()
+> ClearDagRun200Response ClearDagRun(ctx, dagId, dagRunId).ClearDagRun(clearDagRun).Execute()
 
 Clear a DAG run
 
@@ -49,26 +30,26 @@ Clear a DAG run
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./airflow"
 )
 
 func main() {
-    dagId := "dagId_example" // string | The DAG ID.
-    dagRunId := "dagRunId_example" // string | The DAG run ID.
-    clearDagRun := *openapiclient.NewClearDagRun() // ClearDagRun | 
+	dagId := "dagId_example" // string | The DAG ID.
+	dagRunId := "dagRunId_example" // string | The DAG run ID.
+	clearDagRun := *openapiclient.NewClearDagRun() // ClearDagRun | 
 
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DAGRunApi.ClearDagRun(context.Background(), dagId, dagRunId).ClearDagRun(clearDagRun).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `DAGRunApi.ClearDagRun``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ClearDagRun`: DAGRun
-    fmt.Fprintf(os.Stdout, "Response from `DAGRunApi.ClearDagRun`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DAGRunAPI.ClearDagRun(context.Background(), dagId, dagRunId).ClearDagRun(clearDagRun).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DAGRunAPI.ClearDagRun``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ClearDagRun`: ClearDagRun200Response
+	fmt.Fprintf(os.Stdout, "Response from `DAGRunAPI.ClearDagRun`: %v\n", resp)
 }
 ```
 
@@ -94,11 +75,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DAGRun**](DAGRun.md)
+[**ClearDagRun200Response**](ClearDagRun200Response.md)
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+No authorization required
 
 ### HTTP request headers
 
@@ -122,23 +103,23 @@ Delete a DAG run
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./airflow"
 )
 
 func main() {
-    dagId := "dagId_example" // string | The DAG ID.
-    dagRunId := "dagRunId_example" // string | The DAG run ID.
+	dagId := "dagId_example" // string | The DAG ID.
+	dagRunId := "dagRunId_example" // string | The DAG run ID.
 
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DAGRunApi.DeleteDagRun(context.Background(), dagId, dagRunId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `DAGRunApi.DeleteDagRun``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.DAGRunAPI.DeleteDagRun(context.Background(), dagId, dagRunId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DAGRunAPI.DeleteDagRun``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -167,7 +148,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+No authorization required
 
 ### HTTP request headers
 
@@ -181,7 +162,7 @@ Name | Type | Description  | Notes
 
 ## GetDagRun
 
-> DAGRun GetDagRun(ctx, dagId, dagRunId).Execute()
+> DAGRun GetDagRun(ctx, dagId, dagRunId).Fields(fields).Execute()
 
 Get a DAG run
 
@@ -191,25 +172,26 @@ Get a DAG run
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./airflow"
 )
 
 func main() {
-    dagId := "dagId_example" // string | The DAG ID.
-    dagRunId := "dagRunId_example" // string | The DAG run ID.
+	dagId := "dagId_example" // string | The DAG ID.
+	dagRunId := "dagRunId_example" // string | The DAG run ID.
+	fields := []string{"Inner_example"} // []string | List of field for return.  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DAGRunApi.GetDagRun(context.Background(), dagId, dagRunId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `DAGRunApi.GetDagRun``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetDagRun`: DAGRun
-    fmt.Fprintf(os.Stdout, "Response from `DAGRunApi.GetDagRun`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DAGRunAPI.GetDagRun(context.Background(), dagId, dagRunId).Fields(fields).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DAGRunAPI.GetDagRun``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetDagRun`: DAGRun
+	fmt.Fprintf(os.Stdout, "Response from `DAGRunAPI.GetDagRun`: %v\n", resp)
 }
 ```
 
@@ -231,6 +213,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **fields** | **[]string** | List of field for return.  | 
 
 ### Return type
 
@@ -238,7 +221,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+No authorization required
 
 ### HTTP request headers
 
@@ -252,7 +235,7 @@ Name | Type | Description  | Notes
 
 ## GetDagRuns
 
-> DAGRunCollection GetDagRuns(ctx, dagId).Limit(limit).Offset(offset).ExecutionDateGte(executionDateGte).ExecutionDateLte(executionDateLte).StartDateGte(startDateGte).StartDateLte(startDateLte).EndDateGte(endDateGte).EndDateLte(endDateLte).State(state).OrderBy(orderBy).Execute()
+> DAGRunCollection GetDagRuns(ctx, dagId).Limit(limit).Offset(offset).ExecutionDateGte(executionDateGte).ExecutionDateLte(executionDateLte).StartDateGte(startDateGte).StartDateLte(startDateLte).EndDateGte(endDateGte).EndDateLte(endDateLte).UpdatedAtGte(updatedAtGte).UpdatedAtLte(updatedAtLte).State(state).OrderBy(orderBy).Fields(fields).Execute()
 
 List DAG runs
 
@@ -264,35 +247,38 @@ List DAG runs
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
+	"context"
+	"fmt"
+	"os"
     "time"
-    openapiclient "./openapi"
+	openapiclient "./airflow"
 )
 
 func main() {
-    dagId := "dagId_example" // string | The DAG ID.
-    limit := int32(56) // int32 | The numbers of items to return. (optional) (default to 100)
-    offset := int32(56) // int32 | The number of items to skip before starting to collect the result set. (optional)
-    executionDateGte := time.Now() // time.Time | Returns objects greater or equal to the specified date.  This can be combined with execution_date_lte parameter to receive only the selected period.  (optional)
-    executionDateLte := time.Now() // time.Time | Returns objects less than or equal to the specified date.  This can be combined with execution_date_gte parameter to receive only the selected period.  (optional)
-    startDateGte := time.Now() // time.Time | Returns objects greater or equal the specified date.  This can be combined with start_date_lte parameter to receive only the selected period.  (optional)
-    startDateLte := time.Now() // time.Time | Returns objects less or equal the specified date.  This can be combined with start_date_gte parameter to receive only the selected period.  (optional)
-    endDateGte := time.Now() // time.Time | Returns objects greater or equal the specified date.  This can be combined with start_date_lte parameter to receive only the selected period.  (optional)
-    endDateLte := time.Now() // time.Time | Returns objects less than or equal to the specified date.  This can be combined with start_date_gte parameter to receive only the selected period.  (optional)
-    state := []string{"Inner_example"} // []string | The value can be repeated to retrieve multiple matching values (OR condition). (optional)
-    orderBy := "orderBy_example" // string | The name of the field to order the results by. Prefix a field name with `-` to reverse the sort order.  *New in version 2.1.0*  (optional)
+	dagId := "dagId_example" // string | The DAG ID.
+	limit := int32(56) // int32 | The numbers of items to return. (optional) (default to 100)
+	offset := int32(56) // int32 | The number of items to skip before starting to collect the result set. (optional)
+	executionDateGte := time.Now() // time.Time | Returns objects greater or equal to the specified date.  This can be combined with execution_date_lte parameter to receive only the selected period.  (optional)
+	executionDateLte := time.Now() // time.Time | Returns objects less than or equal to the specified date.  This can be combined with execution_date_gte parameter to receive only the selected period.  (optional)
+	startDateGte := time.Now() // time.Time | Returns objects greater or equal the specified date.  This can be combined with start_date_lte parameter to receive only the selected period.  (optional)
+	startDateLte := time.Now() // time.Time | Returns objects less or equal the specified date.  This can be combined with start_date_gte parameter to receive only the selected period.  (optional)
+	endDateGte := time.Now() // time.Time | Returns objects greater or equal the specified date.  This can be combined with start_date_lte parameter to receive only the selected period.  (optional)
+	endDateLte := time.Now() // time.Time | Returns objects less than or equal to the specified date.  This can be combined with start_date_gte parameter to receive only the selected period.  (optional)
+	updatedAtGte := time.Now() // time.Time | Returns objects greater or equal the specified date.  This can be combined with updated_at_lte parameter to receive only the selected period.  *New in version 2.6.0*  (optional)
+	updatedAtLte := time.Now() // time.Time | Returns objects less or equal the specified date.  This can be combined with updated_at_gte parameter to receive only the selected period.  *New in version 2.6.0*  (optional)
+	state := []string{"Inner_example"} // []string | The value can be repeated to retrieve multiple matching values (OR condition). (optional)
+	orderBy := "orderBy_example" // string | The name of the field to order the results by. Prefix a field name with `-` to reverse the sort order.  *New in version 2.1.0*  (optional)
+	fields := []string{"Inner_example"} // []string | List of field for return.  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DAGRunApi.GetDagRuns(context.Background(), dagId).Limit(limit).Offset(offset).ExecutionDateGte(executionDateGte).ExecutionDateLte(executionDateLte).StartDateGte(startDateGte).StartDateLte(startDateLte).EndDateGte(endDateGte).EndDateLte(endDateLte).State(state).OrderBy(orderBy).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `DAGRunApi.GetDagRuns``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetDagRuns`: DAGRunCollection
-    fmt.Fprintf(os.Stdout, "Response from `DAGRunApi.GetDagRuns`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DAGRunAPI.GetDagRuns(context.Background(), dagId).Limit(limit).Offset(offset).ExecutionDateGte(executionDateGte).ExecutionDateLte(executionDateLte).StartDateGte(startDateGte).StartDateLte(startDateLte).EndDateGte(endDateGte).EndDateLte(endDateLte).UpdatedAtGte(updatedAtGte).UpdatedAtLte(updatedAtLte).State(state).OrderBy(orderBy).Fields(fields).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DAGRunAPI.GetDagRuns``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetDagRuns`: DAGRunCollection
+	fmt.Fprintf(os.Stdout, "Response from `DAGRunAPI.GetDagRuns`: %v\n", resp)
 }
 ```
 
@@ -320,8 +306,11 @@ Name | Type | Description  | Notes
  **startDateLte** | **time.Time** | Returns objects less or equal the specified date.  This can be combined with start_date_gte parameter to receive only the selected period.  | 
  **endDateGte** | **time.Time** | Returns objects greater or equal the specified date.  This can be combined with start_date_lte parameter to receive only the selected period.  | 
  **endDateLte** | **time.Time** | Returns objects less than or equal to the specified date.  This can be combined with start_date_gte parameter to receive only the selected period.  | 
+ **updatedAtGte** | **time.Time** | Returns objects greater or equal the specified date.  This can be combined with updated_at_lte parameter to receive only the selected period.  *New in version 2.6.0*  | 
+ **updatedAtLte** | **time.Time** | Returns objects less or equal the specified date.  This can be combined with updated_at_gte parameter to receive only the selected period.  *New in version 2.6.0*  | 
  **state** | **[]string** | The value can be repeated to retrieve multiple matching values (OR condition). | 
  **orderBy** | **string** | The name of the field to order the results by. Prefix a field name with &#x60;-&#x60; to reverse the sort order.  *New in version 2.1.0*  | 
+ **fields** | **[]string** | List of field for return.  | 
 
 ### Return type
 
@@ -329,7 +318,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+No authorization required
 
 ### HTTP request headers
 
@@ -355,24 +344,24 @@ List DAG runs (batch)
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./airflow"
 )
 
 func main() {
-    listDagRunsForm := *openapiclient.NewListDagRunsForm() // ListDagRunsForm | 
+	listDagRunsForm := *openapiclient.NewListDagRunsForm() // ListDagRunsForm | 
 
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DAGRunApi.GetDagRunsBatch(context.Background()).ListDagRunsForm(listDagRunsForm).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `DAGRunApi.GetDagRunsBatch``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetDagRunsBatch`: DAGRunCollection
-    fmt.Fprintf(os.Stdout, "Response from `DAGRunApi.GetDagRunsBatch`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DAGRunAPI.GetDagRunsBatch(context.Background()).ListDagRunsForm(listDagRunsForm).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DAGRunAPI.GetDagRunsBatch``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetDagRunsBatch`: DAGRunCollection
+	fmt.Fprintf(os.Stdout, "Response from `DAGRunAPI.GetDagRunsBatch`: %v\n", resp)
 }
 ```
 
@@ -395,7 +384,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+No authorization required
 
 ### HTTP request headers
 
@@ -421,25 +410,25 @@ Get dataset events for a DAG run
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./airflow"
 )
 
 func main() {
-    dagId := "dagId_example" // string | The DAG ID.
-    dagRunId := "dagRunId_example" // string | The DAG run ID.
+	dagId := "dagId_example" // string | The DAG ID.
+	dagRunId := "dagRunId_example" // string | The DAG run ID.
 
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DAGRunApi.GetUpstreamDatasetEvents(context.Background(), dagId, dagRunId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `DAGRunApi.GetUpstreamDatasetEvents``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetUpstreamDatasetEvents`: DatasetEventCollection
-    fmt.Fprintf(os.Stdout, "Response from `DAGRunApi.GetUpstreamDatasetEvents`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DAGRunAPI.GetUpstreamDatasetEvents(context.Background(), dagId, dagRunId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DAGRunAPI.GetUpstreamDatasetEvents``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetUpstreamDatasetEvents`: DatasetEventCollection
+	fmt.Fprintf(os.Stdout, "Response from `DAGRunAPI.GetUpstreamDatasetEvents`: %v\n", resp)
 }
 ```
 
@@ -468,7 +457,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+No authorization required
 
 ### HTTP request headers
 
@@ -484,7 +473,9 @@ Name | Type | Description  | Notes
 
 > DAGRun PostDagRun(ctx, dagId).DAGRun(dAGRun).Execute()
 
-Trigger a new DAG run
+Trigger a new DAG run.
+
+
 
 ### Example
 
@@ -492,25 +483,25 @@ Trigger a new DAG run
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./airflow"
 )
 
 func main() {
-    dagId := "dagId_example" // string | The DAG ID.
-    dAGRun := *openapiclient.NewDAGRun() // DAGRun | 
+	dagId := "dagId_example" // string | The DAG ID.
+	dAGRun := *openapiclient.NewDAGRun() // DAGRun | 
 
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DAGRunApi.PostDagRun(context.Background(), dagId).DAGRun(dAGRun).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `DAGRunApi.PostDagRun``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `PostDagRun`: DAGRun
-    fmt.Fprintf(os.Stdout, "Response from `DAGRunApi.PostDagRun`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DAGRunAPI.PostDagRun(context.Background(), dagId).DAGRun(dAGRun).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DAGRunAPI.PostDagRun``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `PostDagRun`: DAGRun
+	fmt.Fprintf(os.Stdout, "Response from `DAGRunAPI.PostDagRun`: %v\n", resp)
 }
 ```
 
@@ -538,7 +529,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+No authorization required
 
 ### HTTP request headers
 
@@ -564,26 +555,26 @@ Update the DagRun note.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./airflow"
 )
 
 func main() {
-    dagId := "dagId_example" // string | The DAG ID.
-    dagRunId := "dagRunId_example" // string | The DAG run ID.
-    setDagRunNote := *openapiclient.NewSetDagRunNote() // SetDagRunNote | Parameters of set DagRun note.
+	dagId := "dagId_example" // string | The DAG ID.
+	dagRunId := "dagRunId_example" // string | The DAG run ID.
+	setDagRunNote := *openapiclient.NewSetDagRunNote() // SetDagRunNote | Parameters of set DagRun note.
 
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DAGRunApi.SetDagRunNote(context.Background(), dagId, dagRunId).SetDagRunNote(setDagRunNote).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `DAGRunApi.SetDagRunNote``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `SetDagRunNote`: DAGRun
-    fmt.Fprintf(os.Stdout, "Response from `DAGRunApi.SetDagRunNote`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DAGRunAPI.SetDagRunNote(context.Background(), dagId, dagRunId).SetDagRunNote(setDagRunNote).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DAGRunAPI.SetDagRunNote``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `SetDagRunNote`: DAGRun
+	fmt.Fprintf(os.Stdout, "Response from `DAGRunAPI.SetDagRunNote`: %v\n", resp)
 }
 ```
 
@@ -613,7 +604,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+No authorization required
 
 ### HTTP request headers
 
@@ -639,26 +630,26 @@ Modify a DAG run
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./airflow"
 )
 
 func main() {
-    dagId := "dagId_example" // string | The DAG ID.
-    dagRunId := "dagRunId_example" // string | The DAG run ID.
-    updateDagRunState := *openapiclient.NewUpdateDagRunState() // UpdateDagRunState | 
+	dagId := "dagId_example" // string | The DAG ID.
+	dagRunId := "dagRunId_example" // string | The DAG run ID.
+	updateDagRunState := *openapiclient.NewUpdateDagRunState() // UpdateDagRunState | 
 
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DAGRunApi.UpdateDagRunState(context.Background(), dagId, dagRunId).UpdateDagRunState(updateDagRunState).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `DAGRunApi.UpdateDagRunState``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `UpdateDagRunState`: DAGRun
-    fmt.Fprintf(os.Stdout, "Response from `DAGRunApi.UpdateDagRunState`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DAGRunAPI.UpdateDagRunState(context.Background(), dagId, dagRunId).UpdateDagRunState(updateDagRunState).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DAGRunAPI.UpdateDagRunState``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UpdateDagRunState`: DAGRun
+	fmt.Fprintf(os.Stdout, "Response from `DAGRunAPI.UpdateDagRunState`: %v\n", resp)
 }
 ```
 
@@ -688,7 +679,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+No authorization required
 
 ### HTTP request headers
 

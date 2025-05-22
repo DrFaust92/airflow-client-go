@@ -1,36 +1,20 @@
-<!--
- Licensed to the Apache Software Foundation (ASF) under one
- or more contributor license agreements.  See the NOTICE file
- distributed with this work for additional information
- regarding copyright ownership.  The ASF licenses this file
- to you under the Apache License, Version 2.0 (the
- "License"); you may not use this file except in compliance
- with the License.  You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing,
- software distributed under the License is distributed on an
- "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- KIND, either express or implied.  See the License for the
- specific language governing permissions and limitations
- under the License.
- -->
-
 # EventLog
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**EventLogId** | Pointer to **int32** | The event log ID | [optional] [readonly] 
-**When** | Pointer to **time.Time** | The time when these events happened. | [optional] [readonly] 
 **DagId** | Pointer to **NullableString** | The DAG ID | [optional] [readonly] 
-**TaskId** | Pointer to **NullableString** | The DAG ID | [optional] [readonly] 
 **Event** | Pointer to **string** | A key describing the type of event. | [optional] [readonly] 
+**EventLogId** | Pointer to **int32** | The event log ID | [optional] [readonly] 
 **ExecutionDate** | Pointer to **NullableTime** | When the event was dispatched for an object having execution_date, the value of this field.  | [optional] [readonly] 
-**Owner** | Pointer to **string** | Name of the user who triggered these events a. | [optional] [readonly] 
 **Extra** | Pointer to **NullableString** | Other information that was not included in the other fields, e.g. the complete CLI command.  | [optional] [readonly] 
+**MapIndex** | Pointer to **NullableInt32** | The Map Index | [optional] [readonly] 
+**Owner** | Pointer to **NullableString** | Name of the user who triggered these events a. | [optional] [readonly] 
+**RunId** | Pointer to **NullableString** | The DAG Run ID | [optional] [readonly] 
+**TaskId** | Pointer to **NullableString** | The Task ID | [optional] [readonly] 
+**TryNumber** | Pointer to **NullableInt32** | The Try Number | [optional] [readonly] 
+**When** | Pointer to **time.Time** | The time when these events happened. | [optional] [readonly] 
 
 ## Methods
 
@@ -50,56 +34,6 @@ will change when the set of required properties is changed
 NewEventLogWithDefaults instantiates a new EventLog object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetEventLogId
-
-`func (o *EventLog) GetEventLogId() int32`
-
-GetEventLogId returns the EventLogId field if non-nil, zero value otherwise.
-
-### GetEventLogIdOk
-
-`func (o *EventLog) GetEventLogIdOk() (*int32, bool)`
-
-GetEventLogIdOk returns a tuple with the EventLogId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetEventLogId
-
-`func (o *EventLog) SetEventLogId(v int32)`
-
-SetEventLogId sets EventLogId field to given value.
-
-### HasEventLogId
-
-`func (o *EventLog) HasEventLogId() bool`
-
-HasEventLogId returns a boolean if a field has been set.
-
-### GetWhen
-
-`func (o *EventLog) GetWhen() time.Time`
-
-GetWhen returns the When field if non-nil, zero value otherwise.
-
-### GetWhenOk
-
-`func (o *EventLog) GetWhenOk() (*time.Time, bool)`
-
-GetWhenOk returns a tuple with the When field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetWhen
-
-`func (o *EventLog) SetWhen(v time.Time)`
-
-SetWhen sets When field to given value.
-
-### HasWhen
-
-`func (o *EventLog) HasWhen() bool`
-
-HasWhen returns a boolean if a field has been set.
 
 ### GetDagId
 
@@ -136,41 +70,6 @@ HasDagId returns a boolean if a field has been set.
 `func (o *EventLog) UnsetDagId()`
 
 UnsetDagId ensures that no value is present for DagId, not even an explicit nil
-### GetTaskId
-
-`func (o *EventLog) GetTaskId() string`
-
-GetTaskId returns the TaskId field if non-nil, zero value otherwise.
-
-### GetTaskIdOk
-
-`func (o *EventLog) GetTaskIdOk() (*string, bool)`
-
-GetTaskIdOk returns a tuple with the TaskId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetTaskId
-
-`func (o *EventLog) SetTaskId(v string)`
-
-SetTaskId sets TaskId field to given value.
-
-### HasTaskId
-
-`func (o *EventLog) HasTaskId() bool`
-
-HasTaskId returns a boolean if a field has been set.
-
-### SetTaskIdNil
-
-`func (o *EventLog) SetTaskIdNil(b bool)`
-
- SetTaskIdNil sets the value for TaskId to be an explicit nil
-
-### UnsetTaskId
-`func (o *EventLog) UnsetTaskId()`
-
-UnsetTaskId ensures that no value is present for TaskId, not even an explicit nil
 ### GetEvent
 
 `func (o *EventLog) GetEvent() string`
@@ -195,6 +94,31 @@ SetEvent sets Event field to given value.
 `func (o *EventLog) HasEvent() bool`
 
 HasEvent returns a boolean if a field has been set.
+
+### GetEventLogId
+
+`func (o *EventLog) GetEventLogId() int32`
+
+GetEventLogId returns the EventLogId field if non-nil, zero value otherwise.
+
+### GetEventLogIdOk
+
+`func (o *EventLog) GetEventLogIdOk() (*int32, bool)`
+
+GetEventLogIdOk returns a tuple with the EventLogId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEventLogId
+
+`func (o *EventLog) SetEventLogId(v int32)`
+
+SetEventLogId sets EventLogId field to given value.
+
+### HasEventLogId
+
+`func (o *EventLog) HasEventLogId() bool`
+
+HasEventLogId returns a boolean if a field has been set.
 
 ### GetExecutionDate
 
@@ -231,31 +155,6 @@ HasExecutionDate returns a boolean if a field has been set.
 `func (o *EventLog) UnsetExecutionDate()`
 
 UnsetExecutionDate ensures that no value is present for ExecutionDate, not even an explicit nil
-### GetOwner
-
-`func (o *EventLog) GetOwner() string`
-
-GetOwner returns the Owner field if non-nil, zero value otherwise.
-
-### GetOwnerOk
-
-`func (o *EventLog) GetOwnerOk() (*string, bool)`
-
-GetOwnerOk returns a tuple with the Owner field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetOwner
-
-`func (o *EventLog) SetOwner(v string)`
-
-SetOwner sets Owner field to given value.
-
-### HasOwner
-
-`func (o *EventLog) HasOwner() bool`
-
-HasOwner returns a boolean if a field has been set.
-
 ### GetExtra
 
 `func (o *EventLog) GetExtra() string`
@@ -291,6 +190,206 @@ HasExtra returns a boolean if a field has been set.
 `func (o *EventLog) UnsetExtra()`
 
 UnsetExtra ensures that no value is present for Extra, not even an explicit nil
+### GetMapIndex
+
+`func (o *EventLog) GetMapIndex() int32`
+
+GetMapIndex returns the MapIndex field if non-nil, zero value otherwise.
+
+### GetMapIndexOk
+
+`func (o *EventLog) GetMapIndexOk() (*int32, bool)`
+
+GetMapIndexOk returns a tuple with the MapIndex field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMapIndex
+
+`func (o *EventLog) SetMapIndex(v int32)`
+
+SetMapIndex sets MapIndex field to given value.
+
+### HasMapIndex
+
+`func (o *EventLog) HasMapIndex() bool`
+
+HasMapIndex returns a boolean if a field has been set.
+
+### SetMapIndexNil
+
+`func (o *EventLog) SetMapIndexNil(b bool)`
+
+ SetMapIndexNil sets the value for MapIndex to be an explicit nil
+
+### UnsetMapIndex
+`func (o *EventLog) UnsetMapIndex()`
+
+UnsetMapIndex ensures that no value is present for MapIndex, not even an explicit nil
+### GetOwner
+
+`func (o *EventLog) GetOwner() string`
+
+GetOwner returns the Owner field if non-nil, zero value otherwise.
+
+### GetOwnerOk
+
+`func (o *EventLog) GetOwnerOk() (*string, bool)`
+
+GetOwnerOk returns a tuple with the Owner field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOwner
+
+`func (o *EventLog) SetOwner(v string)`
+
+SetOwner sets Owner field to given value.
+
+### HasOwner
+
+`func (o *EventLog) HasOwner() bool`
+
+HasOwner returns a boolean if a field has been set.
+
+### SetOwnerNil
+
+`func (o *EventLog) SetOwnerNil(b bool)`
+
+ SetOwnerNil sets the value for Owner to be an explicit nil
+
+### UnsetOwner
+`func (o *EventLog) UnsetOwner()`
+
+UnsetOwner ensures that no value is present for Owner, not even an explicit nil
+### GetRunId
+
+`func (o *EventLog) GetRunId() string`
+
+GetRunId returns the RunId field if non-nil, zero value otherwise.
+
+### GetRunIdOk
+
+`func (o *EventLog) GetRunIdOk() (*string, bool)`
+
+GetRunIdOk returns a tuple with the RunId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRunId
+
+`func (o *EventLog) SetRunId(v string)`
+
+SetRunId sets RunId field to given value.
+
+### HasRunId
+
+`func (o *EventLog) HasRunId() bool`
+
+HasRunId returns a boolean if a field has been set.
+
+### SetRunIdNil
+
+`func (o *EventLog) SetRunIdNil(b bool)`
+
+ SetRunIdNil sets the value for RunId to be an explicit nil
+
+### UnsetRunId
+`func (o *EventLog) UnsetRunId()`
+
+UnsetRunId ensures that no value is present for RunId, not even an explicit nil
+### GetTaskId
+
+`func (o *EventLog) GetTaskId() string`
+
+GetTaskId returns the TaskId field if non-nil, zero value otherwise.
+
+### GetTaskIdOk
+
+`func (o *EventLog) GetTaskIdOk() (*string, bool)`
+
+GetTaskIdOk returns a tuple with the TaskId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTaskId
+
+`func (o *EventLog) SetTaskId(v string)`
+
+SetTaskId sets TaskId field to given value.
+
+### HasTaskId
+
+`func (o *EventLog) HasTaskId() bool`
+
+HasTaskId returns a boolean if a field has been set.
+
+### SetTaskIdNil
+
+`func (o *EventLog) SetTaskIdNil(b bool)`
+
+ SetTaskIdNil sets the value for TaskId to be an explicit nil
+
+### UnsetTaskId
+`func (o *EventLog) UnsetTaskId()`
+
+UnsetTaskId ensures that no value is present for TaskId, not even an explicit nil
+### GetTryNumber
+
+`func (o *EventLog) GetTryNumber() int32`
+
+GetTryNumber returns the TryNumber field if non-nil, zero value otherwise.
+
+### GetTryNumberOk
+
+`func (o *EventLog) GetTryNumberOk() (*int32, bool)`
+
+GetTryNumberOk returns a tuple with the TryNumber field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTryNumber
+
+`func (o *EventLog) SetTryNumber(v int32)`
+
+SetTryNumber sets TryNumber field to given value.
+
+### HasTryNumber
+
+`func (o *EventLog) HasTryNumber() bool`
+
+HasTryNumber returns a boolean if a field has been set.
+
+### SetTryNumberNil
+
+`func (o *EventLog) SetTryNumberNil(b bool)`
+
+ SetTryNumberNil sets the value for TryNumber to be an explicit nil
+
+### UnsetTryNumber
+`func (o *EventLog) UnsetTryNumber()`
+
+UnsetTryNumber ensures that no value is present for TryNumber, not even an explicit nil
+### GetWhen
+
+`func (o *EventLog) GetWhen() time.Time`
+
+GetWhen returns the When field if non-nil, zero value otherwise.
+
+### GetWhenOk
+
+`func (o *EventLog) GetWhenOk() (*time.Time, bool)`
+
+GetWhenOk returns a tuple with the When field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetWhen
+
+`func (o *EventLog) SetWhen(v time.Time)`
+
+SetWhen sets When field to given value.
+
+### HasWhen
+
+`func (o *EventLog) HasWhen() bool`
+
+HasWhen returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

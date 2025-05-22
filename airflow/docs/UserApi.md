@@ -1,33 +1,14 @@
-<!--
- Licensed to the Apache Software Foundation (ASF) under one
- or more contributor license agreements.  See the NOTICE file
- distributed with this work for additional information
- regarding copyright ownership.  The ASF licenses this file
- to you under the Apache License, Version 2.0 (the
- "License"); you may not use this file except in compliance
- with the License.  You may obtain a copy of the License at
+# \UserAPI
 
-   http://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing,
- software distributed under the License is distributed on an
- "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- KIND, either express or implied.  See the License for the
- specific language governing permissions and limitations
- under the License.
- -->
-
-# \UserApi
-
-All URIs are relative to *http://localhost/api/v1*
+All URIs are relative to */api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**DeleteUser**](UserApi.md#DeleteUser) | **Delete** /users/{username} | Delete a user
-[**GetUser**](UserApi.md#GetUser) | **Get** /users/{username} | Get a user
-[**GetUsers**](UserApi.md#GetUsers) | **Get** /users | List users
-[**PatchUser**](UserApi.md#PatchUser) | **Patch** /users/{username} | Update a user
-[**PostUser**](UserApi.md#PostUser) | **Post** /users | Create a user
+[**DeleteUser**](UserAPI.md#DeleteUser) | **Delete** /users/{username} | Delete a user
+[**GetUser**](UserAPI.md#GetUser) | **Get** /users/{username} | Get a user
+[**GetUsers**](UserAPI.md#GetUsers) | **Get** /users | List users
+[**PatchUser**](UserAPI.md#PatchUser) | **Patch** /users/{username} | Update a user
+[**PostUser**](UserAPI.md#PostUser) | **Post** /users | Create a user
 
 
 
@@ -45,22 +26,22 @@ Delete a user
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./airflow"
 )
 
 func main() {
-    username := "username_example" // string | The username of the user.  *New in version 2.1.0* 
+	username := "username_example" // string | The username of the user.  *New in version 2.1.0* 
 
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UserApi.DeleteUser(context.Background(), username).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `UserApi.DeleteUser``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.UserAPI.DeleteUser(context.Background(), username).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `UserAPI.DeleteUser``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -87,7 +68,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+No authorization required
 
 ### HTTP request headers
 
@@ -113,24 +94,24 @@ Get a user
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./airflow"
 )
 
 func main() {
-    username := "username_example" // string | The username of the user.  *New in version 2.1.0* 
+	username := "username_example" // string | The username of the user.  *New in version 2.1.0* 
 
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UserApi.GetUser(context.Background(), username).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `UserApi.GetUser``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetUser`: UserCollectionItem
-    fmt.Fprintf(os.Stdout, "Response from `UserApi.GetUser`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.UserAPI.GetUser(context.Background(), username).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `UserAPI.GetUser``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetUser`: UserCollectionItem
+	fmt.Fprintf(os.Stdout, "Response from `UserAPI.GetUser`: %v\n", resp)
 }
 ```
 
@@ -157,7 +138,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+No authorization required
 
 ### HTTP request headers
 
@@ -183,26 +164,26 @@ List users
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./airflow"
 )
 
 func main() {
-    limit := int32(56) // int32 | The numbers of items to return. (optional) (default to 100)
-    offset := int32(56) // int32 | The number of items to skip before starting to collect the result set. (optional)
-    orderBy := "orderBy_example" // string | The name of the field to order the results by. Prefix a field name with `-` to reverse the sort order.  *New in version 2.1.0*  (optional)
+	limit := int32(56) // int32 | The numbers of items to return. (optional) (default to 100)
+	offset := int32(56) // int32 | The number of items to skip before starting to collect the result set. (optional)
+	orderBy := "orderBy_example" // string | The name of the field to order the results by. Prefix a field name with `-` to reverse the sort order.  *New in version 2.1.0*  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UserApi.GetUsers(context.Background()).Limit(limit).Offset(offset).OrderBy(orderBy).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `UserApi.GetUsers``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetUsers`: UserCollection
-    fmt.Fprintf(os.Stdout, "Response from `UserApi.GetUsers`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.UserAPI.GetUsers(context.Background()).Limit(limit).Offset(offset).OrderBy(orderBy).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `UserAPI.GetUsers``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetUsers`: UserCollection
+	fmt.Fprintf(os.Stdout, "Response from `UserAPI.GetUsers`: %v\n", resp)
 }
 ```
 
@@ -227,7 +208,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+No authorization required
 
 ### HTTP request headers
 
@@ -241,7 +222,7 @@ Name | Type | Description  | Notes
 
 ## PatchUser
 
-> Role PatchUser(ctx, username).User(user).UpdateMask(updateMask).Execute()
+> UserCollectionItem PatchUser(ctx, username).User(user).UpdateMask(updateMask).Execute()
 
 Update a user
 
@@ -253,26 +234,26 @@ Update a user
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./airflow"
 )
 
 func main() {
-    username := "username_example" // string | The username of the user.  *New in version 2.1.0* 
-    user := *openapiclient.NewUser() // User | 
-    updateMask := []string{"Inner_example"} // []string | The fields to update on the resource. If absent or empty, all modifiable fields are updated. A comma-separated list of fully qualified names of fields.  (optional)
+	username := "username_example" // string | The username of the user.  *New in version 2.1.0* 
+	user := *openapiclient.NewUser() // User | 
+	updateMask := []string{"Inner_example"} // []string | The fields to update on the resource. If absent or empty, all modifiable fields are updated. A comma-separated list of fully qualified names of fields.  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UserApi.PatchUser(context.Background(), username).User(user).UpdateMask(updateMask).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `UserApi.PatchUser``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `PatchUser`: Role
-    fmt.Fprintf(os.Stdout, "Response from `UserApi.PatchUser`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.UserAPI.PatchUser(context.Background(), username).User(user).UpdateMask(updateMask).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `UserAPI.PatchUser``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `PatchUser`: UserCollectionItem
+	fmt.Fprintf(os.Stdout, "Response from `UserAPI.PatchUser`: %v\n", resp)
 }
 ```
 
@@ -297,11 +278,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Role**](Role.md)
+[**UserCollectionItem**](UserCollectionItem.md)
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+No authorization required
 
 ### HTTP request headers
 
@@ -327,24 +308,24 @@ Create a user
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./airflow"
 )
 
 func main() {
-    user := *openapiclient.NewUser() // User | 
+	user := *openapiclient.NewUser() // User | 
 
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UserApi.PostUser(context.Background()).User(user).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `UserApi.PostUser``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `PostUser`: User
-    fmt.Fprintf(os.Stdout, "Response from `UserApi.PostUser`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.UserAPI.PostUser(context.Background()).User(user).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `UserAPI.PostUser``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `PostUser`: User
+	fmt.Fprintf(os.Stdout, "Response from `UserAPI.PostUser`: %v\n", resp)
 }
 ```
 
@@ -367,7 +348,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+No authorization required
 
 ### HTTP request headers
 

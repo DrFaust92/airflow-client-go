@@ -1,30 +1,11 @@
-<!--
- Licensed to the Apache Software Foundation (ASF) under one
- or more contributor license agreements.  See the NOTICE file
- distributed with this work for additional information
- regarding copyright ownership.  The ASF licenses this file
- to you under the Apache License, Version 2.0 (the
- "License"); you may not use this file except in compliance
- with the License.  You may obtain a copy of the License at
+# \EventLogAPI
 
-   http://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing,
- software distributed under the License is distributed on an
- "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- KIND, either express or implied.  See the License for the
- specific language governing permissions and limitations
- under the License.
- -->
-
-# \EventLogApi
-
-All URIs are relative to *http://localhost/api/v1*
+All URIs are relative to */api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetEventLog**](EventLogApi.md#GetEventLog) | **Get** /eventLogs/{event_log_id} | Get a log entry
-[**GetEventLogs**](EventLogApi.md#GetEventLogs) | **Get** /eventLogs | List log entries
+[**GetEventLog**](EventLogAPI.md#GetEventLog) | **Get** /eventLogs/{event_log_id} | Get a log entry
+[**GetEventLogs**](EventLogAPI.md#GetEventLogs) | **Get** /eventLogs | List log entries
 
 
 
@@ -40,24 +21,24 @@ Get a log entry
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./airflow"
 )
 
 func main() {
-    eventLogId := int32(56) // int32 | The event log ID.
+	eventLogId := int32(56) // int32 | The event log ID.
 
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.EventLogApi.GetEventLog(context.Background(), eventLogId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `EventLogApi.GetEventLog``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetEventLog`: EventLog
-    fmt.Fprintf(os.Stdout, "Response from `EventLogApi.GetEventLog`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.EventLogAPI.GetEventLog(context.Background(), eventLogId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `EventLogAPI.GetEventLog``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetEventLog`: EventLog
+	fmt.Fprintf(os.Stdout, "Response from `EventLogAPI.GetEventLog`: %v\n", resp)
 }
 ```
 
@@ -84,7 +65,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+No authorization required
 
 ### HTTP request headers
 
@@ -98,7 +79,7 @@ Name | Type | Description  | Notes
 
 ## GetEventLogs
 
-> EventLogCollection GetEventLogs(ctx).Limit(limit).Offset(offset).OrderBy(orderBy).Execute()
+> EventLogCollection GetEventLogs(ctx).Limit(limit).Offset(offset).OrderBy(orderBy).DagId(dagId).TaskId(taskId).RunId(runId).MapIndex(mapIndex).TryNumber(tryNumber).Event(event).Owner(owner).Before(before).After(after).IncludedEvents(includedEvents).ExcludedEvents(excludedEvents).Execute()
 
 List log entries
 
@@ -110,26 +91,38 @@ List log entries
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+    "time"
+	openapiclient "./airflow"
 )
 
 func main() {
-    limit := int32(56) // int32 | The numbers of items to return. (optional) (default to 100)
-    offset := int32(56) // int32 | The number of items to skip before starting to collect the result set. (optional)
-    orderBy := "orderBy_example" // string | The name of the field to order the results by. Prefix a field name with `-` to reverse the sort order.  *New in version 2.1.0*  (optional)
+	limit := int32(56) // int32 | The numbers of items to return. (optional) (default to 100)
+	offset := int32(56) // int32 | The number of items to skip before starting to collect the result set. (optional)
+	orderBy := "orderBy_example" // string | The name of the field to order the results by. Prefix a field name with `-` to reverse the sort order.  *New in version 2.1.0*  (optional)
+	dagId := "dagId_example" // string | Returns objects matched by the DAG ID. (optional)
+	taskId := "taskId_example" // string | Returns objects matched by the Task ID. (optional)
+	runId := "runId_example" // string | Returns objects matched by the Run ID. (optional)
+	mapIndex := int32(56) // int32 | Filter on map index for mapped task. (optional)
+	tryNumber := int32(56) // int32 | Filter on try_number for task instance. (optional)
+	event := "event_example" // string | The name of event log. (optional)
+	owner := "owner_example" // string | The owner's name of event log. (optional)
+	before := time.Now() // time.Time | Timestamp to select event logs occurring before. (optional)
+	after := time.Now() // time.Time | Timestamp to select event logs occurring after. (optional)
+	includedEvents := "includedEvents_example" // string | One or more event names separated by commas. If set, only return event logs with events matching this pattern. *New in version 2.9.0*  (optional)
+	excludedEvents := "excludedEvents_example" // string | One or more event names separated by commas. If set, only return event logs with events that do not match this pattern. *New in version 2.9.0*  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.EventLogApi.GetEventLogs(context.Background()).Limit(limit).Offset(offset).OrderBy(orderBy).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `EventLogApi.GetEventLogs``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetEventLogs`: EventLogCollection
-    fmt.Fprintf(os.Stdout, "Response from `EventLogApi.GetEventLogs`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.EventLogAPI.GetEventLogs(context.Background()).Limit(limit).Offset(offset).OrderBy(orderBy).DagId(dagId).TaskId(taskId).RunId(runId).MapIndex(mapIndex).TryNumber(tryNumber).Event(event).Owner(owner).Before(before).After(after).IncludedEvents(includedEvents).ExcludedEvents(excludedEvents).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `EventLogAPI.GetEventLogs``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetEventLogs`: EventLogCollection
+	fmt.Fprintf(os.Stdout, "Response from `EventLogAPI.GetEventLogs`: %v\n", resp)
 }
 ```
 
@@ -147,6 +140,17 @@ Name | Type | Description  | Notes
  **limit** | **int32** | The numbers of items to return. | [default to 100]
  **offset** | **int32** | The number of items to skip before starting to collect the result set. | 
  **orderBy** | **string** | The name of the field to order the results by. Prefix a field name with &#x60;-&#x60; to reverse the sort order.  *New in version 2.1.0*  | 
+ **dagId** | **string** | Returns objects matched by the DAG ID. | 
+ **taskId** | **string** | Returns objects matched by the Task ID. | 
+ **runId** | **string** | Returns objects matched by the Run ID. | 
+ **mapIndex** | **int32** | Filter on map index for mapped task. | 
+ **tryNumber** | **int32** | Filter on try_number for task instance. | 
+ **event** | **string** | The name of event log. | 
+ **owner** | **string** | The owner&#39;s name of event log. | 
+ **before** | **time.Time** | Timestamp to select event logs occurring before. | 
+ **after** | **time.Time** | Timestamp to select event logs occurring after. | 
+ **includedEvents** | **string** | One or more event names separated by commas. If set, only return event logs with events matching this pattern. *New in version 2.9.0*  | 
+ **excludedEvents** | **string** | One or more event names separated by commas. If set, only return event logs with events that do not match this pattern. *New in version 2.9.0*  | 
 
 ### Return type
 
@@ -154,7 +158,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+No authorization required
 
 ### HTTP request headers
 

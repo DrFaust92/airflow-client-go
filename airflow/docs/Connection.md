@@ -1,37 +1,18 @@
-<!--
- Licensed to the Apache Software Foundation (ASF) under one
- or more contributor license agreements.  See the NOTICE file
- distributed with this work for additional information
- regarding copyright ownership.  The ASF licenses this file
- to you under the Apache License, Version 2.0 (the
- "License"); you may not use this file except in compliance
- with the License.  You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing,
- software distributed under the License is distributed on an
- "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- KIND, either express or implied.  See the License for the
- specific language governing permissions and limitations
- under the License.
- -->
-
 # Connection
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ConnectionId** | Pointer to **string** | The connection ID. | [optional] 
 **ConnType** | Pointer to **string** | The connection type. | [optional] 
+**ConnectionId** | Pointer to **string** | The connection ID. | [optional] 
 **Description** | Pointer to **NullableString** | The description of the connection. | [optional] 
 **Host** | Pointer to **NullableString** | Host of the connection. | [optional] 
 **Login** | Pointer to **NullableString** | Login of the connection. | [optional] 
-**Schema** | Pointer to **NullableString** | Schema of the connection. | [optional] 
 **Port** | Pointer to **NullableInt32** | Port of the connection. | [optional] 
-**Password** | Pointer to **string** | Password of the connection. | [optional] 
+**Schema** | Pointer to **NullableString** | Schema of the connection. | [optional] 
 **Extra** | Pointer to **NullableString** | Other values that cannot be put into another field, e.g. RSA keys. | [optional] 
+**Password** | Pointer to **string** | Password of the connection. | [optional] 
 
 ## Methods
 
@@ -51,31 +32,6 @@ will change when the set of required properties is changed
 NewConnectionWithDefaults instantiates a new Connection object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetConnectionId
-
-`func (o *Connection) GetConnectionId() string`
-
-GetConnectionId returns the ConnectionId field if non-nil, zero value otherwise.
-
-### GetConnectionIdOk
-
-`func (o *Connection) GetConnectionIdOk() (*string, bool)`
-
-GetConnectionIdOk returns a tuple with the ConnectionId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetConnectionId
-
-`func (o *Connection) SetConnectionId(v string)`
-
-SetConnectionId sets ConnectionId field to given value.
-
-### HasConnectionId
-
-`func (o *Connection) HasConnectionId() bool`
-
-HasConnectionId returns a boolean if a field has been set.
 
 ### GetConnType
 
@@ -101,6 +57,31 @@ SetConnType sets ConnType field to given value.
 `func (o *Connection) HasConnType() bool`
 
 HasConnType returns a boolean if a field has been set.
+
+### GetConnectionId
+
+`func (o *Connection) GetConnectionId() string`
+
+GetConnectionId returns the ConnectionId field if non-nil, zero value otherwise.
+
+### GetConnectionIdOk
+
+`func (o *Connection) GetConnectionIdOk() (*string, bool)`
+
+GetConnectionIdOk returns a tuple with the ConnectionId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetConnectionId
+
+`func (o *Connection) SetConnectionId(v string)`
+
+SetConnectionId sets ConnectionId field to given value.
+
+### HasConnectionId
+
+`func (o *Connection) HasConnectionId() bool`
+
+HasConnectionId returns a boolean if a field has been set.
 
 ### GetDescription
 
@@ -207,41 +188,6 @@ HasLogin returns a boolean if a field has been set.
 `func (o *Connection) UnsetLogin()`
 
 UnsetLogin ensures that no value is present for Login, not even an explicit nil
-### GetSchema
-
-`func (o *Connection) GetSchema() string`
-
-GetSchema returns the Schema field if non-nil, zero value otherwise.
-
-### GetSchemaOk
-
-`func (o *Connection) GetSchemaOk() (*string, bool)`
-
-GetSchemaOk returns a tuple with the Schema field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSchema
-
-`func (o *Connection) SetSchema(v string)`
-
-SetSchema sets Schema field to given value.
-
-### HasSchema
-
-`func (o *Connection) HasSchema() bool`
-
-HasSchema returns a boolean if a field has been set.
-
-### SetSchemaNil
-
-`func (o *Connection) SetSchemaNil(b bool)`
-
- SetSchemaNil sets the value for Schema to be an explicit nil
-
-### UnsetSchema
-`func (o *Connection) UnsetSchema()`
-
-UnsetSchema ensures that no value is present for Schema, not even an explicit nil
 ### GetPort
 
 `func (o *Connection) GetPort() int32`
@@ -277,31 +223,41 @@ HasPort returns a boolean if a field has been set.
 `func (o *Connection) UnsetPort()`
 
 UnsetPort ensures that no value is present for Port, not even an explicit nil
-### GetPassword
+### GetSchema
 
-`func (o *Connection) GetPassword() string`
+`func (o *Connection) GetSchema() string`
 
-GetPassword returns the Password field if non-nil, zero value otherwise.
+GetSchema returns the Schema field if non-nil, zero value otherwise.
 
-### GetPasswordOk
+### GetSchemaOk
 
-`func (o *Connection) GetPasswordOk() (*string, bool)`
+`func (o *Connection) GetSchemaOk() (*string, bool)`
 
-GetPasswordOk returns a tuple with the Password field if it's non-nil, zero value otherwise
+GetSchemaOk returns a tuple with the Schema field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetPassword
+### SetSchema
 
-`func (o *Connection) SetPassword(v string)`
+`func (o *Connection) SetSchema(v string)`
 
-SetPassword sets Password field to given value.
+SetSchema sets Schema field to given value.
 
-### HasPassword
+### HasSchema
 
-`func (o *Connection) HasPassword() bool`
+`func (o *Connection) HasSchema() bool`
 
-HasPassword returns a boolean if a field has been set.
+HasSchema returns a boolean if a field has been set.
 
+### SetSchemaNil
+
+`func (o *Connection) SetSchemaNil(b bool)`
+
+ SetSchemaNil sets the value for Schema to be an explicit nil
+
+### UnsetSchema
+`func (o *Connection) UnsetSchema()`
+
+UnsetSchema ensures that no value is present for Schema, not even an explicit nil
 ### GetExtra
 
 `func (o *Connection) GetExtra() string`
@@ -337,6 +293,31 @@ HasExtra returns a boolean if a field has been set.
 `func (o *Connection) UnsetExtra()`
 
 UnsetExtra ensures that no value is present for Extra, not even an explicit nil
+### GetPassword
+
+`func (o *Connection) GetPassword() string`
+
+GetPassword returns the Password field if non-nil, zero value otherwise.
+
+### GetPasswordOk
+
+`func (o *Connection) GetPasswordOk() (*string, bool)`
+
+GetPasswordOk returns a tuple with the Password field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPassword
+
+`func (o *Connection) SetPassword(v string)`
+
+SetPassword sets Password field to given value.
+
+### HasPassword
+
+`func (o *Connection) HasPassword() bool`
+
+HasPassword returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -1,26 +1,9 @@
-// Licensed to the Apache Software Foundation (ASF) under one
-// or more contributor license agreements.  See the NOTICE file
-// distributed with this work for additional information
-// regarding copyright ownership.  The ASF licenses this file
-// to you under the Apache License, Version 2.0 (the
-// "License"); you may not use this file except in compliance
-// with the License.  You may obtain a copy of the License at
-//
-//   http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing,
-// software distributed under the License is distributed on an
-// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-// KIND, either express or implied.  See the License for the
-// specific language governing permissions and limitations
-// under the License.
-
 /*
 Airflow API (Stable)
 
-# Overview  To facilitate management, Apache Airflow supports a range of REST API endpoints across its objects. This section provides an overview of the API design, methods, and supported use cases.  Most of the endpoints accept `JSON` as input and return `JSON` responses. This means that you must usually add the following headers to your request: ``` Content-type: application/json Accept: application/json ```  ## Resources  The term `resource` refers to a single type of object in the Airflow metadata. An API is broken up by its endpoint's corresponding resource. The name of a resource is typically plural and expressed in camelCase. Example: `dagRuns`.  Resource names are used as part of endpoint URLs, as well as in API parameters and responses.  ## CRUD Operations  The platform supports **C**reate, **R**ead, **U**pdate, and **D**elete operations on most resources. You can review the standards for these operations and their standard parameters below.  Some endpoints have special behavior as exceptions.  ### Create  To create a resource, you typically submit an HTTP `POST` request with the resource's required metadata in the request body. The response returns a `201 Created` response code upon success with the resource's metadata, including its internal `id`, in the response body.  ### Read  The HTTP `GET` request can be used to read a resource or to list a number of resources.  A resource's `id` can be submitted in the request parameters to read a specific resource. The response usually returns a `200 OK` response code upon success, with the resource's metadata in the response body.  If a `GET` request does not include a specific resource `id`, it is treated as a list request. The response usually returns a `200 OK` response code upon success, with an object containing a list of resources' metadata in the response body.  When reading resources, some common query parameters are usually available. e.g.: ``` v1/connections?limit=25&offset=25 ```  |Query Parameter|Type|Description| |---------------|----|-----------| |limit|integer|Maximum number of objects to fetch. Usually 25 by default| |offset|integer|Offset after which to start returning objects. For use with limit query parameter.|  ### Update  Updating a resource requires the resource `id`, and is typically done using an HTTP `PATCH` request, with the fields to modify in the request body. The response usually returns a `200 OK` response code upon success, with information about the modified resource in the response body.  ### Delete  Deleting a resource requires the resource `id` and is typically executing via an HTTP `DELETE` request. The response usually returns a `204 No Content` response code upon success.  ## Conventions  - Resource names are plural and expressed in camelCase. - Names are consistent between URL parameter name and field name.  - Field names are in snake_case. ```json {     \"name\": \"string\",     \"slots\": 0,     \"occupied_slots\": 0,     \"used_slots\": 0,     \"queued_slots\": 0,     \"open_slots\": 0 } ```  ### Update Mask  Update mask is available as a query parameter in patch endpoints. It is used to notify the API which fields you want to update. Using `update_mask` makes it easier to update objects by helping the server know which fields to update in an object instead of updating all fields. The update request ignores any fields that aren't specified in the field mask, leaving them with their current values.  Example: ```   resource = request.get('/resource/my-id').json()   resource['my_field'] = 'new-value'   request.patch('/resource/my-id?update_mask=my_field', data=json.dumps(resource)) ```  ## Versioning and Endpoint Lifecycle  - API versioning is not synchronized to specific releases of the Apache Airflow. - APIs are designed to be backward compatible. - Any changes to the API will first go through a deprecation phase.  # Trying the API  You can use a third party client, such as [curl](https://curl.haxx.se/), [HTTPie](https://httpie.org/), [Postman](https://www.postman.com/) or [the Insomnia rest client](https://insomnia.rest/) to test the Apache Airflow API.  Note that you will need to pass credentials data.  For e.g., here is how to pause a DAG with [curl](https://curl.haxx.se/), when basic authorization is used: ```bash curl -X PATCH 'https://example.com/api/v1/dags/{dag_id}?update_mask=is_paused' \\ -H 'Content-Type: application/json' \\ --user \"username:password\" \\ -d '{     \"is_paused\": true }' ```  Using a graphical tool such as [Postman](https://www.postman.com/) or [Insomnia](https://insomnia.rest/), it is possible to import the API specifications directly:  1. Download the API specification by clicking the **Download** button at top of this document 2. Import the JSON specification in the graphical tool of your choice.   - In *Postman*, you can click the **import** button at the top   - With *Insomnia*, you can just drag-and-drop the file on the UI  Note that with *Postman*, you can also generate code snippets by selecting a request and clicking on the **Code** button.  ## Enabling CORS  [Cross-origin resource sharing (CORS)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) is a browser security feature that restricts HTTP requests that are initiated from scripts running in the browser.  For details on enabling/configuring CORS, see [Enabling CORS](https://airflow.apache.org/docs/apache-airflow/stable/security/api.html).  # Authentication  To be able to meet the requirements of many organizations, Airflow supports many authentication methods, and it is even possible to add your own method.  If you want to check which auth backend is currently set, you can use `airflow config get-value api auth_backends` command as in the example below. ```bash $ airflow config get-value api auth_backends airflow.api.auth.backend.basic_auth ``` The default is to deny all requests.  For details on configuring the authentication, see [API Authorization](https://airflow.apache.org/docs/apache-airflow/stable/security/api.html).  # Errors  We follow the error response format proposed in [RFC 7807](https://tools.ietf.org/html/rfc7807) also known as Problem Details for HTTP APIs. As with our normal API responses, your client must be prepared to gracefully handle additional members of the response.  ## Unauthenticated  This indicates that the request has not been applied because it lacks valid authentication credentials for the target resource. Please check that you have valid credentials.  ## PermissionDenied  This response means that the server understood the request but refuses to authorize it because it lacks sufficient rights to the resource. It happens when you do not have the necessary permission to execute the action you performed. You need to get the appropriate permissions in other to resolve this error.  ## BadRequest  This response means that the server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing). To resolve this, please ensure that your syntax is correct.  ## NotFound  This client error response indicates that the server cannot find the requested resource.  ## MethodNotAllowed  Indicates that the request method is known by the server but is not supported by the target resource.  ## NotAcceptable  The target resource does not have a current representation that would be acceptable to the user agent, according to the proactive negotiation header fields received in the request, and the server is unwilling to supply a default representation.  ## AlreadyExists  The request could not be completed due to a conflict with the current state of the target resource, e.g. the resource it tries to create already exists.  ## Unknown  This means that the server encountered an unexpected condition that prevented it from fulfilling the request. 
+# Overview  To facilitate management, Apache Airflow supports a range of REST API endpoints across its objects. This section provides an overview of the API design, methods, and supported use cases.  Most of the endpoints accept `JSON` as input and return `JSON` responses. This means that you must usually add the following headers to your request: ``` Content-type: application/json Accept: application/json ```  ## Resources  The term `resource` refers to a single type of object in the Airflow metadata. An API is broken up by its endpoint's corresponding resource. The name of a resource is typically plural and expressed in camelCase. Example: `dagRuns`.  Resource names are used as part of endpoint URLs, as well as in API parameters and responses.  ## CRUD Operations  The platform supports **C**reate, **R**ead, **U**pdate, and **D**elete operations on most resources. You can review the standards for these operations and their standard parameters below.  Some endpoints have special behavior as exceptions.  ### Create  To create a resource, you typically submit an HTTP `POST` request with the resource's required metadata in the request body. The response returns a `201 Created` response code upon success with the resource's metadata, including its internal `id`, in the response body.  ### Read  The HTTP `GET` request can be used to read a resource or to list a number of resources.  A resource's `id` can be submitted in the request parameters to read a specific resource. The response usually returns a `200 OK` response code upon success, with the resource's metadata in the response body.  If a `GET` request does not include a specific resource `id`, it is treated as a list request. The response usually returns a `200 OK` response code upon success, with an object containing a list of resources' metadata in the response body.  When reading resources, some common query parameters are usually available. e.g.: ``` v1/connections?limit=25&offset=25 ```  |Query Parameter|Type|Description| |---------------|----|-----------| |limit|integer|Maximum number of objects to fetch. Usually 25 by default| |offset|integer|Offset after which to start returning objects. For use with limit query parameter.|  ### Update  Updating a resource requires the resource `id`, and is typically done using an HTTP `PATCH` request, with the fields to modify in the request body. The response usually returns a `200 OK` response code upon success, with information about the modified resource in the response body.  ### Delete  Deleting a resource requires the resource `id` and is typically executed via an HTTP `DELETE` request. The response usually returns a `204 No Content` response code upon success.  ## Conventions  - Resource names are plural and expressed in camelCase. - Names are consistent between URL parameter name and field name.  - Field names are in snake_case. ```json {     \"description\": \"string\",     \"name\": \"string\",     \"occupied_slots\": 0,     \"open_slots\": 0     \"queued_slots\": 0,     \"running_slots\": 0,     \"scheduled_slots\": 0,     \"slots\": 0, } ```  ### Update Mask  Update mask is available as a query parameter in patch endpoints. It is used to notify the API which fields you want to update. Using `update_mask` makes it easier to update objects by helping the server know which fields to update in an object instead of updating all fields. The update request ignores any fields that aren't specified in the field mask, leaving them with their current values.  Example: ```   resource = request.get('/resource/my-id').json()   resource['my_field'] = 'new-value'   request.patch('/resource/my-id?update_mask=my_field', data=json.dumps(resource)) ```  ## Versioning and Endpoint Lifecycle  - API versioning is not synchronized to specific releases of the Apache Airflow. - APIs are designed to be backward compatible. - Any changes to the API will first go through a deprecation phase.  # Trying the API  You can use a third party client, such as [curl](https://curl.haxx.se/), [HTTPie](https://httpie.org/), [Postman](https://www.postman.com/) or [the Insomnia rest client](https://insomnia.rest/) to test the Apache Airflow API.  Note that you will need to pass credentials data.  For e.g., here is how to pause a DAG with [curl](https://curl.haxx.se/), when basic authorization is used: ```bash curl -X PATCH 'https://example.com/api/v1/dags/{dag_id}?update_mask=is_paused' \\ -H 'Content-Type: application/json' \\ --user \"username:password\" \\ -d '{     \"is_paused\": true }' ```  Using a graphical tool such as [Postman](https://www.postman.com/) or [Insomnia](https://insomnia.rest/), it is possible to import the API specifications directly:  1. Download the API specification by clicking the **Download** button at the top of this document 2. Import the JSON specification in the graphical tool of your choice.   - In *Postman*, you can click the **import** button at the top   - With *Insomnia*, you can just drag-and-drop the file on the UI  Note that with *Postman*, you can also generate code snippets by selecting a request and clicking on the **Code** button.  ## Enabling CORS  [Cross-origin resource sharing (CORS)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) is a browser security feature that restricts HTTP requests that are initiated from scripts running in the browser.  For details on enabling/configuring CORS, see [Enabling CORS](https://airflow.apache.org/docs/apache-airflow/stable/security/api.html).  # Authentication  To be able to meet the requirements of many organizations, Airflow supports many authentication methods, and it is even possible to add your own method.  If you want to check which auth backend is currently set, you can use `airflow config get-value api auth_backends` command as in the example below. ```bash $ airflow config get-value api auth_backends airflow.api.auth.backend.basic_auth ``` The default is to deny all requests.  For details on configuring the authentication, see [API Authorization](https://airflow.apache.org/docs/apache-airflow/stable/security/api.html).  # Errors  We follow the error response format proposed in [RFC 7807](https://tools.ietf.org/html/rfc7807) also known as Problem Details for HTTP APIs. As with our normal API responses, your client must be prepared to gracefully handle additional members of the response.  ## Unauthenticated  This indicates that the request has not been applied because it lacks valid authentication credentials for the target resource. Please check that you have valid credentials.  ## PermissionDenied  This response means that the server understood the request but refuses to authorize it because it lacks sufficient rights to the resource. It happens when you do not have the necessary permission to execute the action you performed. You need to get the appropriate permissions in other to resolve this error.  ## BadRequest  This response means that the server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing). To resolve this, please ensure that your syntax is correct.  ## NotFound  This client error response indicates that the server cannot find the requested resource.  ## MethodNotAllowed  Indicates that the request method is known by the server but is not supported by the target resource.  ## NotAcceptable  The target resource does not have a current representation that would be acceptable to the user agent, according to the proactive negotiation header fields received in the request, and the server is unwilling to supply a default representation.  ## AlreadyExists  The request could not be completed due to a conflict with the current state of the target resource, e.g. the resource it tries to create already exists.  ## Unknown  This means that the server encountered an unexpected condition that prevented it from fulfilling the request. 
 
-API version: 2.5.0
+API version: 2.10.5
 Contact: dev@airflow.apache.org
 */
 
@@ -36,7 +19,6 @@ import (
 	"errors"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"log"
 	"mime/multipart"
 	"net/http"
@@ -51,15 +33,16 @@ import (
 	"time"
 	"unicode/utf8"
 
-	"golang.org/x/oauth2"
 )
 
 var (
-	jsonCheck = regexp.MustCompile(`(?i:(?:application|text)/(?:vnd\.[^;]+\+)?json)`)
-	xmlCheck  = regexp.MustCompile(`(?i:(?:application|text)/xml)`)
+	JsonCheck       = regexp.MustCompile(`(?i:(?:application|text)/(?:[^;]+\+)?json)`)
+	XmlCheck        = regexp.MustCompile(`(?i:(?:application|text)/(?:[^;]+\+)?xml)`)
+	queryParamSplit = regexp.MustCompile(`(^|&)([^&]+)`)
+	queryDescape    = strings.NewReplacer( "%5B", "[", "%5D", "]" )
 )
 
-// APIClient manages communication with the Airflow API (Stable) API v2.5.0
+// APIClient manages communication with the Airflow API (Stable) API v2.10.5
 // In most cases there should be only one, shared, APIClient.
 type APIClient struct {
 	cfg    *Configuration
@@ -67,41 +50,43 @@ type APIClient struct {
 
 	// API Services
 
-	ConfigApi *ConfigApiService
+	ConfigAPI *ConfigAPIService
 
-	ConnectionApi *ConnectionApiService
+	ConnectionAPI *ConnectionAPIService
 
-	DAGApi *DAGApiService
+	DAGAPI *DAGAPIService
 
-	DAGRunApi *DAGRunApiService
+	DAGRunAPI *DAGRunAPIService
 
-	DagWarningApi *DagWarningApiService
+	DagStatsAPI *DagStatsAPIService
 
-	DatasetApi *DatasetApiService
+	DagWarningAPI *DagWarningAPIService
 
-	EventLogApi *EventLogApiService
+	DatasetAPI *DatasetAPIService
 
-	ImportErrorApi *ImportErrorApiService
+	EventLogAPI *EventLogAPIService
 
-	MonitoringApi *MonitoringApiService
+	ImportErrorAPI *ImportErrorAPIService
 
-	PermissionApi *PermissionApiService
+	MonitoringAPI *MonitoringAPIService
 
-	PluginApi *PluginApiService
+	PermissionAPI *PermissionAPIService
 
-	PoolApi *PoolApiService
+	PluginAPI *PluginAPIService
 
-	ProviderApi *ProviderApiService
+	PoolAPI *PoolAPIService
 
-	RoleApi *RoleApiService
+	ProviderAPI *ProviderAPIService
 
-	TaskInstanceApi *TaskInstanceApiService
+	RoleAPI *RoleAPIService
 
-	UserApi *UserApiService
+	TaskInstanceAPI *TaskInstanceAPIService
 
-	VariableApi *VariableApiService
+	UserAPI *UserAPIService
 
-	XComApi *XComApiService
+	VariableAPI *VariableAPIService
+
+	XComAPI *XComAPIService
 }
 
 type service struct {
@@ -120,24 +105,25 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.common.client = c
 
 	// API Services
-	c.ConfigApi = (*ConfigApiService)(&c.common)
-	c.ConnectionApi = (*ConnectionApiService)(&c.common)
-	c.DAGApi = (*DAGApiService)(&c.common)
-	c.DAGRunApi = (*DAGRunApiService)(&c.common)
-	c.DagWarningApi = (*DagWarningApiService)(&c.common)
-	c.DatasetApi = (*DatasetApiService)(&c.common)
-	c.EventLogApi = (*EventLogApiService)(&c.common)
-	c.ImportErrorApi = (*ImportErrorApiService)(&c.common)
-	c.MonitoringApi = (*MonitoringApiService)(&c.common)
-	c.PermissionApi = (*PermissionApiService)(&c.common)
-	c.PluginApi = (*PluginApiService)(&c.common)
-	c.PoolApi = (*PoolApiService)(&c.common)
-	c.ProviderApi = (*ProviderApiService)(&c.common)
-	c.RoleApi = (*RoleApiService)(&c.common)
-	c.TaskInstanceApi = (*TaskInstanceApiService)(&c.common)
-	c.UserApi = (*UserApiService)(&c.common)
-	c.VariableApi = (*VariableApiService)(&c.common)
-	c.XComApi = (*XComApiService)(&c.common)
+	c.ConfigAPI = (*ConfigAPIService)(&c.common)
+	c.ConnectionAPI = (*ConnectionAPIService)(&c.common)
+	c.DAGAPI = (*DAGAPIService)(&c.common)
+	c.DAGRunAPI = (*DAGRunAPIService)(&c.common)
+	c.DagStatsAPI = (*DagStatsAPIService)(&c.common)
+	c.DagWarningAPI = (*DagWarningAPIService)(&c.common)
+	c.DatasetAPI = (*DatasetAPIService)(&c.common)
+	c.EventLogAPI = (*EventLogAPIService)(&c.common)
+	c.ImportErrorAPI = (*ImportErrorAPIService)(&c.common)
+	c.MonitoringAPI = (*MonitoringAPIService)(&c.common)
+	c.PermissionAPI = (*PermissionAPIService)(&c.common)
+	c.PluginAPI = (*PluginAPIService)(&c.common)
+	c.PoolAPI = (*PoolAPIService)(&c.common)
+	c.ProviderAPI = (*ProviderAPIService)(&c.common)
+	c.RoleAPI = (*RoleAPIService)(&c.common)
+	c.TaskInstanceAPI = (*TaskInstanceAPIService)(&c.common)
+	c.UserAPI = (*UserAPIService)(&c.common)
+	c.VariableAPI = (*VariableAPIService)(&c.common)
+	c.XComAPI = (*XComAPIService)(&c.common)
 
 	return c
 }
@@ -173,7 +159,7 @@ func selectHeaderAccept(accepts []string) string {
 // contains is a case insensitive match, finding needle in a haystack
 func contains(haystack []string, needle string) bool {
 	for _, a := range haystack {
-		if strings.ToLower(a) == strings.ToLower(needle) {
+		if strings.EqualFold(a, needle) {
 			return true
 		}
 	}
@@ -189,33 +175,119 @@ func typeCheckParameter(obj interface{}, expected string, name string) error {
 
 	// Check the type is as expected.
 	if reflect.TypeOf(obj).String() != expected {
-		return fmt.Errorf("Expected %s to be of type %s but received %s.", name, expected, reflect.TypeOf(obj).String())
+		return fmt.Errorf("expected %s to be of type %s but received %s", name, expected, reflect.TypeOf(obj).String())
 	}
 	return nil
 }
 
-// parameterToString convert interface{} parameters to string, using a delimiter if format is provided.
-func parameterToString(obj interface{}, collectionFormat string) string {
-	var delimiter string
+func parameterValueToString( obj interface{}, key string ) string {
+	if reflect.TypeOf(obj).Kind() != reflect.Ptr {
+		if actualObj, ok := obj.(interface{ GetActualInstanceValue() interface{} }); ok {
+			return fmt.Sprintf("%v", actualObj.GetActualInstanceValue())
+		}
 
-	switch collectionFormat {
-	case "pipes":
-		delimiter = "|"
-	case "ssv":
-		delimiter = " "
-	case "tsv":
-		delimiter = "\t"
-	case "csv":
-		delimiter = ","
+		return fmt.Sprintf("%v", obj)
+	}
+	var param,ok = obj.(MappedNullable)
+	if !ok {
+		return ""
+	}
+	dataMap,err := param.ToMap()
+	if err != nil {
+		return ""
+	}
+	return fmt.Sprintf("%v", dataMap[key])
+}
+
+// parameterAddToHeaderOrQuery adds the provided object to the request header or url query
+// supporting deep object syntax
+func parameterAddToHeaderOrQuery(headerOrQueryParams interface{}, keyPrefix string, obj interface{}, style string, collectionType string) {
+	var v = reflect.ValueOf(obj)
+	var value = ""
+	if v == reflect.ValueOf(nil) {
+		value = "null"
+	} else {
+		switch v.Kind() {
+			case reflect.Invalid:
+				value = "invalid"
+
+			case reflect.Struct:
+				if t,ok := obj.(MappedNullable); ok {
+					dataMap,err := t.ToMap()
+					if err != nil {
+						return
+					}
+					parameterAddToHeaderOrQuery(headerOrQueryParams, keyPrefix, dataMap, style, collectionType)
+					return
+				}
+				if t, ok := obj.(time.Time); ok {
+					parameterAddToHeaderOrQuery(headerOrQueryParams, keyPrefix, t.Format(time.RFC3339Nano), style, collectionType)
+					return
+				}
+				value = v.Type().String() + " value"
+			case reflect.Slice:
+				var indValue = reflect.ValueOf(obj)
+				if indValue == reflect.ValueOf(nil) {
+					return
+				}
+				var lenIndValue = indValue.Len()
+				for i:=0;i<lenIndValue;i++ {
+					var arrayValue = indValue.Index(i)
+					var keyPrefixForCollectionType = keyPrefix
+					if style == "deepObject" {
+						keyPrefixForCollectionType = keyPrefix + "[" + strconv.Itoa(i) + "]"
+					}
+					parameterAddToHeaderOrQuery(headerOrQueryParams, keyPrefixForCollectionType, arrayValue.Interface(), style, collectionType)
+				}
+				return
+
+			case reflect.Map:
+				var indValue = reflect.ValueOf(obj)
+				if indValue == reflect.ValueOf(nil) {
+					return
+				}
+				iter := indValue.MapRange()
+				for iter.Next() {
+					k,v := iter.Key(), iter.Value()
+					parameterAddToHeaderOrQuery(headerOrQueryParams, fmt.Sprintf("%s[%s]", keyPrefix, k.String()), v.Interface(), style, collectionType)
+				}
+				return
+
+			case reflect.Interface:
+				fallthrough
+			case reflect.Ptr:
+				parameterAddToHeaderOrQuery(headerOrQueryParams, keyPrefix, v.Elem().Interface(), style, collectionType)
+				return
+
+			case reflect.Int, reflect.Int8, reflect.Int16,
+				reflect.Int32, reflect.Int64:
+				value = strconv.FormatInt(v.Int(), 10)
+			case reflect.Uint, reflect.Uint8, reflect.Uint16,
+				reflect.Uint32, reflect.Uint64, reflect.Uintptr:
+				value = strconv.FormatUint(v.Uint(), 10)
+			case reflect.Float32, reflect.Float64:
+				value = strconv.FormatFloat(v.Float(), 'g', -1, 32)
+			case reflect.Bool:
+				value = strconv.FormatBool(v.Bool())
+			case reflect.String:
+				value = v.String()
+			default:
+				value = v.Type().String() + " value"
+		}
 	}
 
-	if reflect.TypeOf(obj).Kind() == reflect.Slice {
-		return strings.Trim(strings.Replace(fmt.Sprint(obj), " ", delimiter, -1), "[]")
-	} else if t, ok := obj.(time.Time); ok {
-		return t.Format(time.RFC3339)
+	switch valuesMap := headerOrQueryParams.(type) {
+		case url.Values:
+			if collectionType == "csv" && valuesMap.Get(keyPrefix) != "" {
+				valuesMap.Set(keyPrefix, valuesMap.Get(keyPrefix) + "," + value)
+			} else {
+				valuesMap.Add(keyPrefix, value)
+			}
+			break
+		case map[string]string:
+			valuesMap[keyPrefix] = value
+			break
 	}
-
-	return fmt.Sprintf("%v", obj)
 }
 
 // helper for converting interface{} parameters to json strings
@@ -258,6 +330,12 @@ func (c *APIClient) GetConfig() *Configuration {
 	return c.cfg
 }
 
+type formFile struct {
+		fileBytes []byte
+		fileName string
+		formFileName string
+}
+
 // prepareRequest build the request
 func (c *APIClient) prepareRequest(
 	ctx context.Context,
@@ -266,9 +344,7 @@ func (c *APIClient) prepareRequest(
 	headerParams map[string]string,
 	queryParams url.Values,
 	formParams url.Values,
-	formFileName string,
-	fileName string,
-	fileBytes []byte) (localVarRequest *http.Request, err error) {
+	formFiles []formFile) (localVarRequest *http.Request, err error) {
 
 	var body *bytes.Buffer
 
@@ -287,7 +363,7 @@ func (c *APIClient) prepareRequest(
 	}
 
 	// add form parameters and file if available.
-	if strings.HasPrefix(headerParams["Content-Type"], "multipart/form-data") && len(formParams) > 0 || (len(fileBytes) > 0 && fileName != "") {
+	if strings.HasPrefix(headerParams["Content-Type"], "multipart/form-data") && len(formParams) > 0 || (len(formFiles) > 0) {
 		if body != nil {
 			return nil, errors.New("Cannot specify postBody and multipart form at the same time.")
 		}
@@ -306,16 +382,17 @@ func (c *APIClient) prepareRequest(
 				}
 			}
 		}
-		if len(fileBytes) > 0 && fileName != "" {
-			w.Boundary()
-			//_, fileNm := filepath.Split(fileName)
-			part, err := w.CreateFormFile(formFileName, filepath.Base(fileName))
-			if err != nil {
-				return nil, err
-			}
-			_, err = part.Write(fileBytes)
-			if err != nil {
-				return nil, err
+		for _, formFile := range formFiles {
+			if len(formFile.fileBytes) > 0 && formFile.fileName != "" {
+				w.Boundary()
+				part, err := w.CreateFormFile(formFile.formFileName, filepath.Base(formFile.fileName))
+				if err != nil {
+						return nil, err
+				}
+				_, err = part.Write(formFile.fileBytes)
+				if err != nil {
+						return nil, err
+				}
 			}
 		}
 
@@ -362,7 +439,11 @@ func (c *APIClient) prepareRequest(
 	}
 
 	// Encode the parameters.
-	url.RawQuery = query.Encode()
+	url.RawQuery = queryParamSplit.ReplaceAllStringFunc(query.Encode(), func(s string) string {
+		pieces := strings.Split(s, "=")
+		pieces[0] = queryDescape.Replace(pieces[0])
+		return strings.Join(pieces, "=")
+	})
 
 	// Generate a new request
 	if body != nil {
@@ -378,7 +459,7 @@ func (c *APIClient) prepareRequest(
 	if len(headerParams) > 0 {
 		headers := http.Header{}
 		for h, v := range headerParams {
-			headers.Set(h, v)
+			headers[h] = []string{v}
 		}
 		localVarRequest.Header = headers
 	}
@@ -392,25 +473,9 @@ func (c *APIClient) prepareRequest(
 
 		// Walk through any authentication.
 
-		// OAuth2 authentication
-		if tok, ok := ctx.Value(ContextOAuth2).(oauth2.TokenSource); ok {
-			// We were able to grab an oauth2 token from the context
-			var latestToken *oauth2.Token
-			if latestToken, err = tok.Token(); err != nil {
-				return nil, err
-			}
-
-			latestToken.SetAuthHeader(localVarRequest)
-		}
-
 		// Basic HTTP Authentication
 		if auth, ok := ctx.Value(ContextBasicAuth).(BasicAuth); ok {
 			localVarRequest.SetBasicAuth(auth.UserName, auth.Password)
-		}
-
-		// AccessToken Authentication
-		if auth, ok := ctx.Value(ContextAccessToken).(string); ok {
-			localVarRequest.Header.Add("Authorization", "Bearer "+auth)
 		}
 
 	}
@@ -429,8 +494,20 @@ func (c *APIClient) decode(v interface{}, b []byte, contentType string) (err err
 		*s = string(b)
 		return nil
 	}
+	if f, ok := v.(*os.File); ok {
+		f, err = os.CreateTemp("", "HttpClientFile")
+		if err != nil {
+			return
+		}
+		_, err = f.Write(b)
+		if err != nil {
+			return
+		}
+		_, err = f.Seek(0, io.SeekStart)
+		return
+	}
 	if f, ok := v.(**os.File); ok {
-		*f, err = ioutil.TempFile("", "HttpClientFile")
+		*f, err = os.CreateTemp("", "HttpClientFile")
 		if err != nil {
 			return
 		}
@@ -441,13 +518,13 @@ func (c *APIClient) decode(v interface{}, b []byte, contentType string) (err err
 		_, err = (*f).Seek(0, io.SeekStart)
 		return
 	}
-	if xmlCheck.MatchString(contentType) {
+	if XmlCheck.MatchString(contentType) {
 		if err = xml.Unmarshal(b, v); err != nil {
 			return err
 		}
 		return nil
 	}
-	if jsonCheck.MatchString(contentType) {
+	if JsonCheck.MatchString(contentType) {
 		if actualObj, ok := v.(interface{ GetActualInstance() interface{} }); ok { // oneOf, anyOf schemas
 			if unmarshalObj, ok := actualObj.(interface{ UnmarshalJSON([]byte) error }); ok { // make sure it has UnmarshalJSON defined
 				if err = unmarshalObj.UnmarshalJSON(b); err != nil {
@@ -466,11 +543,14 @@ func (c *APIClient) decode(v interface{}, b []byte, contentType string) (err err
 
 // Add a file to the multipart request
 func addFile(w *multipart.Writer, fieldName, path string) error {
-	file, err := os.Open(path)
+	file, err := os.Open(filepath.Clean(path))
 	if err != nil {
 		return err
 	}
-	defer file.Close()
+	err = file.Close()
+	if err != nil {
+		return err
+	}
 
 	part, err := w.CreateFormFile(fieldName, filepath.Base(path))
 	if err != nil {
@@ -481,11 +561,6 @@ func addFile(w *multipart.Writer, fieldName, path string) error {
 	return err
 }
 
-// Prevent trying to import "fmt"
-func reportError(format string, a ...interface{}) error {
-	return fmt.Errorf(format, a...)
-}
-
 // Set request body from an interface{}
 func setBody(body interface{}, contentType string) (bodyBuf *bytes.Buffer, err error) {
 	if bodyBuf == nil {
@@ -494,18 +569,22 @@ func setBody(body interface{}, contentType string) (bodyBuf *bytes.Buffer, err e
 
 	if reader, ok := body.(io.Reader); ok {
 		_, err = bodyBuf.ReadFrom(reader)
-	} else if fp, ok := body.(**os.File); ok {
-		_, err = bodyBuf.ReadFrom(*fp)
+	} else if fp, ok := body.(*os.File); ok {
+		_, err = bodyBuf.ReadFrom(fp)
 	} else if b, ok := body.([]byte); ok {
 		_, err = bodyBuf.Write(b)
 	} else if s, ok := body.(string); ok {
 		_, err = bodyBuf.WriteString(s)
 	} else if s, ok := body.(*string); ok {
 		_, err = bodyBuf.WriteString(*s)
-	} else if jsonCheck.MatchString(contentType) {
+	} else if JsonCheck.MatchString(contentType) {
 		err = json.NewEncoder(bodyBuf).Encode(body)
-	} else if xmlCheck.MatchString(contentType) {
-		err = xml.NewEncoder(bodyBuf).Encode(body)
+	} else if XmlCheck.MatchString(contentType) {
+		var bs []byte
+		bs, err = xml.Marshal(body)
+		if err == nil {
+			bodyBuf.Write(bs)
+		}
 	}
 
 	if err != nil {
@@ -513,7 +592,7 @@ func setBody(body interface{}, contentType string) (bodyBuf *bytes.Buffer, err e
 	}
 
 	if bodyBuf.Len() == 0 {
-		err = fmt.Errorf("Invalid body type %s\n", contentType)
+		err = fmt.Errorf("invalid body type %s\n", contentType)
 		return nil, err
 	}
 	return bodyBuf, nil
@@ -614,4 +693,24 @@ func (e GenericOpenAPIError) Body() []byte {
 // Model returns the unpacked model of the error
 func (e GenericOpenAPIError) Model() interface{} {
 	return e.model
+}
+
+// format error message using title and detail when model implements rfc7807
+func formatErrorMessage(status string, v interface{}) string {
+	str := ""
+	metaValue := reflect.ValueOf(v).Elem()
+
+	if metaValue.Kind() == reflect.Struct {
+		field := metaValue.FieldByName("Title")
+		if field != (reflect.Value{}) {
+			str = fmt.Sprintf("%s", field.Interface())
+		}
+
+		field = metaValue.FieldByName("Detail")
+		if field != (reflect.Value{}) {
+			str = fmt.Sprintf("%s (%s)", str, field.Interface())
+		}
+	}
+
+	return strings.TrimSpace(fmt.Sprintf("%s %s", status, str))
 }

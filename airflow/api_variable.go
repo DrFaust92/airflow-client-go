@@ -1,26 +1,9 @@
-// Licensed to the Apache Software Foundation (ASF) under one
-// or more contributor license agreements.  See the NOTICE file
-// distributed with this work for additional information
-// regarding copyright ownership.  The ASF licenses this file
-// to you under the Apache License, Version 2.0 (the
-// "License"); you may not use this file except in compliance
-// with the License.  You may obtain a copy of the License at
-//
-//   http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing,
-// software distributed under the License is distributed on an
-// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-// KIND, either express or implied.  See the License for the
-// specific language governing permissions and limitations
-// under the License.
-
 /*
 Airflow API (Stable)
 
-# Overview  To facilitate management, Apache Airflow supports a range of REST API endpoints across its objects. This section provides an overview of the API design, methods, and supported use cases.  Most of the endpoints accept `JSON` as input and return `JSON` responses. This means that you must usually add the following headers to your request: ``` Content-type: application/json Accept: application/json ```  ## Resources  The term `resource` refers to a single type of object in the Airflow metadata. An API is broken up by its endpoint's corresponding resource. The name of a resource is typically plural and expressed in camelCase. Example: `dagRuns`.  Resource names are used as part of endpoint URLs, as well as in API parameters and responses.  ## CRUD Operations  The platform supports **C**reate, **R**ead, **U**pdate, and **D**elete operations on most resources. You can review the standards for these operations and their standard parameters below.  Some endpoints have special behavior as exceptions.  ### Create  To create a resource, you typically submit an HTTP `POST` request with the resource's required metadata in the request body. The response returns a `201 Created` response code upon success with the resource's metadata, including its internal `id`, in the response body.  ### Read  The HTTP `GET` request can be used to read a resource or to list a number of resources.  A resource's `id` can be submitted in the request parameters to read a specific resource. The response usually returns a `200 OK` response code upon success, with the resource's metadata in the response body.  If a `GET` request does not include a specific resource `id`, it is treated as a list request. The response usually returns a `200 OK` response code upon success, with an object containing a list of resources' metadata in the response body.  When reading resources, some common query parameters are usually available. e.g.: ``` v1/connections?limit=25&offset=25 ```  |Query Parameter|Type|Description| |---------------|----|-----------| |limit|integer|Maximum number of objects to fetch. Usually 25 by default| |offset|integer|Offset after which to start returning objects. For use with limit query parameter.|  ### Update  Updating a resource requires the resource `id`, and is typically done using an HTTP `PATCH` request, with the fields to modify in the request body. The response usually returns a `200 OK` response code upon success, with information about the modified resource in the response body.  ### Delete  Deleting a resource requires the resource `id` and is typically executing via an HTTP `DELETE` request. The response usually returns a `204 No Content` response code upon success.  ## Conventions  - Resource names are plural and expressed in camelCase. - Names are consistent between URL parameter name and field name.  - Field names are in snake_case. ```json {     \"name\": \"string\",     \"slots\": 0,     \"occupied_slots\": 0,     \"used_slots\": 0,     \"queued_slots\": 0,     \"open_slots\": 0 } ```  ### Update Mask  Update mask is available as a query parameter in patch endpoints. It is used to notify the API which fields you want to update. Using `update_mask` makes it easier to update objects by helping the server know which fields to update in an object instead of updating all fields. The update request ignores any fields that aren't specified in the field mask, leaving them with their current values.  Example: ```   resource = request.get('/resource/my-id').json()   resource['my_field'] = 'new-value'   request.patch('/resource/my-id?update_mask=my_field', data=json.dumps(resource)) ```  ## Versioning and Endpoint Lifecycle  - API versioning is not synchronized to specific releases of the Apache Airflow. - APIs are designed to be backward compatible. - Any changes to the API will first go through a deprecation phase.  # Trying the API  You can use a third party client, such as [curl](https://curl.haxx.se/), [HTTPie](https://httpie.org/), [Postman](https://www.postman.com/) or [the Insomnia rest client](https://insomnia.rest/) to test the Apache Airflow API.  Note that you will need to pass credentials data.  For e.g., here is how to pause a DAG with [curl](https://curl.haxx.se/), when basic authorization is used: ```bash curl -X PATCH 'https://example.com/api/v1/dags/{dag_id}?update_mask=is_paused' \\ -H 'Content-Type: application/json' \\ --user \"username:password\" \\ -d '{     \"is_paused\": true }' ```  Using a graphical tool such as [Postman](https://www.postman.com/) or [Insomnia](https://insomnia.rest/), it is possible to import the API specifications directly:  1. Download the API specification by clicking the **Download** button at top of this document 2. Import the JSON specification in the graphical tool of your choice.   - In *Postman*, you can click the **import** button at the top   - With *Insomnia*, you can just drag-and-drop the file on the UI  Note that with *Postman*, you can also generate code snippets by selecting a request and clicking on the **Code** button.  ## Enabling CORS  [Cross-origin resource sharing (CORS)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) is a browser security feature that restricts HTTP requests that are initiated from scripts running in the browser.  For details on enabling/configuring CORS, see [Enabling CORS](https://airflow.apache.org/docs/apache-airflow/stable/security/api.html).  # Authentication  To be able to meet the requirements of many organizations, Airflow supports many authentication methods, and it is even possible to add your own method.  If you want to check which auth backend is currently set, you can use `airflow config get-value api auth_backends` command as in the example below. ```bash $ airflow config get-value api auth_backends airflow.api.auth.backend.basic_auth ``` The default is to deny all requests.  For details on configuring the authentication, see [API Authorization](https://airflow.apache.org/docs/apache-airflow/stable/security/api.html).  # Errors  We follow the error response format proposed in [RFC 7807](https://tools.ietf.org/html/rfc7807) also known as Problem Details for HTTP APIs. As with our normal API responses, your client must be prepared to gracefully handle additional members of the response.  ## Unauthenticated  This indicates that the request has not been applied because it lacks valid authentication credentials for the target resource. Please check that you have valid credentials.  ## PermissionDenied  This response means that the server understood the request but refuses to authorize it because it lacks sufficient rights to the resource. It happens when you do not have the necessary permission to execute the action you performed. You need to get the appropriate permissions in other to resolve this error.  ## BadRequest  This response means that the server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing). To resolve this, please ensure that your syntax is correct.  ## NotFound  This client error response indicates that the server cannot find the requested resource.  ## MethodNotAllowed  Indicates that the request method is known by the server but is not supported by the target resource.  ## NotAcceptable  The target resource does not have a current representation that would be acceptable to the user agent, according to the proactive negotiation header fields received in the request, and the server is unwilling to supply a default representation.  ## AlreadyExists  The request could not be completed due to a conflict with the current state of the target resource, e.g. the resource it tries to create already exists.  ## Unknown  This means that the server encountered an unexpected condition that prevented it from fulfilling the request. 
+# Overview  To facilitate management, Apache Airflow supports a range of REST API endpoints across its objects. This section provides an overview of the API design, methods, and supported use cases.  Most of the endpoints accept `JSON` as input and return `JSON` responses. This means that you must usually add the following headers to your request: ``` Content-type: application/json Accept: application/json ```  ## Resources  The term `resource` refers to a single type of object in the Airflow metadata. An API is broken up by its endpoint's corresponding resource. The name of a resource is typically plural and expressed in camelCase. Example: `dagRuns`.  Resource names are used as part of endpoint URLs, as well as in API parameters and responses.  ## CRUD Operations  The platform supports **C**reate, **R**ead, **U**pdate, and **D**elete operations on most resources. You can review the standards for these operations and their standard parameters below.  Some endpoints have special behavior as exceptions.  ### Create  To create a resource, you typically submit an HTTP `POST` request with the resource's required metadata in the request body. The response returns a `201 Created` response code upon success with the resource's metadata, including its internal `id`, in the response body.  ### Read  The HTTP `GET` request can be used to read a resource or to list a number of resources.  A resource's `id` can be submitted in the request parameters to read a specific resource. The response usually returns a `200 OK` response code upon success, with the resource's metadata in the response body.  If a `GET` request does not include a specific resource `id`, it is treated as a list request. The response usually returns a `200 OK` response code upon success, with an object containing a list of resources' metadata in the response body.  When reading resources, some common query parameters are usually available. e.g.: ``` v1/connections?limit=25&offset=25 ```  |Query Parameter|Type|Description| |---------------|----|-----------| |limit|integer|Maximum number of objects to fetch. Usually 25 by default| |offset|integer|Offset after which to start returning objects. For use with limit query parameter.|  ### Update  Updating a resource requires the resource `id`, and is typically done using an HTTP `PATCH` request, with the fields to modify in the request body. The response usually returns a `200 OK` response code upon success, with information about the modified resource in the response body.  ### Delete  Deleting a resource requires the resource `id` and is typically executed via an HTTP `DELETE` request. The response usually returns a `204 No Content` response code upon success.  ## Conventions  - Resource names are plural and expressed in camelCase. - Names are consistent between URL parameter name and field name.  - Field names are in snake_case. ```json {     \"description\": \"string\",     \"name\": \"string\",     \"occupied_slots\": 0,     \"open_slots\": 0     \"queued_slots\": 0,     \"running_slots\": 0,     \"scheduled_slots\": 0,     \"slots\": 0, } ```  ### Update Mask  Update mask is available as a query parameter in patch endpoints. It is used to notify the API which fields you want to update. Using `update_mask` makes it easier to update objects by helping the server know which fields to update in an object instead of updating all fields. The update request ignores any fields that aren't specified in the field mask, leaving them with their current values.  Example: ```   resource = request.get('/resource/my-id').json()   resource['my_field'] = 'new-value'   request.patch('/resource/my-id?update_mask=my_field', data=json.dumps(resource)) ```  ## Versioning and Endpoint Lifecycle  - API versioning is not synchronized to specific releases of the Apache Airflow. - APIs are designed to be backward compatible. - Any changes to the API will first go through a deprecation phase.  # Trying the API  You can use a third party client, such as [curl](https://curl.haxx.se/), [HTTPie](https://httpie.org/), [Postman](https://www.postman.com/) or [the Insomnia rest client](https://insomnia.rest/) to test the Apache Airflow API.  Note that you will need to pass credentials data.  For e.g., here is how to pause a DAG with [curl](https://curl.haxx.se/), when basic authorization is used: ```bash curl -X PATCH 'https://example.com/api/v1/dags/{dag_id}?update_mask=is_paused' \\ -H 'Content-Type: application/json' \\ --user \"username:password\" \\ -d '{     \"is_paused\": true }' ```  Using a graphical tool such as [Postman](https://www.postman.com/) or [Insomnia](https://insomnia.rest/), it is possible to import the API specifications directly:  1. Download the API specification by clicking the **Download** button at the top of this document 2. Import the JSON specification in the graphical tool of your choice.   - In *Postman*, you can click the **import** button at the top   - With *Insomnia*, you can just drag-and-drop the file on the UI  Note that with *Postman*, you can also generate code snippets by selecting a request and clicking on the **Code** button.  ## Enabling CORS  [Cross-origin resource sharing (CORS)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) is a browser security feature that restricts HTTP requests that are initiated from scripts running in the browser.  For details on enabling/configuring CORS, see [Enabling CORS](https://airflow.apache.org/docs/apache-airflow/stable/security/api.html).  # Authentication  To be able to meet the requirements of many organizations, Airflow supports many authentication methods, and it is even possible to add your own method.  If you want to check which auth backend is currently set, you can use `airflow config get-value api auth_backends` command as in the example below. ```bash $ airflow config get-value api auth_backends airflow.api.auth.backend.basic_auth ``` The default is to deny all requests.  For details on configuring the authentication, see [API Authorization](https://airflow.apache.org/docs/apache-airflow/stable/security/api.html).  # Errors  We follow the error response format proposed in [RFC 7807](https://tools.ietf.org/html/rfc7807) also known as Problem Details for HTTP APIs. As with our normal API responses, your client must be prepared to gracefully handle additional members of the response.  ## Unauthenticated  This indicates that the request has not been applied because it lacks valid authentication credentials for the target resource. Please check that you have valid credentials.  ## PermissionDenied  This response means that the server understood the request but refuses to authorize it because it lacks sufficient rights to the resource. It happens when you do not have the necessary permission to execute the action you performed. You need to get the appropriate permissions in other to resolve this error.  ## BadRequest  This response means that the server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing). To resolve this, please ensure that your syntax is correct.  ## NotFound  This client error response indicates that the server cannot find the requested resource.  ## MethodNotAllowed  Indicates that the request method is known by the server but is not supported by the target resource.  ## NotAcceptable  The target resource does not have a current representation that would be acceptable to the user agent, according to the proactive negotiation header fields received in the request, and the server is unwilling to supply a default representation.  ## AlreadyExists  The request could not be completed due to a conflict with the current state of the target resource, e.g. the resource it tries to create already exists.  ## Unknown  This means that the server encountered an unexpected condition that prevented it from fulfilling the request. 
 
-API version: 2.5.0
+API version: 2.10.5
 Contact: dev@airflow.apache.org
 */
 
@@ -30,41 +13,36 @@ package airflow
 
 import (
 	"bytes"
-	_context "context"
-	_ioutil "io/ioutil"
-	_nethttp "net/http"
-	_neturl "net/url"
+	"context"
+	"io"
+	"net/http"
+	"net/url"
 	"strings"
 )
 
-// Linger please
-var (
-	_ _context.Context
-)
 
-// VariableApiService VariableApi service
-type VariableApiService service
+// VariableAPIService VariableAPI service
+type VariableAPIService service
 
-type VariableApiApiDeleteVariableRequest struct {
-	ctx _context.Context
-	ApiService *VariableApiService
+type ApiDeleteVariableRequest struct {
+	ctx context.Context
+	ApiService *VariableAPIService
 	variableKey string
 }
 
-
-func (r VariableApiApiDeleteVariableRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteVariableRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteVariableExecute(r)
 }
 
 /*
 DeleteVariable Delete a variable
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param variableKey The variable Key.
- @return VariableApiApiDeleteVariableRequest
+ @return ApiDeleteVariableRequest
 */
-func (a *VariableApiService) DeleteVariable(ctx _context.Context, variableKey string) VariableApiApiDeleteVariableRequest {
-	return VariableApiApiDeleteVariableRequest{
+func (a *VariableAPIService) DeleteVariable(ctx context.Context, variableKey string) ApiDeleteVariableRequest {
+	return ApiDeleteVariableRequest{
 		ApiService: a,
 		ctx: ctx,
 		variableKey: variableKey,
@@ -72,26 +50,24 @@ func (a *VariableApiService) DeleteVariable(ctx _context.Context, variableKey st
 }
 
 // Execute executes the request
-func (a *VariableApiService) DeleteVariableExecute(r VariableApiApiDeleteVariableRequest) (*_nethttp.Response, error) {
+func (a *VariableAPIService) DeleteVariableExecute(r ApiDeleteVariableRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
+		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VariableApiService.DeleteVariable")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VariableAPIService.DeleteVariable")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/variables/{variable_key}"
-	localVarPath = strings.Replace(localVarPath, "{"+"variable_key"+"}", _neturl.PathEscape(parameterToString(r.variableKey, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"variable_key"+"}", url.PathEscape(parameterValueToString(r.variableKey, "variableKey")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -110,7 +86,7 @@ func (a *VariableApiService) DeleteVariableExecute(r VariableApiApiDeleteVariabl
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -120,15 +96,15 @@ func (a *VariableApiService) DeleteVariableExecute(r VariableApiApiDeleteVariabl
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -139,7 +115,8 @@ func (a *VariableApiService) DeleteVariableExecute(r VariableApiApiDeleteVariabl
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -149,7 +126,8 @@ func (a *VariableApiService) DeleteVariableExecute(r VariableApiApiDeleteVariabl
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -159,7 +137,8 @@ func (a *VariableApiService) DeleteVariableExecute(r VariableApiApiDeleteVariabl
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -169,7 +148,8 @@ func (a *VariableApiService) DeleteVariableExecute(r VariableApiApiDeleteVariabl
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarHTTPResponse, newErr
 	}
@@ -177,14 +157,13 @@ func (a *VariableApiService) DeleteVariableExecute(r VariableApiApiDeleteVariabl
 	return localVarHTTPResponse, nil
 }
 
-type VariableApiApiGetVariableRequest struct {
-	ctx _context.Context
-	ApiService *VariableApiService
+type ApiGetVariableRequest struct {
+	ctx context.Context
+	ApiService *VariableAPIService
 	variableKey string
 }
 
-
-func (r VariableApiApiGetVariableRequest) Execute() (Variable, *_nethttp.Response, error) {
+func (r ApiGetVariableRequest) Execute() (*Variable, *http.Response, error) {
 	return r.ApiService.GetVariableExecute(r)
 }
 
@@ -193,12 +172,12 @@ GetVariable Get a variable
 
 Get a variable by key.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param variableKey The variable Key.
- @return VariableApiApiGetVariableRequest
+ @return ApiGetVariableRequest
 */
-func (a *VariableApiService) GetVariable(ctx _context.Context, variableKey string) VariableApiApiGetVariableRequest {
-	return VariableApiApiGetVariableRequest{
+func (a *VariableAPIService) GetVariable(ctx context.Context, variableKey string) ApiGetVariableRequest {
+	return ApiGetVariableRequest{
 		ApiService: a,
 		ctx: ctx,
 		variableKey: variableKey,
@@ -207,27 +186,25 @@ func (a *VariableApiService) GetVariable(ctx _context.Context, variableKey strin
 
 // Execute executes the request
 //  @return Variable
-func (a *VariableApiService) GetVariableExecute(r VariableApiApiGetVariableRequest) (Variable, *_nethttp.Response, error) {
+func (a *VariableAPIService) GetVariableExecute(r ApiGetVariableRequest) (*Variable, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  Variable
+		formFiles            []formFile
+		localVarReturnValue  *Variable
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VariableApiService.GetVariable")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VariableAPIService.GetVariable")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/variables/{variable_key}"
-	localVarPath = strings.Replace(localVarPath, "{"+"variable_key"+"}", _neturl.PathEscape(parameterToString(r.variableKey, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"variable_key"+"}", url.PathEscape(parameterValueToString(r.variableKey, "variableKey")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -246,7 +223,7 @@ func (a *VariableApiService) GetVariableExecute(r VariableApiApiGetVariableReque
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -256,15 +233,15 @@ func (a *VariableApiService) GetVariableExecute(r VariableApiApiGetVariableReque
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -275,7 +252,8 @@ func (a *VariableApiService) GetVariableExecute(r VariableApiApiGetVariableReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -285,7 +263,8 @@ func (a *VariableApiService) GetVariableExecute(r VariableApiApiGetVariableReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -295,14 +274,15 @@ func (a *VariableApiService) GetVariableExecute(r VariableApiApiGetVariableReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -312,31 +292,33 @@ func (a *VariableApiService) GetVariableExecute(r VariableApiApiGetVariableReque
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type VariableApiApiGetVariablesRequest struct {
-	ctx _context.Context
-	ApiService *VariableApiService
+type ApiGetVariablesRequest struct {
+	ctx context.Context
+	ApiService *VariableAPIService
 	limit *int32
 	offset *int32
 	orderBy *string
 }
 
 // The numbers of items to return.
-func (r VariableApiApiGetVariablesRequest) Limit(limit int32) VariableApiApiGetVariablesRequest {
+func (r ApiGetVariablesRequest) Limit(limit int32) ApiGetVariablesRequest {
 	r.limit = &limit
 	return r
 }
+
 // The number of items to skip before starting to collect the result set.
-func (r VariableApiApiGetVariablesRequest) Offset(offset int32) VariableApiApiGetVariablesRequest {
+func (r ApiGetVariablesRequest) Offset(offset int32) ApiGetVariablesRequest {
 	r.offset = &offset
 	return r
 }
+
 // The name of the field to order the results by. Prefix a field name with &#x60;-&#x60; to reverse the sort order.  *New in version 2.1.0* 
-func (r VariableApiApiGetVariablesRequest) OrderBy(orderBy string) VariableApiApiGetVariablesRequest {
+func (r ApiGetVariablesRequest) OrderBy(orderBy string) ApiGetVariablesRequest {
 	r.orderBy = &orderBy
 	return r
 }
 
-func (r VariableApiApiGetVariablesRequest) Execute() (VariableCollection, *_nethttp.Response, error) {
+func (r ApiGetVariablesRequest) Execute() (*VariableCollection, *http.Response, error) {
 	return r.ApiService.GetVariablesExecute(r)
 }
 
@@ -345,11 +327,11 @@ GetVariables List variables
 
 The collection does not contain data. To get data, you must get a single entity.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return VariableApiApiGetVariablesRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetVariablesRequest
 */
-func (a *VariableApiService) GetVariables(ctx _context.Context) VariableApiApiGetVariablesRequest {
-	return VariableApiApiGetVariablesRequest{
+func (a *VariableAPIService) GetVariables(ctx context.Context) ApiGetVariablesRequest {
+	return ApiGetVariablesRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -357,35 +339,36 @@ func (a *VariableApiService) GetVariables(ctx _context.Context) VariableApiApiGe
 
 // Execute executes the request
 //  @return VariableCollection
-func (a *VariableApiService) GetVariablesExecute(r VariableApiApiGetVariablesRequest) (VariableCollection, *_nethttp.Response, error) {
+func (a *VariableAPIService) GetVariablesExecute(r ApiGetVariablesRequest) (*VariableCollection, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  VariableCollection
+		formFiles            []formFile
+		localVarReturnValue  *VariableCollection
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VariableApiService.GetVariables")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VariableAPIService.GetVariables")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/variables"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.limit != nil {
-		localVarQueryParams.Add("limit", parameterToString(*r.limit, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+	} else {
+		var defaultValue int32 = 100
+		r.limit = &defaultValue
 	}
 	if r.offset != nil {
-		localVarQueryParams.Add("offset", parameterToString(*r.offset, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "form", "")
 	}
 	if r.orderBy != nil {
-		localVarQueryParams.Add("order_by", parameterToString(*r.orderBy, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "order_by", r.orderBy, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -404,7 +387,7 @@ func (a *VariableApiService) GetVariablesExecute(r VariableApiApiGetVariablesReq
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -414,15 +397,15 @@ func (a *VariableApiService) GetVariablesExecute(r VariableApiApiGetVariablesReq
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -433,7 +416,8 @@ func (a *VariableApiService) GetVariablesExecute(r VariableApiApiGetVariablesReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -443,14 +427,15 @@ func (a *VariableApiService) GetVariablesExecute(r VariableApiApiGetVariablesReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -460,25 +445,26 @@ func (a *VariableApiService) GetVariablesExecute(r VariableApiApiGetVariablesReq
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type VariableApiApiPatchVariableRequest struct {
-	ctx _context.Context
-	ApiService *VariableApiService
+type ApiPatchVariableRequest struct {
+	ctx context.Context
+	ApiService *VariableAPIService
 	variableKey string
 	variable *Variable
 	updateMask *[]string
 }
 
-func (r VariableApiApiPatchVariableRequest) Variable(variable Variable) VariableApiApiPatchVariableRequest {
+func (r ApiPatchVariableRequest) Variable(variable Variable) ApiPatchVariableRequest {
 	r.variable = &variable
 	return r
 }
+
 // The fields to update on the resource. If absent or empty, all modifiable fields are updated. A comma-separated list of fully qualified names of fields. 
-func (r VariableApiApiPatchVariableRequest) UpdateMask(updateMask []string) VariableApiApiPatchVariableRequest {
+func (r ApiPatchVariableRequest) UpdateMask(updateMask []string) ApiPatchVariableRequest {
 	r.updateMask = &updateMask
 	return r
 }
 
-func (r VariableApiApiPatchVariableRequest) Execute() (Variable, *_nethttp.Response, error) {
+func (r ApiPatchVariableRequest) Execute() (*Variable, *http.Response, error) {
 	return r.ApiService.PatchVariableExecute(r)
 }
 
@@ -487,12 +473,12 @@ PatchVariable Update a variable
 
 Update a variable by key.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param variableKey The variable Key.
- @return VariableApiApiPatchVariableRequest
+ @return ApiPatchVariableRequest
 */
-func (a *VariableApiService) PatchVariable(ctx _context.Context, variableKey string) VariableApiApiPatchVariableRequest {
-	return VariableApiApiPatchVariableRequest{
+func (a *VariableAPIService) PatchVariable(ctx context.Context, variableKey string) ApiPatchVariableRequest {
+	return ApiPatchVariableRequest{
 		ApiService: a,
 		ctx: ctx,
 		variableKey: variableKey,
@@ -501,33 +487,31 @@ func (a *VariableApiService) PatchVariable(ctx _context.Context, variableKey str
 
 // Execute executes the request
 //  @return Variable
-func (a *VariableApiService) PatchVariableExecute(r VariableApiApiPatchVariableRequest) (Variable, *_nethttp.Response, error) {
+func (a *VariableAPIService) PatchVariableExecute(r ApiPatchVariableRequest) (*Variable, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
+		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  Variable
+		formFiles            []formFile
+		localVarReturnValue  *Variable
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VariableApiService.PatchVariable")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VariableAPIService.PatchVariable")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/variables/{variable_key}"
-	localVarPath = strings.Replace(localVarPath, "{"+"variable_key"+"}", _neturl.PathEscape(parameterToString(r.variableKey, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"variable_key"+"}", url.PathEscape(parameterValueToString(r.variableKey, "variableKey")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.variable == nil {
 		return localVarReturnValue, nil, reportError("variable is required and must be specified")
 	}
 
 	if r.updateMask != nil {
-		localVarQueryParams.Add("update_mask", parameterToString(*r.updateMask, "csv"))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "update_mask", r.updateMask, "form", "csv")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -548,7 +532,7 @@ func (a *VariableApiService) PatchVariableExecute(r VariableApiApiPatchVariableR
 	}
 	// body params
 	localVarPostBody = r.variable
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -558,15 +542,15 @@ func (a *VariableApiService) PatchVariableExecute(r VariableApiApiPatchVariableR
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -577,7 +561,8 @@ func (a *VariableApiService) PatchVariableExecute(r VariableApiApiPatchVariableR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -587,7 +572,8 @@ func (a *VariableApiService) PatchVariableExecute(r VariableApiApiPatchVariableR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -597,7 +583,8 @@ func (a *VariableApiService) PatchVariableExecute(r VariableApiApiPatchVariableR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -607,14 +594,15 @@ func (a *VariableApiService) PatchVariableExecute(r VariableApiApiPatchVariableR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -624,29 +612,29 @@ func (a *VariableApiService) PatchVariableExecute(r VariableApiApiPatchVariableR
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type VariableApiApiPostVariablesRequest struct {
-	ctx _context.Context
-	ApiService *VariableApiService
+type ApiPostVariablesRequest struct {
+	ctx context.Context
+	ApiService *VariableAPIService
 	variable *Variable
 }
 
-func (r VariableApiApiPostVariablesRequest) Variable(variable Variable) VariableApiApiPostVariablesRequest {
+func (r ApiPostVariablesRequest) Variable(variable Variable) ApiPostVariablesRequest {
 	r.variable = &variable
 	return r
 }
 
-func (r VariableApiApiPostVariablesRequest) Execute() (Variable, *_nethttp.Response, error) {
+func (r ApiPostVariablesRequest) Execute() (*Variable, *http.Response, error) {
 	return r.ApiService.PostVariablesExecute(r)
 }
 
 /*
 PostVariables Create a variable
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return VariableApiApiPostVariablesRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiPostVariablesRequest
 */
-func (a *VariableApiService) PostVariables(ctx _context.Context) VariableApiApiPostVariablesRequest {
-	return VariableApiApiPostVariablesRequest{
+func (a *VariableAPIService) PostVariables(ctx context.Context) ApiPostVariablesRequest {
+	return ApiPostVariablesRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -654,26 +642,24 @@ func (a *VariableApiService) PostVariables(ctx _context.Context) VariableApiApiP
 
 // Execute executes the request
 //  @return Variable
-func (a *VariableApiService) PostVariablesExecute(r VariableApiApiPostVariablesRequest) (Variable, *_nethttp.Response, error) {
+func (a *VariableAPIService) PostVariablesExecute(r ApiPostVariablesRequest) (*Variable, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  Variable
+		formFiles            []formFile
+		localVarReturnValue  *Variable
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VariableApiService.PostVariables")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VariableAPIService.PostVariables")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/variables"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.variable == nil {
 		return localVarReturnValue, nil, reportError("variable is required and must be specified")
 	}
@@ -697,7 +683,7 @@ func (a *VariableApiService) PostVariablesExecute(r VariableApiApiPostVariablesR
 	}
 	// body params
 	localVarPostBody = r.variable
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -707,15 +693,15 @@ func (a *VariableApiService) PostVariablesExecute(r VariableApiApiPostVariablesR
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -726,7 +712,8 @@ func (a *VariableApiService) PostVariablesExecute(r VariableApiApiPostVariablesR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -736,7 +723,8 @@ func (a *VariableApiService) PostVariablesExecute(r VariableApiApiPostVariablesR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -746,14 +734,15 @@ func (a *VariableApiService) PostVariablesExecute(r VariableApiApiPostVariablesR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}

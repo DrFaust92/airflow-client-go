@@ -1,37 +1,18 @@
-<!--
- Licensed to the Apache Software Foundation (ASF) under one
- or more contributor license agreements.  See the NOTICE file
- distributed with this work for additional information
- regarding copyright ownership.  The ASF licenses this file
- to you under the Apache License, Version 2.0 (the
- "License"); you may not use this file except in compliance
- with the License.  You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing,
- software distributed under the License is distributed on an
- "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- KIND, either express or implied.  See the License for the
- specific language governing permissions and limitations
- under the License.
- -->
-
 # UpdateTaskInstancesState
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**DryRun** | Pointer to **bool** | If set, don&#39;t actually run this operation. The response will contain a list of task instances planned to be affected, but won&#39;t be modified in any way.  | [optional] [default to true]
-**TaskId** | Pointer to **string** | The task ID. | [optional] 
-**ExecutionDate** | Pointer to **string** | The execution date. Either set this or dag_run_id but not both. | [optional] 
 **DagRunId** | Pointer to **string** | The task instance&#39;s DAG run ID. Either set this or execution_date but not both.  *New in version 2.3.0*  | [optional] 
-**IncludeUpstream** | Pointer to **bool** | If set to true, upstream tasks are also affected. | [optional] 
+**DryRun** | Pointer to **bool** | If set, don&#39;t actually run this operation. The response will contain a list of task instances planned to be affected, but won&#39;t be modified in any way.  | [optional] [default to true]
+**ExecutionDate** | Pointer to **string** | The execution date. Either set this or dag_run_id but not both. | [optional] 
 **IncludeDownstream** | Pointer to **bool** | If set to true, downstream tasks are also affected. | [optional] 
 **IncludeFuture** | Pointer to **bool** | If set to True, also tasks from future DAG Runs are affected. | [optional] 
 **IncludePast** | Pointer to **bool** | If set to True, also tasks from past DAG Runs are affected. | [optional] 
-**NewState** | Pointer to **string** | Expected new state. | [optional] 
+**IncludeUpstream** | Pointer to **bool** | If set to true, upstream tasks are also affected. | [optional] 
+**NewState** | Pointer to [**UpdateTaskState**](UpdateTaskState.md) |  | [optional] 
+**TaskId** | Pointer to **string** | The task ID. | [optional] 
 
 ## Methods
 
@@ -51,81 +32,6 @@ will change when the set of required properties is changed
 NewUpdateTaskInstancesStateWithDefaults instantiates a new UpdateTaskInstancesState object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetDryRun
-
-`func (o *UpdateTaskInstancesState) GetDryRun() bool`
-
-GetDryRun returns the DryRun field if non-nil, zero value otherwise.
-
-### GetDryRunOk
-
-`func (o *UpdateTaskInstancesState) GetDryRunOk() (*bool, bool)`
-
-GetDryRunOk returns a tuple with the DryRun field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDryRun
-
-`func (o *UpdateTaskInstancesState) SetDryRun(v bool)`
-
-SetDryRun sets DryRun field to given value.
-
-### HasDryRun
-
-`func (o *UpdateTaskInstancesState) HasDryRun() bool`
-
-HasDryRun returns a boolean if a field has been set.
-
-### GetTaskId
-
-`func (o *UpdateTaskInstancesState) GetTaskId() string`
-
-GetTaskId returns the TaskId field if non-nil, zero value otherwise.
-
-### GetTaskIdOk
-
-`func (o *UpdateTaskInstancesState) GetTaskIdOk() (*string, bool)`
-
-GetTaskIdOk returns a tuple with the TaskId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetTaskId
-
-`func (o *UpdateTaskInstancesState) SetTaskId(v string)`
-
-SetTaskId sets TaskId field to given value.
-
-### HasTaskId
-
-`func (o *UpdateTaskInstancesState) HasTaskId() bool`
-
-HasTaskId returns a boolean if a field has been set.
-
-### GetExecutionDate
-
-`func (o *UpdateTaskInstancesState) GetExecutionDate() string`
-
-GetExecutionDate returns the ExecutionDate field if non-nil, zero value otherwise.
-
-### GetExecutionDateOk
-
-`func (o *UpdateTaskInstancesState) GetExecutionDateOk() (*string, bool)`
-
-GetExecutionDateOk returns a tuple with the ExecutionDate field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetExecutionDate
-
-`func (o *UpdateTaskInstancesState) SetExecutionDate(v string)`
-
-SetExecutionDate sets ExecutionDate field to given value.
-
-### HasExecutionDate
-
-`func (o *UpdateTaskInstancesState) HasExecutionDate() bool`
-
-HasExecutionDate returns a boolean if a field has been set.
 
 ### GetDagRunId
 
@@ -152,30 +58,55 @@ SetDagRunId sets DagRunId field to given value.
 
 HasDagRunId returns a boolean if a field has been set.
 
-### GetIncludeUpstream
+### GetDryRun
 
-`func (o *UpdateTaskInstancesState) GetIncludeUpstream() bool`
+`func (o *UpdateTaskInstancesState) GetDryRun() bool`
 
-GetIncludeUpstream returns the IncludeUpstream field if non-nil, zero value otherwise.
+GetDryRun returns the DryRun field if non-nil, zero value otherwise.
 
-### GetIncludeUpstreamOk
+### GetDryRunOk
 
-`func (o *UpdateTaskInstancesState) GetIncludeUpstreamOk() (*bool, bool)`
+`func (o *UpdateTaskInstancesState) GetDryRunOk() (*bool, bool)`
 
-GetIncludeUpstreamOk returns a tuple with the IncludeUpstream field if it's non-nil, zero value otherwise
+GetDryRunOk returns a tuple with the DryRun field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetIncludeUpstream
+### SetDryRun
 
-`func (o *UpdateTaskInstancesState) SetIncludeUpstream(v bool)`
+`func (o *UpdateTaskInstancesState) SetDryRun(v bool)`
 
-SetIncludeUpstream sets IncludeUpstream field to given value.
+SetDryRun sets DryRun field to given value.
 
-### HasIncludeUpstream
+### HasDryRun
 
-`func (o *UpdateTaskInstancesState) HasIncludeUpstream() bool`
+`func (o *UpdateTaskInstancesState) HasDryRun() bool`
 
-HasIncludeUpstream returns a boolean if a field has been set.
+HasDryRun returns a boolean if a field has been set.
+
+### GetExecutionDate
+
+`func (o *UpdateTaskInstancesState) GetExecutionDate() string`
+
+GetExecutionDate returns the ExecutionDate field if non-nil, zero value otherwise.
+
+### GetExecutionDateOk
+
+`func (o *UpdateTaskInstancesState) GetExecutionDateOk() (*string, bool)`
+
+GetExecutionDateOk returns a tuple with the ExecutionDate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExecutionDate
+
+`func (o *UpdateTaskInstancesState) SetExecutionDate(v string)`
+
+SetExecutionDate sets ExecutionDate field to given value.
+
+### HasExecutionDate
+
+`func (o *UpdateTaskInstancesState) HasExecutionDate() bool`
+
+HasExecutionDate returns a boolean if a field has been set.
 
 ### GetIncludeDownstream
 
@@ -252,22 +183,47 @@ SetIncludePast sets IncludePast field to given value.
 
 HasIncludePast returns a boolean if a field has been set.
 
+### GetIncludeUpstream
+
+`func (o *UpdateTaskInstancesState) GetIncludeUpstream() bool`
+
+GetIncludeUpstream returns the IncludeUpstream field if non-nil, zero value otherwise.
+
+### GetIncludeUpstreamOk
+
+`func (o *UpdateTaskInstancesState) GetIncludeUpstreamOk() (*bool, bool)`
+
+GetIncludeUpstreamOk returns a tuple with the IncludeUpstream field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIncludeUpstream
+
+`func (o *UpdateTaskInstancesState) SetIncludeUpstream(v bool)`
+
+SetIncludeUpstream sets IncludeUpstream field to given value.
+
+### HasIncludeUpstream
+
+`func (o *UpdateTaskInstancesState) HasIncludeUpstream() bool`
+
+HasIncludeUpstream returns a boolean if a field has been set.
+
 ### GetNewState
 
-`func (o *UpdateTaskInstancesState) GetNewState() string`
+`func (o *UpdateTaskInstancesState) GetNewState() UpdateTaskState`
 
 GetNewState returns the NewState field if non-nil, zero value otherwise.
 
 ### GetNewStateOk
 
-`func (o *UpdateTaskInstancesState) GetNewStateOk() (*string, bool)`
+`func (o *UpdateTaskInstancesState) GetNewStateOk() (*UpdateTaskState, bool)`
 
 GetNewStateOk returns a tuple with the NewState field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetNewState
 
-`func (o *UpdateTaskInstancesState) SetNewState(v string)`
+`func (o *UpdateTaskInstancesState) SetNewState(v UpdateTaskState)`
 
 SetNewState sets NewState field to given value.
 
@@ -276,6 +232,31 @@ SetNewState sets NewState field to given value.
 `func (o *UpdateTaskInstancesState) HasNewState() bool`
 
 HasNewState returns a boolean if a field has been set.
+
+### GetTaskId
+
+`func (o *UpdateTaskInstancesState) GetTaskId() string`
+
+GetTaskId returns the TaskId field if non-nil, zero value otherwise.
+
+### GetTaskIdOk
+
+`func (o *UpdateTaskInstancesState) GetTaskIdOk() (*string, bool)`
+
+GetTaskIdOk returns a tuple with the TaskId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTaskId
+
+`func (o *UpdateTaskInstancesState) SetTaskId(v string)`
+
+SetTaskId sets TaskId field to given value.
+
+### HasTaskId
+
+`func (o *UpdateTaskInstancesState) HasTaskId() bool`
+
+HasTaskId returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -1,30 +1,11 @@
-<!--
- Licensed to the Apache Software Foundation (ASF) under one
- or more contributor license agreements.  See the NOTICE file
- distributed with this work for additional information
- regarding copyright ownership.  The ASF licenses this file
- to you under the Apache License, Version 2.0 (the
- "License"); you may not use this file except in compliance
- with the License.  You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing,
- software distributed under the License is distributed on an
- "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- KIND, either express or implied.  See the License for the
- specific language governing permissions and limitations
- under the License.
- -->
-
 # VersionInfo
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Version** | Pointer to **string** | The version of Airflow | [optional] 
 **GitVersion** | Pointer to **NullableString** | The git version (including git commit hash) | [optional] 
+**Version** | Pointer to **string** | The version of Airflow | [optional] 
 
 ## Methods
 
@@ -44,31 +25,6 @@ will change when the set of required properties is changed
 NewVersionInfoWithDefaults instantiates a new VersionInfo object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetVersion
-
-`func (o *VersionInfo) GetVersion() string`
-
-GetVersion returns the Version field if non-nil, zero value otherwise.
-
-### GetVersionOk
-
-`func (o *VersionInfo) GetVersionOk() (*string, bool)`
-
-GetVersionOk returns a tuple with the Version field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetVersion
-
-`func (o *VersionInfo) SetVersion(v string)`
-
-SetVersion sets Version field to given value.
-
-### HasVersion
-
-`func (o *VersionInfo) HasVersion() bool`
-
-HasVersion returns a boolean if a field has been set.
 
 ### GetGitVersion
 
@@ -105,6 +61,31 @@ HasGitVersion returns a boolean if a field has been set.
 `func (o *VersionInfo) UnsetGitVersion()`
 
 UnsetGitVersion ensures that no value is present for GitVersion, not even an explicit nil
+### GetVersion
+
+`func (o *VersionInfo) GetVersion() string`
+
+GetVersion returns the Version field if non-nil, zero value otherwise.
+
+### GetVersionOk
+
+`func (o *VersionInfo) GetVersionOk() (*string, bool)`
+
+GetVersionOk returns a tuple with the Version field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVersion
+
+`func (o *VersionInfo) SetVersion(v string)`
+
+SetVersion sets Version field to given value.
+
+### HasVersion
+
+`func (o *VersionInfo) HasVersion() bool`
+
+HasVersion returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

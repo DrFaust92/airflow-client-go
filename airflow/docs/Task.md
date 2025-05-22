@@ -1,22 +1,3 @@
-<!--
- Licensed to the Apache Software Foundation (ASF) under one
- or more contributor license agreements.  See the NOTICE file
- distributed with this work for additional information
- regarding copyright ownership.  The ASF licenses this file
- to you under the Apache License, Version 2.0 (the
- "License"); you may not use this file except in compliance
- with the License.  You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing,
- software distributed under the License is distributed on an
- "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- KIND, either express or implied.  See the License for the
- specific language governing permissions and limitations
- under the License.
- -->
-
 # Task
 
 ## Properties
@@ -24,29 +5,32 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassRef** | Pointer to [**ClassReference**](ClassReference.md) |  | [optional] 
-**TaskId** | Pointer to **string** |  | [optional] [readonly] 
-**Owner** | Pointer to **string** |  | [optional] [readonly] 
-**StartDate** | Pointer to **time.Time** |  | [optional] [readonly] 
-**EndDate** | Pointer to **NullableTime** |  | [optional] [readonly] 
-**TriggerRule** | Pointer to [**TriggerRule**](TriggerRule.md) |  | [optional] 
-**ExtraLinks** | Pointer to [**[]TaskExtraLinks**](TaskExtraLinks.md) |  | [optional] [readonly] 
 **DependsOnPast** | Pointer to **bool** |  | [optional] [readonly] 
+**DocMd** | Pointer to **NullableString** | Task documentation in markdown.  *New in version 2.10.0*  | [optional] [readonly] 
+**DownstreamTaskIds** | Pointer to **[]string** |  | [optional] [readonly] 
+**EndDate** | Pointer to **NullableTime** |  | [optional] [readonly] 
+**ExecutionTimeout** | Pointer to [**NullableTimeDelta**](TimeDelta.md) |  | [optional] 
+**Executor** | Pointer to **NullableString** |  | [optional] [readonly] 
+**ExtraLinks** | Pointer to [**[]TaskExtraLinksInner**](TaskExtraLinksInner.md) |  | [optional] [readonly] 
 **IsMapped** | Pointer to **bool** |  | [optional] [readonly] 
-**WaitForDownstream** | Pointer to **bool** |  | [optional] [readonly] 
-**Retries** | Pointer to **float32** |  | [optional] [readonly] 
-**Queue** | Pointer to **NullableString** |  | [optional] [readonly] 
+**Owner** | Pointer to **string** |  | [optional] [readonly] 
 **Pool** | Pointer to **string** |  | [optional] [readonly] 
 **PoolSlots** | Pointer to **float32** |  | [optional] [readonly] 
-**ExecutionTimeout** | Pointer to [**TimeDelta**](TimeDelta.md) |  | [optional] 
-**RetryDelay** | Pointer to [**TimeDelta**](TimeDelta.md) |  | [optional] 
-**RetryExponentialBackoff** | Pointer to **bool** |  | [optional] [readonly] 
 **PriorityWeight** | Pointer to **float32** |  | [optional] [readonly] 
-**WeightRule** | Pointer to [**WeightRule**](WeightRule.md) |  | [optional] 
+**Queue** | Pointer to **NullableString** |  | [optional] [readonly] 
+**Retries** | Pointer to **float32** |  | [optional] [readonly] 
+**RetryDelay** | Pointer to [**NullableTimeDelta**](TimeDelta.md) |  | [optional] 
+**RetryExponentialBackoff** | Pointer to **bool** |  | [optional] [readonly] 
+**StartDate** | Pointer to **NullableTime** |  | [optional] [readonly] 
+**SubDag** | Pointer to [**DAG**](DAG.md) |  | [optional] 
+**TaskDisplayName** | Pointer to **string** |  | [optional] [readonly] 
+**TaskId** | Pointer to **string** |  | [optional] [readonly] 
+**TemplateFields** | Pointer to **[]string** |  | [optional] [readonly] 
+**TriggerRule** | Pointer to [**TriggerRule**](TriggerRule.md) |  | [optional] 
 **UiColor** | Pointer to **string** | Color in hexadecimal notation. | [optional] 
 **UiFgcolor** | Pointer to **string** | Color in hexadecimal notation. | [optional] 
-**TemplateFields** | Pointer to **[]string** |  | [optional] [readonly] 
-**SubDag** | Pointer to [**DAG**](DAG.md) |  | [optional] 
-**DownstreamTaskIds** | Pointer to **[]string** |  | [optional] [readonly] 
+**WaitForDownstream** | Pointer to **bool** |  | [optional] [readonly] 
+**WeightRule** | Pointer to [**WeightRule**](WeightRule.md) |  | [optional] 
 
 ## Methods
 
@@ -92,80 +76,90 @@ SetClassRef sets ClassRef field to given value.
 
 HasClassRef returns a boolean if a field has been set.
 
-### GetTaskId
+### GetDependsOnPast
 
-`func (o *Task) GetTaskId() string`
+`func (o *Task) GetDependsOnPast() bool`
 
-GetTaskId returns the TaskId field if non-nil, zero value otherwise.
+GetDependsOnPast returns the DependsOnPast field if non-nil, zero value otherwise.
 
-### GetTaskIdOk
+### GetDependsOnPastOk
 
-`func (o *Task) GetTaskIdOk() (*string, bool)`
+`func (o *Task) GetDependsOnPastOk() (*bool, bool)`
 
-GetTaskIdOk returns a tuple with the TaskId field if it's non-nil, zero value otherwise
+GetDependsOnPastOk returns a tuple with the DependsOnPast field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetTaskId
+### SetDependsOnPast
 
-`func (o *Task) SetTaskId(v string)`
+`func (o *Task) SetDependsOnPast(v bool)`
 
-SetTaskId sets TaskId field to given value.
+SetDependsOnPast sets DependsOnPast field to given value.
 
-### HasTaskId
+### HasDependsOnPast
 
-`func (o *Task) HasTaskId() bool`
+`func (o *Task) HasDependsOnPast() bool`
 
-HasTaskId returns a boolean if a field has been set.
+HasDependsOnPast returns a boolean if a field has been set.
 
-### GetOwner
+### GetDocMd
 
-`func (o *Task) GetOwner() string`
+`func (o *Task) GetDocMd() string`
 
-GetOwner returns the Owner field if non-nil, zero value otherwise.
+GetDocMd returns the DocMd field if non-nil, zero value otherwise.
 
-### GetOwnerOk
+### GetDocMdOk
 
-`func (o *Task) GetOwnerOk() (*string, bool)`
+`func (o *Task) GetDocMdOk() (*string, bool)`
 
-GetOwnerOk returns a tuple with the Owner field if it's non-nil, zero value otherwise
+GetDocMdOk returns a tuple with the DocMd field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetOwner
+### SetDocMd
 
-`func (o *Task) SetOwner(v string)`
+`func (o *Task) SetDocMd(v string)`
 
-SetOwner sets Owner field to given value.
+SetDocMd sets DocMd field to given value.
 
-### HasOwner
+### HasDocMd
 
-`func (o *Task) HasOwner() bool`
+`func (o *Task) HasDocMd() bool`
 
-HasOwner returns a boolean if a field has been set.
+HasDocMd returns a boolean if a field has been set.
 
-### GetStartDate
+### SetDocMdNil
 
-`func (o *Task) GetStartDate() time.Time`
+`func (o *Task) SetDocMdNil(b bool)`
 
-GetStartDate returns the StartDate field if non-nil, zero value otherwise.
+ SetDocMdNil sets the value for DocMd to be an explicit nil
 
-### GetStartDateOk
+### UnsetDocMd
+`func (o *Task) UnsetDocMd()`
 
-`func (o *Task) GetStartDateOk() (*time.Time, bool)`
+UnsetDocMd ensures that no value is present for DocMd, not even an explicit nil
+### GetDownstreamTaskIds
 
-GetStartDateOk returns a tuple with the StartDate field if it's non-nil, zero value otherwise
+`func (o *Task) GetDownstreamTaskIds() []string`
+
+GetDownstreamTaskIds returns the DownstreamTaskIds field if non-nil, zero value otherwise.
+
+### GetDownstreamTaskIdsOk
+
+`func (o *Task) GetDownstreamTaskIdsOk() (*[]string, bool)`
+
+GetDownstreamTaskIdsOk returns a tuple with the DownstreamTaskIds field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetStartDate
+### SetDownstreamTaskIds
 
-`func (o *Task) SetStartDate(v time.Time)`
+`func (o *Task) SetDownstreamTaskIds(v []string)`
 
-SetStartDate sets StartDate field to given value.
+SetDownstreamTaskIds sets DownstreamTaskIds field to given value.
 
-### HasStartDate
+### HasDownstreamTaskIds
 
-`func (o *Task) HasStartDate() bool`
+`func (o *Task) HasDownstreamTaskIds() bool`
 
-HasStartDate returns a boolean if a field has been set.
+HasDownstreamTaskIds returns a boolean if a field has been set.
 
 ### GetEndDate
 
@@ -202,47 +196,92 @@ HasEndDate returns a boolean if a field has been set.
 `func (o *Task) UnsetEndDate()`
 
 UnsetEndDate ensures that no value is present for EndDate, not even an explicit nil
-### GetTriggerRule
+### GetExecutionTimeout
 
-`func (o *Task) GetTriggerRule() TriggerRule`
+`func (o *Task) GetExecutionTimeout() TimeDelta`
 
-GetTriggerRule returns the TriggerRule field if non-nil, zero value otherwise.
+GetExecutionTimeout returns the ExecutionTimeout field if non-nil, zero value otherwise.
 
-### GetTriggerRuleOk
+### GetExecutionTimeoutOk
 
-`func (o *Task) GetTriggerRuleOk() (*TriggerRule, bool)`
+`func (o *Task) GetExecutionTimeoutOk() (*TimeDelta, bool)`
 
-GetTriggerRuleOk returns a tuple with the TriggerRule field if it's non-nil, zero value otherwise
+GetExecutionTimeoutOk returns a tuple with the ExecutionTimeout field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetTriggerRule
+### SetExecutionTimeout
 
-`func (o *Task) SetTriggerRule(v TriggerRule)`
+`func (o *Task) SetExecutionTimeout(v TimeDelta)`
 
-SetTriggerRule sets TriggerRule field to given value.
+SetExecutionTimeout sets ExecutionTimeout field to given value.
 
-### HasTriggerRule
+### HasExecutionTimeout
 
-`func (o *Task) HasTriggerRule() bool`
+`func (o *Task) HasExecutionTimeout() bool`
 
-HasTriggerRule returns a boolean if a field has been set.
+HasExecutionTimeout returns a boolean if a field has been set.
 
+### SetExecutionTimeoutNil
+
+`func (o *Task) SetExecutionTimeoutNil(b bool)`
+
+ SetExecutionTimeoutNil sets the value for ExecutionTimeout to be an explicit nil
+
+### UnsetExecutionTimeout
+`func (o *Task) UnsetExecutionTimeout()`
+
+UnsetExecutionTimeout ensures that no value is present for ExecutionTimeout, not even an explicit nil
+### GetExecutor
+
+`func (o *Task) GetExecutor() string`
+
+GetExecutor returns the Executor field if non-nil, zero value otherwise.
+
+### GetExecutorOk
+
+`func (o *Task) GetExecutorOk() (*string, bool)`
+
+GetExecutorOk returns a tuple with the Executor field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExecutor
+
+`func (o *Task) SetExecutor(v string)`
+
+SetExecutor sets Executor field to given value.
+
+### HasExecutor
+
+`func (o *Task) HasExecutor() bool`
+
+HasExecutor returns a boolean if a field has been set.
+
+### SetExecutorNil
+
+`func (o *Task) SetExecutorNil(b bool)`
+
+ SetExecutorNil sets the value for Executor to be an explicit nil
+
+### UnsetExecutor
+`func (o *Task) UnsetExecutor()`
+
+UnsetExecutor ensures that no value is present for Executor, not even an explicit nil
 ### GetExtraLinks
 
-`func (o *Task) GetExtraLinks() []TaskExtraLinks`
+`func (o *Task) GetExtraLinks() []TaskExtraLinksInner`
 
 GetExtraLinks returns the ExtraLinks field if non-nil, zero value otherwise.
 
 ### GetExtraLinksOk
 
-`func (o *Task) GetExtraLinksOk() (*[]TaskExtraLinks, bool)`
+`func (o *Task) GetExtraLinksOk() (*[]TaskExtraLinksInner, bool)`
 
 GetExtraLinksOk returns a tuple with the ExtraLinks field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetExtraLinks
 
-`func (o *Task) SetExtraLinks(v []TaskExtraLinks)`
+`func (o *Task) SetExtraLinks(v []TaskExtraLinksInner)`
 
 SetExtraLinks sets ExtraLinks field to given value.
 
@@ -251,31 +290,6 @@ SetExtraLinks sets ExtraLinks field to given value.
 `func (o *Task) HasExtraLinks() bool`
 
 HasExtraLinks returns a boolean if a field has been set.
-
-### GetDependsOnPast
-
-`func (o *Task) GetDependsOnPast() bool`
-
-GetDependsOnPast returns the DependsOnPast field if non-nil, zero value otherwise.
-
-### GetDependsOnPastOk
-
-`func (o *Task) GetDependsOnPastOk() (*bool, bool)`
-
-GetDependsOnPastOk returns a tuple with the DependsOnPast field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDependsOnPast
-
-`func (o *Task) SetDependsOnPast(v bool)`
-
-SetDependsOnPast sets DependsOnPast field to given value.
-
-### HasDependsOnPast
-
-`func (o *Task) HasDependsOnPast() bool`
-
-HasDependsOnPast returns a boolean if a field has been set.
 
 ### GetIsMapped
 
@@ -302,91 +316,31 @@ SetIsMapped sets IsMapped field to given value.
 
 HasIsMapped returns a boolean if a field has been set.
 
-### GetWaitForDownstream
+### GetOwner
 
-`func (o *Task) GetWaitForDownstream() bool`
+`func (o *Task) GetOwner() string`
 
-GetWaitForDownstream returns the WaitForDownstream field if non-nil, zero value otherwise.
+GetOwner returns the Owner field if non-nil, zero value otherwise.
 
-### GetWaitForDownstreamOk
+### GetOwnerOk
 
-`func (o *Task) GetWaitForDownstreamOk() (*bool, bool)`
+`func (o *Task) GetOwnerOk() (*string, bool)`
 
-GetWaitForDownstreamOk returns a tuple with the WaitForDownstream field if it's non-nil, zero value otherwise
+GetOwnerOk returns a tuple with the Owner field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetWaitForDownstream
+### SetOwner
 
-`func (o *Task) SetWaitForDownstream(v bool)`
+`func (o *Task) SetOwner(v string)`
 
-SetWaitForDownstream sets WaitForDownstream field to given value.
+SetOwner sets Owner field to given value.
 
-### HasWaitForDownstream
+### HasOwner
 
-`func (o *Task) HasWaitForDownstream() bool`
+`func (o *Task) HasOwner() bool`
 
-HasWaitForDownstream returns a boolean if a field has been set.
+HasOwner returns a boolean if a field has been set.
 
-### GetRetries
-
-`func (o *Task) GetRetries() float32`
-
-GetRetries returns the Retries field if non-nil, zero value otherwise.
-
-### GetRetriesOk
-
-`func (o *Task) GetRetriesOk() (*float32, bool)`
-
-GetRetriesOk returns a tuple with the Retries field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetRetries
-
-`func (o *Task) SetRetries(v float32)`
-
-SetRetries sets Retries field to given value.
-
-### HasRetries
-
-`func (o *Task) HasRetries() bool`
-
-HasRetries returns a boolean if a field has been set.
-
-### GetQueue
-
-`func (o *Task) GetQueue() string`
-
-GetQueue returns the Queue field if non-nil, zero value otherwise.
-
-### GetQueueOk
-
-`func (o *Task) GetQueueOk() (*string, bool)`
-
-GetQueueOk returns a tuple with the Queue field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetQueue
-
-`func (o *Task) SetQueue(v string)`
-
-SetQueue sets Queue field to given value.
-
-### HasQueue
-
-`func (o *Task) HasQueue() bool`
-
-HasQueue returns a boolean if a field has been set.
-
-### SetQueueNil
-
-`func (o *Task) SetQueueNil(b bool)`
-
- SetQueueNil sets the value for Queue to be an explicit nil
-
-### UnsetQueue
-`func (o *Task) UnsetQueue()`
-
-UnsetQueue ensures that no value is present for Queue, not even an explicit nil
 ### GetPool
 
 `func (o *Task) GetPool() string`
@@ -437,30 +391,90 @@ SetPoolSlots sets PoolSlots field to given value.
 
 HasPoolSlots returns a boolean if a field has been set.
 
-### GetExecutionTimeout
+### GetPriorityWeight
 
-`func (o *Task) GetExecutionTimeout() TimeDelta`
+`func (o *Task) GetPriorityWeight() float32`
 
-GetExecutionTimeout returns the ExecutionTimeout field if non-nil, zero value otherwise.
+GetPriorityWeight returns the PriorityWeight field if non-nil, zero value otherwise.
 
-### GetExecutionTimeoutOk
+### GetPriorityWeightOk
 
-`func (o *Task) GetExecutionTimeoutOk() (*TimeDelta, bool)`
+`func (o *Task) GetPriorityWeightOk() (*float32, bool)`
 
-GetExecutionTimeoutOk returns a tuple with the ExecutionTimeout field if it's non-nil, zero value otherwise
+GetPriorityWeightOk returns a tuple with the PriorityWeight field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetExecutionTimeout
+### SetPriorityWeight
 
-`func (o *Task) SetExecutionTimeout(v TimeDelta)`
+`func (o *Task) SetPriorityWeight(v float32)`
 
-SetExecutionTimeout sets ExecutionTimeout field to given value.
+SetPriorityWeight sets PriorityWeight field to given value.
 
-### HasExecutionTimeout
+### HasPriorityWeight
 
-`func (o *Task) HasExecutionTimeout() bool`
+`func (o *Task) HasPriorityWeight() bool`
 
-HasExecutionTimeout returns a boolean if a field has been set.
+HasPriorityWeight returns a boolean if a field has been set.
+
+### GetQueue
+
+`func (o *Task) GetQueue() string`
+
+GetQueue returns the Queue field if non-nil, zero value otherwise.
+
+### GetQueueOk
+
+`func (o *Task) GetQueueOk() (*string, bool)`
+
+GetQueueOk returns a tuple with the Queue field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetQueue
+
+`func (o *Task) SetQueue(v string)`
+
+SetQueue sets Queue field to given value.
+
+### HasQueue
+
+`func (o *Task) HasQueue() bool`
+
+HasQueue returns a boolean if a field has been set.
+
+### SetQueueNil
+
+`func (o *Task) SetQueueNil(b bool)`
+
+ SetQueueNil sets the value for Queue to be an explicit nil
+
+### UnsetQueue
+`func (o *Task) UnsetQueue()`
+
+UnsetQueue ensures that no value is present for Queue, not even an explicit nil
+### GetRetries
+
+`func (o *Task) GetRetries() float32`
+
+GetRetries returns the Retries field if non-nil, zero value otherwise.
+
+### GetRetriesOk
+
+`func (o *Task) GetRetriesOk() (*float32, bool)`
+
+GetRetriesOk returns a tuple with the Retries field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRetries
+
+`func (o *Task) SetRetries(v float32)`
+
+SetRetries sets Retries field to given value.
+
+### HasRetries
+
+`func (o *Task) HasRetries() bool`
+
+HasRetries returns a boolean if a field has been set.
 
 ### GetRetryDelay
 
@@ -487,6 +501,16 @@ SetRetryDelay sets RetryDelay field to given value.
 
 HasRetryDelay returns a boolean if a field has been set.
 
+### SetRetryDelayNil
+
+`func (o *Task) SetRetryDelayNil(b bool)`
+
+ SetRetryDelayNil sets the value for RetryDelay to be an explicit nil
+
+### UnsetRetryDelay
+`func (o *Task) UnsetRetryDelay()`
+
+UnsetRetryDelay ensures that no value is present for RetryDelay, not even an explicit nil
 ### GetRetryExponentialBackoff
 
 `func (o *Task) GetRetryExponentialBackoff() bool`
@@ -512,55 +536,165 @@ SetRetryExponentialBackoff sets RetryExponentialBackoff field to given value.
 
 HasRetryExponentialBackoff returns a boolean if a field has been set.
 
-### GetPriorityWeight
+### GetStartDate
 
-`func (o *Task) GetPriorityWeight() float32`
+`func (o *Task) GetStartDate() time.Time`
 
-GetPriorityWeight returns the PriorityWeight field if non-nil, zero value otherwise.
+GetStartDate returns the StartDate field if non-nil, zero value otherwise.
 
-### GetPriorityWeightOk
+### GetStartDateOk
 
-`func (o *Task) GetPriorityWeightOk() (*float32, bool)`
+`func (o *Task) GetStartDateOk() (*time.Time, bool)`
 
-GetPriorityWeightOk returns a tuple with the PriorityWeight field if it's non-nil, zero value otherwise
+GetStartDateOk returns a tuple with the StartDate field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetPriorityWeight
+### SetStartDate
 
-`func (o *Task) SetPriorityWeight(v float32)`
+`func (o *Task) SetStartDate(v time.Time)`
 
-SetPriorityWeight sets PriorityWeight field to given value.
+SetStartDate sets StartDate field to given value.
 
-### HasPriorityWeight
+### HasStartDate
 
-`func (o *Task) HasPriorityWeight() bool`
+`func (o *Task) HasStartDate() bool`
 
-HasPriorityWeight returns a boolean if a field has been set.
+HasStartDate returns a boolean if a field has been set.
 
-### GetWeightRule
+### SetStartDateNil
 
-`func (o *Task) GetWeightRule() WeightRule`
+`func (o *Task) SetStartDateNil(b bool)`
 
-GetWeightRule returns the WeightRule field if non-nil, zero value otherwise.
+ SetStartDateNil sets the value for StartDate to be an explicit nil
 
-### GetWeightRuleOk
+### UnsetStartDate
+`func (o *Task) UnsetStartDate()`
 
-`func (o *Task) GetWeightRuleOk() (*WeightRule, bool)`
+UnsetStartDate ensures that no value is present for StartDate, not even an explicit nil
+### GetSubDag
 
-GetWeightRuleOk returns a tuple with the WeightRule field if it's non-nil, zero value otherwise
+`func (o *Task) GetSubDag() DAG`
+
+GetSubDag returns the SubDag field if non-nil, zero value otherwise.
+
+### GetSubDagOk
+
+`func (o *Task) GetSubDagOk() (*DAG, bool)`
+
+GetSubDagOk returns a tuple with the SubDag field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetWeightRule
+### SetSubDag
 
-`func (o *Task) SetWeightRule(v WeightRule)`
+`func (o *Task) SetSubDag(v DAG)`
 
-SetWeightRule sets WeightRule field to given value.
+SetSubDag sets SubDag field to given value.
 
-### HasWeightRule
+### HasSubDag
 
-`func (o *Task) HasWeightRule() bool`
+`func (o *Task) HasSubDag() bool`
 
-HasWeightRule returns a boolean if a field has been set.
+HasSubDag returns a boolean if a field has been set.
+
+### GetTaskDisplayName
+
+`func (o *Task) GetTaskDisplayName() string`
+
+GetTaskDisplayName returns the TaskDisplayName field if non-nil, zero value otherwise.
+
+### GetTaskDisplayNameOk
+
+`func (o *Task) GetTaskDisplayNameOk() (*string, bool)`
+
+GetTaskDisplayNameOk returns a tuple with the TaskDisplayName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTaskDisplayName
+
+`func (o *Task) SetTaskDisplayName(v string)`
+
+SetTaskDisplayName sets TaskDisplayName field to given value.
+
+### HasTaskDisplayName
+
+`func (o *Task) HasTaskDisplayName() bool`
+
+HasTaskDisplayName returns a boolean if a field has been set.
+
+### GetTaskId
+
+`func (o *Task) GetTaskId() string`
+
+GetTaskId returns the TaskId field if non-nil, zero value otherwise.
+
+### GetTaskIdOk
+
+`func (o *Task) GetTaskIdOk() (*string, bool)`
+
+GetTaskIdOk returns a tuple with the TaskId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTaskId
+
+`func (o *Task) SetTaskId(v string)`
+
+SetTaskId sets TaskId field to given value.
+
+### HasTaskId
+
+`func (o *Task) HasTaskId() bool`
+
+HasTaskId returns a boolean if a field has been set.
+
+### GetTemplateFields
+
+`func (o *Task) GetTemplateFields() []string`
+
+GetTemplateFields returns the TemplateFields field if non-nil, zero value otherwise.
+
+### GetTemplateFieldsOk
+
+`func (o *Task) GetTemplateFieldsOk() (*[]string, bool)`
+
+GetTemplateFieldsOk returns a tuple with the TemplateFields field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTemplateFields
+
+`func (o *Task) SetTemplateFields(v []string)`
+
+SetTemplateFields sets TemplateFields field to given value.
+
+### HasTemplateFields
+
+`func (o *Task) HasTemplateFields() bool`
+
+HasTemplateFields returns a boolean if a field has been set.
+
+### GetTriggerRule
+
+`func (o *Task) GetTriggerRule() TriggerRule`
+
+GetTriggerRule returns the TriggerRule field if non-nil, zero value otherwise.
+
+### GetTriggerRuleOk
+
+`func (o *Task) GetTriggerRuleOk() (*TriggerRule, bool)`
+
+GetTriggerRuleOk returns a tuple with the TriggerRule field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTriggerRule
+
+`func (o *Task) SetTriggerRule(v TriggerRule)`
+
+SetTriggerRule sets TriggerRule field to given value.
+
+### HasTriggerRule
+
+`func (o *Task) HasTriggerRule() bool`
+
+HasTriggerRule returns a boolean if a field has been set.
 
 ### GetUiColor
 
@@ -612,80 +746,55 @@ SetUiFgcolor sets UiFgcolor field to given value.
 
 HasUiFgcolor returns a boolean if a field has been set.
 
-### GetTemplateFields
+### GetWaitForDownstream
 
-`func (o *Task) GetTemplateFields() []string`
+`func (o *Task) GetWaitForDownstream() bool`
 
-GetTemplateFields returns the TemplateFields field if non-nil, zero value otherwise.
+GetWaitForDownstream returns the WaitForDownstream field if non-nil, zero value otherwise.
 
-### GetTemplateFieldsOk
+### GetWaitForDownstreamOk
 
-`func (o *Task) GetTemplateFieldsOk() (*[]string, bool)`
+`func (o *Task) GetWaitForDownstreamOk() (*bool, bool)`
 
-GetTemplateFieldsOk returns a tuple with the TemplateFields field if it's non-nil, zero value otherwise
+GetWaitForDownstreamOk returns a tuple with the WaitForDownstream field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetTemplateFields
+### SetWaitForDownstream
 
-`func (o *Task) SetTemplateFields(v []string)`
+`func (o *Task) SetWaitForDownstream(v bool)`
 
-SetTemplateFields sets TemplateFields field to given value.
+SetWaitForDownstream sets WaitForDownstream field to given value.
 
-### HasTemplateFields
+### HasWaitForDownstream
 
-`func (o *Task) HasTemplateFields() bool`
+`func (o *Task) HasWaitForDownstream() bool`
 
-HasTemplateFields returns a boolean if a field has been set.
+HasWaitForDownstream returns a boolean if a field has been set.
 
-### GetSubDag
+### GetWeightRule
 
-`func (o *Task) GetSubDag() DAG`
+`func (o *Task) GetWeightRule() WeightRule`
 
-GetSubDag returns the SubDag field if non-nil, zero value otherwise.
+GetWeightRule returns the WeightRule field if non-nil, zero value otherwise.
 
-### GetSubDagOk
+### GetWeightRuleOk
 
-`func (o *Task) GetSubDagOk() (*DAG, bool)`
+`func (o *Task) GetWeightRuleOk() (*WeightRule, bool)`
 
-GetSubDagOk returns a tuple with the SubDag field if it's non-nil, zero value otherwise
+GetWeightRuleOk returns a tuple with the WeightRule field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetSubDag
+### SetWeightRule
 
-`func (o *Task) SetSubDag(v DAG)`
+`func (o *Task) SetWeightRule(v WeightRule)`
 
-SetSubDag sets SubDag field to given value.
+SetWeightRule sets WeightRule field to given value.
 
-### HasSubDag
+### HasWeightRule
 
-`func (o *Task) HasSubDag() bool`
+`func (o *Task) HasWeightRule() bool`
 
-HasSubDag returns a boolean if a field has been set.
-
-### GetDownstreamTaskIds
-
-`func (o *Task) GetDownstreamTaskIds() []string`
-
-GetDownstreamTaskIds returns the DownstreamTaskIds field if non-nil, zero value otherwise.
-
-### GetDownstreamTaskIdsOk
-
-`func (o *Task) GetDownstreamTaskIdsOk() (*[]string, bool)`
-
-GetDownstreamTaskIdsOk returns a tuple with the DownstreamTaskIds field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDownstreamTaskIds
-
-`func (o *Task) SetDownstreamTaskIds(v []string)`
-
-SetDownstreamTaskIds sets DownstreamTaskIds field to given value.
-
-### HasDownstreamTaskIds
-
-`func (o *Task) HasDownstreamTaskIds() bool`
-
-HasDownstreamTaskIds returns a boolean if a field has been set.
+HasWeightRule returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

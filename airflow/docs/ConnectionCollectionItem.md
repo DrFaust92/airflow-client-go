@@ -1,35 +1,16 @@
-<!--
- Licensed to the Apache Software Foundation (ASF) under one
- or more contributor license agreements.  See the NOTICE file
- distributed with this work for additional information
- regarding copyright ownership.  The ASF licenses this file
- to you under the Apache License, Version 2.0 (the
- "License"); you may not use this file except in compliance
- with the License.  You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing,
- software distributed under the License is distributed on an
- "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- KIND, either express or implied.  See the License for the
- specific language governing permissions and limitations
- under the License.
- -->
-
 # ConnectionCollectionItem
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ConnectionId** | Pointer to **string** | The connection ID. | [optional] 
 **ConnType** | Pointer to **string** | The connection type. | [optional] 
+**ConnectionId** | Pointer to **string** | The connection ID. | [optional] 
 **Description** | Pointer to **NullableString** | The description of the connection. | [optional] 
 **Host** | Pointer to **NullableString** | Host of the connection. | [optional] 
 **Login** | Pointer to **NullableString** | Login of the connection. | [optional] 
-**Schema** | Pointer to **NullableString** | Schema of the connection. | [optional] 
 **Port** | Pointer to **NullableInt32** | Port of the connection. | [optional] 
+**Schema** | Pointer to **NullableString** | Schema of the connection. | [optional] 
 
 ## Methods
 
@@ -49,31 +30,6 @@ will change when the set of required properties is changed
 NewConnectionCollectionItemWithDefaults instantiates a new ConnectionCollectionItem object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetConnectionId
-
-`func (o *ConnectionCollectionItem) GetConnectionId() string`
-
-GetConnectionId returns the ConnectionId field if non-nil, zero value otherwise.
-
-### GetConnectionIdOk
-
-`func (o *ConnectionCollectionItem) GetConnectionIdOk() (*string, bool)`
-
-GetConnectionIdOk returns a tuple with the ConnectionId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetConnectionId
-
-`func (o *ConnectionCollectionItem) SetConnectionId(v string)`
-
-SetConnectionId sets ConnectionId field to given value.
-
-### HasConnectionId
-
-`func (o *ConnectionCollectionItem) HasConnectionId() bool`
-
-HasConnectionId returns a boolean if a field has been set.
 
 ### GetConnType
 
@@ -99,6 +55,31 @@ SetConnType sets ConnType field to given value.
 `func (o *ConnectionCollectionItem) HasConnType() bool`
 
 HasConnType returns a boolean if a field has been set.
+
+### GetConnectionId
+
+`func (o *ConnectionCollectionItem) GetConnectionId() string`
+
+GetConnectionId returns the ConnectionId field if non-nil, zero value otherwise.
+
+### GetConnectionIdOk
+
+`func (o *ConnectionCollectionItem) GetConnectionIdOk() (*string, bool)`
+
+GetConnectionIdOk returns a tuple with the ConnectionId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetConnectionId
+
+`func (o *ConnectionCollectionItem) SetConnectionId(v string)`
+
+SetConnectionId sets ConnectionId field to given value.
+
+### HasConnectionId
+
+`func (o *ConnectionCollectionItem) HasConnectionId() bool`
+
+HasConnectionId returns a boolean if a field has been set.
 
 ### GetDescription
 
@@ -205,41 +186,6 @@ HasLogin returns a boolean if a field has been set.
 `func (o *ConnectionCollectionItem) UnsetLogin()`
 
 UnsetLogin ensures that no value is present for Login, not even an explicit nil
-### GetSchema
-
-`func (o *ConnectionCollectionItem) GetSchema() string`
-
-GetSchema returns the Schema field if non-nil, zero value otherwise.
-
-### GetSchemaOk
-
-`func (o *ConnectionCollectionItem) GetSchemaOk() (*string, bool)`
-
-GetSchemaOk returns a tuple with the Schema field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSchema
-
-`func (o *ConnectionCollectionItem) SetSchema(v string)`
-
-SetSchema sets Schema field to given value.
-
-### HasSchema
-
-`func (o *ConnectionCollectionItem) HasSchema() bool`
-
-HasSchema returns a boolean if a field has been set.
-
-### SetSchemaNil
-
-`func (o *ConnectionCollectionItem) SetSchemaNil(b bool)`
-
- SetSchemaNil sets the value for Schema to be an explicit nil
-
-### UnsetSchema
-`func (o *ConnectionCollectionItem) UnsetSchema()`
-
-UnsetSchema ensures that no value is present for Schema, not even an explicit nil
 ### GetPort
 
 `func (o *ConnectionCollectionItem) GetPort() int32`
@@ -275,6 +221,41 @@ HasPort returns a boolean if a field has been set.
 `func (o *ConnectionCollectionItem) UnsetPort()`
 
 UnsetPort ensures that no value is present for Port, not even an explicit nil
+### GetSchema
+
+`func (o *ConnectionCollectionItem) GetSchema() string`
+
+GetSchema returns the Schema field if non-nil, zero value otherwise.
+
+### GetSchemaOk
+
+`func (o *ConnectionCollectionItem) GetSchemaOk() (*string, bool)`
+
+GetSchemaOk returns a tuple with the Schema field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSchema
+
+`func (o *ConnectionCollectionItem) SetSchema(v string)`
+
+SetSchema sets Schema field to given value.
+
+### HasSchema
+
+`func (o *ConnectionCollectionItem) HasSchema() bool`
+
+HasSchema returns a boolean if a field has been set.
+
+### SetSchemaNil
+
+`func (o *ConnectionCollectionItem) SetSchemaNil(b bool)`
+
+ SetSchemaNil sets the value for Schema to be an explicit nil
+
+### UnsetSchema
+`func (o *ConnectionCollectionItem) UnsetSchema()`
+
+UnsetSchema ensures that no value is present for Schema, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

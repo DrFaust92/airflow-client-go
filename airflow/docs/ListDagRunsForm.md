@@ -1,39 +1,20 @@
-<!--
- Licensed to the Apache Software Foundation (ASF) under one
- or more contributor license agreements.  See the NOTICE file
- distributed with this work for additional information
- regarding copyright ownership.  The ASF licenses this file
- to you under the Apache License, Version 2.0 (the
- "License"); you may not use this file except in compliance
- with the License.  You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing,
- software distributed under the License is distributed on an
- "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- KIND, either express or implied.  See the License for the
- specific language governing permissions and limitations
- under the License.
- -->
-
 # ListDagRunsForm
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**OrderBy** | Pointer to **string** | The name of the field to order the results by. Prefix a field name with &#x60;-&#x60; to reverse the sort order.  *New in version 2.1.0*  | [optional] 
-**PageOffset** | Pointer to **int32** | The number of items to skip before starting to collect the result set. | [optional] 
-**PageLimit** | Pointer to **int32** | The numbers of items to return. | [optional] [default to 100]
 **DagIds** | Pointer to **[]string** | Return objects with specific DAG IDs. The value can be repeated to retrieve multiple matching values (OR condition). | [optional] 
-**States** | Pointer to **[]string** | Return objects with specific states. The value can be repeated to retrieve multiple matching values (OR condition). | [optional] 
-**ExecutionDateGte** | Pointer to **time.Time** | Returns objects greater or equal to the specified date.  This can be combined with execution_date_lte key to receive only the selected period.  | [optional] 
-**ExecutionDateLte** | Pointer to **time.Time** | Returns objects less than or equal to the specified date.  This can be combined with execution_date_gte key to receive only the selected period.  | [optional] 
-**StartDateGte** | Pointer to **time.Time** | Returns objects greater or equal the specified date.  This can be combined with start_date_lte key to receive only the selected period.  | [optional] 
-**StartDateLte** | Pointer to **time.Time** | Returns objects less or equal the specified date.  This can be combined with start_date_gte parameter to receive only the selected period  | [optional] 
 **EndDateGte** | Pointer to **time.Time** | Returns objects greater or equal the specified date.  This can be combined with end_date_lte parameter to receive only the selected period.  | [optional] 
 **EndDateLte** | Pointer to **time.Time** | Returns objects less than or equal to the specified date.  This can be combined with end_date_gte parameter to receive only the selected period.  | [optional] 
+**ExecutionDateGte** | Pointer to **time.Time** | Returns objects greater or equal to the specified date.  This can be combined with execution_date_lte key to receive only the selected period.  | [optional] 
+**ExecutionDateLte** | Pointer to **time.Time** | Returns objects less than or equal to the specified date.  This can be combined with execution_date_gte key to receive only the selected period.  | [optional] 
+**OrderBy** | Pointer to **string** | The name of the field to order the results by. Prefix a field name with &#x60;-&#x60; to reverse the sort order.  *New in version 2.1.0*  | [optional] 
+**PageLimit** | Pointer to **int32** | The numbers of items to return. | [optional] [default to 100]
+**PageOffset** | Pointer to **int32** | The number of items to skip before starting to collect the result set. | [optional] 
+**StartDateGte** | Pointer to **time.Time** | Returns objects greater or equal the specified date.  This can be combined with start_date_lte key to receive only the selected period.  | [optional] 
+**StartDateLte** | Pointer to **time.Time** | Returns objects less or equal the specified date.  This can be combined with start_date_gte parameter to receive only the selected period  | [optional] 
+**States** | Pointer to **[]string** | Return objects with specific states. The value can be repeated to retrieve multiple matching values (OR condition). | [optional] 
 
 ## Methods
 
@@ -53,81 +34,6 @@ will change when the set of required properties is changed
 NewListDagRunsFormWithDefaults instantiates a new ListDagRunsForm object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetOrderBy
-
-`func (o *ListDagRunsForm) GetOrderBy() string`
-
-GetOrderBy returns the OrderBy field if non-nil, zero value otherwise.
-
-### GetOrderByOk
-
-`func (o *ListDagRunsForm) GetOrderByOk() (*string, bool)`
-
-GetOrderByOk returns a tuple with the OrderBy field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetOrderBy
-
-`func (o *ListDagRunsForm) SetOrderBy(v string)`
-
-SetOrderBy sets OrderBy field to given value.
-
-### HasOrderBy
-
-`func (o *ListDagRunsForm) HasOrderBy() bool`
-
-HasOrderBy returns a boolean if a field has been set.
-
-### GetPageOffset
-
-`func (o *ListDagRunsForm) GetPageOffset() int32`
-
-GetPageOffset returns the PageOffset field if non-nil, zero value otherwise.
-
-### GetPageOffsetOk
-
-`func (o *ListDagRunsForm) GetPageOffsetOk() (*int32, bool)`
-
-GetPageOffsetOk returns a tuple with the PageOffset field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPageOffset
-
-`func (o *ListDagRunsForm) SetPageOffset(v int32)`
-
-SetPageOffset sets PageOffset field to given value.
-
-### HasPageOffset
-
-`func (o *ListDagRunsForm) HasPageOffset() bool`
-
-HasPageOffset returns a boolean if a field has been set.
-
-### GetPageLimit
-
-`func (o *ListDagRunsForm) GetPageLimit() int32`
-
-GetPageLimit returns the PageLimit field if non-nil, zero value otherwise.
-
-### GetPageLimitOk
-
-`func (o *ListDagRunsForm) GetPageLimitOk() (*int32, bool)`
-
-GetPageLimitOk returns a tuple with the PageLimit field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPageLimit
-
-`func (o *ListDagRunsForm) SetPageLimit(v int32)`
-
-SetPageLimit sets PageLimit field to given value.
-
-### HasPageLimit
-
-`func (o *ListDagRunsForm) HasPageLimit() bool`
-
-HasPageLimit returns a boolean if a field has been set.
 
 ### GetDagIds
 
@@ -154,30 +60,55 @@ SetDagIds sets DagIds field to given value.
 
 HasDagIds returns a boolean if a field has been set.
 
-### GetStates
+### GetEndDateGte
 
-`func (o *ListDagRunsForm) GetStates() []string`
+`func (o *ListDagRunsForm) GetEndDateGte() time.Time`
 
-GetStates returns the States field if non-nil, zero value otherwise.
+GetEndDateGte returns the EndDateGte field if non-nil, zero value otherwise.
 
-### GetStatesOk
+### GetEndDateGteOk
 
-`func (o *ListDagRunsForm) GetStatesOk() (*[]string, bool)`
+`func (o *ListDagRunsForm) GetEndDateGteOk() (*time.Time, bool)`
 
-GetStatesOk returns a tuple with the States field if it's non-nil, zero value otherwise
+GetEndDateGteOk returns a tuple with the EndDateGte field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetStates
+### SetEndDateGte
 
-`func (o *ListDagRunsForm) SetStates(v []string)`
+`func (o *ListDagRunsForm) SetEndDateGte(v time.Time)`
 
-SetStates sets States field to given value.
+SetEndDateGte sets EndDateGte field to given value.
 
-### HasStates
+### HasEndDateGte
 
-`func (o *ListDagRunsForm) HasStates() bool`
+`func (o *ListDagRunsForm) HasEndDateGte() bool`
 
-HasStates returns a boolean if a field has been set.
+HasEndDateGte returns a boolean if a field has been set.
+
+### GetEndDateLte
+
+`func (o *ListDagRunsForm) GetEndDateLte() time.Time`
+
+GetEndDateLte returns the EndDateLte field if non-nil, zero value otherwise.
+
+### GetEndDateLteOk
+
+`func (o *ListDagRunsForm) GetEndDateLteOk() (*time.Time, bool)`
+
+GetEndDateLteOk returns a tuple with the EndDateLte field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEndDateLte
+
+`func (o *ListDagRunsForm) SetEndDateLte(v time.Time)`
+
+SetEndDateLte sets EndDateLte field to given value.
+
+### HasEndDateLte
+
+`func (o *ListDagRunsForm) HasEndDateLte() bool`
+
+HasEndDateLte returns a boolean if a field has been set.
 
 ### GetExecutionDateGte
 
@@ -229,6 +160,81 @@ SetExecutionDateLte sets ExecutionDateLte field to given value.
 
 HasExecutionDateLte returns a boolean if a field has been set.
 
+### GetOrderBy
+
+`func (o *ListDagRunsForm) GetOrderBy() string`
+
+GetOrderBy returns the OrderBy field if non-nil, zero value otherwise.
+
+### GetOrderByOk
+
+`func (o *ListDagRunsForm) GetOrderByOk() (*string, bool)`
+
+GetOrderByOk returns a tuple with the OrderBy field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOrderBy
+
+`func (o *ListDagRunsForm) SetOrderBy(v string)`
+
+SetOrderBy sets OrderBy field to given value.
+
+### HasOrderBy
+
+`func (o *ListDagRunsForm) HasOrderBy() bool`
+
+HasOrderBy returns a boolean if a field has been set.
+
+### GetPageLimit
+
+`func (o *ListDagRunsForm) GetPageLimit() int32`
+
+GetPageLimit returns the PageLimit field if non-nil, zero value otherwise.
+
+### GetPageLimitOk
+
+`func (o *ListDagRunsForm) GetPageLimitOk() (*int32, bool)`
+
+GetPageLimitOk returns a tuple with the PageLimit field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPageLimit
+
+`func (o *ListDagRunsForm) SetPageLimit(v int32)`
+
+SetPageLimit sets PageLimit field to given value.
+
+### HasPageLimit
+
+`func (o *ListDagRunsForm) HasPageLimit() bool`
+
+HasPageLimit returns a boolean if a field has been set.
+
+### GetPageOffset
+
+`func (o *ListDagRunsForm) GetPageOffset() int32`
+
+GetPageOffset returns the PageOffset field if non-nil, zero value otherwise.
+
+### GetPageOffsetOk
+
+`func (o *ListDagRunsForm) GetPageOffsetOk() (*int32, bool)`
+
+GetPageOffsetOk returns a tuple with the PageOffset field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPageOffset
+
+`func (o *ListDagRunsForm) SetPageOffset(v int32)`
+
+SetPageOffset sets PageOffset field to given value.
+
+### HasPageOffset
+
+`func (o *ListDagRunsForm) HasPageOffset() bool`
+
+HasPageOffset returns a boolean if a field has been set.
+
 ### GetStartDateGte
 
 `func (o *ListDagRunsForm) GetStartDateGte() time.Time`
@@ -279,55 +285,30 @@ SetStartDateLte sets StartDateLte field to given value.
 
 HasStartDateLte returns a boolean if a field has been set.
 
-### GetEndDateGte
+### GetStates
 
-`func (o *ListDagRunsForm) GetEndDateGte() time.Time`
+`func (o *ListDagRunsForm) GetStates() []string`
 
-GetEndDateGte returns the EndDateGte field if non-nil, zero value otherwise.
+GetStates returns the States field if non-nil, zero value otherwise.
 
-### GetEndDateGteOk
+### GetStatesOk
 
-`func (o *ListDagRunsForm) GetEndDateGteOk() (*time.Time, bool)`
+`func (o *ListDagRunsForm) GetStatesOk() (*[]string, bool)`
 
-GetEndDateGteOk returns a tuple with the EndDateGte field if it's non-nil, zero value otherwise
+GetStatesOk returns a tuple with the States field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetEndDateGte
+### SetStates
 
-`func (o *ListDagRunsForm) SetEndDateGte(v time.Time)`
+`func (o *ListDagRunsForm) SetStates(v []string)`
 
-SetEndDateGte sets EndDateGte field to given value.
+SetStates sets States field to given value.
 
-### HasEndDateGte
+### HasStates
 
-`func (o *ListDagRunsForm) HasEndDateGte() bool`
+`func (o *ListDagRunsForm) HasStates() bool`
 
-HasEndDateGte returns a boolean if a field has been set.
-
-### GetEndDateLte
-
-`func (o *ListDagRunsForm) GetEndDateLte() time.Time`
-
-GetEndDateLte returns the EndDateLte field if non-nil, zero value otherwise.
-
-### GetEndDateLteOk
-
-`func (o *ListDagRunsForm) GetEndDateLteOk() (*time.Time, bool)`
-
-GetEndDateLteOk returns a tuple with the EndDateLte field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetEndDateLte
-
-`func (o *ListDagRunsForm) SetEndDateLte(v time.Time)`
-
-SetEndDateLte sets EndDateLte field to given value.
-
-### HasEndDateLte
-
-`func (o *ListDagRunsForm) HasEndDateLte() bool`
-
-HasEndDateLte returns a boolean if a field has been set.
+HasStates returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

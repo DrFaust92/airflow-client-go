@@ -1,33 +1,14 @@
-<!--
- Licensed to the Apache Software Foundation (ASF) under one
- or more contributor license agreements.  See the NOTICE file
- distributed with this work for additional information
- regarding copyright ownership.  The ASF licenses this file
- to you under the Apache License, Version 2.0 (the
- "License"); you may not use this file except in compliance
- with the License.  You may obtain a copy of the License at
+# \VariableAPI
 
-   http://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing,
- software distributed under the License is distributed on an
- "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- KIND, either express or implied.  See the License for the
- specific language governing permissions and limitations
- under the License.
- -->
-
-# \VariableApi
-
-All URIs are relative to *http://localhost/api/v1*
+All URIs are relative to */api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**DeleteVariable**](VariableApi.md#DeleteVariable) | **Delete** /variables/{variable_key} | Delete a variable
-[**GetVariable**](VariableApi.md#GetVariable) | **Get** /variables/{variable_key} | Get a variable
-[**GetVariables**](VariableApi.md#GetVariables) | **Get** /variables | List variables
-[**PatchVariable**](VariableApi.md#PatchVariable) | **Patch** /variables/{variable_key} | Update a variable
-[**PostVariables**](VariableApi.md#PostVariables) | **Post** /variables | Create a variable
+[**DeleteVariable**](VariableAPI.md#DeleteVariable) | **Delete** /variables/{variable_key} | Delete a variable
+[**GetVariable**](VariableAPI.md#GetVariable) | **Get** /variables/{variable_key} | Get a variable
+[**GetVariables**](VariableAPI.md#GetVariables) | **Get** /variables | List variables
+[**PatchVariable**](VariableAPI.md#PatchVariable) | **Patch** /variables/{variable_key} | Update a variable
+[**PostVariables**](VariableAPI.md#PostVariables) | **Post** /variables | Create a variable
 
 
 
@@ -43,22 +24,22 @@ Delete a variable
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./airflow"
 )
 
 func main() {
-    variableKey := "variableKey_example" // string | The variable Key.
+	variableKey := "variableKey_example" // string | The variable Key.
 
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.VariableApi.DeleteVariable(context.Background(), variableKey).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `VariableApi.DeleteVariable``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.VariableAPI.DeleteVariable(context.Background(), variableKey).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `VariableAPI.DeleteVariable``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -85,7 +66,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+No authorization required
 
 ### HTTP request headers
 
@@ -111,24 +92,24 @@ Get a variable
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./airflow"
 )
 
 func main() {
-    variableKey := "variableKey_example" // string | The variable Key.
+	variableKey := "variableKey_example" // string | The variable Key.
 
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.VariableApi.GetVariable(context.Background(), variableKey).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `VariableApi.GetVariable``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetVariable`: Variable
-    fmt.Fprintf(os.Stdout, "Response from `VariableApi.GetVariable`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.VariableAPI.GetVariable(context.Background(), variableKey).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `VariableAPI.GetVariable``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetVariable`: Variable
+	fmt.Fprintf(os.Stdout, "Response from `VariableAPI.GetVariable`: %v\n", resp)
 }
 ```
 
@@ -155,7 +136,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+No authorization required
 
 ### HTTP request headers
 
@@ -181,26 +162,26 @@ List variables
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./airflow"
 )
 
 func main() {
-    limit := int32(56) // int32 | The numbers of items to return. (optional) (default to 100)
-    offset := int32(56) // int32 | The number of items to skip before starting to collect the result set. (optional)
-    orderBy := "orderBy_example" // string | The name of the field to order the results by. Prefix a field name with `-` to reverse the sort order.  *New in version 2.1.0*  (optional)
+	limit := int32(56) // int32 | The numbers of items to return. (optional) (default to 100)
+	offset := int32(56) // int32 | The number of items to skip before starting to collect the result set. (optional)
+	orderBy := "orderBy_example" // string | The name of the field to order the results by. Prefix a field name with `-` to reverse the sort order.  *New in version 2.1.0*  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.VariableApi.GetVariables(context.Background()).Limit(limit).Offset(offset).OrderBy(orderBy).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `VariableApi.GetVariables``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetVariables`: VariableCollection
-    fmt.Fprintf(os.Stdout, "Response from `VariableApi.GetVariables`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.VariableAPI.GetVariables(context.Background()).Limit(limit).Offset(offset).OrderBy(orderBy).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `VariableAPI.GetVariables``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetVariables`: VariableCollection
+	fmt.Fprintf(os.Stdout, "Response from `VariableAPI.GetVariables`: %v\n", resp)
 }
 ```
 
@@ -225,7 +206,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+No authorization required
 
 ### HTTP request headers
 
@@ -251,26 +232,26 @@ Update a variable
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./airflow"
 )
 
 func main() {
-    variableKey := "variableKey_example" // string | The variable Key.
-    variable := *openapiclient.NewVariable() // Variable | 
-    updateMask := []string{"Inner_example"} // []string | The fields to update on the resource. If absent or empty, all modifiable fields are updated. A comma-separated list of fully qualified names of fields.  (optional)
+	variableKey := "variableKey_example" // string | The variable Key.
+	variable := *openapiclient.NewVariable() // Variable | 
+	updateMask := []string{"Inner_example"} // []string | The fields to update on the resource. If absent or empty, all modifiable fields are updated. A comma-separated list of fully qualified names of fields.  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.VariableApi.PatchVariable(context.Background(), variableKey).Variable(variable).UpdateMask(updateMask).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `VariableApi.PatchVariable``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `PatchVariable`: Variable
-    fmt.Fprintf(os.Stdout, "Response from `VariableApi.PatchVariable`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.VariableAPI.PatchVariable(context.Background(), variableKey).Variable(variable).UpdateMask(updateMask).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `VariableAPI.PatchVariable``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `PatchVariable`: Variable
+	fmt.Fprintf(os.Stdout, "Response from `VariableAPI.PatchVariable`: %v\n", resp)
 }
 ```
 
@@ -299,7 +280,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+No authorization required
 
 ### HTTP request headers
 
@@ -323,24 +304,24 @@ Create a variable
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./airflow"
 )
 
 func main() {
-    variable := *openapiclient.NewVariable() // Variable | 
+	variable := *openapiclient.NewVariable() // Variable | 
 
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.VariableApi.PostVariables(context.Background()).Variable(variable).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `VariableApi.PostVariables``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `PostVariables`: Variable
-    fmt.Fprintf(os.Stdout, "Response from `VariableApi.PostVariables`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.VariableAPI.PostVariables(context.Background()).Variable(variable).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `VariableAPI.PostVariables``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `PostVariables`: Variable
+	fmt.Fprintf(os.Stdout, "Response from `VariableAPI.PostVariables`: %v\n", resp)
 }
 ```
 
@@ -363,7 +344,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+No authorization required
 
 ### HTTP request headers
 

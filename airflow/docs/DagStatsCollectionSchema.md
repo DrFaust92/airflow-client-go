@@ -1,0 +1,82 @@
+# DagStatsCollectionSchema
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**TotalEntries** | Pointer to **int32** | Count of total objects in the current result set before pagination parameters (limit, offset) are applied.  | [optional] 
+**Dags** | Pointer to [**[]DagStatsCollectionItem**](DagStatsCollectionItem.md) |  | [optional] 
+
+## Methods
+
+### NewDagStatsCollectionSchema
+
+`func NewDagStatsCollectionSchema() *DagStatsCollectionSchema`
+
+NewDagStatsCollectionSchema instantiates a new DagStatsCollectionSchema object
+This constructor will assign default values to properties that have it defined,
+and makes sure properties required by API are set, but the set of arguments
+will change when the set of required properties is changed
+
+### NewDagStatsCollectionSchemaWithDefaults
+
+`func NewDagStatsCollectionSchemaWithDefaults() *DagStatsCollectionSchema`
+
+NewDagStatsCollectionSchemaWithDefaults instantiates a new DagStatsCollectionSchema object
+This constructor will only assign default values to properties that have it defined,
+but it doesn't guarantee that properties required by API are set
+
+### GetTotalEntries
+
+`func (o *DagStatsCollectionSchema) GetTotalEntries() int32`
+
+GetTotalEntries returns the TotalEntries field if non-nil, zero value otherwise.
+
+### GetTotalEntriesOk
+
+`func (o *DagStatsCollectionSchema) GetTotalEntriesOk() (*int32, bool)`
+
+GetTotalEntriesOk returns a tuple with the TotalEntries field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTotalEntries
+
+`func (o *DagStatsCollectionSchema) SetTotalEntries(v int32)`
+
+SetTotalEntries sets TotalEntries field to given value.
+
+### HasTotalEntries
+
+`func (o *DagStatsCollectionSchema) HasTotalEntries() bool`
+
+HasTotalEntries returns a boolean if a field has been set.
+
+### GetDags
+
+`func (o *DagStatsCollectionSchema) GetDags() []DagStatsCollectionItem`
+
+GetDags returns the Dags field if non-nil, zero value otherwise.
+
+### GetDagsOk
+
+`func (o *DagStatsCollectionSchema) GetDagsOk() (*[]DagStatsCollectionItem, bool)`
+
+GetDagsOk returns a tuple with the Dags field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDags
+
+`func (o *DagStatsCollectionSchema) SetDags(v []DagStatsCollectionItem)`
+
+SetDags sets Dags field to given value.
+
+### HasDags
+
+`func (o *DagStatsCollectionSchema) HasDags() bool`
+
+HasDags returns a boolean if a field has been set.
+
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

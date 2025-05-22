@@ -1,22 +1,3 @@
-<!--
- Licensed to the Apache Software Foundation (ASF) under one
- or more contributor license agreements.  See the NOTICE file
- distributed with this work for additional information
- regarding copyright ownership.  The ASF licenses this file
- to you under the Apache License, Version 2.0 (the
- "License"); you may not use this file except in compliance
- with the License.  You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing,
- software distributed under the License is distributed on an
- "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- KIND, either express or implied.  See the License for the
- specific language governing permissions and limitations
- under the License.
- -->
-
 # RelativeDelta
 
 ## Properties
@@ -24,27 +5,27 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type** | **string** |  | 
-**Years** | **int32** |  | 
-**Months** | **int32** |  | 
-**Days** | **int32** |  | 
-**Leapdays** | **int32** |  | 
-**Hours** | **int32** |  | 
-**Minutes** | **int32** |  | 
-**Seconds** | **int32** |  | 
-**Microseconds** | **int32** |  | 
-**Year** | **int32** |  | 
-**Month** | **int32** |  | 
 **Day** | **int32** |  | 
+**Days** | **int32** |  | 
 **Hour** | **int32** |  | 
-**Minute** | **int32** |  | 
-**Second** | **int32** |  | 
+**Hours** | **int32** |  | 
+**Leapdays** | **int32** |  | 
 **Microsecond** | **int32** |  | 
+**Microseconds** | **int32** |  | 
+**Minute** | **int32** |  | 
+**Minutes** | **int32** |  | 
+**Month** | **int32** |  | 
+**Months** | **int32** |  | 
+**Second** | **int32** |  | 
+**Seconds** | **int32** |  | 
+**Year** | **int32** |  | 
+**Years** | **int32** |  | 
 
 ## Methods
 
 ### NewRelativeDelta
 
-`func NewRelativeDelta(type_ string, years int32, months int32, days int32, leapdays int32, hours int32, minutes int32, seconds int32, microseconds int32, year int32, month int32, day int32, hour int32, minute int32, second int32, microsecond int32, ) *RelativeDelta`
+`func NewRelativeDelta(type_ string, day int32, days int32, hour int32, hours int32, leapdays int32, microsecond int32, microseconds int32, minute int32, minutes int32, month int32, months int32, second int32, seconds int32, year int32, years int32, ) *RelativeDelta`
 
 NewRelativeDelta instantiates a new RelativeDelta object
 This constructor will assign default values to properties that have it defined,
@@ -79,44 +60,24 @@ and a boolean to check if the value has been set.
 SetType sets Type field to given value.
 
 
-### GetYears
+### GetDay
 
-`func (o *RelativeDelta) GetYears() int32`
+`func (o *RelativeDelta) GetDay() int32`
 
-GetYears returns the Years field if non-nil, zero value otherwise.
+GetDay returns the Day field if non-nil, zero value otherwise.
 
-### GetYearsOk
+### GetDayOk
 
-`func (o *RelativeDelta) GetYearsOk() (*int32, bool)`
+`func (o *RelativeDelta) GetDayOk() (*int32, bool)`
 
-GetYearsOk returns a tuple with the Years field if it's non-nil, zero value otherwise
+GetDayOk returns a tuple with the Day field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetYears
+### SetDay
 
-`func (o *RelativeDelta) SetYears(v int32)`
+`func (o *RelativeDelta) SetDay(v int32)`
 
-SetYears sets Years field to given value.
-
-
-### GetMonths
-
-`func (o *RelativeDelta) GetMonths() int32`
-
-GetMonths returns the Months field if non-nil, zero value otherwise.
-
-### GetMonthsOk
-
-`func (o *RelativeDelta) GetMonthsOk() (*int32, bool)`
-
-GetMonthsOk returns a tuple with the Months field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMonths
-
-`func (o *RelativeDelta) SetMonths(v int32)`
-
-SetMonths sets Months field to given value.
+SetDay sets Day field to given value.
 
 
 ### GetDays
@@ -139,24 +100,24 @@ and a boolean to check if the value has been set.
 SetDays sets Days field to given value.
 
 
-### GetLeapdays
+### GetHour
 
-`func (o *RelativeDelta) GetLeapdays() int32`
+`func (o *RelativeDelta) GetHour() int32`
 
-GetLeapdays returns the Leapdays field if non-nil, zero value otherwise.
+GetHour returns the Hour field if non-nil, zero value otherwise.
 
-### GetLeapdaysOk
+### GetHourOk
 
-`func (o *RelativeDelta) GetLeapdaysOk() (*int32, bool)`
+`func (o *RelativeDelta) GetHourOk() (*int32, bool)`
 
-GetLeapdaysOk returns a tuple with the Leapdays field if it's non-nil, zero value otherwise
+GetHourOk returns a tuple with the Hour field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetLeapdays
+### SetHour
 
-`func (o *RelativeDelta) SetLeapdays(v int32)`
+`func (o *RelativeDelta) SetHour(v int32)`
 
-SetLeapdays sets Leapdays field to given value.
+SetHour sets Hour field to given value.
 
 
 ### GetHours
@@ -179,44 +140,44 @@ and a boolean to check if the value has been set.
 SetHours sets Hours field to given value.
 
 
-### GetMinutes
+### GetLeapdays
 
-`func (o *RelativeDelta) GetMinutes() int32`
+`func (o *RelativeDelta) GetLeapdays() int32`
 
-GetMinutes returns the Minutes field if non-nil, zero value otherwise.
+GetLeapdays returns the Leapdays field if non-nil, zero value otherwise.
 
-### GetMinutesOk
+### GetLeapdaysOk
 
-`func (o *RelativeDelta) GetMinutesOk() (*int32, bool)`
+`func (o *RelativeDelta) GetLeapdaysOk() (*int32, bool)`
 
-GetMinutesOk returns a tuple with the Minutes field if it's non-nil, zero value otherwise
+GetLeapdaysOk returns a tuple with the Leapdays field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetMinutes
+### SetLeapdays
 
-`func (o *RelativeDelta) SetMinutes(v int32)`
+`func (o *RelativeDelta) SetLeapdays(v int32)`
 
-SetMinutes sets Minutes field to given value.
+SetLeapdays sets Leapdays field to given value.
 
 
-### GetSeconds
+### GetMicrosecond
 
-`func (o *RelativeDelta) GetSeconds() int32`
+`func (o *RelativeDelta) GetMicrosecond() int32`
 
-GetSeconds returns the Seconds field if non-nil, zero value otherwise.
+GetMicrosecond returns the Microsecond field if non-nil, zero value otherwise.
 
-### GetSecondsOk
+### GetMicrosecondOk
 
-`func (o *RelativeDelta) GetSecondsOk() (*int32, bool)`
+`func (o *RelativeDelta) GetMicrosecondOk() (*int32, bool)`
 
-GetSecondsOk returns a tuple with the Seconds field if it's non-nil, zero value otherwise
+GetMicrosecondOk returns a tuple with the Microsecond field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetSeconds
+### SetMicrosecond
 
-`func (o *RelativeDelta) SetSeconds(v int32)`
+`func (o *RelativeDelta) SetMicrosecond(v int32)`
 
-SetSeconds sets Seconds field to given value.
+SetMicrosecond sets Microsecond field to given value.
 
 
 ### GetMicroseconds
@@ -239,24 +200,44 @@ and a boolean to check if the value has been set.
 SetMicroseconds sets Microseconds field to given value.
 
 
-### GetYear
+### GetMinute
 
-`func (o *RelativeDelta) GetYear() int32`
+`func (o *RelativeDelta) GetMinute() int32`
 
-GetYear returns the Year field if non-nil, zero value otherwise.
+GetMinute returns the Minute field if non-nil, zero value otherwise.
 
-### GetYearOk
+### GetMinuteOk
 
-`func (o *RelativeDelta) GetYearOk() (*int32, bool)`
+`func (o *RelativeDelta) GetMinuteOk() (*int32, bool)`
 
-GetYearOk returns a tuple with the Year field if it's non-nil, zero value otherwise
+GetMinuteOk returns a tuple with the Minute field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetYear
+### SetMinute
 
-`func (o *RelativeDelta) SetYear(v int32)`
+`func (o *RelativeDelta) SetMinute(v int32)`
 
-SetYear sets Year field to given value.
+SetMinute sets Minute field to given value.
+
+
+### GetMinutes
+
+`func (o *RelativeDelta) GetMinutes() int32`
+
+GetMinutes returns the Minutes field if non-nil, zero value otherwise.
+
+### GetMinutesOk
+
+`func (o *RelativeDelta) GetMinutesOk() (*int32, bool)`
+
+GetMinutesOk returns a tuple with the Minutes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMinutes
+
+`func (o *RelativeDelta) SetMinutes(v int32)`
+
+SetMinutes sets Minutes field to given value.
 
 
 ### GetMonth
@@ -279,64 +260,24 @@ and a boolean to check if the value has been set.
 SetMonth sets Month field to given value.
 
 
-### GetDay
+### GetMonths
 
-`func (o *RelativeDelta) GetDay() int32`
+`func (o *RelativeDelta) GetMonths() int32`
 
-GetDay returns the Day field if non-nil, zero value otherwise.
+GetMonths returns the Months field if non-nil, zero value otherwise.
 
-### GetDayOk
+### GetMonthsOk
 
-`func (o *RelativeDelta) GetDayOk() (*int32, bool)`
+`func (o *RelativeDelta) GetMonthsOk() (*int32, bool)`
 
-GetDayOk returns a tuple with the Day field if it's non-nil, zero value otherwise
+GetMonthsOk returns a tuple with the Months field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetDay
+### SetMonths
 
-`func (o *RelativeDelta) SetDay(v int32)`
+`func (o *RelativeDelta) SetMonths(v int32)`
 
-SetDay sets Day field to given value.
-
-
-### GetHour
-
-`func (o *RelativeDelta) GetHour() int32`
-
-GetHour returns the Hour field if non-nil, zero value otherwise.
-
-### GetHourOk
-
-`func (o *RelativeDelta) GetHourOk() (*int32, bool)`
-
-GetHourOk returns a tuple with the Hour field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetHour
-
-`func (o *RelativeDelta) SetHour(v int32)`
-
-SetHour sets Hour field to given value.
-
-
-### GetMinute
-
-`func (o *RelativeDelta) GetMinute() int32`
-
-GetMinute returns the Minute field if non-nil, zero value otherwise.
-
-### GetMinuteOk
-
-`func (o *RelativeDelta) GetMinuteOk() (*int32, bool)`
-
-GetMinuteOk returns a tuple with the Minute field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMinute
-
-`func (o *RelativeDelta) SetMinute(v int32)`
-
-SetMinute sets Minute field to given value.
+SetMonths sets Months field to given value.
 
 
 ### GetSecond
@@ -359,24 +300,64 @@ and a boolean to check if the value has been set.
 SetSecond sets Second field to given value.
 
 
-### GetMicrosecond
+### GetSeconds
 
-`func (o *RelativeDelta) GetMicrosecond() int32`
+`func (o *RelativeDelta) GetSeconds() int32`
 
-GetMicrosecond returns the Microsecond field if non-nil, zero value otherwise.
+GetSeconds returns the Seconds field if non-nil, zero value otherwise.
 
-### GetMicrosecondOk
+### GetSecondsOk
 
-`func (o *RelativeDelta) GetMicrosecondOk() (*int32, bool)`
+`func (o *RelativeDelta) GetSecondsOk() (*int32, bool)`
 
-GetMicrosecondOk returns a tuple with the Microsecond field if it's non-nil, zero value otherwise
+GetSecondsOk returns a tuple with the Seconds field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetMicrosecond
+### SetSeconds
 
-`func (o *RelativeDelta) SetMicrosecond(v int32)`
+`func (o *RelativeDelta) SetSeconds(v int32)`
 
-SetMicrosecond sets Microsecond field to given value.
+SetSeconds sets Seconds field to given value.
+
+
+### GetYear
+
+`func (o *RelativeDelta) GetYear() int32`
+
+GetYear returns the Year field if non-nil, zero value otherwise.
+
+### GetYearOk
+
+`func (o *RelativeDelta) GetYearOk() (*int32, bool)`
+
+GetYearOk returns a tuple with the Year field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetYear
+
+`func (o *RelativeDelta) SetYear(v int32)`
+
+SetYear sets Year field to given value.
+
+
+### GetYears
+
+`func (o *RelativeDelta) GetYears() int32`
+
+GetYears returns the Years field if non-nil, zero value otherwise.
+
+### GetYearsOk
+
+`func (o *RelativeDelta) GetYearsOk() (*int32, bool)`
+
+GetYearsOk returns a tuple with the Years field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetYears
+
+`func (o *RelativeDelta) SetYears(v int32)`
+
+SetYears sets Years field to given value.
 
 
 

@@ -1,22 +1,3 @@
-<!--
- Licensed to the Apache Software Foundation (ASF) under one
- or more contributor license agreements.  See the NOTICE file
- distributed with this work for additional information
- regarding copyright ownership.  The ASF licenses this file
- to you under the Apache License, Version 2.0 (the
- "License"); you may not use this file except in compliance
- with the License.  You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing,
- software distributed under the License is distributed on an
- "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- KIND, either express or implied.  See the License for the
- specific language governing permissions and limitations
- under the License.
- -->
-
 # TimeDelta
 
 ## Properties
@@ -25,14 +6,14 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type** | **string** |  | 
 **Days** | **int32** |  | 
-**Seconds** | **int32** |  | 
 **Microseconds** | **int32** |  | 
+**Seconds** | **int32** |  | 
 
 ## Methods
 
 ### NewTimeDelta
 
-`func NewTimeDelta(type_ string, days int32, seconds int32, microseconds int32, ) *TimeDelta`
+`func NewTimeDelta(type_ string, days int32, microseconds int32, seconds int32, ) *TimeDelta`
 
 NewTimeDelta instantiates a new TimeDelta object
 This constructor will assign default values to properties that have it defined,
@@ -87,26 +68,6 @@ and a boolean to check if the value has been set.
 SetDays sets Days field to given value.
 
 
-### GetSeconds
-
-`func (o *TimeDelta) GetSeconds() int32`
-
-GetSeconds returns the Seconds field if non-nil, zero value otherwise.
-
-### GetSecondsOk
-
-`func (o *TimeDelta) GetSecondsOk() (*int32, bool)`
-
-GetSecondsOk returns a tuple with the Seconds field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSeconds
-
-`func (o *TimeDelta) SetSeconds(v int32)`
-
-SetSeconds sets Seconds field to given value.
-
-
 ### GetMicroseconds
 
 `func (o *TimeDelta) GetMicroseconds() int32`
@@ -125,6 +86,26 @@ and a boolean to check if the value has been set.
 `func (o *TimeDelta) SetMicroseconds(v int32)`
 
 SetMicroseconds sets Microseconds field to given value.
+
+
+### GetSeconds
+
+`func (o *TimeDelta) GetSeconds() int32`
+
+GetSeconds returns the Seconds field if non-nil, zero value otherwise.
+
+### GetSecondsOk
+
+`func (o *TimeDelta) GetSecondsOk() (*int32, bool)`
+
+GetSecondsOk returns a tuple with the Seconds field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSeconds
+
+`func (o *TimeDelta) SetSeconds(v int32)`
+
+SetSeconds sets Seconds field to given value.
 
 
 

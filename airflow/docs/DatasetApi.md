@@ -1,33 +1,452 @@
-<!--
- Licensed to the Apache Software Foundation (ASF) under one
- or more contributor license agreements.  See the NOTICE file
- distributed with this work for additional information
- regarding copyright ownership.  The ASF licenses this file
- to you under the Apache License, Version 2.0 (the
- "License"); you may not use this file except in compliance
- with the License.  You may obtain a copy of the License at
+# \DatasetAPI
 
-   http://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing,
- software distributed under the License is distributed on an
- "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- KIND, either express or implied.  See the License for the
- specific language governing permissions and limitations
- under the License.
- -->
-
-# \DatasetApi
-
-All URIs are relative to *http://localhost/api/v1*
+All URIs are relative to */api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetDataset**](DatasetApi.md#GetDataset) | **Get** /datasets/{uri} | Get a dataset
-[**GetDatasetEvents**](DatasetApi.md#GetDatasetEvents) | **Get** /datasets/events | Get dataset events
-[**GetDatasets**](DatasetApi.md#GetDatasets) | **Get** /datasets | List datasets
-[**GetUpstreamDatasetEvents**](DatasetApi.md#GetUpstreamDatasetEvents) | **Get** /dags/{dag_id}/dagRuns/{dag_run_id}/upstreamDatasetEvents | Get dataset events for a DAG run
+[**CreateDatasetEvent**](DatasetAPI.md#CreateDatasetEvent) | **Post** /datasets/events | Create dataset event
+[**DeleteDagDatasetQueuedEvent**](DatasetAPI.md#DeleteDagDatasetQueuedEvent) | **Delete** /dags/{dag_id}/datasets/queuedEvent/{uri} | Delete a queued Dataset event for a DAG.
+[**DeleteDagDatasetQueuedEvents**](DatasetAPI.md#DeleteDagDatasetQueuedEvents) | **Delete** /dags/{dag_id}/datasets/queuedEvent | Delete queued Dataset events for a DAG.
+[**DeleteDatasetQueuedEvents**](DatasetAPI.md#DeleteDatasetQueuedEvents) | **Delete** /datasets/queuedEvent/{uri} | Delete queued Dataset events for a Dataset.
+[**GetDagDatasetQueuedEvent**](DatasetAPI.md#GetDagDatasetQueuedEvent) | **Get** /dags/{dag_id}/datasets/queuedEvent/{uri} | Get a queued Dataset event for a DAG
+[**GetDagDatasetQueuedEvents**](DatasetAPI.md#GetDagDatasetQueuedEvents) | **Get** /dags/{dag_id}/datasets/queuedEvent | Get queued Dataset events for a DAG.
+[**GetDataset**](DatasetAPI.md#GetDataset) | **Get** /datasets/{uri} | Get a dataset
+[**GetDatasetEvents**](DatasetAPI.md#GetDatasetEvents) | **Get** /datasets/events | Get dataset events
+[**GetDatasetQueuedEvents**](DatasetAPI.md#GetDatasetQueuedEvents) | **Get** /datasets/queuedEvent/{uri} | Get queued Dataset events for a Dataset.
+[**GetDatasets**](DatasetAPI.md#GetDatasets) | **Get** /datasets | List datasets
+[**GetUpstreamDatasetEvents**](DatasetAPI.md#GetUpstreamDatasetEvents) | **Get** /dags/{dag_id}/dagRuns/{dag_run_id}/upstreamDatasetEvents | Get dataset events for a DAG run
 
+
+
+## CreateDatasetEvent
+
+> DatasetEvent CreateDatasetEvent(ctx).CreateDatasetEvent(createDatasetEvent).Execute()
+
+Create dataset event
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./airflow"
+)
+
+func main() {
+	createDatasetEvent := *openapiclient.NewCreateDatasetEvent("DatasetUri_example") // CreateDatasetEvent | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DatasetAPI.CreateDatasetEvent(context.Background()).CreateDatasetEvent(createDatasetEvent).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DatasetAPI.CreateDatasetEvent``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CreateDatasetEvent`: DatasetEvent
+	fmt.Fprintf(os.Stdout, "Response from `DatasetAPI.CreateDatasetEvent`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateDatasetEventRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **createDatasetEvent** | [**CreateDatasetEvent**](CreateDatasetEvent.md) |  | 
+
+### Return type
+
+[**DatasetEvent**](DatasetEvent.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeleteDagDatasetQueuedEvent
+
+> DeleteDagDatasetQueuedEvent(ctx, dagId, uri).Before(before).Execute()
+
+Delete a queued Dataset event for a DAG.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+    "time"
+	openapiclient "./airflow"
+)
+
+func main() {
+	dagId := "dagId_example" // string | The DAG ID.
+	uri := "uri_example" // string | The encoded Dataset URI
+	before := time.Now() // time.Time | Timestamp to select event logs occurring before. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.DatasetAPI.DeleteDagDatasetQueuedEvent(context.Background(), dagId, uri).Before(before).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DatasetAPI.DeleteDagDatasetQueuedEvent``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**dagId** | **string** | The DAG ID. | 
+**uri** | **string** | The encoded Dataset URI | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteDagDatasetQueuedEventRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **before** | **time.Time** | Timestamp to select event logs occurring before. | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeleteDagDatasetQueuedEvents
+
+> DeleteDagDatasetQueuedEvents(ctx, dagId).Before(before).Execute()
+
+Delete queued Dataset events for a DAG.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+    "time"
+	openapiclient "./airflow"
+)
+
+func main() {
+	dagId := "dagId_example" // string | The DAG ID.
+	before := time.Now() // time.Time | Timestamp to select event logs occurring before. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.DatasetAPI.DeleteDagDatasetQueuedEvents(context.Background(), dagId).Before(before).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DatasetAPI.DeleteDagDatasetQueuedEvents``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**dagId** | **string** | The DAG ID. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteDagDatasetQueuedEventsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **before** | **time.Time** | Timestamp to select event logs occurring before. | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeleteDatasetQueuedEvents
+
+> DeleteDatasetQueuedEvents(ctx, uri).Before(before).Execute()
+
+Delete queued Dataset events for a Dataset.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+    "time"
+	openapiclient "./airflow"
+)
+
+func main() {
+	uri := "uri_example" // string | The encoded Dataset URI
+	before := time.Now() // time.Time | Timestamp to select event logs occurring before. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.DatasetAPI.DeleteDatasetQueuedEvents(context.Background(), uri).Before(before).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DatasetAPI.DeleteDatasetQueuedEvents``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**uri** | **string** | The encoded Dataset URI | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteDatasetQueuedEventsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **before** | **time.Time** | Timestamp to select event logs occurring before. | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetDagDatasetQueuedEvent
+
+> QueuedEvent GetDagDatasetQueuedEvent(ctx, dagId, uri).Before(before).Execute()
+
+Get a queued Dataset event for a DAG
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+    "time"
+	openapiclient "./airflow"
+)
+
+func main() {
+	dagId := "dagId_example" // string | The DAG ID.
+	uri := "uri_example" // string | The encoded Dataset URI
+	before := time.Now() // time.Time | Timestamp to select event logs occurring before. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DatasetAPI.GetDagDatasetQueuedEvent(context.Background(), dagId, uri).Before(before).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DatasetAPI.GetDagDatasetQueuedEvent``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetDagDatasetQueuedEvent`: QueuedEvent
+	fmt.Fprintf(os.Stdout, "Response from `DatasetAPI.GetDagDatasetQueuedEvent`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**dagId** | **string** | The DAG ID. | 
+**uri** | **string** | The encoded Dataset URI | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetDagDatasetQueuedEventRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **before** | **time.Time** | Timestamp to select event logs occurring before. | 
+
+### Return type
+
+[**QueuedEvent**](QueuedEvent.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetDagDatasetQueuedEvents
+
+> QueuedEventCollection GetDagDatasetQueuedEvents(ctx, dagId).Before(before).Execute()
+
+Get queued Dataset events for a DAG.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+    "time"
+	openapiclient "./airflow"
+)
+
+func main() {
+	dagId := "dagId_example" // string | The DAG ID.
+	before := time.Now() // time.Time | Timestamp to select event logs occurring before. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DatasetAPI.GetDagDatasetQueuedEvents(context.Background(), dagId).Before(before).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DatasetAPI.GetDagDatasetQueuedEvents``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetDagDatasetQueuedEvents`: QueuedEventCollection
+	fmt.Fprintf(os.Stdout, "Response from `DatasetAPI.GetDagDatasetQueuedEvents`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**dagId** | **string** | The DAG ID. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetDagDatasetQueuedEventsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **before** | **time.Time** | Timestamp to select event logs occurring before. | 
+
+### Return type
+
+[**QueuedEventCollection**](QueuedEventCollection.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
 
 ## GetDataset
@@ -44,24 +463,24 @@ Get a dataset
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./airflow"
 )
 
 func main() {
-    uri := "uri_example" // string | The encoded Dataset URI
+	uri := "uri_example" // string | The encoded Dataset URI
 
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DatasetApi.GetDataset(context.Background(), uri).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `DatasetApi.GetDataset``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetDataset`: Dataset
-    fmt.Fprintf(os.Stdout, "Response from `DatasetApi.GetDataset`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DatasetAPI.GetDataset(context.Background(), uri).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DatasetAPI.GetDataset``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetDataset`: Dataset
+	fmt.Fprintf(os.Stdout, "Response from `DatasetAPI.GetDataset`: %v\n", resp)
 }
 ```
 
@@ -88,7 +507,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+No authorization required
 
 ### HTTP request headers
 
@@ -114,31 +533,31 @@ Get dataset events
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./airflow"
 )
 
 func main() {
-    limit := int32(56) // int32 | The numbers of items to return. (optional) (default to 100)
-    offset := int32(56) // int32 | The number of items to skip before starting to collect the result set. (optional)
-    orderBy := "orderBy_example" // string | The name of the field to order the results by. Prefix a field name with `-` to reverse the sort order.  *New in version 2.1.0*  (optional)
-    datasetId := int32(56) // int32 | The Dataset ID that updated the dataset. (optional)
-    sourceDagId := "sourceDagId_example" // string | The DAG ID that updated the dataset. (optional)
-    sourceTaskId := "sourceTaskId_example" // string | The task ID that updated the dataset. (optional)
-    sourceRunId := "sourceRunId_example" // string | The DAG run ID that updated the dataset. (optional)
-    sourceMapIndex := int32(56) // int32 | The map index that updated the dataset. (optional)
+	limit := int32(56) // int32 | The numbers of items to return. (optional) (default to 100)
+	offset := int32(56) // int32 | The number of items to skip before starting to collect the result set. (optional)
+	orderBy := "orderBy_example" // string | The name of the field to order the results by. Prefix a field name with `-` to reverse the sort order.  *New in version 2.1.0*  (optional)
+	datasetId := int32(56) // int32 | The Dataset ID that updated the dataset. (optional)
+	sourceDagId := "sourceDagId_example" // string | The DAG ID that updated the dataset. (optional)
+	sourceTaskId := "sourceTaskId_example" // string | The task ID that updated the dataset. (optional)
+	sourceRunId := "sourceRunId_example" // string | The DAG run ID that updated the dataset. (optional)
+	sourceMapIndex := int32(56) // int32 | The map index that updated the dataset. (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DatasetApi.GetDatasetEvents(context.Background()).Limit(limit).Offset(offset).OrderBy(orderBy).DatasetId(datasetId).SourceDagId(sourceDagId).SourceTaskId(sourceTaskId).SourceRunId(sourceRunId).SourceMapIndex(sourceMapIndex).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `DatasetApi.GetDatasetEvents``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetDatasetEvents`: DatasetEventCollection
-    fmt.Fprintf(os.Stdout, "Response from `DatasetApi.GetDatasetEvents`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DatasetAPI.GetDatasetEvents(context.Background()).Limit(limit).Offset(offset).OrderBy(orderBy).DatasetId(datasetId).SourceDagId(sourceDagId).SourceTaskId(sourceTaskId).SourceRunId(sourceRunId).SourceMapIndex(sourceMapIndex).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DatasetAPI.GetDatasetEvents``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetDatasetEvents`: DatasetEventCollection
+	fmt.Fprintf(os.Stdout, "Response from `DatasetAPI.GetDatasetEvents`: %v\n", resp)
 }
 ```
 
@@ -168,7 +587,80 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetDatasetQueuedEvents
+
+> QueuedEventCollection GetDatasetQueuedEvents(ctx, uri).Before(before).Execute()
+
+Get queued Dataset events for a Dataset.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+    "time"
+	openapiclient "./airflow"
+)
+
+func main() {
+	uri := "uri_example" // string | The encoded Dataset URI
+	before := time.Now() // time.Time | Timestamp to select event logs occurring before. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DatasetAPI.GetDatasetQueuedEvents(context.Background(), uri).Before(before).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DatasetAPI.GetDatasetQueuedEvents``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetDatasetQueuedEvents`: QueuedEventCollection
+	fmt.Fprintf(os.Stdout, "Response from `DatasetAPI.GetDatasetQueuedEvents`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**uri** | **string** | The encoded Dataset URI | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetDatasetQueuedEventsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **before** | **time.Time** | Timestamp to select event logs occurring before. | 
+
+### Return type
+
+[**QueuedEventCollection**](QueuedEventCollection.md)
+
+### Authorization
+
+No authorization required
 
 ### HTTP request headers
 
@@ -182,7 +674,7 @@ Name | Type | Description  | Notes
 
 ## GetDatasets
 
-> DatasetCollection GetDatasets(ctx).Limit(limit).Offset(offset).OrderBy(orderBy).UriPattern(uriPattern).Execute()
+> DatasetCollection GetDatasets(ctx).Limit(limit).Offset(offset).OrderBy(orderBy).UriPattern(uriPattern).DagIds(dagIds).Execute()
 
 List datasets
 
@@ -192,27 +684,28 @@ List datasets
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./airflow"
 )
 
 func main() {
-    limit := int32(56) // int32 | The numbers of items to return. (optional) (default to 100)
-    offset := int32(56) // int32 | The number of items to skip before starting to collect the result set. (optional)
-    orderBy := "orderBy_example" // string | The name of the field to order the results by. Prefix a field name with `-` to reverse the sort order.  *New in version 2.1.0*  (optional)
-    uriPattern := "uriPattern_example" // string | If set, only return datasets with uris matching this pattern.  (optional)
+	limit := int32(56) // int32 | The numbers of items to return. (optional) (default to 100)
+	offset := int32(56) // int32 | The number of items to skip before starting to collect the result set. (optional)
+	orderBy := "orderBy_example" // string | The name of the field to order the results by. Prefix a field name with `-` to reverse the sort order.  *New in version 2.1.0*  (optional)
+	uriPattern := "uriPattern_example" // string | If set, only return datasets with uris matching this pattern.  (optional)
+	dagIds := "dagIds_example" // string | One or more DAG IDs separated by commas to filter datasets by associated DAGs either consuming or producing.  *New in version 2.9.0*  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DatasetApi.GetDatasets(context.Background()).Limit(limit).Offset(offset).OrderBy(orderBy).UriPattern(uriPattern).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `DatasetApi.GetDatasets``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetDatasets`: DatasetCollection
-    fmt.Fprintf(os.Stdout, "Response from `DatasetApi.GetDatasets`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DatasetAPI.GetDatasets(context.Background()).Limit(limit).Offset(offset).OrderBy(orderBy).UriPattern(uriPattern).DagIds(dagIds).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DatasetAPI.GetDatasets``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetDatasets`: DatasetCollection
+	fmt.Fprintf(os.Stdout, "Response from `DatasetAPI.GetDatasets`: %v\n", resp)
 }
 ```
 
@@ -231,6 +724,7 @@ Name | Type | Description  | Notes
  **offset** | **int32** | The number of items to skip before starting to collect the result set. | 
  **orderBy** | **string** | The name of the field to order the results by. Prefix a field name with &#x60;-&#x60; to reverse the sort order.  *New in version 2.1.0*  | 
  **uriPattern** | **string** | If set, only return datasets with uris matching this pattern.  | 
+ **dagIds** | **string** | One or more DAG IDs separated by commas to filter datasets by associated DAGs either consuming or producing.  *New in version 2.9.0*  | 
 
 ### Return type
 
@@ -238,7 +732,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+No authorization required
 
 ### HTTP request headers
 
@@ -264,25 +758,25 @@ Get dataset events for a DAG run
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./airflow"
 )
 
 func main() {
-    dagId := "dagId_example" // string | The DAG ID.
-    dagRunId := "dagRunId_example" // string | The DAG run ID.
+	dagId := "dagId_example" // string | The DAG ID.
+	dagRunId := "dagRunId_example" // string | The DAG run ID.
 
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DatasetApi.GetUpstreamDatasetEvents(context.Background(), dagId, dagRunId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `DatasetApi.GetUpstreamDatasetEvents``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetUpstreamDatasetEvents`: DatasetEventCollection
-    fmt.Fprintf(os.Stdout, "Response from `DatasetApi.GetUpstreamDatasetEvents`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DatasetAPI.GetUpstreamDatasetEvents(context.Background(), dagId, dagRunId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DatasetAPI.GetUpstreamDatasetEvents``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetUpstreamDatasetEvents`: DatasetEventCollection
+	fmt.Fprintf(os.Stdout, "Response from `DatasetAPI.GetUpstreamDatasetEvents`: %v\n", resp)
 }
 ```
 
@@ -311,7 +805,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+No authorization required
 
 ### HTTP request headers
 

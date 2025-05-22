@@ -1,30 +1,11 @@
-<!--
- Licensed to the Apache Software Foundation (ASF) under one
- or more contributor license agreements.  See the NOTICE file
- distributed with this work for additional information
- regarding copyright ownership.  The ASF licenses this file
- to you under the Apache License, Version 2.0 (the
- "License"); you may not use this file except in compliance
- with the License.  You may obtain a copy of the License at
+# \ImportErrorAPI
 
-   http://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing,
- software distributed under the License is distributed on an
- "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- KIND, either express or implied.  See the License for the
- specific language governing permissions and limitations
- under the License.
- -->
-
-# \ImportErrorApi
-
-All URIs are relative to *http://localhost/api/v1*
+All URIs are relative to */api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetImportError**](ImportErrorApi.md#GetImportError) | **Get** /importErrors/{import_error_id} | Get an import error
-[**GetImportErrors**](ImportErrorApi.md#GetImportErrors) | **Get** /importErrors | List import errors
+[**GetImportError**](ImportErrorAPI.md#GetImportError) | **Get** /importErrors/{import_error_id} | Get an import error
+[**GetImportErrors**](ImportErrorAPI.md#GetImportErrors) | **Get** /importErrors | List import errors
 
 
 
@@ -40,24 +21,24 @@ Get an import error
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./airflow"
 )
 
 func main() {
-    importErrorId := int32(56) // int32 | The import error ID.
+	importErrorId := int32(56) // int32 | The import error ID.
 
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ImportErrorApi.GetImportError(context.Background(), importErrorId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ImportErrorApi.GetImportError``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetImportError`: ImportError
-    fmt.Fprintf(os.Stdout, "Response from `ImportErrorApi.GetImportError`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ImportErrorAPI.GetImportError(context.Background(), importErrorId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ImportErrorAPI.GetImportError``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetImportError`: ImportError
+	fmt.Fprintf(os.Stdout, "Response from `ImportErrorAPI.GetImportError`: %v\n", resp)
 }
 ```
 
@@ -84,7 +65,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+No authorization required
 
 ### HTTP request headers
 
@@ -108,26 +89,26 @@ List import errors
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "./airflow"
 )
 
 func main() {
-    limit := int32(56) // int32 | The numbers of items to return. (optional) (default to 100)
-    offset := int32(56) // int32 | The number of items to skip before starting to collect the result set. (optional)
-    orderBy := "orderBy_example" // string | The name of the field to order the results by. Prefix a field name with `-` to reverse the sort order.  *New in version 2.1.0*  (optional)
+	limit := int32(56) // int32 | The numbers of items to return. (optional) (default to 100)
+	offset := int32(56) // int32 | The number of items to skip before starting to collect the result set. (optional)
+	orderBy := "orderBy_example" // string | The name of the field to order the results by. Prefix a field name with `-` to reverse the sort order.  *New in version 2.1.0*  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ImportErrorApi.GetImportErrors(context.Background()).Limit(limit).Offset(offset).OrderBy(orderBy).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ImportErrorApi.GetImportErrors``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetImportErrors`: ImportErrorCollection
-    fmt.Fprintf(os.Stdout, "Response from `ImportErrorApi.GetImportErrors`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ImportErrorAPI.GetImportErrors(context.Background()).Limit(limit).Offset(offset).OrderBy(orderBy).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ImportErrorAPI.GetImportErrors``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetImportErrors`: ImportErrorCollection
+	fmt.Fprintf(os.Stdout, "Response from `ImportErrorAPI.GetImportErrors`: %v\n", resp)
 }
 ```
 
@@ -152,7 +133,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+No authorization required
 
 ### HTTP request headers
 

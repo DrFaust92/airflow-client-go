@@ -1,67 +1,51 @@
-<!--
- Licensed to the Apache Software Foundation (ASF) under one
- or more contributor license agreements.  See the NOTICE file
- distributed with this work for additional information
- regarding copyright ownership.  The ASF licenses this file
- to you under the Apache License, Version 2.0 (the
- "License"); you may not use this file except in compliance
- with the License.  You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing,
- software distributed under the License is distributed on an
- "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- KIND, either express or implied.  See the License for the
- specific language governing permissions and limitations
- under the License.
- -->
-
 # DAGDetail
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**DagDisplayName** | Pointer to **string** | Human centric display text for the DAG.  *New in version 2.9.0*  | [optional] [readonly] 
 **DagId** | Pointer to **string** | The ID of the DAG. | [optional] [readonly] 
-**RootDagId** | Pointer to **NullableString** | If the DAG is SubDAG then it is the top level DAG identifier. Otherwise, null. | [optional] [readonly] 
-**IsPaused** | Pointer to **NullableBool** | Whether the DAG is paused. | [optional] 
+**DefaultView** | Pointer to **NullableString** |  | [optional] [readonly] 
+**Description** | Pointer to **NullableString** | User-provided DAG description, which can consist of several sentences or paragraphs that describe DAG contents.  | [optional] [readonly] 
+**FileToken** | Pointer to **string** | The key containing the encrypted path to the file. Encryption and decryption take place only on the server. This prevents the client from reading an non-DAG file. This also ensures API extensibility, because the format of encrypted data may change.  | [optional] [readonly] 
+**Fileloc** | Pointer to **string** | The absolute path to the file. | [optional] [readonly] 
+**HasImportErrors** | Pointer to **NullableBool** | Whether the DAG has import errors  *New in version 2.3.0*  | [optional] [readonly] 
+**HasTaskConcurrencyLimits** | Pointer to **NullableBool** | Whether the DAG has task concurrency limits  *New in version 2.3.0*  | [optional] [readonly] 
 **IsActive** | Pointer to **NullableBool** | Whether the DAG is currently seen by the scheduler(s).  *New in version 2.1.1*  *Changed in version 2.2.0*&amp;#58; Field is read-only.  | [optional] [readonly] 
+**IsPaused** | Pointer to **NullableBool** | Whether the DAG is paused. | [optional] 
 **IsSubdag** | Pointer to **bool** | Whether the DAG is SubDAG. | [optional] [readonly] 
+**LastExpired** | Pointer to **NullableTime** | Time when the DAG last received a refresh signal (e.g. the DAG&#39;s \&quot;refresh\&quot; button was clicked in the web UI)  *New in version 2.3.0*  | [optional] [readonly] 
 **LastParsedTime** | Pointer to **NullableTime** | The last time the DAG was parsed.  *New in version 2.3.0*  | [optional] [readonly] 
 **LastPickled** | Pointer to **NullableTime** | The last time the DAG was pickled.  *New in version 2.3.0*  | [optional] [readonly] 
-**LastExpired** | Pointer to **NullableTime** | Time when the DAG last received a refresh signal (e.g. the DAG&#39;s \&quot;refresh\&quot; button was clicked in the web UI)  *New in version 2.3.0*  | [optional] [readonly] 
-**SchedulerLock** | Pointer to **NullableBool** | Whether (one of) the scheduler is scheduling this DAG at the moment  *New in version 2.3.0*  | [optional] [readonly] 
-**PickleId** | Pointer to **NullableString** | Foreign key to the latest pickle_id  *New in version 2.3.0*  | [optional] [readonly] 
-**DefaultView** | Pointer to **string** |  | [optional] [readonly] 
-**Fileloc** | Pointer to **string** | The absolute path to the file. | [optional] [readonly] 
-**FileToken** | Pointer to **string** | The key containing the encrypted path to the file. Encryption and decryption take place only on the server. This prevents the client from reading an non-DAG file. This also ensures API extensibility, because the format of encrypted data may change.  | [optional] [readonly] 
-**Owners** | Pointer to **[]string** |  | [optional] [readonly] 
-**Description** | Pointer to **NullableString** | User-provided DAG description, which can consist of several sentences or paragraphs that describe DAG contents.  | [optional] [readonly] 
-**ScheduleInterval** | Pointer to [**NullableScheduleInterval**](ScheduleInterval.md) |  | [optional] 
-**TimetableDescription** | Pointer to **NullableString** | Timetable/Schedule Interval description.  *New in version 2.3.0*  | [optional] [readonly] 
-**Tags** | Pointer to [**[]Tag**](Tag.md) | List of tags. | [optional] [readonly] 
-**MaxActiveTasks** | Pointer to **NullableInt32** | Maximum number of active tasks that can be run on the DAG  *New in version 2.3.0*  | [optional] [readonly] 
 **MaxActiveRuns** | Pointer to **NullableInt32** | Maximum number of active DAG runs for the DAG  *New in version 2.3.0*  | [optional] [readonly] 
-**HasTaskConcurrencyLimits** | Pointer to **NullableBool** | Whether the DAG has task concurrency limits  *New in version 2.3.0*  | [optional] [readonly] 
-**HasImportErrors** | Pointer to **NullableBool** | Whether the DAG has import errors  *New in version 2.3.0*  | [optional] [readonly] 
+**MaxActiveTasks** | Pointer to **NullableInt32** | Maximum number of active tasks that can be run on the DAG  *New in version 2.3.0*  | [optional] [readonly] 
+**MaxConsecutiveFailedDagRuns** | Pointer to **NullableInt32** | (experimental) The maximum number of consecutive DAG failures before DAG is automatically paused.  *New in version 2.9.0*  | [optional] [readonly] 
 **NextDagrun** | Pointer to **NullableTime** | The logical date of the next dag run.  *New in version 2.3.0*  | [optional] [readonly] 
-**NextDagrunDataIntervalStart** | Pointer to **NullableTime** | The start of the interval of the next dag run.  *New in version 2.3.0*  | [optional] [readonly] 
-**NextDagrunDataIntervalEnd** | Pointer to **NullableTime** | The end of the interval of the next dag run.  *New in version 2.3.0*  | [optional] [readonly] 
 **NextDagrunCreateAfter** | Pointer to **NullableTime** | Earliest time at which this &#x60;&#x60;next_dagrun&#x60;&#x60; can be created.  *New in version 2.3.0*  | [optional] [readonly] 
-**Timezone** | Pointer to **string** |  | [optional] 
-**Catchup** | Pointer to **bool** |  | [optional] [readonly] 
-**Orientation** | Pointer to **string** |  | [optional] [readonly] 
-**Concurrency** | Pointer to **float32** |  | [optional] [readonly] 
-**StartDate** | Pointer to **NullableTime** | The DAG&#39;s start date.  *Changed in version 2.0.1*&amp;#58; Field becomes nullable.  | [optional] [readonly] 
-**DagRunTimeout** | Pointer to [**TimeDelta**](TimeDelta.md) |  | [optional] 
+**NextDagrunDataIntervalEnd** | Pointer to **NullableTime** | The end of the interval of the next dag run.  *New in version 2.3.0*  | [optional] [readonly] 
+**NextDagrunDataIntervalStart** | Pointer to **NullableTime** | The start of the interval of the next dag run.  *New in version 2.3.0*  | [optional] [readonly] 
+**Owners** | Pointer to **[]string** |  | [optional] [readonly] 
+**PickleId** | Pointer to **NullableString** | Foreign key to the latest pickle_id  *New in version 2.3.0*  | [optional] [readonly] 
+**RootDagId** | Pointer to **NullableString** | If the DAG is SubDAG then it is the top level DAG identifier. Otherwise, null. | [optional] [readonly] 
+**ScheduleInterval** | Pointer to [**NullableScheduleInterval**](ScheduleInterval.md) |  | [optional] 
+**SchedulerLock** | Pointer to **NullableBool** | Whether (one of) the scheduler is scheduling this DAG at the moment  *New in version 2.3.0*  | [optional] [readonly] 
+**Tags** | Pointer to [**[]Tag**](Tag.md) | List of tags. | [optional] [readonly] 
+**TimetableDescription** | Pointer to **NullableString** | Timetable/Schedule Interval description.  *New in version 2.3.0*  | [optional] [readonly] 
+**Catchup** | Pointer to **NullableBool** |  | [optional] [readonly] 
+**Concurrency** | Pointer to **NullableFloat32** |  | [optional] [readonly] 
+**DagRunTimeout** | Pointer to [**NullableTimeDelta**](TimeDelta.md) |  | [optional] 
+**DatasetExpression** | Pointer to **map[string]interface{}** | Nested dataset any/all conditions | [optional] 
 **DocMd** | Pointer to **NullableString** |  | [optional] [readonly] 
-**Params** | Pointer to **map[string]interface{}** | User-specified DAG params.  *New in version 2.0.1*  | [optional] [readonly] 
 **EndDate** | Pointer to **NullableTime** | The DAG&#39;s end date.  *New in version 2.3.0*.  | [optional] [readonly] 
 **IsPausedUponCreation** | Pointer to **NullableBool** | Whether the DAG is paused upon creation.  *New in version 2.3.0*  | [optional] [readonly] 
 **LastParsed** | Pointer to **NullableTime** | The last time the DAG was parsed.  *New in version 2.3.0*  | [optional] [readonly] 
-**TemplateSearchPath** | Pointer to **[]string** | The template search path.  *New in version 2.3.0*  | [optional] 
+**Orientation** | Pointer to **NullableString** |  | [optional] [readonly] 
+**Params** | Pointer to **map[string]interface{}** | User-specified DAG params.  *New in version 2.0.1*  | [optional] [readonly] 
 **RenderTemplateAsNativeObj** | Pointer to **NullableBool** | Whether to render templates as native Python objects.  *New in version 2.3.0*  | [optional] [readonly] 
+**StartDate** | Pointer to **NullableTime** | The DAG&#39;s start date.  *Changed in version 2.0.1*&amp;#58; Field becomes nullable.  | [optional] [readonly] 
+**TemplateSearchPath** | Pointer to **[]string** | The template search path.  *New in version 2.3.0*  | [optional] 
+**Timezone** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
@@ -81,6 +65,31 @@ will change when the set of required properties is changed
 NewDAGDetailWithDefaults instantiates a new DAGDetail object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetDagDisplayName
+
+`func (o *DAGDetail) GetDagDisplayName() string`
+
+GetDagDisplayName returns the DagDisplayName field if non-nil, zero value otherwise.
+
+### GetDagDisplayNameOk
+
+`func (o *DAGDetail) GetDagDisplayNameOk() (*string, bool)`
+
+GetDagDisplayNameOk returns a tuple with the DagDisplayName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDagDisplayName
+
+`func (o *DAGDetail) SetDagDisplayName(v string)`
+
+SetDagDisplayName sets DagDisplayName field to given value.
+
+### HasDagDisplayName
+
+`func (o *DAGDetail) HasDagDisplayName() bool`
+
+HasDagDisplayName returns a boolean if a field has been set.
 
 ### GetDagId
 
@@ -107,76 +116,196 @@ SetDagId sets DagId field to given value.
 
 HasDagId returns a boolean if a field has been set.
 
-### GetRootDagId
+### GetDefaultView
 
-`func (o *DAGDetail) GetRootDagId() string`
+`func (o *DAGDetail) GetDefaultView() string`
 
-GetRootDagId returns the RootDagId field if non-nil, zero value otherwise.
+GetDefaultView returns the DefaultView field if non-nil, zero value otherwise.
 
-### GetRootDagIdOk
+### GetDefaultViewOk
 
-`func (o *DAGDetail) GetRootDagIdOk() (*string, bool)`
+`func (o *DAGDetail) GetDefaultViewOk() (*string, bool)`
 
-GetRootDagIdOk returns a tuple with the RootDagId field if it's non-nil, zero value otherwise
+GetDefaultViewOk returns a tuple with the DefaultView field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetRootDagId
+### SetDefaultView
 
-`func (o *DAGDetail) SetRootDagId(v string)`
+`func (o *DAGDetail) SetDefaultView(v string)`
 
-SetRootDagId sets RootDagId field to given value.
+SetDefaultView sets DefaultView field to given value.
 
-### HasRootDagId
+### HasDefaultView
 
-`func (o *DAGDetail) HasRootDagId() bool`
+`func (o *DAGDetail) HasDefaultView() bool`
 
-HasRootDagId returns a boolean if a field has been set.
+HasDefaultView returns a boolean if a field has been set.
 
-### SetRootDagIdNil
+### SetDefaultViewNil
 
-`func (o *DAGDetail) SetRootDagIdNil(b bool)`
+`func (o *DAGDetail) SetDefaultViewNil(b bool)`
 
- SetRootDagIdNil sets the value for RootDagId to be an explicit nil
+ SetDefaultViewNil sets the value for DefaultView to be an explicit nil
 
-### UnsetRootDagId
-`func (o *DAGDetail) UnsetRootDagId()`
+### UnsetDefaultView
+`func (o *DAGDetail) UnsetDefaultView()`
 
-UnsetRootDagId ensures that no value is present for RootDagId, not even an explicit nil
-### GetIsPaused
+UnsetDefaultView ensures that no value is present for DefaultView, not even an explicit nil
+### GetDescription
 
-`func (o *DAGDetail) GetIsPaused() bool`
+`func (o *DAGDetail) GetDescription() string`
 
-GetIsPaused returns the IsPaused field if non-nil, zero value otherwise.
+GetDescription returns the Description field if non-nil, zero value otherwise.
 
-### GetIsPausedOk
+### GetDescriptionOk
 
-`func (o *DAGDetail) GetIsPausedOk() (*bool, bool)`
+`func (o *DAGDetail) GetDescriptionOk() (*string, bool)`
 
-GetIsPausedOk returns a tuple with the IsPaused field if it's non-nil, zero value otherwise
+GetDescriptionOk returns a tuple with the Description field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetIsPaused
+### SetDescription
 
-`func (o *DAGDetail) SetIsPaused(v bool)`
+`func (o *DAGDetail) SetDescription(v string)`
 
-SetIsPaused sets IsPaused field to given value.
+SetDescription sets Description field to given value.
 
-### HasIsPaused
+### HasDescription
 
-`func (o *DAGDetail) HasIsPaused() bool`
+`func (o *DAGDetail) HasDescription() bool`
 
-HasIsPaused returns a boolean if a field has been set.
+HasDescription returns a boolean if a field has been set.
 
-### SetIsPausedNil
+### SetDescriptionNil
 
-`func (o *DAGDetail) SetIsPausedNil(b bool)`
+`func (o *DAGDetail) SetDescriptionNil(b bool)`
 
- SetIsPausedNil sets the value for IsPaused to be an explicit nil
+ SetDescriptionNil sets the value for Description to be an explicit nil
 
-### UnsetIsPaused
-`func (o *DAGDetail) UnsetIsPaused()`
+### UnsetDescription
+`func (o *DAGDetail) UnsetDescription()`
 
-UnsetIsPaused ensures that no value is present for IsPaused, not even an explicit nil
+UnsetDescription ensures that no value is present for Description, not even an explicit nil
+### GetFileToken
+
+`func (o *DAGDetail) GetFileToken() string`
+
+GetFileToken returns the FileToken field if non-nil, zero value otherwise.
+
+### GetFileTokenOk
+
+`func (o *DAGDetail) GetFileTokenOk() (*string, bool)`
+
+GetFileTokenOk returns a tuple with the FileToken field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFileToken
+
+`func (o *DAGDetail) SetFileToken(v string)`
+
+SetFileToken sets FileToken field to given value.
+
+### HasFileToken
+
+`func (o *DAGDetail) HasFileToken() bool`
+
+HasFileToken returns a boolean if a field has been set.
+
+### GetFileloc
+
+`func (o *DAGDetail) GetFileloc() string`
+
+GetFileloc returns the Fileloc field if non-nil, zero value otherwise.
+
+### GetFilelocOk
+
+`func (o *DAGDetail) GetFilelocOk() (*string, bool)`
+
+GetFilelocOk returns a tuple with the Fileloc field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFileloc
+
+`func (o *DAGDetail) SetFileloc(v string)`
+
+SetFileloc sets Fileloc field to given value.
+
+### HasFileloc
+
+`func (o *DAGDetail) HasFileloc() bool`
+
+HasFileloc returns a boolean if a field has been set.
+
+### GetHasImportErrors
+
+`func (o *DAGDetail) GetHasImportErrors() bool`
+
+GetHasImportErrors returns the HasImportErrors field if non-nil, zero value otherwise.
+
+### GetHasImportErrorsOk
+
+`func (o *DAGDetail) GetHasImportErrorsOk() (*bool, bool)`
+
+GetHasImportErrorsOk returns a tuple with the HasImportErrors field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHasImportErrors
+
+`func (o *DAGDetail) SetHasImportErrors(v bool)`
+
+SetHasImportErrors sets HasImportErrors field to given value.
+
+### HasHasImportErrors
+
+`func (o *DAGDetail) HasHasImportErrors() bool`
+
+HasHasImportErrors returns a boolean if a field has been set.
+
+### SetHasImportErrorsNil
+
+`func (o *DAGDetail) SetHasImportErrorsNil(b bool)`
+
+ SetHasImportErrorsNil sets the value for HasImportErrors to be an explicit nil
+
+### UnsetHasImportErrors
+`func (o *DAGDetail) UnsetHasImportErrors()`
+
+UnsetHasImportErrors ensures that no value is present for HasImportErrors, not even an explicit nil
+### GetHasTaskConcurrencyLimits
+
+`func (o *DAGDetail) GetHasTaskConcurrencyLimits() bool`
+
+GetHasTaskConcurrencyLimits returns the HasTaskConcurrencyLimits field if non-nil, zero value otherwise.
+
+### GetHasTaskConcurrencyLimitsOk
+
+`func (o *DAGDetail) GetHasTaskConcurrencyLimitsOk() (*bool, bool)`
+
+GetHasTaskConcurrencyLimitsOk returns a tuple with the HasTaskConcurrencyLimits field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHasTaskConcurrencyLimits
+
+`func (o *DAGDetail) SetHasTaskConcurrencyLimits(v bool)`
+
+SetHasTaskConcurrencyLimits sets HasTaskConcurrencyLimits field to given value.
+
+### HasHasTaskConcurrencyLimits
+
+`func (o *DAGDetail) HasHasTaskConcurrencyLimits() bool`
+
+HasHasTaskConcurrencyLimits returns a boolean if a field has been set.
+
+### SetHasTaskConcurrencyLimitsNil
+
+`func (o *DAGDetail) SetHasTaskConcurrencyLimitsNil(b bool)`
+
+ SetHasTaskConcurrencyLimitsNil sets the value for HasTaskConcurrencyLimits to be an explicit nil
+
+### UnsetHasTaskConcurrencyLimits
+`func (o *DAGDetail) UnsetHasTaskConcurrencyLimits()`
+
+UnsetHasTaskConcurrencyLimits ensures that no value is present for HasTaskConcurrencyLimits, not even an explicit nil
 ### GetIsActive
 
 `func (o *DAGDetail) GetIsActive() bool`
@@ -212,6 +341,41 @@ HasIsActive returns a boolean if a field has been set.
 `func (o *DAGDetail) UnsetIsActive()`
 
 UnsetIsActive ensures that no value is present for IsActive, not even an explicit nil
+### GetIsPaused
+
+`func (o *DAGDetail) GetIsPaused() bool`
+
+GetIsPaused returns the IsPaused field if non-nil, zero value otherwise.
+
+### GetIsPausedOk
+
+`func (o *DAGDetail) GetIsPausedOk() (*bool, bool)`
+
+GetIsPausedOk returns a tuple with the IsPaused field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsPaused
+
+`func (o *DAGDetail) SetIsPaused(v bool)`
+
+SetIsPaused sets IsPaused field to given value.
+
+### HasIsPaused
+
+`func (o *DAGDetail) HasIsPaused() bool`
+
+HasIsPaused returns a boolean if a field has been set.
+
+### SetIsPausedNil
+
+`func (o *DAGDetail) SetIsPausedNil(b bool)`
+
+ SetIsPausedNil sets the value for IsPaused to be an explicit nil
+
+### UnsetIsPaused
+`func (o *DAGDetail) UnsetIsPaused()`
+
+UnsetIsPaused ensures that no value is present for IsPaused, not even an explicit nil
 ### GetIsSubdag
 
 `func (o *DAGDetail) GetIsSubdag() bool`
@@ -237,6 +401,41 @@ SetIsSubdag sets IsSubdag field to given value.
 
 HasIsSubdag returns a boolean if a field has been set.
 
+### GetLastExpired
+
+`func (o *DAGDetail) GetLastExpired() time.Time`
+
+GetLastExpired returns the LastExpired field if non-nil, zero value otherwise.
+
+### GetLastExpiredOk
+
+`func (o *DAGDetail) GetLastExpiredOk() (*time.Time, bool)`
+
+GetLastExpiredOk returns a tuple with the LastExpired field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLastExpired
+
+`func (o *DAGDetail) SetLastExpired(v time.Time)`
+
+SetLastExpired sets LastExpired field to given value.
+
+### HasLastExpired
+
+`func (o *DAGDetail) HasLastExpired() bool`
+
+HasLastExpired returns a boolean if a field has been set.
+
+### SetLastExpiredNil
+
+`func (o *DAGDetail) SetLastExpiredNil(b bool)`
+
+ SetLastExpiredNil sets the value for LastExpired to be an explicit nil
+
+### UnsetLastExpired
+`func (o *DAGDetail) UnsetLastExpired()`
+
+UnsetLastExpired ensures that no value is present for LastExpired, not even an explicit nil
 ### GetLastParsedTime
 
 `func (o *DAGDetail) GetLastParsedTime() time.Time`
@@ -307,386 +506,6 @@ HasLastPickled returns a boolean if a field has been set.
 `func (o *DAGDetail) UnsetLastPickled()`
 
 UnsetLastPickled ensures that no value is present for LastPickled, not even an explicit nil
-### GetLastExpired
-
-`func (o *DAGDetail) GetLastExpired() time.Time`
-
-GetLastExpired returns the LastExpired field if non-nil, zero value otherwise.
-
-### GetLastExpiredOk
-
-`func (o *DAGDetail) GetLastExpiredOk() (*time.Time, bool)`
-
-GetLastExpiredOk returns a tuple with the LastExpired field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetLastExpired
-
-`func (o *DAGDetail) SetLastExpired(v time.Time)`
-
-SetLastExpired sets LastExpired field to given value.
-
-### HasLastExpired
-
-`func (o *DAGDetail) HasLastExpired() bool`
-
-HasLastExpired returns a boolean if a field has been set.
-
-### SetLastExpiredNil
-
-`func (o *DAGDetail) SetLastExpiredNil(b bool)`
-
- SetLastExpiredNil sets the value for LastExpired to be an explicit nil
-
-### UnsetLastExpired
-`func (o *DAGDetail) UnsetLastExpired()`
-
-UnsetLastExpired ensures that no value is present for LastExpired, not even an explicit nil
-### GetSchedulerLock
-
-`func (o *DAGDetail) GetSchedulerLock() bool`
-
-GetSchedulerLock returns the SchedulerLock field if non-nil, zero value otherwise.
-
-### GetSchedulerLockOk
-
-`func (o *DAGDetail) GetSchedulerLockOk() (*bool, bool)`
-
-GetSchedulerLockOk returns a tuple with the SchedulerLock field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSchedulerLock
-
-`func (o *DAGDetail) SetSchedulerLock(v bool)`
-
-SetSchedulerLock sets SchedulerLock field to given value.
-
-### HasSchedulerLock
-
-`func (o *DAGDetail) HasSchedulerLock() bool`
-
-HasSchedulerLock returns a boolean if a field has been set.
-
-### SetSchedulerLockNil
-
-`func (o *DAGDetail) SetSchedulerLockNil(b bool)`
-
- SetSchedulerLockNil sets the value for SchedulerLock to be an explicit nil
-
-### UnsetSchedulerLock
-`func (o *DAGDetail) UnsetSchedulerLock()`
-
-UnsetSchedulerLock ensures that no value is present for SchedulerLock, not even an explicit nil
-### GetPickleId
-
-`func (o *DAGDetail) GetPickleId() string`
-
-GetPickleId returns the PickleId field if non-nil, zero value otherwise.
-
-### GetPickleIdOk
-
-`func (o *DAGDetail) GetPickleIdOk() (*string, bool)`
-
-GetPickleIdOk returns a tuple with the PickleId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPickleId
-
-`func (o *DAGDetail) SetPickleId(v string)`
-
-SetPickleId sets PickleId field to given value.
-
-### HasPickleId
-
-`func (o *DAGDetail) HasPickleId() bool`
-
-HasPickleId returns a boolean if a field has been set.
-
-### SetPickleIdNil
-
-`func (o *DAGDetail) SetPickleIdNil(b bool)`
-
- SetPickleIdNil sets the value for PickleId to be an explicit nil
-
-### UnsetPickleId
-`func (o *DAGDetail) UnsetPickleId()`
-
-UnsetPickleId ensures that no value is present for PickleId, not even an explicit nil
-### GetDefaultView
-
-`func (o *DAGDetail) GetDefaultView() string`
-
-GetDefaultView returns the DefaultView field if non-nil, zero value otherwise.
-
-### GetDefaultViewOk
-
-`func (o *DAGDetail) GetDefaultViewOk() (*string, bool)`
-
-GetDefaultViewOk returns a tuple with the DefaultView field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDefaultView
-
-`func (o *DAGDetail) SetDefaultView(v string)`
-
-SetDefaultView sets DefaultView field to given value.
-
-### HasDefaultView
-
-`func (o *DAGDetail) HasDefaultView() bool`
-
-HasDefaultView returns a boolean if a field has been set.
-
-### GetFileloc
-
-`func (o *DAGDetail) GetFileloc() string`
-
-GetFileloc returns the Fileloc field if non-nil, zero value otherwise.
-
-### GetFilelocOk
-
-`func (o *DAGDetail) GetFilelocOk() (*string, bool)`
-
-GetFilelocOk returns a tuple with the Fileloc field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetFileloc
-
-`func (o *DAGDetail) SetFileloc(v string)`
-
-SetFileloc sets Fileloc field to given value.
-
-### HasFileloc
-
-`func (o *DAGDetail) HasFileloc() bool`
-
-HasFileloc returns a boolean if a field has been set.
-
-### GetFileToken
-
-`func (o *DAGDetail) GetFileToken() string`
-
-GetFileToken returns the FileToken field if non-nil, zero value otherwise.
-
-### GetFileTokenOk
-
-`func (o *DAGDetail) GetFileTokenOk() (*string, bool)`
-
-GetFileTokenOk returns a tuple with the FileToken field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetFileToken
-
-`func (o *DAGDetail) SetFileToken(v string)`
-
-SetFileToken sets FileToken field to given value.
-
-### HasFileToken
-
-`func (o *DAGDetail) HasFileToken() bool`
-
-HasFileToken returns a boolean if a field has been set.
-
-### GetOwners
-
-`func (o *DAGDetail) GetOwners() []string`
-
-GetOwners returns the Owners field if non-nil, zero value otherwise.
-
-### GetOwnersOk
-
-`func (o *DAGDetail) GetOwnersOk() (*[]string, bool)`
-
-GetOwnersOk returns a tuple with the Owners field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetOwners
-
-`func (o *DAGDetail) SetOwners(v []string)`
-
-SetOwners sets Owners field to given value.
-
-### HasOwners
-
-`func (o *DAGDetail) HasOwners() bool`
-
-HasOwners returns a boolean if a field has been set.
-
-### GetDescription
-
-`func (o *DAGDetail) GetDescription() string`
-
-GetDescription returns the Description field if non-nil, zero value otherwise.
-
-### GetDescriptionOk
-
-`func (o *DAGDetail) GetDescriptionOk() (*string, bool)`
-
-GetDescriptionOk returns a tuple with the Description field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDescription
-
-`func (o *DAGDetail) SetDescription(v string)`
-
-SetDescription sets Description field to given value.
-
-### HasDescription
-
-`func (o *DAGDetail) HasDescription() bool`
-
-HasDescription returns a boolean if a field has been set.
-
-### SetDescriptionNil
-
-`func (o *DAGDetail) SetDescriptionNil(b bool)`
-
- SetDescriptionNil sets the value for Description to be an explicit nil
-
-### UnsetDescription
-`func (o *DAGDetail) UnsetDescription()`
-
-UnsetDescription ensures that no value is present for Description, not even an explicit nil
-### GetScheduleInterval
-
-`func (o *DAGDetail) GetScheduleInterval() ScheduleInterval`
-
-GetScheduleInterval returns the ScheduleInterval field if non-nil, zero value otherwise.
-
-### GetScheduleIntervalOk
-
-`func (o *DAGDetail) GetScheduleIntervalOk() (*ScheduleInterval, bool)`
-
-GetScheduleIntervalOk returns a tuple with the ScheduleInterval field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetScheduleInterval
-
-`func (o *DAGDetail) SetScheduleInterval(v ScheduleInterval)`
-
-SetScheduleInterval sets ScheduleInterval field to given value.
-
-### HasScheduleInterval
-
-`func (o *DAGDetail) HasScheduleInterval() bool`
-
-HasScheduleInterval returns a boolean if a field has been set.
-
-### SetScheduleIntervalNil
-
-`func (o *DAGDetail) SetScheduleIntervalNil(b bool)`
-
- SetScheduleIntervalNil sets the value for ScheduleInterval to be an explicit nil
-
-### UnsetScheduleInterval
-`func (o *DAGDetail) UnsetScheduleInterval()`
-
-UnsetScheduleInterval ensures that no value is present for ScheduleInterval, not even an explicit nil
-### GetTimetableDescription
-
-`func (o *DAGDetail) GetTimetableDescription() string`
-
-GetTimetableDescription returns the TimetableDescription field if non-nil, zero value otherwise.
-
-### GetTimetableDescriptionOk
-
-`func (o *DAGDetail) GetTimetableDescriptionOk() (*string, bool)`
-
-GetTimetableDescriptionOk returns a tuple with the TimetableDescription field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetTimetableDescription
-
-`func (o *DAGDetail) SetTimetableDescription(v string)`
-
-SetTimetableDescription sets TimetableDescription field to given value.
-
-### HasTimetableDescription
-
-`func (o *DAGDetail) HasTimetableDescription() bool`
-
-HasTimetableDescription returns a boolean if a field has been set.
-
-### SetTimetableDescriptionNil
-
-`func (o *DAGDetail) SetTimetableDescriptionNil(b bool)`
-
- SetTimetableDescriptionNil sets the value for TimetableDescription to be an explicit nil
-
-### UnsetTimetableDescription
-`func (o *DAGDetail) UnsetTimetableDescription()`
-
-UnsetTimetableDescription ensures that no value is present for TimetableDescription, not even an explicit nil
-### GetTags
-
-`func (o *DAGDetail) GetTags() []Tag`
-
-GetTags returns the Tags field if non-nil, zero value otherwise.
-
-### GetTagsOk
-
-`func (o *DAGDetail) GetTagsOk() (*[]Tag, bool)`
-
-GetTagsOk returns a tuple with the Tags field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetTags
-
-`func (o *DAGDetail) SetTags(v []Tag)`
-
-SetTags sets Tags field to given value.
-
-### HasTags
-
-`func (o *DAGDetail) HasTags() bool`
-
-HasTags returns a boolean if a field has been set.
-
-### SetTagsNil
-
-`func (o *DAGDetail) SetTagsNil(b bool)`
-
- SetTagsNil sets the value for Tags to be an explicit nil
-
-### UnsetTags
-`func (o *DAGDetail) UnsetTags()`
-
-UnsetTags ensures that no value is present for Tags, not even an explicit nil
-### GetMaxActiveTasks
-
-`func (o *DAGDetail) GetMaxActiveTasks() int32`
-
-GetMaxActiveTasks returns the MaxActiveTasks field if non-nil, zero value otherwise.
-
-### GetMaxActiveTasksOk
-
-`func (o *DAGDetail) GetMaxActiveTasksOk() (*int32, bool)`
-
-GetMaxActiveTasksOk returns a tuple with the MaxActiveTasks field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMaxActiveTasks
-
-`func (o *DAGDetail) SetMaxActiveTasks(v int32)`
-
-SetMaxActiveTasks sets MaxActiveTasks field to given value.
-
-### HasMaxActiveTasks
-
-`func (o *DAGDetail) HasMaxActiveTasks() bool`
-
-HasMaxActiveTasks returns a boolean if a field has been set.
-
-### SetMaxActiveTasksNil
-
-`func (o *DAGDetail) SetMaxActiveTasksNil(b bool)`
-
- SetMaxActiveTasksNil sets the value for MaxActiveTasks to be an explicit nil
-
-### UnsetMaxActiveTasks
-`func (o *DAGDetail) UnsetMaxActiveTasks()`
-
-UnsetMaxActiveTasks ensures that no value is present for MaxActiveTasks, not even an explicit nil
 ### GetMaxActiveRuns
 
 `func (o *DAGDetail) GetMaxActiveRuns() int32`
@@ -722,76 +541,76 @@ HasMaxActiveRuns returns a boolean if a field has been set.
 `func (o *DAGDetail) UnsetMaxActiveRuns()`
 
 UnsetMaxActiveRuns ensures that no value is present for MaxActiveRuns, not even an explicit nil
-### GetHasTaskConcurrencyLimits
+### GetMaxActiveTasks
 
-`func (o *DAGDetail) GetHasTaskConcurrencyLimits() bool`
+`func (o *DAGDetail) GetMaxActiveTasks() int32`
 
-GetHasTaskConcurrencyLimits returns the HasTaskConcurrencyLimits field if non-nil, zero value otherwise.
+GetMaxActiveTasks returns the MaxActiveTasks field if non-nil, zero value otherwise.
 
-### GetHasTaskConcurrencyLimitsOk
+### GetMaxActiveTasksOk
 
-`func (o *DAGDetail) GetHasTaskConcurrencyLimitsOk() (*bool, bool)`
+`func (o *DAGDetail) GetMaxActiveTasksOk() (*int32, bool)`
 
-GetHasTaskConcurrencyLimitsOk returns a tuple with the HasTaskConcurrencyLimits field if it's non-nil, zero value otherwise
+GetMaxActiveTasksOk returns a tuple with the MaxActiveTasks field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetHasTaskConcurrencyLimits
+### SetMaxActiveTasks
 
-`func (o *DAGDetail) SetHasTaskConcurrencyLimits(v bool)`
+`func (o *DAGDetail) SetMaxActiveTasks(v int32)`
 
-SetHasTaskConcurrencyLimits sets HasTaskConcurrencyLimits field to given value.
+SetMaxActiveTasks sets MaxActiveTasks field to given value.
 
-### HasHasTaskConcurrencyLimits
+### HasMaxActiveTasks
 
-`func (o *DAGDetail) HasHasTaskConcurrencyLimits() bool`
+`func (o *DAGDetail) HasMaxActiveTasks() bool`
 
-HasHasTaskConcurrencyLimits returns a boolean if a field has been set.
+HasMaxActiveTasks returns a boolean if a field has been set.
 
-### SetHasTaskConcurrencyLimitsNil
+### SetMaxActiveTasksNil
 
-`func (o *DAGDetail) SetHasTaskConcurrencyLimitsNil(b bool)`
+`func (o *DAGDetail) SetMaxActiveTasksNil(b bool)`
 
- SetHasTaskConcurrencyLimitsNil sets the value for HasTaskConcurrencyLimits to be an explicit nil
+ SetMaxActiveTasksNil sets the value for MaxActiveTasks to be an explicit nil
 
-### UnsetHasTaskConcurrencyLimits
-`func (o *DAGDetail) UnsetHasTaskConcurrencyLimits()`
+### UnsetMaxActiveTasks
+`func (o *DAGDetail) UnsetMaxActiveTasks()`
 
-UnsetHasTaskConcurrencyLimits ensures that no value is present for HasTaskConcurrencyLimits, not even an explicit nil
-### GetHasImportErrors
+UnsetMaxActiveTasks ensures that no value is present for MaxActiveTasks, not even an explicit nil
+### GetMaxConsecutiveFailedDagRuns
 
-`func (o *DAGDetail) GetHasImportErrors() bool`
+`func (o *DAGDetail) GetMaxConsecutiveFailedDagRuns() int32`
 
-GetHasImportErrors returns the HasImportErrors field if non-nil, zero value otherwise.
+GetMaxConsecutiveFailedDagRuns returns the MaxConsecutiveFailedDagRuns field if non-nil, zero value otherwise.
 
-### GetHasImportErrorsOk
+### GetMaxConsecutiveFailedDagRunsOk
 
-`func (o *DAGDetail) GetHasImportErrorsOk() (*bool, bool)`
+`func (o *DAGDetail) GetMaxConsecutiveFailedDagRunsOk() (*int32, bool)`
 
-GetHasImportErrorsOk returns a tuple with the HasImportErrors field if it's non-nil, zero value otherwise
+GetMaxConsecutiveFailedDagRunsOk returns a tuple with the MaxConsecutiveFailedDagRuns field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetHasImportErrors
+### SetMaxConsecutiveFailedDagRuns
 
-`func (o *DAGDetail) SetHasImportErrors(v bool)`
+`func (o *DAGDetail) SetMaxConsecutiveFailedDagRuns(v int32)`
 
-SetHasImportErrors sets HasImportErrors field to given value.
+SetMaxConsecutiveFailedDagRuns sets MaxConsecutiveFailedDagRuns field to given value.
 
-### HasHasImportErrors
+### HasMaxConsecutiveFailedDagRuns
 
-`func (o *DAGDetail) HasHasImportErrors() bool`
+`func (o *DAGDetail) HasMaxConsecutiveFailedDagRuns() bool`
 
-HasHasImportErrors returns a boolean if a field has been set.
+HasMaxConsecutiveFailedDagRuns returns a boolean if a field has been set.
 
-### SetHasImportErrorsNil
+### SetMaxConsecutiveFailedDagRunsNil
 
-`func (o *DAGDetail) SetHasImportErrorsNil(b bool)`
+`func (o *DAGDetail) SetMaxConsecutiveFailedDagRunsNil(b bool)`
 
- SetHasImportErrorsNil sets the value for HasImportErrors to be an explicit nil
+ SetMaxConsecutiveFailedDagRunsNil sets the value for MaxConsecutiveFailedDagRuns to be an explicit nil
 
-### UnsetHasImportErrors
-`func (o *DAGDetail) UnsetHasImportErrors()`
+### UnsetMaxConsecutiveFailedDagRuns
+`func (o *DAGDetail) UnsetMaxConsecutiveFailedDagRuns()`
 
-UnsetHasImportErrors ensures that no value is present for HasImportErrors, not even an explicit nil
+UnsetMaxConsecutiveFailedDagRuns ensures that no value is present for MaxConsecutiveFailedDagRuns, not even an explicit nil
 ### GetNextDagrun
 
 `func (o *DAGDetail) GetNextDagrun() time.Time`
@@ -827,76 +646,6 @@ HasNextDagrun returns a boolean if a field has been set.
 `func (o *DAGDetail) UnsetNextDagrun()`
 
 UnsetNextDagrun ensures that no value is present for NextDagrun, not even an explicit nil
-### GetNextDagrunDataIntervalStart
-
-`func (o *DAGDetail) GetNextDagrunDataIntervalStart() time.Time`
-
-GetNextDagrunDataIntervalStart returns the NextDagrunDataIntervalStart field if non-nil, zero value otherwise.
-
-### GetNextDagrunDataIntervalStartOk
-
-`func (o *DAGDetail) GetNextDagrunDataIntervalStartOk() (*time.Time, bool)`
-
-GetNextDagrunDataIntervalStartOk returns a tuple with the NextDagrunDataIntervalStart field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetNextDagrunDataIntervalStart
-
-`func (o *DAGDetail) SetNextDagrunDataIntervalStart(v time.Time)`
-
-SetNextDagrunDataIntervalStart sets NextDagrunDataIntervalStart field to given value.
-
-### HasNextDagrunDataIntervalStart
-
-`func (o *DAGDetail) HasNextDagrunDataIntervalStart() bool`
-
-HasNextDagrunDataIntervalStart returns a boolean if a field has been set.
-
-### SetNextDagrunDataIntervalStartNil
-
-`func (o *DAGDetail) SetNextDagrunDataIntervalStartNil(b bool)`
-
- SetNextDagrunDataIntervalStartNil sets the value for NextDagrunDataIntervalStart to be an explicit nil
-
-### UnsetNextDagrunDataIntervalStart
-`func (o *DAGDetail) UnsetNextDagrunDataIntervalStart()`
-
-UnsetNextDagrunDataIntervalStart ensures that no value is present for NextDagrunDataIntervalStart, not even an explicit nil
-### GetNextDagrunDataIntervalEnd
-
-`func (o *DAGDetail) GetNextDagrunDataIntervalEnd() time.Time`
-
-GetNextDagrunDataIntervalEnd returns the NextDagrunDataIntervalEnd field if non-nil, zero value otherwise.
-
-### GetNextDagrunDataIntervalEndOk
-
-`func (o *DAGDetail) GetNextDagrunDataIntervalEndOk() (*time.Time, bool)`
-
-GetNextDagrunDataIntervalEndOk returns a tuple with the NextDagrunDataIntervalEnd field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetNextDagrunDataIntervalEnd
-
-`func (o *DAGDetail) SetNextDagrunDataIntervalEnd(v time.Time)`
-
-SetNextDagrunDataIntervalEnd sets NextDagrunDataIntervalEnd field to given value.
-
-### HasNextDagrunDataIntervalEnd
-
-`func (o *DAGDetail) HasNextDagrunDataIntervalEnd() bool`
-
-HasNextDagrunDataIntervalEnd returns a boolean if a field has been set.
-
-### SetNextDagrunDataIntervalEndNil
-
-`func (o *DAGDetail) SetNextDagrunDataIntervalEndNil(b bool)`
-
- SetNextDagrunDataIntervalEndNil sets the value for NextDagrunDataIntervalEnd to be an explicit nil
-
-### UnsetNextDagrunDataIntervalEnd
-`func (o *DAGDetail) UnsetNextDagrunDataIntervalEnd()`
-
-UnsetNextDagrunDataIntervalEnd ensures that no value is present for NextDagrunDataIntervalEnd, not even an explicit nil
 ### GetNextDagrunCreateAfter
 
 `func (o *DAGDetail) GetNextDagrunCreateAfter() time.Time`
@@ -932,31 +681,311 @@ HasNextDagrunCreateAfter returns a boolean if a field has been set.
 `func (o *DAGDetail) UnsetNextDagrunCreateAfter()`
 
 UnsetNextDagrunCreateAfter ensures that no value is present for NextDagrunCreateAfter, not even an explicit nil
-### GetTimezone
+### GetNextDagrunDataIntervalEnd
 
-`func (o *DAGDetail) GetTimezone() string`
+`func (o *DAGDetail) GetNextDagrunDataIntervalEnd() time.Time`
 
-GetTimezone returns the Timezone field if non-nil, zero value otherwise.
+GetNextDagrunDataIntervalEnd returns the NextDagrunDataIntervalEnd field if non-nil, zero value otherwise.
 
-### GetTimezoneOk
+### GetNextDagrunDataIntervalEndOk
 
-`func (o *DAGDetail) GetTimezoneOk() (*string, bool)`
+`func (o *DAGDetail) GetNextDagrunDataIntervalEndOk() (*time.Time, bool)`
 
-GetTimezoneOk returns a tuple with the Timezone field if it's non-nil, zero value otherwise
+GetNextDagrunDataIntervalEndOk returns a tuple with the NextDagrunDataIntervalEnd field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetTimezone
+### SetNextDagrunDataIntervalEnd
 
-`func (o *DAGDetail) SetTimezone(v string)`
+`func (o *DAGDetail) SetNextDagrunDataIntervalEnd(v time.Time)`
 
-SetTimezone sets Timezone field to given value.
+SetNextDagrunDataIntervalEnd sets NextDagrunDataIntervalEnd field to given value.
 
-### HasTimezone
+### HasNextDagrunDataIntervalEnd
 
-`func (o *DAGDetail) HasTimezone() bool`
+`func (o *DAGDetail) HasNextDagrunDataIntervalEnd() bool`
 
-HasTimezone returns a boolean if a field has been set.
+HasNextDagrunDataIntervalEnd returns a boolean if a field has been set.
 
+### SetNextDagrunDataIntervalEndNil
+
+`func (o *DAGDetail) SetNextDagrunDataIntervalEndNil(b bool)`
+
+ SetNextDagrunDataIntervalEndNil sets the value for NextDagrunDataIntervalEnd to be an explicit nil
+
+### UnsetNextDagrunDataIntervalEnd
+`func (o *DAGDetail) UnsetNextDagrunDataIntervalEnd()`
+
+UnsetNextDagrunDataIntervalEnd ensures that no value is present for NextDagrunDataIntervalEnd, not even an explicit nil
+### GetNextDagrunDataIntervalStart
+
+`func (o *DAGDetail) GetNextDagrunDataIntervalStart() time.Time`
+
+GetNextDagrunDataIntervalStart returns the NextDagrunDataIntervalStart field if non-nil, zero value otherwise.
+
+### GetNextDagrunDataIntervalStartOk
+
+`func (o *DAGDetail) GetNextDagrunDataIntervalStartOk() (*time.Time, bool)`
+
+GetNextDagrunDataIntervalStartOk returns a tuple with the NextDagrunDataIntervalStart field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNextDagrunDataIntervalStart
+
+`func (o *DAGDetail) SetNextDagrunDataIntervalStart(v time.Time)`
+
+SetNextDagrunDataIntervalStart sets NextDagrunDataIntervalStart field to given value.
+
+### HasNextDagrunDataIntervalStart
+
+`func (o *DAGDetail) HasNextDagrunDataIntervalStart() bool`
+
+HasNextDagrunDataIntervalStart returns a boolean if a field has been set.
+
+### SetNextDagrunDataIntervalStartNil
+
+`func (o *DAGDetail) SetNextDagrunDataIntervalStartNil(b bool)`
+
+ SetNextDagrunDataIntervalStartNil sets the value for NextDagrunDataIntervalStart to be an explicit nil
+
+### UnsetNextDagrunDataIntervalStart
+`func (o *DAGDetail) UnsetNextDagrunDataIntervalStart()`
+
+UnsetNextDagrunDataIntervalStart ensures that no value is present for NextDagrunDataIntervalStart, not even an explicit nil
+### GetOwners
+
+`func (o *DAGDetail) GetOwners() []string`
+
+GetOwners returns the Owners field if non-nil, zero value otherwise.
+
+### GetOwnersOk
+
+`func (o *DAGDetail) GetOwnersOk() (*[]string, bool)`
+
+GetOwnersOk returns a tuple with the Owners field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOwners
+
+`func (o *DAGDetail) SetOwners(v []string)`
+
+SetOwners sets Owners field to given value.
+
+### HasOwners
+
+`func (o *DAGDetail) HasOwners() bool`
+
+HasOwners returns a boolean if a field has been set.
+
+### GetPickleId
+
+`func (o *DAGDetail) GetPickleId() string`
+
+GetPickleId returns the PickleId field if non-nil, zero value otherwise.
+
+### GetPickleIdOk
+
+`func (o *DAGDetail) GetPickleIdOk() (*string, bool)`
+
+GetPickleIdOk returns a tuple with the PickleId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPickleId
+
+`func (o *DAGDetail) SetPickleId(v string)`
+
+SetPickleId sets PickleId field to given value.
+
+### HasPickleId
+
+`func (o *DAGDetail) HasPickleId() bool`
+
+HasPickleId returns a boolean if a field has been set.
+
+### SetPickleIdNil
+
+`func (o *DAGDetail) SetPickleIdNil(b bool)`
+
+ SetPickleIdNil sets the value for PickleId to be an explicit nil
+
+### UnsetPickleId
+`func (o *DAGDetail) UnsetPickleId()`
+
+UnsetPickleId ensures that no value is present for PickleId, not even an explicit nil
+### GetRootDagId
+
+`func (o *DAGDetail) GetRootDagId() string`
+
+GetRootDagId returns the RootDagId field if non-nil, zero value otherwise.
+
+### GetRootDagIdOk
+
+`func (o *DAGDetail) GetRootDagIdOk() (*string, bool)`
+
+GetRootDagIdOk returns a tuple with the RootDagId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRootDagId
+
+`func (o *DAGDetail) SetRootDagId(v string)`
+
+SetRootDagId sets RootDagId field to given value.
+
+### HasRootDagId
+
+`func (o *DAGDetail) HasRootDagId() bool`
+
+HasRootDagId returns a boolean if a field has been set.
+
+### SetRootDagIdNil
+
+`func (o *DAGDetail) SetRootDagIdNil(b bool)`
+
+ SetRootDagIdNil sets the value for RootDagId to be an explicit nil
+
+### UnsetRootDagId
+`func (o *DAGDetail) UnsetRootDagId()`
+
+UnsetRootDagId ensures that no value is present for RootDagId, not even an explicit nil
+### GetScheduleInterval
+
+`func (o *DAGDetail) GetScheduleInterval() ScheduleInterval`
+
+GetScheduleInterval returns the ScheduleInterval field if non-nil, zero value otherwise.
+
+### GetScheduleIntervalOk
+
+`func (o *DAGDetail) GetScheduleIntervalOk() (*ScheduleInterval, bool)`
+
+GetScheduleIntervalOk returns a tuple with the ScheduleInterval field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetScheduleInterval
+
+`func (o *DAGDetail) SetScheduleInterval(v ScheduleInterval)`
+
+SetScheduleInterval sets ScheduleInterval field to given value.
+
+### HasScheduleInterval
+
+`func (o *DAGDetail) HasScheduleInterval() bool`
+
+HasScheduleInterval returns a boolean if a field has been set.
+
+### SetScheduleIntervalNil
+
+`func (o *DAGDetail) SetScheduleIntervalNil(b bool)`
+
+ SetScheduleIntervalNil sets the value for ScheduleInterval to be an explicit nil
+
+### UnsetScheduleInterval
+`func (o *DAGDetail) UnsetScheduleInterval()`
+
+UnsetScheduleInterval ensures that no value is present for ScheduleInterval, not even an explicit nil
+### GetSchedulerLock
+
+`func (o *DAGDetail) GetSchedulerLock() bool`
+
+GetSchedulerLock returns the SchedulerLock field if non-nil, zero value otherwise.
+
+### GetSchedulerLockOk
+
+`func (o *DAGDetail) GetSchedulerLockOk() (*bool, bool)`
+
+GetSchedulerLockOk returns a tuple with the SchedulerLock field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSchedulerLock
+
+`func (o *DAGDetail) SetSchedulerLock(v bool)`
+
+SetSchedulerLock sets SchedulerLock field to given value.
+
+### HasSchedulerLock
+
+`func (o *DAGDetail) HasSchedulerLock() bool`
+
+HasSchedulerLock returns a boolean if a field has been set.
+
+### SetSchedulerLockNil
+
+`func (o *DAGDetail) SetSchedulerLockNil(b bool)`
+
+ SetSchedulerLockNil sets the value for SchedulerLock to be an explicit nil
+
+### UnsetSchedulerLock
+`func (o *DAGDetail) UnsetSchedulerLock()`
+
+UnsetSchedulerLock ensures that no value is present for SchedulerLock, not even an explicit nil
+### GetTags
+
+`func (o *DAGDetail) GetTags() []Tag`
+
+GetTags returns the Tags field if non-nil, zero value otherwise.
+
+### GetTagsOk
+
+`func (o *DAGDetail) GetTagsOk() (*[]Tag, bool)`
+
+GetTagsOk returns a tuple with the Tags field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTags
+
+`func (o *DAGDetail) SetTags(v []Tag)`
+
+SetTags sets Tags field to given value.
+
+### HasTags
+
+`func (o *DAGDetail) HasTags() bool`
+
+HasTags returns a boolean if a field has been set.
+
+### SetTagsNil
+
+`func (o *DAGDetail) SetTagsNil(b bool)`
+
+ SetTagsNil sets the value for Tags to be an explicit nil
+
+### UnsetTags
+`func (o *DAGDetail) UnsetTags()`
+
+UnsetTags ensures that no value is present for Tags, not even an explicit nil
+### GetTimetableDescription
+
+`func (o *DAGDetail) GetTimetableDescription() string`
+
+GetTimetableDescription returns the TimetableDescription field if non-nil, zero value otherwise.
+
+### GetTimetableDescriptionOk
+
+`func (o *DAGDetail) GetTimetableDescriptionOk() (*string, bool)`
+
+GetTimetableDescriptionOk returns a tuple with the TimetableDescription field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTimetableDescription
+
+`func (o *DAGDetail) SetTimetableDescription(v string)`
+
+SetTimetableDescription sets TimetableDescription field to given value.
+
+### HasTimetableDescription
+
+`func (o *DAGDetail) HasTimetableDescription() bool`
+
+HasTimetableDescription returns a boolean if a field has been set.
+
+### SetTimetableDescriptionNil
+
+`func (o *DAGDetail) SetTimetableDescriptionNil(b bool)`
+
+ SetTimetableDescriptionNil sets the value for TimetableDescription to be an explicit nil
+
+### UnsetTimetableDescription
+`func (o *DAGDetail) UnsetTimetableDescription()`
+
+UnsetTimetableDescription ensures that no value is present for TimetableDescription, not even an explicit nil
 ### GetCatchup
 
 `func (o *DAGDetail) GetCatchup() bool`
@@ -982,31 +1011,16 @@ SetCatchup sets Catchup field to given value.
 
 HasCatchup returns a boolean if a field has been set.
 
-### GetOrientation
+### SetCatchupNil
 
-`func (o *DAGDetail) GetOrientation() string`
+`func (o *DAGDetail) SetCatchupNil(b bool)`
 
-GetOrientation returns the Orientation field if non-nil, zero value otherwise.
+ SetCatchupNil sets the value for Catchup to be an explicit nil
 
-### GetOrientationOk
+### UnsetCatchup
+`func (o *DAGDetail) UnsetCatchup()`
 
-`func (o *DAGDetail) GetOrientationOk() (*string, bool)`
-
-GetOrientationOk returns a tuple with the Orientation field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetOrientation
-
-`func (o *DAGDetail) SetOrientation(v string)`
-
-SetOrientation sets Orientation field to given value.
-
-### HasOrientation
-
-`func (o *DAGDetail) HasOrientation() bool`
-
-HasOrientation returns a boolean if a field has been set.
-
+UnsetCatchup ensures that no value is present for Catchup, not even an explicit nil
 ### GetConcurrency
 
 `func (o *DAGDetail) GetConcurrency() float32`
@@ -1032,41 +1046,16 @@ SetConcurrency sets Concurrency field to given value.
 
 HasConcurrency returns a boolean if a field has been set.
 
-### GetStartDate
+### SetConcurrencyNil
 
-`func (o *DAGDetail) GetStartDate() time.Time`
+`func (o *DAGDetail) SetConcurrencyNil(b bool)`
 
-GetStartDate returns the StartDate field if non-nil, zero value otherwise.
+ SetConcurrencyNil sets the value for Concurrency to be an explicit nil
 
-### GetStartDateOk
+### UnsetConcurrency
+`func (o *DAGDetail) UnsetConcurrency()`
 
-`func (o *DAGDetail) GetStartDateOk() (*time.Time, bool)`
-
-GetStartDateOk returns a tuple with the StartDate field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetStartDate
-
-`func (o *DAGDetail) SetStartDate(v time.Time)`
-
-SetStartDate sets StartDate field to given value.
-
-### HasStartDate
-
-`func (o *DAGDetail) HasStartDate() bool`
-
-HasStartDate returns a boolean if a field has been set.
-
-### SetStartDateNil
-
-`func (o *DAGDetail) SetStartDateNil(b bool)`
-
- SetStartDateNil sets the value for StartDate to be an explicit nil
-
-### UnsetStartDate
-`func (o *DAGDetail) UnsetStartDate()`
-
-UnsetStartDate ensures that no value is present for StartDate, not even an explicit nil
+UnsetConcurrency ensures that no value is present for Concurrency, not even an explicit nil
 ### GetDagRunTimeout
 
 `func (o *DAGDetail) GetDagRunTimeout() TimeDelta`
@@ -1092,6 +1081,51 @@ SetDagRunTimeout sets DagRunTimeout field to given value.
 
 HasDagRunTimeout returns a boolean if a field has been set.
 
+### SetDagRunTimeoutNil
+
+`func (o *DAGDetail) SetDagRunTimeoutNil(b bool)`
+
+ SetDagRunTimeoutNil sets the value for DagRunTimeout to be an explicit nil
+
+### UnsetDagRunTimeout
+`func (o *DAGDetail) UnsetDagRunTimeout()`
+
+UnsetDagRunTimeout ensures that no value is present for DagRunTimeout, not even an explicit nil
+### GetDatasetExpression
+
+`func (o *DAGDetail) GetDatasetExpression() map[string]interface{}`
+
+GetDatasetExpression returns the DatasetExpression field if non-nil, zero value otherwise.
+
+### GetDatasetExpressionOk
+
+`func (o *DAGDetail) GetDatasetExpressionOk() (*map[string]interface{}, bool)`
+
+GetDatasetExpressionOk returns a tuple with the DatasetExpression field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDatasetExpression
+
+`func (o *DAGDetail) SetDatasetExpression(v map[string]interface{})`
+
+SetDatasetExpression sets DatasetExpression field to given value.
+
+### HasDatasetExpression
+
+`func (o *DAGDetail) HasDatasetExpression() bool`
+
+HasDatasetExpression returns a boolean if a field has been set.
+
+### SetDatasetExpressionNil
+
+`func (o *DAGDetail) SetDatasetExpressionNil(b bool)`
+
+ SetDatasetExpressionNil sets the value for DatasetExpression to be an explicit nil
+
+### UnsetDatasetExpression
+`func (o *DAGDetail) UnsetDatasetExpression()`
+
+UnsetDatasetExpression ensures that no value is present for DatasetExpression, not even an explicit nil
 ### GetDocMd
 
 `func (o *DAGDetail) GetDocMd() string`
@@ -1127,31 +1161,6 @@ HasDocMd returns a boolean if a field has been set.
 `func (o *DAGDetail) UnsetDocMd()`
 
 UnsetDocMd ensures that no value is present for DocMd, not even an explicit nil
-### GetParams
-
-`func (o *DAGDetail) GetParams() map[string]interface{}`
-
-GetParams returns the Params field if non-nil, zero value otherwise.
-
-### GetParamsOk
-
-`func (o *DAGDetail) GetParamsOk() (*map[string]interface{}, bool)`
-
-GetParamsOk returns a tuple with the Params field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetParams
-
-`func (o *DAGDetail) SetParams(v map[string]interface{})`
-
-SetParams sets Params field to given value.
-
-### HasParams
-
-`func (o *DAGDetail) HasParams() bool`
-
-HasParams returns a boolean if a field has been set.
-
 ### GetEndDate
 
 `func (o *DAGDetail) GetEndDate() time.Time`
@@ -1257,41 +1266,66 @@ HasLastParsed returns a boolean if a field has been set.
 `func (o *DAGDetail) UnsetLastParsed()`
 
 UnsetLastParsed ensures that no value is present for LastParsed, not even an explicit nil
-### GetTemplateSearchPath
+### GetOrientation
 
-`func (o *DAGDetail) GetTemplateSearchPath() []string`
+`func (o *DAGDetail) GetOrientation() string`
 
-GetTemplateSearchPath returns the TemplateSearchPath field if non-nil, zero value otherwise.
+GetOrientation returns the Orientation field if non-nil, zero value otherwise.
 
-### GetTemplateSearchPathOk
+### GetOrientationOk
 
-`func (o *DAGDetail) GetTemplateSearchPathOk() (*[]string, bool)`
+`func (o *DAGDetail) GetOrientationOk() (*string, bool)`
 
-GetTemplateSearchPathOk returns a tuple with the TemplateSearchPath field if it's non-nil, zero value otherwise
+GetOrientationOk returns a tuple with the Orientation field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetTemplateSearchPath
+### SetOrientation
 
-`func (o *DAGDetail) SetTemplateSearchPath(v []string)`
+`func (o *DAGDetail) SetOrientation(v string)`
 
-SetTemplateSearchPath sets TemplateSearchPath field to given value.
+SetOrientation sets Orientation field to given value.
 
-### HasTemplateSearchPath
+### HasOrientation
 
-`func (o *DAGDetail) HasTemplateSearchPath() bool`
+`func (o *DAGDetail) HasOrientation() bool`
 
-HasTemplateSearchPath returns a boolean if a field has been set.
+HasOrientation returns a boolean if a field has been set.
 
-### SetTemplateSearchPathNil
+### SetOrientationNil
 
-`func (o *DAGDetail) SetTemplateSearchPathNil(b bool)`
+`func (o *DAGDetail) SetOrientationNil(b bool)`
 
- SetTemplateSearchPathNil sets the value for TemplateSearchPath to be an explicit nil
+ SetOrientationNil sets the value for Orientation to be an explicit nil
 
-### UnsetTemplateSearchPath
-`func (o *DAGDetail) UnsetTemplateSearchPath()`
+### UnsetOrientation
+`func (o *DAGDetail) UnsetOrientation()`
 
-UnsetTemplateSearchPath ensures that no value is present for TemplateSearchPath, not even an explicit nil
+UnsetOrientation ensures that no value is present for Orientation, not even an explicit nil
+### GetParams
+
+`func (o *DAGDetail) GetParams() map[string]interface{}`
+
+GetParams returns the Params field if non-nil, zero value otherwise.
+
+### GetParamsOk
+
+`func (o *DAGDetail) GetParamsOk() (*map[string]interface{}, bool)`
+
+GetParamsOk returns a tuple with the Params field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetParams
+
+`func (o *DAGDetail) SetParams(v map[string]interface{})`
+
+SetParams sets Params field to given value.
+
+### HasParams
+
+`func (o *DAGDetail) HasParams() bool`
+
+HasParams returns a boolean if a field has been set.
+
 ### GetRenderTemplateAsNativeObj
 
 `func (o *DAGDetail) GetRenderTemplateAsNativeObj() bool`
@@ -1327,6 +1361,101 @@ HasRenderTemplateAsNativeObj returns a boolean if a field has been set.
 `func (o *DAGDetail) UnsetRenderTemplateAsNativeObj()`
 
 UnsetRenderTemplateAsNativeObj ensures that no value is present for RenderTemplateAsNativeObj, not even an explicit nil
+### GetStartDate
+
+`func (o *DAGDetail) GetStartDate() time.Time`
+
+GetStartDate returns the StartDate field if non-nil, zero value otherwise.
+
+### GetStartDateOk
+
+`func (o *DAGDetail) GetStartDateOk() (*time.Time, bool)`
+
+GetStartDateOk returns a tuple with the StartDate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStartDate
+
+`func (o *DAGDetail) SetStartDate(v time.Time)`
+
+SetStartDate sets StartDate field to given value.
+
+### HasStartDate
+
+`func (o *DAGDetail) HasStartDate() bool`
+
+HasStartDate returns a boolean if a field has been set.
+
+### SetStartDateNil
+
+`func (o *DAGDetail) SetStartDateNil(b bool)`
+
+ SetStartDateNil sets the value for StartDate to be an explicit nil
+
+### UnsetStartDate
+`func (o *DAGDetail) UnsetStartDate()`
+
+UnsetStartDate ensures that no value is present for StartDate, not even an explicit nil
+### GetTemplateSearchPath
+
+`func (o *DAGDetail) GetTemplateSearchPath() []string`
+
+GetTemplateSearchPath returns the TemplateSearchPath field if non-nil, zero value otherwise.
+
+### GetTemplateSearchPathOk
+
+`func (o *DAGDetail) GetTemplateSearchPathOk() (*[]string, bool)`
+
+GetTemplateSearchPathOk returns a tuple with the TemplateSearchPath field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTemplateSearchPath
+
+`func (o *DAGDetail) SetTemplateSearchPath(v []string)`
+
+SetTemplateSearchPath sets TemplateSearchPath field to given value.
+
+### HasTemplateSearchPath
+
+`func (o *DAGDetail) HasTemplateSearchPath() bool`
+
+HasTemplateSearchPath returns a boolean if a field has been set.
+
+### SetTemplateSearchPathNil
+
+`func (o *DAGDetail) SetTemplateSearchPathNil(b bool)`
+
+ SetTemplateSearchPathNil sets the value for TemplateSearchPath to be an explicit nil
+
+### UnsetTemplateSearchPath
+`func (o *DAGDetail) UnsetTemplateSearchPath()`
+
+UnsetTemplateSearchPath ensures that no value is present for TemplateSearchPath, not even an explicit nil
+### GetTimezone
+
+`func (o *DAGDetail) GetTimezone() string`
+
+GetTimezone returns the Timezone field if non-nil, zero value otherwise.
+
+### GetTimezoneOk
+
+`func (o *DAGDetail) GetTimezoneOk() (*string, bool)`
+
+GetTimezoneOk returns a tuple with the Timezone field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTimezone
+
+`func (o *DAGDetail) SetTimezone(v string)`
+
+SetTimezone sets Timezone field to given value.
+
+### HasTimezone
+
+`func (o *DAGDetail) HasTimezone() bool`
+
+HasTimezone returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

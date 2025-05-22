@@ -1,36 +1,17 @@
-<!--
- Licensed to the Apache Software Foundation (ASF) under one
- or more contributor license agreements.  See the NOTICE file
- distributed with this work for additional information
- regarding copyright ownership.  The ASF licenses this file
- to you under the Apache License, Version 2.0 (the
- "License"); you may not use this file except in compliance
- with the License.  You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing,
- software distributed under the License is distributed on an
- "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- KIND, either express or implied.  See the License for the
- specific language governing permissions and limitations
- under the License.
- -->
-
 # DatasetEvent
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**CreatedDagruns** | Pointer to [**[]BasicDAGRun**](BasicDAGRun.md) |  | [optional] 
 **DatasetId** | Pointer to **int32** | The dataset id | [optional] 
 **DatasetUri** | Pointer to **string** | The URI of the dataset | [optional] 
 **Extra** | Pointer to **map[string]interface{}** | The dataset event extra | [optional] 
 **SourceDagId** | Pointer to **NullableString** | The DAG ID that updated the dataset. | [optional] 
-**SourceTaskId** | Pointer to **NullableString** | The task ID that updated the dataset. | [optional] 
-**SourceRunId** | Pointer to **NullableString** | The DAG run ID that updated the dataset. | [optional] 
 **SourceMapIndex** | Pointer to **NullableInt32** | The task map index that updated the dataset. | [optional] 
-**CreatedDagruns** | Pointer to [**[]BasicDAGRun**](BasicDAGRun.md) |  | [optional] 
+**SourceRunId** | Pointer to **NullableString** | The DAG run ID that updated the dataset. | [optional] 
+**SourceTaskId** | Pointer to **NullableString** | The task ID that updated the dataset. | [optional] 
 **Timestamp** | Pointer to **string** | The dataset event creation time | [optional] 
 
 ## Methods
@@ -51,6 +32,31 @@ will change when the set of required properties is changed
 NewDatasetEventWithDefaults instantiates a new DatasetEvent object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetCreatedDagruns
+
+`func (o *DatasetEvent) GetCreatedDagruns() []BasicDAGRun`
+
+GetCreatedDagruns returns the CreatedDagruns field if non-nil, zero value otherwise.
+
+### GetCreatedDagrunsOk
+
+`func (o *DatasetEvent) GetCreatedDagrunsOk() (*[]BasicDAGRun, bool)`
+
+GetCreatedDagrunsOk returns a tuple with the CreatedDagruns field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCreatedDagruns
+
+`func (o *DatasetEvent) SetCreatedDagruns(v []BasicDAGRun)`
+
+SetCreatedDagruns sets CreatedDagruns field to given value.
+
+### HasCreatedDagruns
+
+`func (o *DatasetEvent) HasCreatedDagruns() bool`
+
+HasCreatedDagruns returns a boolean if a field has been set.
 
 ### GetDatasetId
 
@@ -172,76 +178,6 @@ HasSourceDagId returns a boolean if a field has been set.
 `func (o *DatasetEvent) UnsetSourceDagId()`
 
 UnsetSourceDagId ensures that no value is present for SourceDagId, not even an explicit nil
-### GetSourceTaskId
-
-`func (o *DatasetEvent) GetSourceTaskId() string`
-
-GetSourceTaskId returns the SourceTaskId field if non-nil, zero value otherwise.
-
-### GetSourceTaskIdOk
-
-`func (o *DatasetEvent) GetSourceTaskIdOk() (*string, bool)`
-
-GetSourceTaskIdOk returns a tuple with the SourceTaskId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSourceTaskId
-
-`func (o *DatasetEvent) SetSourceTaskId(v string)`
-
-SetSourceTaskId sets SourceTaskId field to given value.
-
-### HasSourceTaskId
-
-`func (o *DatasetEvent) HasSourceTaskId() bool`
-
-HasSourceTaskId returns a boolean if a field has been set.
-
-### SetSourceTaskIdNil
-
-`func (o *DatasetEvent) SetSourceTaskIdNil(b bool)`
-
- SetSourceTaskIdNil sets the value for SourceTaskId to be an explicit nil
-
-### UnsetSourceTaskId
-`func (o *DatasetEvent) UnsetSourceTaskId()`
-
-UnsetSourceTaskId ensures that no value is present for SourceTaskId, not even an explicit nil
-### GetSourceRunId
-
-`func (o *DatasetEvent) GetSourceRunId() string`
-
-GetSourceRunId returns the SourceRunId field if non-nil, zero value otherwise.
-
-### GetSourceRunIdOk
-
-`func (o *DatasetEvent) GetSourceRunIdOk() (*string, bool)`
-
-GetSourceRunIdOk returns a tuple with the SourceRunId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSourceRunId
-
-`func (o *DatasetEvent) SetSourceRunId(v string)`
-
-SetSourceRunId sets SourceRunId field to given value.
-
-### HasSourceRunId
-
-`func (o *DatasetEvent) HasSourceRunId() bool`
-
-HasSourceRunId returns a boolean if a field has been set.
-
-### SetSourceRunIdNil
-
-`func (o *DatasetEvent) SetSourceRunIdNil(b bool)`
-
- SetSourceRunIdNil sets the value for SourceRunId to be an explicit nil
-
-### UnsetSourceRunId
-`func (o *DatasetEvent) UnsetSourceRunId()`
-
-UnsetSourceRunId ensures that no value is present for SourceRunId, not even an explicit nil
 ### GetSourceMapIndex
 
 `func (o *DatasetEvent) GetSourceMapIndex() int32`
@@ -277,31 +213,76 @@ HasSourceMapIndex returns a boolean if a field has been set.
 `func (o *DatasetEvent) UnsetSourceMapIndex()`
 
 UnsetSourceMapIndex ensures that no value is present for SourceMapIndex, not even an explicit nil
-### GetCreatedDagruns
+### GetSourceRunId
 
-`func (o *DatasetEvent) GetCreatedDagruns() []BasicDAGRun`
+`func (o *DatasetEvent) GetSourceRunId() string`
 
-GetCreatedDagruns returns the CreatedDagruns field if non-nil, zero value otherwise.
+GetSourceRunId returns the SourceRunId field if non-nil, zero value otherwise.
 
-### GetCreatedDagrunsOk
+### GetSourceRunIdOk
 
-`func (o *DatasetEvent) GetCreatedDagrunsOk() (*[]BasicDAGRun, bool)`
+`func (o *DatasetEvent) GetSourceRunIdOk() (*string, bool)`
 
-GetCreatedDagrunsOk returns a tuple with the CreatedDagruns field if it's non-nil, zero value otherwise
+GetSourceRunIdOk returns a tuple with the SourceRunId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetCreatedDagruns
+### SetSourceRunId
 
-`func (o *DatasetEvent) SetCreatedDagruns(v []BasicDAGRun)`
+`func (o *DatasetEvent) SetSourceRunId(v string)`
 
-SetCreatedDagruns sets CreatedDagruns field to given value.
+SetSourceRunId sets SourceRunId field to given value.
 
-### HasCreatedDagruns
+### HasSourceRunId
 
-`func (o *DatasetEvent) HasCreatedDagruns() bool`
+`func (o *DatasetEvent) HasSourceRunId() bool`
 
-HasCreatedDagruns returns a boolean if a field has been set.
+HasSourceRunId returns a boolean if a field has been set.
 
+### SetSourceRunIdNil
+
+`func (o *DatasetEvent) SetSourceRunIdNil(b bool)`
+
+ SetSourceRunIdNil sets the value for SourceRunId to be an explicit nil
+
+### UnsetSourceRunId
+`func (o *DatasetEvent) UnsetSourceRunId()`
+
+UnsetSourceRunId ensures that no value is present for SourceRunId, not even an explicit nil
+### GetSourceTaskId
+
+`func (o *DatasetEvent) GetSourceTaskId() string`
+
+GetSourceTaskId returns the SourceTaskId field if non-nil, zero value otherwise.
+
+### GetSourceTaskIdOk
+
+`func (o *DatasetEvent) GetSourceTaskIdOk() (*string, bool)`
+
+GetSourceTaskIdOk returns a tuple with the SourceTaskId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSourceTaskId
+
+`func (o *DatasetEvent) SetSourceTaskId(v string)`
+
+SetSourceTaskId sets SourceTaskId field to given value.
+
+### HasSourceTaskId
+
+`func (o *DatasetEvent) HasSourceTaskId() bool`
+
+HasSourceTaskId returns a boolean if a field has been set.
+
+### SetSourceTaskIdNil
+
+`func (o *DatasetEvent) SetSourceTaskIdNil(b bool)`
+
+ SetSourceTaskIdNil sets the value for SourceTaskId to be an explicit nil
+
+### UnsetSourceTaskId
+`func (o *DatasetEvent) UnsetSourceTaskId()`
+
+UnsetSourceTaskId ensures that no value is present for SourceTaskId, not even an explicit nil
 ### GetTimestamp
 
 `func (o *DatasetEvent) GetTimestamp() string`

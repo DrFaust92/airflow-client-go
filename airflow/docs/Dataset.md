@@ -1,35 +1,16 @@
-<!--
- Licensed to the Apache Software Foundation (ASF) under one
- or more contributor license agreements.  See the NOTICE file
- distributed with this work for additional information
- regarding copyright ownership.  The ASF licenses this file
- to you under the Apache License, Version 2.0 (the
- "License"); you may not use this file except in compliance
- with the License.  You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing,
- software distributed under the License is distributed on an
- "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- KIND, either express or implied.  See the License for the
- specific language governing permissions and limitations
- under the License.
- -->
-
 # Dataset
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | Pointer to **int32** | The dataset id | [optional] 
-**Uri** | Pointer to **string** | The dataset uri | [optional] 
-**Extra** | Pointer to **map[string]interface{}** | The dataset extra | [optional] 
-**CreatedAt** | Pointer to **string** | The dataset creation time | [optional] 
-**UpdatedAt** | Pointer to **string** | The dataset update time | [optional] 
 **ConsumingDags** | Pointer to [**[]DagScheduleDatasetReference**](DagScheduleDatasetReference.md) |  | [optional] 
+**CreatedAt** | Pointer to **string** | The dataset creation time | [optional] 
+**Extra** | Pointer to **map[string]interface{}** | The dataset extra | [optional] 
+**Id** | Pointer to **int32** | The dataset id | [optional] 
 **ProducingTasks** | Pointer to [**[]TaskOutletDatasetReference**](TaskOutletDatasetReference.md) |  | [optional] 
+**UpdatedAt** | Pointer to **string** | The dataset update time | [optional] 
+**Uri** | Pointer to **string** | The dataset uri | [optional] 
 
 ## Methods
 
@@ -50,55 +31,55 @@ NewDatasetWithDefaults instantiates a new Dataset object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetId
+### GetConsumingDags
 
-`func (o *Dataset) GetId() int32`
+`func (o *Dataset) GetConsumingDags() []DagScheduleDatasetReference`
 
-GetId returns the Id field if non-nil, zero value otherwise.
+GetConsumingDags returns the ConsumingDags field if non-nil, zero value otherwise.
 
-### GetIdOk
+### GetConsumingDagsOk
 
-`func (o *Dataset) GetIdOk() (*int32, bool)`
+`func (o *Dataset) GetConsumingDagsOk() (*[]DagScheduleDatasetReference, bool)`
 
-GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
+GetConsumingDagsOk returns a tuple with the ConsumingDags field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetId
+### SetConsumingDags
 
-`func (o *Dataset) SetId(v int32)`
+`func (o *Dataset) SetConsumingDags(v []DagScheduleDatasetReference)`
 
-SetId sets Id field to given value.
+SetConsumingDags sets ConsumingDags field to given value.
 
-### HasId
+### HasConsumingDags
 
-`func (o *Dataset) HasId() bool`
+`func (o *Dataset) HasConsumingDags() bool`
 
-HasId returns a boolean if a field has been set.
+HasConsumingDags returns a boolean if a field has been set.
 
-### GetUri
+### GetCreatedAt
 
-`func (o *Dataset) GetUri() string`
+`func (o *Dataset) GetCreatedAt() string`
 
-GetUri returns the Uri field if non-nil, zero value otherwise.
+GetCreatedAt returns the CreatedAt field if non-nil, zero value otherwise.
 
-### GetUriOk
+### GetCreatedAtOk
 
-`func (o *Dataset) GetUriOk() (*string, bool)`
+`func (o *Dataset) GetCreatedAtOk() (*string, bool)`
 
-GetUriOk returns a tuple with the Uri field if it's non-nil, zero value otherwise
+GetCreatedAtOk returns a tuple with the CreatedAt field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetUri
+### SetCreatedAt
 
-`func (o *Dataset) SetUri(v string)`
+`func (o *Dataset) SetCreatedAt(v string)`
 
-SetUri sets Uri field to given value.
+SetCreatedAt sets CreatedAt field to given value.
 
-### HasUri
+### HasCreatedAt
 
-`func (o *Dataset) HasUri() bool`
+`func (o *Dataset) HasCreatedAt() bool`
 
-HasUri returns a boolean if a field has been set.
+HasCreatedAt returns a boolean if a field has been set.
 
 ### GetExtra
 
@@ -135,30 +116,55 @@ HasExtra returns a boolean if a field has been set.
 `func (o *Dataset) UnsetExtra()`
 
 UnsetExtra ensures that no value is present for Extra, not even an explicit nil
-### GetCreatedAt
+### GetId
 
-`func (o *Dataset) GetCreatedAt() string`
+`func (o *Dataset) GetId() int32`
 
-GetCreatedAt returns the CreatedAt field if non-nil, zero value otherwise.
+GetId returns the Id field if non-nil, zero value otherwise.
 
-### GetCreatedAtOk
+### GetIdOk
 
-`func (o *Dataset) GetCreatedAtOk() (*string, bool)`
+`func (o *Dataset) GetIdOk() (*int32, bool)`
 
-GetCreatedAtOk returns a tuple with the CreatedAt field if it's non-nil, zero value otherwise
+GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetCreatedAt
+### SetId
 
-`func (o *Dataset) SetCreatedAt(v string)`
+`func (o *Dataset) SetId(v int32)`
 
-SetCreatedAt sets CreatedAt field to given value.
+SetId sets Id field to given value.
 
-### HasCreatedAt
+### HasId
 
-`func (o *Dataset) HasCreatedAt() bool`
+`func (o *Dataset) HasId() bool`
 
-HasCreatedAt returns a boolean if a field has been set.
+HasId returns a boolean if a field has been set.
+
+### GetProducingTasks
+
+`func (o *Dataset) GetProducingTasks() []TaskOutletDatasetReference`
+
+GetProducingTasks returns the ProducingTasks field if non-nil, zero value otherwise.
+
+### GetProducingTasksOk
+
+`func (o *Dataset) GetProducingTasksOk() (*[]TaskOutletDatasetReference, bool)`
+
+GetProducingTasksOk returns a tuple with the ProducingTasks field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetProducingTasks
+
+`func (o *Dataset) SetProducingTasks(v []TaskOutletDatasetReference)`
+
+SetProducingTasks sets ProducingTasks field to given value.
+
+### HasProducingTasks
+
+`func (o *Dataset) HasProducingTasks() bool`
+
+HasProducingTasks returns a boolean if a field has been set.
 
 ### GetUpdatedAt
 
@@ -185,55 +191,30 @@ SetUpdatedAt sets UpdatedAt field to given value.
 
 HasUpdatedAt returns a boolean if a field has been set.
 
-### GetConsumingDags
+### GetUri
 
-`func (o *Dataset) GetConsumingDags() []DagScheduleDatasetReference`
+`func (o *Dataset) GetUri() string`
 
-GetConsumingDags returns the ConsumingDags field if non-nil, zero value otherwise.
+GetUri returns the Uri field if non-nil, zero value otherwise.
 
-### GetConsumingDagsOk
+### GetUriOk
 
-`func (o *Dataset) GetConsumingDagsOk() (*[]DagScheduleDatasetReference, bool)`
+`func (o *Dataset) GetUriOk() (*string, bool)`
 
-GetConsumingDagsOk returns a tuple with the ConsumingDags field if it's non-nil, zero value otherwise
+GetUriOk returns a tuple with the Uri field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetConsumingDags
+### SetUri
 
-`func (o *Dataset) SetConsumingDags(v []DagScheduleDatasetReference)`
+`func (o *Dataset) SetUri(v string)`
 
-SetConsumingDags sets ConsumingDags field to given value.
+SetUri sets Uri field to given value.
 
-### HasConsumingDags
+### HasUri
 
-`func (o *Dataset) HasConsumingDags() bool`
+`func (o *Dataset) HasUri() bool`
 
-HasConsumingDags returns a boolean if a field has been set.
-
-### GetProducingTasks
-
-`func (o *Dataset) GetProducingTasks() []TaskOutletDatasetReference`
-
-GetProducingTasks returns the ProducingTasks field if non-nil, zero value otherwise.
-
-### GetProducingTasksOk
-
-`func (o *Dataset) GetProducingTasksOk() (*[]TaskOutletDatasetReference, bool)`
-
-GetProducingTasksOk returns a tuple with the ProducingTasks field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetProducingTasks
-
-`func (o *Dataset) SetProducingTasks(v []TaskOutletDatasetReference)`
-
-SetProducingTasks sets ProducingTasks field to given value.
-
-### HasProducingTasks
-
-`func (o *Dataset) HasProducingTasks() bool`
-
-HasProducingTasks returns a boolean if a field has been set.
+HasUri returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
