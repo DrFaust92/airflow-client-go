@@ -1,0 +1,1078 @@
+openapi: 3.0.3
+info:
+  contact:
+    email: dev@airflow.apache.org
+    name: Apache Software Foundation
+    url: https://airflow.apache.org
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  title: Flask App Builder User & Role API
+  version: 1.0.0
+servers:
+- url: /auth/fab/v1
+tags:
+- name: Role
+- name: Permission
+- name: User
+paths:
+  /permissions:
+    get:
+      description: |
+        Get a list of permissions.
+
+        *New in version 2.8.0*
+      operationId: get_permissions
+      parameters:
+      - description: The numbers of items to return.
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 100
+          type: integer
+        style: form
+      - description: The number of items to skip before starting to collect the result
+          set.
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          minimum: 0
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActionCollection'
+          description: Success.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: "Request not authenticated due to missing, invalid, authentication\
+            \ info."
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client does not have sufficient permission.
+      summary: List permissions
+      tags:
+      - Permission
+      x-openapi-router-controller: airflow.providers.fab.auth_manager.api_endpoints.role_and_permission_endpoint
+  /roles:
+    get:
+      description: |
+        Get a list of roles.
+
+        *New in version 2.8.0*
+      operationId: get_roles
+      parameters:
+      - description: The numbers of items to return.
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 100
+          type: integer
+        style: form
+      - description: The number of items to skip before starting to collect the result
+          set.
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          minimum: 0
+          type: integer
+        style: form
+      - description: |
+          The name of the field to order the results by.
+          Prefix a field name with `-` to reverse the sort order.
+
+          *New in version 2.8.0*
+        explode: true
+        in: query
+        name: order_by
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleCollection'
+          description: Success.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: "Request not authenticated due to missing, invalid, authentication\
+            \ info."
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client does not have sufficient permission.
+      summary: List roles
+      tags:
+      - Role
+      x-openapi-router-controller: airflow.providers.fab.auth_manager.api_endpoints.role_and_permission_endpoint
+    post:
+      description: |
+        Create a new role.
+
+        *New in version 2.8.0*
+      operationId: post_role
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Role'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Role'
+          description: Success.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client specified an invalid argument.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: "Request not authenticated due to missing, invalid, authentication\
+            \ info."
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client does not have sufficient permission.
+      summary: Create a role
+      tags:
+      - Role
+      x-openapi-router-controller: airflow.providers.fab.auth_manager.api_endpoints.role_and_permission_endpoint
+  /roles/{role_name}:
+    delete:
+      description: |
+        Delete a role.
+
+        *New in version 2.8.0*
+      operationId: delete_role
+      parameters:
+      - description: The role name
+        explode: false
+        in: path
+        name: role_name
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: Success.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client specified an invalid argument.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: "Request not authenticated due to missing, invalid, authentication\
+            \ info."
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client does not have sufficient permission.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: A specified resource is not found.
+      summary: Delete a role
+      tags:
+      - Role
+      x-openapi-router-controller: airflow.providers.fab.auth_manager.api_endpoints.role_and_permission_endpoint
+    get:
+      description: |
+        Get a role.
+
+        *New in version 2.8.0*
+      operationId: get_role
+      parameters:
+      - description: The role name
+        explode: false
+        in: path
+        name: role_name
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Role'
+          description: Success.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: "Request not authenticated due to missing, invalid, authentication\
+            \ info."
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client does not have sufficient permission.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: A specified resource is not found.
+      summary: Get a role
+      tags:
+      - Role
+      x-openapi-router-controller: airflow.providers.fab.auth_manager.api_endpoints.role_and_permission_endpoint
+    patch:
+      description: |
+        Update a role.
+
+        *New in version 2.8.0*
+      operationId: patch_role
+      parameters:
+      - description: The role name
+        explode: false
+        in: path
+        name: role_name
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: |
+          The fields to update on the resource. If absent or empty, all modifiable fields are updated.
+          A comma-separated list of fully qualified names of fields.
+        explode: false
+        in: query
+        name: update_mask
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Role'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Role'
+          description: Success.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client specified an invalid argument.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: "Request not authenticated due to missing, invalid, authentication\
+            \ info."
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client does not have sufficient permission.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: A specified resource is not found.
+      summary: Update a role
+      tags:
+      - Role
+      x-openapi-router-controller: airflow.providers.fab.auth_manager.api_endpoints.role_and_permission_endpoint
+  /users:
+    get:
+      description: |
+        Get a list of users.
+
+        *New in version 2.8.0*
+      operationId: get_users
+      parameters:
+      - description: The numbers of items to return.
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 100
+          type: integer
+        style: form
+      - description: The number of items to skip before starting to collect the result
+          set.
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          minimum: 0
+          type: integer
+        style: form
+      - description: |
+          The name of the field to order the results by.
+          Prefix a field name with `-` to reverse the sort order.
+
+          *New in version 2.8.0*
+        explode: true
+        in: query
+        name: order_by
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserCollection'
+          description: Success.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: "Request not authenticated due to missing, invalid, authentication\
+            \ info."
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client does not have sufficient permission.
+      summary: List users
+      tags:
+      - User
+      x-openapi-router-controller: airflow.providers.fab.auth_manager.api_endpoints.user_endpoint
+    post:
+      description: |
+        Create a new user with unique username and email.
+
+        *New in version 2.8.0*
+      operationId: post_user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: Success.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client specified an invalid argument.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: "Request not authenticated due to missing, invalid, authentication\
+            \ info."
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client does not have sufficient permission.
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: An existing resource conflicts with the request.
+      summary: Create a user
+      tags:
+      - User
+      x-openapi-router-controller: airflow.providers.fab.auth_manager.api_endpoints.user_endpoint
+  /users/{username}:
+    delete:
+      description: |
+        Delete a user with a specific username.
+
+        *New in version 2.8.0*
+      operationId: delete_user
+      parameters:
+      - description: |
+          The username of the user.
+
+          *New in version 2.8.0*
+        explode: false
+        in: path
+        name: username
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: Success.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client specified an invalid argument.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: "Request not authenticated due to missing, invalid, authentication\
+            \ info."
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client does not have sufficient permission.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: A specified resource is not found.
+      summary: Delete a user
+      tags:
+      - User
+      x-openapi-router-controller: airflow.providers.fab.auth_manager.api_endpoints.user_endpoint
+    get:
+      description: |
+        Get a user with a specific username.
+
+        *New in version 2.8.0*
+      operationId: get_user
+      parameters:
+      - description: |
+          The username of the user.
+
+          *New in version 2.8.0*
+        explode: false
+        in: path
+        name: username
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserCollectionItem'
+          description: Success.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: "Request not authenticated due to missing, invalid, authentication\
+            \ info."
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client does not have sufficient permission.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: A specified resource is not found.
+      summary: Get a user
+      tags:
+      - User
+      x-openapi-router-controller: airflow.providers.fab.auth_manager.api_endpoints.user_endpoint
+    patch:
+      description: |
+        Update fields for a user.
+
+        *New in version 2.8.0*
+      operationId: patch_user
+      parameters:
+      - description: |
+          The username of the user.
+
+          *New in version 2.8.0*
+        explode: false
+        in: path
+        name: username
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: |
+          The fields to update on the resource. If absent or empty, all modifiable fields are updated.
+          A comma-separated list of fully qualified names of fields.
+        explode: false
+        in: query
+        name: update_mask
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserCollectionItem'
+          description: Success.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client specified an invalid argument.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: "Request not authenticated due to missing, invalid, authentication\
+            \ info."
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Client does not have sufficient permission.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: A specified resource is not found.
+      summary: Update a user
+      tags:
+      - User
+      x-openapi-router-controller: airflow.providers.fab.auth_manager.api_endpoints.user_endpoint
+components:
+  parameters:
+    OrderBy:
+      description: |
+        The name of the field to order the results by.
+        Prefix a field name with `-` to reverse the sort order.
+
+        *New in version 2.8.0*
+      explode: true
+      in: query
+      name: order_by
+      required: false
+      schema:
+        type: string
+      style: form
+    PageLimit:
+      description: The numbers of items to return.
+      explode: true
+      in: query
+      name: limit
+      required: false
+      schema:
+        default: 100
+        type: integer
+      style: form
+    PageOffset:
+      description: The number of items to skip before starting to collect the result
+        set.
+      explode: true
+      in: query
+      name: offset
+      required: false
+      schema:
+        minimum: 0
+        type: integer
+      style: form
+    RoleName:
+      description: The role name
+      explode: false
+      in: path
+      name: role_name
+      required: true
+      schema:
+        type: string
+      style: simple
+    UpdateMask:
+      description: |
+        The fields to update on the resource. If absent or empty, all modifiable fields are updated.
+        A comma-separated list of fully qualified names of fields.
+      explode: false
+      in: query
+      name: update_mask
+      required: false
+      schema:
+        items:
+          type: string
+        type: array
+      style: form
+    Username:
+      description: |
+        The username of the user.
+
+        *New in version 2.8.0*
+      explode: false
+      in: path
+      name: username
+      required: true
+      schema:
+        type: string
+      style: simple
+  responses:
+    AlreadyExists:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: An existing resource conflicts with the request.
+    BadRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: Client specified an invalid argument.
+    MethodNotAllowed:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: Request method is known by the server but is not supported by the
+        target resource.
+    NotAcceptable:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: A specified Accept header is not allowed.
+    NotFound:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: A specified resource is not found.
+    PermissionDenied:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: Client does not have sufficient permission.
+    Unauthenticated:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: "Request not authenticated due to missing, invalid, authentication\
+        \ info."
+    Unknown:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: Unknown server error.
+  schemas:
+    Action:
+      description: |
+        An action Item.
+
+        *New in version 2.8.0*
+      example:
+        name: name
+      properties:
+        name:
+          description: The name of the permission "action"
+          nullable: false
+          type: string
+      type: object
+    ActionCollection:
+      allOf:
+      - properties:
+          actions:
+            items:
+              $ref: '#/components/schemas/Action'
+            type: array
+        type: object
+      - $ref: '#/components/schemas/CollectionInfo'
+      description: |
+        A collection of actions.
+
+        *New in version 2.8.0*
+      example:
+        actions:
+        - name: name
+        - name: name
+        total_entries: 0
+      type: object
+    ActionResource:
+      description: |
+        The Action-Resource item.
+
+        *New in version 2.8.0*
+      example:
+        resource:
+          name: name
+        action:
+          name: name
+      properties:
+        action:
+          $ref: '#/components/schemas/Action'
+        resource:
+          $ref: '#/components/schemas/Resource'
+      type: object
+    CollectionInfo:
+      description: Metadata about collection.
+      properties:
+        total_entries:
+          description: |
+            Count of total objects in the current result set before pagination parameters
+            (limit, offset) are applied.
+          type: integer
+      type: object
+    Error:
+      description: |
+        [RFC7807](https://tools.ietf.org/html/rfc7807) compliant response.
+      example:
+        instance: instance
+        detail: detail
+        title: title
+        type: type
+        status: 6.027456183070403
+      properties:
+        detail:
+          description: A human-readable explanation specific to this occurrence of
+            the problem.
+          type: string
+        instance:
+          description: |
+            A URI reference that identifies the specific occurrence of the problem. It may or may
+            not yield further information if dereferenced.
+          type: string
+        status:
+          description: The HTTP status code generated by the API server for this occurrence
+            of the problem.
+          type: number
+        title:
+          description: "A short, human-readable summary of the problem type."
+          type: string
+        type:
+          description: |
+            A URI reference [RFC3986] that identifies the problem type. This specification
+            encourages that, when dereferenced, it provide human-readable documentation for
+            the problem type.
+          type: string
+      required:
+      - status
+      - title
+      - type
+      type: object
+    Resource:
+      description: |
+        A resource on which permissions are granted.
+
+        *New in version 2.8.0*
+      example:
+        name: name
+      properties:
+        name:
+          description: The name of the resource
+          nullable: false
+          type: string
+      type: object
+    Role:
+      description: |
+        a role item.
+
+        *New in version 2.8.0*
+      example:
+        name: name
+        actions:
+        - resource:
+            name: name
+          action:
+            name: name
+        - resource:
+            name: name
+          action:
+            name: name
+      properties:
+        actions:
+          items:
+            $ref: '#/components/schemas/ActionResource'
+          type: array
+        name:
+          description: |
+            The name of the role
+          minLength: 1
+          type: string
+      type: object
+    RoleCollection:
+      allOf:
+      - properties:
+          roles:
+            items:
+              $ref: '#/components/schemas/Role'
+            type: array
+        type: object
+      - $ref: '#/components/schemas/CollectionInfo'
+      description: |
+        A collection of roles.
+
+        *New in version 2.8.0*
+      example:
+        roles:
+        - name: name
+          actions:
+          - resource:
+              name: name
+            action:
+              name: name
+          - resource:
+              name: name
+            action:
+              name: name
+        - name: name
+          actions:
+          - resource:
+              name: name
+            action:
+              name: name
+          - resource:
+              name: name
+            action:
+              name: name
+        total_entries: 0
+      type: object
+    User:
+      allOf:
+      - $ref: '#/components/schemas/UserCollectionItem'
+      - properties:
+          password:
+            type: string
+            writeOnly: true
+        type: object
+      description: |
+        A user object with sensitive data.
+
+        *New in version 2.8.0*
+      example:
+        failed_login_count: 0
+        login_count: 6
+        password: password
+        created_on: created_on
+        last_login: last_login
+        roles:
+        - name: name
+        - name: name
+        active: true
+        last_name: last_name
+        first_name: first_name
+        changed_on: changed_on
+        email: email
+        username: username
+      type: object
+    UserCollection:
+      allOf:
+      - properties:
+          users:
+            items:
+              $ref: '#/components/schemas/UserCollectionItem'
+            type: array
+        type: object
+      - $ref: '#/components/schemas/CollectionInfo'
+      description: |
+        Collection of users.
+
+        *New in version 2.8.0*
+      example:
+        users:
+        - failed_login_count: 0
+          login_count: 6
+          created_on: created_on
+          last_login: last_login
+          roles:
+          - name: name
+          - name: name
+          active: true
+          last_name: last_name
+          first_name: first_name
+          changed_on: changed_on
+          email: email
+          username: username
+        - failed_login_count: 0
+          login_count: 6
+          created_on: created_on
+          last_login: last_login
+          roles:
+          - name: name
+          - name: name
+          active: true
+          last_name: last_name
+          first_name: first_name
+          changed_on: changed_on
+          email: email
+          username: username
+        total_entries: 1
+      type: object
+    UserCollectionItem:
+      description: |
+        A user object.
+
+        *New in version 2.8.0*
+      example:
+        failed_login_count: 0
+        login_count: 6
+        created_on: created_on
+        last_login: last_login
+        roles:
+        - name: name
+        - name: name
+        active: true
+        last_name: last_name
+        first_name: first_name
+        changed_on: changed_on
+        email: email
+        username: username
+      properties:
+        active:
+          description: Whether the user is active
+          nullable: true
+          readOnly: true
+          type: boolean
+        changed_on:
+          description: The date user was changed
+          format: datetime
+          nullable: true
+          readOnly: true
+          type: string
+        created_on:
+          description: The date user was created
+          format: datetime
+          nullable: true
+          readOnly: true
+          type: string
+        email:
+          description: |
+            The user's email.
+          minLength: 1
+          type: string
+        failed_login_count:
+          description: The number of times the login failed
+          nullable: true
+          readOnly: true
+          type: integer
+        first_name:
+          description: |
+            The user's first name.
+          type: string
+        last_login:
+          description: The last user login
+          format: datetime
+          nullable: true
+          readOnly: true
+          type: string
+        last_name:
+          description: |
+            The user's last name.
+          type: string
+        login_count:
+          description: The login count
+          nullable: true
+          readOnly: true
+          type: integer
+        roles:
+          description: |
+            User roles.
+          items:
+            $ref: '#/components/schemas/UserCollectionItem_roles_inner'
+          type: array
+        username:
+          description: |
+            The username.
+          minLength: 1
+          type: string
+      type: object
+    UserCollectionItem_roles_inner:
+      example:
+        name: name
+      nullable: true
+      properties:
+        name:
+          type: string
+      type: object
+  securitySchemes:
+    Basic:
+      scheme: basic
+      type: http
+    GoogleOpenId:
+      openIdConnectUrl: https://accounts.google.com/.well-known/openid-configuration
+      type: openIdConnect
+    Kerberos:
+      scheme: negotiate
+      type: http
