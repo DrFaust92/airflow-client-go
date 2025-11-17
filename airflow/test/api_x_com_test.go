@@ -10,7 +10,7 @@ Testing XComAPIService
 package airflow
 
 import (
-	openapiclient "./airflow"
+	openapiclient "github.com/drfaust92/airflow-client-go/airflow"
 	"context"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
