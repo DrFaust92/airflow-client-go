@@ -1,4 +1,4 @@
-module github.com/apache/airflow-client-go/airflow/auth/fab
+module github.com/drfaust92/airflow-client-go/airflow/auth/fab
 
 go 1.18
 

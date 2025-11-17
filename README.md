@@ -27,7 +27,7 @@ Install
 -------
 
 ```
-go get github.com/apache/airflow-client-go/airflow@latest
+go get github.com/drfaust92/airflow-client-go/airflow@latest
 ```
 
 Usage
@@ -39,7 +39,7 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/apache/airflow-client-go/airflow"
+	"github.com/drfaust92/airflow-client-go/airflow"
 )
 
 func main() {
