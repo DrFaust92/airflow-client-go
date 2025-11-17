@@ -1,6 +1,6 @@
 module github.com/apache/airflow-client-go
 
-go 1.21.0
+go 1.23
 
 toolchain go1.24.3
 
