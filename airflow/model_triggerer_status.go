@@ -32,373 +32,157 @@ import (
 	"encoding/json"
 )
 
-// ConnectionCollectionItem Connection collection item. The password and extra fields are only available when retrieving a single object due to the sensitivity of this data. 
-type ConnectionCollectionItem struct {
-	// The connection ID.
-	ConnectionId *string `json:"connection_id,omitempty"`
-	// The connection type.
-	ConnType *string `json:"conn_type,omitempty"`
-	// The description of the connection.
-	Description NullableString `json:"description,omitempty"`
-	// Host of the connection.
-	Host NullableString `json:"host,omitempty"`
-	// Login of the connection.
-	Login NullableString `json:"login,omitempty"`
-	// Schema of the connection.
-	Schema NullableString `json:"schema,omitempty"`
-	// Port of the connection.
-	Port NullableInt32 `json:"port,omitempty"`
+// TriggererStatus The status and the latest triggerer heartbeat.  *New in version 2.6.2* 
+type TriggererStatus struct {
+	Status NullableHealthStatus `json:"status,omitempty"`
+	// The time the triggerer last did a heartbeat.
+	LatestTriggererHeartbeat NullableString `json:"latest_triggerer_heartbeat,omitempty"`
 }
 
-// NewConnectionCollectionItem instantiates a new ConnectionCollectionItem object
+// NewTriggererStatus instantiates a new TriggererStatus object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewConnectionCollectionItem() *ConnectionCollectionItem {
-	this := ConnectionCollectionItem{}
+func NewTriggererStatus() *TriggererStatus {
+	this := TriggererStatus{}
 	return &this
 }
 
-// NewConnectionCollectionItemWithDefaults instantiates a new ConnectionCollectionItem object
+// NewTriggererStatusWithDefaults instantiates a new TriggererStatus object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewConnectionCollectionItemWithDefaults() *ConnectionCollectionItem {
-	this := ConnectionCollectionItem{}
+func NewTriggererStatusWithDefaults() *TriggererStatus {
+	this := TriggererStatus{}
 	return &this
 }
 
-// GetConnectionId returns the ConnectionId field value if set, zero value otherwise.
-func (o *ConnectionCollectionItem) GetConnectionId() string {
-	if o == nil || o.ConnectionId == nil {
-		var ret string
+// GetStatus returns the Status field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *TriggererStatus) GetStatus() HealthStatus {
+	if o == nil || o.Status.Get() == nil {
+		var ret HealthStatus
 		return ret
 	}
-	return *o.ConnectionId
+	return *o.Status.Get()
 }
 
-// GetConnectionIdOk returns a tuple with the ConnectionId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ConnectionCollectionItem) GetConnectionIdOk() (*string, bool) {
-	if o == nil || o.ConnectionId == nil {
-		return nil, false
-	}
-	return o.ConnectionId, true
-}
-
-// HasConnectionId returns a boolean if a field has been set.
-func (o *ConnectionCollectionItem) HasConnectionId() bool {
-	if o != nil && o.ConnectionId != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetConnectionId gets a reference to the given string and assigns it to the ConnectionId field.
-func (o *ConnectionCollectionItem) SetConnectionId(v string) {
-	o.ConnectionId = &v
-}
-
-// GetConnType returns the ConnType field value if set, zero value otherwise.
-func (o *ConnectionCollectionItem) GetConnType() string {
-	if o == nil || o.ConnType == nil {
-		var ret string
-		return ret
-	}
-	return *o.ConnType
-}
-
-// GetConnTypeOk returns a tuple with the ConnType field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ConnectionCollectionItem) GetConnTypeOk() (*string, bool) {
-	if o == nil || o.ConnType == nil {
-		return nil, false
-	}
-	return o.ConnType, true
-}
-
-// HasConnType returns a boolean if a field has been set.
-func (o *ConnectionCollectionItem) HasConnType() bool {
-	if o != nil && o.ConnType != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetConnType gets a reference to the given string and assigns it to the ConnType field.
-func (o *ConnectionCollectionItem) SetConnType(v string) {
-	o.ConnType = &v
-}
-
-// GetDescription returns the Description field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *ConnectionCollectionItem) GetDescription() string {
-	if o == nil || o.Description.Get() == nil {
-		var ret string
-		return ret
-	}
-	return *o.Description.Get()
-}
-
-// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
+// GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ConnectionCollectionItem) GetDescriptionOk() (*string, bool) {
+func (o *TriggererStatus) GetStatusOk() (*HealthStatus, bool) {
 	if o == nil  {
 		return nil, false
 	}
-	return o.Description.Get(), o.Description.IsSet()
+	return o.Status.Get(), o.Status.IsSet()
 }
 
-// HasDescription returns a boolean if a field has been set.
-func (o *ConnectionCollectionItem) HasDescription() bool {
-	if o != nil && o.Description.IsSet() {
+// HasStatus returns a boolean if a field has been set.
+func (o *TriggererStatus) HasStatus() bool {
+	if o != nil && o.Status.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetDescription gets a reference to the given NullableString and assigns it to the Description field.
-func (o *ConnectionCollectionItem) SetDescription(v string) {
-	o.Description.Set(&v)
+// SetStatus gets a reference to the given NullableHealthStatus and assigns it to the Status field.
+func (o *TriggererStatus) SetStatus(v HealthStatus) {
+	o.Status.Set(&v)
 }
-// SetDescriptionNil sets the value for Description to be an explicit nil
-func (o *ConnectionCollectionItem) SetDescriptionNil() {
-	o.Description.Set(nil)
-}
-
-// UnsetDescription ensures that no value is present for Description, not even an explicit nil
-func (o *ConnectionCollectionItem) UnsetDescription() {
-	o.Description.Unset()
+// SetStatusNil sets the value for Status to be an explicit nil
+func (o *TriggererStatus) SetStatusNil() {
+	o.Status.Set(nil)
 }
 
-// GetHost returns the Host field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *ConnectionCollectionItem) GetHost() string {
-	if o == nil || o.Host.Get() == nil {
+// UnsetStatus ensures that no value is present for Status, not even an explicit nil
+func (o *TriggererStatus) UnsetStatus() {
+	o.Status.Unset()
+}
+
+// GetLatestTriggererHeartbeat returns the LatestTriggererHeartbeat field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *TriggererStatus) GetLatestTriggererHeartbeat() string {
+	if o == nil || o.LatestTriggererHeartbeat.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.Host.Get()
+	return *o.LatestTriggererHeartbeat.Get()
 }
 
-// GetHostOk returns a tuple with the Host field value if set, nil otherwise
+// GetLatestTriggererHeartbeatOk returns a tuple with the LatestTriggererHeartbeat field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ConnectionCollectionItem) GetHostOk() (*string, bool) {
+func (o *TriggererStatus) GetLatestTriggererHeartbeatOk() (*string, bool) {
 	if o == nil  {
 		return nil, false
 	}
-	return o.Host.Get(), o.Host.IsSet()
+	return o.LatestTriggererHeartbeat.Get(), o.LatestTriggererHeartbeat.IsSet()
 }
 
-// HasHost returns a boolean if a field has been set.
-func (o *ConnectionCollectionItem) HasHost() bool {
-	if o != nil && o.Host.IsSet() {
+// HasLatestTriggererHeartbeat returns a boolean if a field has been set.
+func (o *TriggererStatus) HasLatestTriggererHeartbeat() bool {
+	if o != nil && o.LatestTriggererHeartbeat.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetHost gets a reference to the given NullableString and assigns it to the Host field.
-func (o *ConnectionCollectionItem) SetHost(v string) {
-	o.Host.Set(&v)
+// SetLatestTriggererHeartbeat gets a reference to the given NullableString and assigns it to the LatestTriggererHeartbeat field.
+func (o *TriggererStatus) SetLatestTriggererHeartbeat(v string) {
+	o.LatestTriggererHeartbeat.Set(&v)
 }
-// SetHostNil sets the value for Host to be an explicit nil
-func (o *ConnectionCollectionItem) SetHostNil() {
-	o.Host.Set(nil)
-}
-
-// UnsetHost ensures that no value is present for Host, not even an explicit nil
-func (o *ConnectionCollectionItem) UnsetHost() {
-	o.Host.Unset()
+// SetLatestTriggererHeartbeatNil sets the value for LatestTriggererHeartbeat to be an explicit nil
+func (o *TriggererStatus) SetLatestTriggererHeartbeatNil() {
+	o.LatestTriggererHeartbeat.Set(nil)
 }
 
-// GetLogin returns the Login field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *ConnectionCollectionItem) GetLogin() string {
-	if o == nil || o.Login.Get() == nil {
-		var ret string
-		return ret
-	}
-	return *o.Login.Get()
+// UnsetLatestTriggererHeartbeat ensures that no value is present for LatestTriggererHeartbeat, not even an explicit nil
+func (o *TriggererStatus) UnsetLatestTriggererHeartbeat() {
+	o.LatestTriggererHeartbeat.Unset()
 }
 
-// GetLoginOk returns a tuple with the Login field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ConnectionCollectionItem) GetLoginOk() (*string, bool) {
-	if o == nil  {
-		return nil, false
-	}
-	return o.Login.Get(), o.Login.IsSet()
-}
-
-// HasLogin returns a boolean if a field has been set.
-func (o *ConnectionCollectionItem) HasLogin() bool {
-	if o != nil && o.Login.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetLogin gets a reference to the given NullableString and assigns it to the Login field.
-func (o *ConnectionCollectionItem) SetLogin(v string) {
-	o.Login.Set(&v)
-}
-// SetLoginNil sets the value for Login to be an explicit nil
-func (o *ConnectionCollectionItem) SetLoginNil() {
-	o.Login.Set(nil)
-}
-
-// UnsetLogin ensures that no value is present for Login, not even an explicit nil
-func (o *ConnectionCollectionItem) UnsetLogin() {
-	o.Login.Unset()
-}
-
-// GetSchema returns the Schema field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *ConnectionCollectionItem) GetSchema() string {
-	if o == nil || o.Schema.Get() == nil {
-		var ret string
-		return ret
-	}
-	return *o.Schema.Get()
-}
-
-// GetSchemaOk returns a tuple with the Schema field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ConnectionCollectionItem) GetSchemaOk() (*string, bool) {
-	if o == nil  {
-		return nil, false
-	}
-	return o.Schema.Get(), o.Schema.IsSet()
-}
-
-// HasSchema returns a boolean if a field has been set.
-func (o *ConnectionCollectionItem) HasSchema() bool {
-	if o != nil && o.Schema.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetSchema gets a reference to the given NullableString and assigns it to the Schema field.
-func (o *ConnectionCollectionItem) SetSchema(v string) {
-	o.Schema.Set(&v)
-}
-// SetSchemaNil sets the value for Schema to be an explicit nil
-func (o *ConnectionCollectionItem) SetSchemaNil() {
-	o.Schema.Set(nil)
-}
-
-// UnsetSchema ensures that no value is present for Schema, not even an explicit nil
-func (o *ConnectionCollectionItem) UnsetSchema() {
-	o.Schema.Unset()
-}
-
-// GetPort returns the Port field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *ConnectionCollectionItem) GetPort() int32 {
-	if o == nil || o.Port.Get() == nil {
-		var ret int32
-		return ret
-	}
-	return *o.Port.Get()
-}
-
-// GetPortOk returns a tuple with the Port field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ConnectionCollectionItem) GetPortOk() (*int32, bool) {
-	if o == nil  {
-		return nil, false
-	}
-	return o.Port.Get(), o.Port.IsSet()
-}
-
-// HasPort returns a boolean if a field has been set.
-func (o *ConnectionCollectionItem) HasPort() bool {
-	if o != nil && o.Port.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetPort gets a reference to the given NullableInt32 and assigns it to the Port field.
-func (o *ConnectionCollectionItem) SetPort(v int32) {
-	o.Port.Set(&v)
-}
-// SetPortNil sets the value for Port to be an explicit nil
-func (o *ConnectionCollectionItem) SetPortNil() {
-	o.Port.Set(nil)
-}
-
-// UnsetPort ensures that no value is present for Port, not even an explicit nil
-func (o *ConnectionCollectionItem) UnsetPort() {
-	o.Port.Unset()
-}
-
-func (o ConnectionCollectionItem) MarshalJSON() ([]byte, error) {
+func (o TriggererStatus) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.ConnectionId != nil {
-		toSerialize["connection_id"] = o.ConnectionId
+	if o.Status.IsSet() {
+		toSerialize["status"] = o.Status.Get()
 	}
-	if o.ConnType != nil {
-		toSerialize["conn_type"] = o.ConnType
-	}
-	if o.Description.IsSet() {
-		toSerialize["description"] = o.Description.Get()
-	}
-	if o.Host.IsSet() {
-		toSerialize["host"] = o.Host.Get()
-	}
-	if o.Login.IsSet() {
-		toSerialize["login"] = o.Login.Get()
-	}
-	if o.Schema.IsSet() {
-		toSerialize["schema"] = o.Schema.Get()
-	}
-	if o.Port.IsSet() {
-		toSerialize["port"] = o.Port.Get()
+	if o.LatestTriggererHeartbeat.IsSet() {
+		toSerialize["latest_triggerer_heartbeat"] = o.LatestTriggererHeartbeat.Get()
 	}
 	return json.Marshal(toSerialize)
 }
 
-type NullableConnectionCollectionItem struct {
-	value *ConnectionCollectionItem
+type NullableTriggererStatus struct {
+	value *TriggererStatus
 	isSet bool
 }
 
-func (v NullableConnectionCollectionItem) Get() *ConnectionCollectionItem {
+func (v NullableTriggererStatus) Get() *TriggererStatus {
 	return v.value
 }
 
-func (v *NullableConnectionCollectionItem) Set(val *ConnectionCollectionItem) {
+func (v *NullableTriggererStatus) Set(val *TriggererStatus) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableConnectionCollectionItem) IsSet() bool {
+func (v NullableTriggererStatus) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableConnectionCollectionItem) Unset() {
+func (v *NullableTriggererStatus) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableConnectionCollectionItem(val *ConnectionCollectionItem) *NullableConnectionCollectionItem {
-	return &NullableConnectionCollectionItem{value: val, isSet: true}
+func NewNullableTriggererStatus(val *TriggererStatus) *NullableTriggererStatus {
+	return &NullableTriggererStatus{value: val, isSet: true}
 }
 
-func (v NullableConnectionCollectionItem) MarshalJSON() ([]byte, error) {
+func (v NullableTriggererStatus) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableConnectionCollectionItem) UnmarshalJSON(src []byte) error {
+func (v *NullableTriggererStatus) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

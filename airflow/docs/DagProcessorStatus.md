@@ -17,104 +17,104 @@
  under the License.
  -->
 
-# SchedulerStatus
+# DagProcessorStatus
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Status** | Pointer to [**NullableHealthStatus**](HealthStatus.md) |  | [optional] 
-**LatestSchedulerHeartbeat** | Pointer to **NullableString** | The time the scheduler last did a heartbeat. | [optional] [readonly] 
+**LatestDagProcessorHeartbeat** | Pointer to **NullableString** | The time the dag processor last did a heartbeat. | [optional] [readonly] 
 
 ## Methods
 
-### NewSchedulerStatus
+### NewDagProcessorStatus
 
-`func NewSchedulerStatus() *SchedulerStatus`
+`func NewDagProcessorStatus() *DagProcessorStatus`
 
-NewSchedulerStatus instantiates a new SchedulerStatus object
+NewDagProcessorStatus instantiates a new DagProcessorStatus object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewSchedulerStatusWithDefaults
+### NewDagProcessorStatusWithDefaults
 
-`func NewSchedulerStatusWithDefaults() *SchedulerStatus`
+`func NewDagProcessorStatusWithDefaults() *DagProcessorStatus`
 
-NewSchedulerStatusWithDefaults instantiates a new SchedulerStatus object
+NewDagProcessorStatusWithDefaults instantiates a new DagProcessorStatus object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetStatus
 
-`func (o *SchedulerStatus) GetStatus() HealthStatus`
+`func (o *DagProcessorStatus) GetStatus() HealthStatus`
 
 GetStatus returns the Status field if non-nil, zero value otherwise.
 
 ### GetStatusOk
 
-`func (o *SchedulerStatus) GetStatusOk() (*HealthStatus, bool)`
+`func (o *DagProcessorStatus) GetStatusOk() (*HealthStatus, bool)`
 
 GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStatus
 
-`func (o *SchedulerStatus) SetStatus(v HealthStatus)`
+`func (o *DagProcessorStatus) SetStatus(v HealthStatus)`
 
 SetStatus sets Status field to given value.
 
 ### HasStatus
 
-`func (o *SchedulerStatus) HasStatus() bool`
+`func (o *DagProcessorStatus) HasStatus() bool`
 
 HasStatus returns a boolean if a field has been set.
 
 ### SetStatusNil
 
-`func (o *SchedulerStatus) SetStatusNil(b bool)`
+`func (o *DagProcessorStatus) SetStatusNil(b bool)`
 
  SetStatusNil sets the value for Status to be an explicit nil
 
 ### UnsetStatus
-`func (o *SchedulerStatus) UnsetStatus()`
+`func (o *DagProcessorStatus) UnsetStatus()`
 
 UnsetStatus ensures that no value is present for Status, not even an explicit nil
-### GetLatestSchedulerHeartbeat
+### GetLatestDagProcessorHeartbeat
 
-`func (o *SchedulerStatus) GetLatestSchedulerHeartbeat() string`
+`func (o *DagProcessorStatus) GetLatestDagProcessorHeartbeat() string`
 
-GetLatestSchedulerHeartbeat returns the LatestSchedulerHeartbeat field if non-nil, zero value otherwise.
+GetLatestDagProcessorHeartbeat returns the LatestDagProcessorHeartbeat field if non-nil, zero value otherwise.
 
-### GetLatestSchedulerHeartbeatOk
+### GetLatestDagProcessorHeartbeatOk
 
-`func (o *SchedulerStatus) GetLatestSchedulerHeartbeatOk() (*string, bool)`
+`func (o *DagProcessorStatus) GetLatestDagProcessorHeartbeatOk() (*string, bool)`
 
-GetLatestSchedulerHeartbeatOk returns a tuple with the LatestSchedulerHeartbeat field if it's non-nil, zero value otherwise
+GetLatestDagProcessorHeartbeatOk returns a tuple with the LatestDagProcessorHeartbeat field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetLatestSchedulerHeartbeat
+### SetLatestDagProcessorHeartbeat
 
-`func (o *SchedulerStatus) SetLatestSchedulerHeartbeat(v string)`
+`func (o *DagProcessorStatus) SetLatestDagProcessorHeartbeat(v string)`
 
-SetLatestSchedulerHeartbeat sets LatestSchedulerHeartbeat field to given value.
+SetLatestDagProcessorHeartbeat sets LatestDagProcessorHeartbeat field to given value.
 
-### HasLatestSchedulerHeartbeat
+### HasLatestDagProcessorHeartbeat
 
-`func (o *SchedulerStatus) HasLatestSchedulerHeartbeat() bool`
+`func (o *DagProcessorStatus) HasLatestDagProcessorHeartbeat() bool`
 
-HasLatestSchedulerHeartbeat returns a boolean if a field has been set.
+HasLatestDagProcessorHeartbeat returns a boolean if a field has been set.
 
-### SetLatestSchedulerHeartbeatNil
+### SetLatestDagProcessorHeartbeatNil
 
-`func (o *SchedulerStatus) SetLatestSchedulerHeartbeatNil(b bool)`
+`func (o *DagProcessorStatus) SetLatestDagProcessorHeartbeatNil(b bool)`
 
- SetLatestSchedulerHeartbeatNil sets the value for LatestSchedulerHeartbeat to be an explicit nil
+ SetLatestDagProcessorHeartbeatNil sets the value for LatestDagProcessorHeartbeat to be an explicit nil
 
-### UnsetLatestSchedulerHeartbeat
-`func (o *SchedulerStatus) UnsetLatestSchedulerHeartbeat()`
+### UnsetLatestDagProcessorHeartbeat
+`func (o *DagProcessorStatus) UnsetLatestDagProcessorHeartbeat()`
 
-UnsetLatestSchedulerHeartbeat ensures that no value is present for LatestSchedulerHeartbeat, not even an explicit nil
+UnsetLatestDagProcessorHeartbeat ensures that no value is present for LatestDagProcessorHeartbeat, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

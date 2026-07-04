@@ -1,2 +1,4 @@
 # Distribution
 dist/
+**/vendor/*
+airflow/vendor/*

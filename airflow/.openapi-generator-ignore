@@ -6,3 +6,8 @@ setup.cfg
 setup.py
 test-requirements.txt
 tox.ini
+
+# Hand-patched to add team_name (Airflow 3 multi-team); protect from regen.
+model_connection.go
+model_pool.go
+model_variable.go

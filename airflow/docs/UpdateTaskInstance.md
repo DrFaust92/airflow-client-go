@@ -23,7 +23,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**DryRun** | Pointer to **bool** | If set, don&#39;t actually run this operation. The response will contain the task instance planned to be affected, but won&#39;t be modified in any way.  | [optional] [default to false]
+**DryRun** | Pointer to **bool** | If set, don&#39;t actually run this operation. The response will contain the task instance planned to be affected, but won&#39;t be modified in any way.  | [optional] [default to true]
 **NewState** | Pointer to **string** | Expected new state. | [optional] 
 
 ## Methods

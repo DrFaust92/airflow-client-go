@@ -1,7 +1,5 @@
-module github.com/apache/airflow-client-go/airflow
+module github.com/drfaust92/airflow-client-go/airflow
 
-go 1.13
+go 1.23
 
-require (
-	golang.org/x/oauth2 v0.0.0-20210218202405-ba52d332ba99
-)
+require golang.org/x/oauth2 v0.24.0
